@@ -8,7 +8,7 @@ export default function TabLayout() {
   return (
      <Stack
       screenOptions={({ route }) => ({
-        headerShown: true,
+        headerShown: false,
       })}
     >
       <Stack.Screen name="explore" options={{ headerShown: false, title: "EXPLORE"}} />
