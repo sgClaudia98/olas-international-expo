@@ -3,7 +3,7 @@ import { useColorScheme as useRNColorScheme } from 'react-native';
 
 /**
  * To support static rendering, this value needs to be re-calculated on the client side for web
- */
+ 
 export function useColorScheme() {
   const [hasHydrated, setHasHydrated] = useState(false);
 
@@ -18,4 +18,8 @@ export function useColorScheme() {
   }
 
   return 'light';
+}
+*/
+export function useColorScheme() {
+  return "light" as "light" | "dark" | null;
 }
