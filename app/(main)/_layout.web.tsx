@@ -8,7 +8,6 @@ export default function TabLayout() {
   return (
      <Stack
       screenOptions={({ route }) => ({
-        tabBarPosition: 'bottom',
         headerShown: true,
       })}
     >
@@ -16,6 +15,7 @@ export default function TabLayout() {
       <Stack.Screen name="new" options={{ }} />
       <Stack.Screen name="information" options={{ }} />
       <Stack.Screen name="settings" options={{  }} />
+      <Stack.Screen name="index" options={{ headerShown: false}} />
     </Stack>
   );
 }
