@@ -9,6 +9,8 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import { PaperProvider } from "react-native-paper";
+import theme from "@/styles/paperTheme";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -18,9 +20,11 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const colorScheme = useColorScheme();
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Provider store={store}>
-        <LocationProvider>{children}</LocationProvider>
-      </Provider>
+      <PaperProvider theme={theme}>
+        <Provider store={store}>
+          <LocationProvider>{children}</LocationProvider>
+        </Provider>
+      </PaperProvider>
     </ThemeProvider>
   );
 };
