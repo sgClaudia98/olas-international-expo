@@ -6,7 +6,7 @@ const phoneNumberValidation = Yup.string()
 
 const validationSchemas = {
   1: Yup.object().shape({
-    person: Yup.object().shape({
+    client: Yup.object().shape({
       fullName: Yup.string().max(50, 'Must be 50 characters or less').required('Full Name is required'),
       phone: phoneNumberValidation,
       email: Yup.string().email('Invalid email address').required('Email is required'),

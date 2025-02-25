@@ -1,4 +1,5 @@
 import {BaseQueryApi, createApi, FetchArgs} from '@reduxjs/toolkit/query/react';
+
 import {baseQueryWithReauth} from '@/services/api/apiService';
 import {
   DepartmentsResponse,
@@ -14,8 +15,8 @@ import {
   SearchMarketBookingOptionsResponse,
   UpdateMarketBookingCartRequest,
 } from '../interfaces/booking';
-import { AgencyClientBookingResponse, CreateMarketBookingRequest } from '../interfaces/bookingDetail';
-import { DEFAULT_DESTINATION, BASE_URL } from '@/constants';
+import {DEFAULT_DESTINATION, BASE_URL} from '@/constants';
+import { AgencyClientBookingResponse, CreateMarketBookingRequest } from '../../services/interfaces/bookingDetail';
 
 // Define the necessary TypeScript interfaces
 export const bookingService = createApi({

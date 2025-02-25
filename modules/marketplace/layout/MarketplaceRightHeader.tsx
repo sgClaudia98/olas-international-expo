@@ -11,18 +11,6 @@ import {MainLayoutStateService} from '@/reducers/mainLayoutReducer';
 import HeaderBar, { MenuLink } from '@/components/layout/HeaderBar';
 import { useAppSelector } from '@/hooks/useAppDispatch';
 
-const getServiceNavigation = (screenName: string) => {
-  return {
-    name: 'MainLayout',
-    params: {
-      screen: 'Services',
-      params: {
-        screen: screenName,
-      },
-    },
-  };
-};
-
 const links: MenuLink[] = [
   //{label: 'Market', route: 'Marketplace', navigation:getServiceNavigation("Marketplace") },
   {label: 'Preguntas Frecuentes', route: 'faq'},
@@ -46,6 +34,7 @@ export default function MarketplaceRightHeader() {
   useEffect(() => {
     console.debug('RRR', state.items);
   }, [state.items]);
+  
   return (
     <View style={styles.container}>
       <HeaderBar

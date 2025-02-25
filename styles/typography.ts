@@ -12,6 +12,7 @@ type Typography = {
   h3: TypographyStyle;
   body: TypographyStyle;
   bodyHighlight: TypographyStyle;
+  title2B: TypographyStyle;
   categoriesTitle: TypographyStyle;
   filterTitle: TypographyStyle;
   selectedItems: TypographyStyle;
@@ -43,6 +44,10 @@ const typography: Typography = {
     fontSize: 16,
     fontWeight: 'normal',
     lineHeight: 24,
+  },
+  title2B: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   categoriesTitle: {
     fontSize: 22,

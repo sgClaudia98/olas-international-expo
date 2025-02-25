@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/core';
 
 import { useRouter } from 'expo-router';
 import SearchInput from '@/components/ui/SearchInput';
-import DropdownMenuSelect from '@/components/ui/DropdownMenuSelect';
+import DropdownMenuSelect from '@/components/DropdownMenuSelect';
 
 export default function MarketplaceLeftHeader() {
   const {data, selection, setSelection, setProductName} = useSearchContext();
@@ -23,6 +23,7 @@ export default function MarketplaceLeftHeader() {
     });
     return dep ? [all_cat, ...dep] : [all_cat];
   }, [data]);
+  
   const onDepartmentSelected = (value: string) => {
     setDepartment(value);
     setSelection({departmentId: value == '' ? undefined : +value, categoryId: undefined});
