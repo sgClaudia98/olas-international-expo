@@ -13,7 +13,7 @@ import {Colors} from '@/styles';
 import ContentBox from './ContentBox';
 import {useCreateMarketBookingMutation} from '../../services/api/BookingService';
 import {CreateMarketBookingRequest} from '../../services/interfaces/bookingDetail';
-import {useGetProfileQuery} from '@/services/api/AccountService';
+import {useGetProfileQuery} from '@/modules/auth/services/AccountService';
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;

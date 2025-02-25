@@ -1,7 +1,7 @@
 import {BaseQueryApi, createApi, FetchArgs} from '@reduxjs/toolkit/query/react';
 
-import { baseQueryWithReauth } from './apiService';
-import { IAccountCreateRequest, IAccountCreateResponse, IAccountPutRequest, IAccountResponse, IAuthRequest, IAuthResponse, IForgetPasswordRequest, IRefreshTokenRequest, IResetPasswordRequest, ISendVerificationCodeRequest, IVerifyRequest } from '../interfaces/account';
+import { baseQueryWithReauth } from '../../../services/api/apiService';
+import { IAccountCreateRequest, IAccountCreateResponse, IAccountPutRequest, IAccountResponse, IAuthRequest, IAuthResponse, IForgetPasswordRequest, IRefreshTokenRequest, IResetPasswordRequest, ISendVerificationCodeRequest, IVerifyRequest } from './interfaces/account';
 import { BASE_URL } from '@/constants';
 
 

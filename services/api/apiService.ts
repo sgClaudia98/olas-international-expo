@@ -1,8 +1,8 @@
 import {BaseQueryApi, FetchArgs, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {decodeToken} from 'react-jwt';
 import {RootState} from '@/state';
-import {logout, setCredentials, User} from '@/slices/authSlice';
-import {accountService} from './AccountService';
+import {logout, setCredentials, User} from '@/modules/auth/slices/authSlice';
+import {accountService} from '../../modules/auth/services/AccountService';
 
 const constructBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({

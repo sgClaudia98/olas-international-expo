@@ -1,11 +1,12 @@
+import Page from "@/components/layout/Page";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
-export default function NewScreen() {
+export default function ResetPasswordScreen() {
   return (
-    <ThemedView>
-      <ThemedText type="title">ResetPassword</ThemedText>
+    <Page>
+      <ThemedText type="title">Reset pswd</ThemedText>
       <ThemedText>This is a new screen</ThemedText>
-    </ThemedView>
+    </Page>
   );
 }

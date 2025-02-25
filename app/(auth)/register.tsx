@@ -1,11 +1,12 @@
+import Page from "@/components/layout/Page";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
-export default function NewScreen() {
+export default function RegisterScreen() {
   return (
-    <ThemedView>
+    <Page>
       <ThemedText type="title">Register</ThemedText>
       <ThemedText>This is a new screen</ThemedText>
-    </ThemedView>
+    </Page>
   );
 }
