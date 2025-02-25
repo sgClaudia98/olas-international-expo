@@ -29,19 +29,16 @@ export default function RootLayout() {
 
   return (
     <AppProviders>
-      <Stack>
-        {Platform.OS !== "web" && (
-          <Stack.Screen name="promos" options={{ headerShown: false }} />
-        )}
-        <Stack.Screen
-          name="(main)"
-          options={{
-            ...screenHeaderLogoOption,
-            headerStyle: { backgroundColor: "white" },
-          }}
-        />
-        <Stack.Screen name="(auth)" options={{ ...screenHeaderLogoOption }} />
-      </Stack>
+      <Stack
+        screenOptions={({ route }) =>
+          route.path != "/promos"
+            ? {
+                ...screenHeaderLogoOption,
+                headerStyle: { backgroundColor: "white" },
+              }
+            : { headerShown: false }
+        }
+      />
       <StatusBar style="auto" />
     </AppProviders>
   );

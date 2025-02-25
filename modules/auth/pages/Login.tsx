@@ -5,14 +5,13 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
 import Btn from "@/components/Btn";
-import { Link } from "@react-navigation/native";
 import { testStyles } from "@/styles";
-import { useAuthMutation } from "@/modules/auth/services/AccountService";
+import { useAuthMutation } from "@/modules/auth/services/api/AccountService";
 import { Card } from "react-native-paper";
 import { setCredentials, User } from "@/modules/auth/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { decodeToken } from "react-jwt";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 interface FormValues {
   email: string;
@@ -27,13 +26,22 @@ const validationSchema = Yup.object({
     .min(8, "Password must be at least 8 characters")
     .required("Password is required"),
 });
+
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const router = useRouter();
   const [auth, { isLoading, isError, isSuccess, error, data }] =
     useAuthMutation(); // Destructure to get mutation states
+
+  if (!auth) {
+    console.error("auth is undefined");
+  }
   const dispatch = useDispatch();
+
+  if (!dispatch) {
+    console.error("dispatch function is undefined");
+  }
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -42,7 +50,6 @@ const Login: FunctionComponent<LoginProps> = () => {
     console.debug(values);
     auth(values);
   };
-
 
   useEffect(() => {
     if (isError) {
@@ -120,15 +127,10 @@ const Login: FunctionComponent<LoginProps> = () => {
               {/* Remember me and forgot password */}
               <View>
                 <Link
-                  screen="Auth"
-                  params={
-                    !touched.email || errors.email
-                      ? { screen: "ResetPassword" }
-                      : {
-                          screen: "ResetPassword",
-                          params: { email: values.email },
-                        }
-                  }
+                  href={{
+                    pathname: "/(auth)/reset-password",
+                    params: { email: values.email },
+                  }}
                 >
                   Forgot password?
                 </Link>
@@ -144,9 +146,7 @@ const Login: FunctionComponent<LoginProps> = () => {
               {/* Sign up navigation */}
               <Text>
                 Don’t have an account?
-                <Link screen="Auth" params={{ screen: "Register" }}>
-                  Sign Up
-                </Link>
+                <Link href="/(auth)/register">Sign Up</Link>
               </Text>
 
               {/* Remember me and forgot password */}

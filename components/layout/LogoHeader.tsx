@@ -8,7 +8,7 @@ const LogoHeader = () => {
 
   return (
     <View style={styles.logo}>
-      <Pressable key={"logo-touch"} onPress={() => router.push("/")}>
+      <Pressable key={"logo-touch"} onPress={() => router.navigate("/(main)")}>
         <Image
           source={require("@/assets/images/logo_large.svg")}
           style={{ alignSelf: "center" }}

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer, { loadAuthStateFromStorage } from '../../modules/auth/slices/authSlice';
+import authReducer, { loadAuthStateFromStorage } from '@/modules/auth/slices/authSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { accountService } from '@/modules/auth/services/AccountService';
+import { accountService } from '@/modules/auth/services/api/AccountService';
 import { bookingService } from '@/modules/marketplace/services/api/BookingService';
 import { geoService } from '@/services/api/GeoService';
 

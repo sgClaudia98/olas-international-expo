@@ -16,7 +16,7 @@ export default function TabLayout() {
           name="explore"
           options={{ headerShown: false, title: "EXPLORE" }}
         />
-        <Stack.Screen name="new" options={{}} />
+        <Stack.Screen name="profile" options={{}} />
         <Stack.Screen name="information" options={{}} />
         <Stack.Screen name="settings" options={{}} />
         <Stack.Screen name="index" options={{ headerShown: false }} />

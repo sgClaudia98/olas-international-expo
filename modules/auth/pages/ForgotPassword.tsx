@@ -12,7 +12,7 @@ import InputField from "@/components/ui/InputField";
 import {
   useForgetPasswordMutation,
   useResetPasswordMutation,
-} from "@/modules/auth/services/AccountService";
+} from "@/modules/auth/services/api/AccountService";
 
 import {
   IForgetPasswordRequest,

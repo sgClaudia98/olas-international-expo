@@ -4,7 +4,7 @@ import { ThemedView } from "@/components/ThemedView";
 export default function NewScreen() {
   return (
     <ThemedView>
-      <ThemedText type="title">Marketplace</ThemedText>
+      <ThemedText type="title">Marketplace Landing page</ThemedText>
       <ThemedText>This is a new screen</ThemedText>
     </ThemedView>
   );

@@ -146,7 +146,7 @@ export interface CreateMarketBookingRequest {
   client: Client;
   beneficiary: Client;
   notes?: Record<string, string | null>;
-  preview: boolean;
+  //preview: boolean;
 }
 
 export interface Client {

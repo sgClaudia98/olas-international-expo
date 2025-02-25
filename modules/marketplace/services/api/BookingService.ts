@@ -119,11 +119,18 @@ export const bookingService = createApi({
       }),
     }),
 
+    previewMarketBooking: builder.mutation<AgencyClientBookingResponse, CreateMarketBookingRequest>({
+      query: (body) => ({
+        url: `/market/booking`,
+        method: 'POST',
+        body: { ...body, preview: true },
+      }),
+    }),
     createMarketBooking: builder.mutation<AgencyClientBookingResponse, CreateMarketBookingRequest>({
       query: (body) => ({
         url: `/market/booking`,
         method: 'POST',
-        body,
+        body: { ...body, preview: false },
       }),
     }),
     
@@ -152,6 +159,7 @@ export const {
   useUpdateCartItemMutation,
   useRemoveFromCartMutation,
   useCreateMarketBookingMutation,
+  usePreviewMarketBookingMutation,
   useGetBookingByIdQuery,
 } = bookingService;
 

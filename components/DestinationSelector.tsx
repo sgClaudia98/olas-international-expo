@@ -6,6 +6,7 @@ import {useGetDestinationsQuery} from '@/services/api/GeoService';
 import {Destination} from '@/services/interfaces/geo';
 import {useLocationContext} from '@/contexts/locationContext';
 import {capitalizeWords} from '@/utils/string';
+import { DEFAULT_DESTINATION } from '@/constants';
 
 const DestinationSelector = () => {
   const {destinationCountry, setDestinations} = useLocationContext();
@@ -21,7 +22,7 @@ const DestinationSelector = () => {
   useEffect(() => {
     if (isSuccess && destinations.destinations) {
       const _dest = destinations.destinations;
-      const initDest = _dest.find(v => v.id == 75);
+      const initDest = _dest.find(v => v.id == DEFAULT_DESTINATION);
       console.log(initDest, 'initDest');
       if (initDest) {
         setDestinations([initDest]);
