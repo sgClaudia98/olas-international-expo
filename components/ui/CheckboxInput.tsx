@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import CheckBox from 'expo-checkbox';
 import * as Colors from '@/styles/colors'
 
 interface CheckboxInputProps {
@@ -21,15 +21,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
                 value={isChecked}
                 onValueChange={handleCheck}
                 style={styles.checkbox}
-                boxType="square"
-                lineWidth={1.5}
-                tintColor={"#007BFF"}
-                onTintColor={"#007BFF"}
-                onCheckColor={"#fff"}
-                onFillColor={"#007BFF"}
-                offAnimationType='bounce'
-                onAnimationType='bounce'
-                animationDuration={0.3}
+                color={Colors.blue.primary}
             />
             <Pressable onPress={handleCheck}>
                 <Text style={styles.text} >
