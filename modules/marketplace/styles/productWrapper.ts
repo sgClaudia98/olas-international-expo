@@ -1,6 +1,6 @@
 import {Colors} from '@/styles';
 import {layout} from '@/styles/sizing';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 
 
 const styles = {

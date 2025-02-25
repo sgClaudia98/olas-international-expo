@@ -4,13 +4,13 @@ import {MarketBookingCartItem, MarketBookingOption} from '../../services/interfa
 
 import {productInfoStyles as styles} from '../../styles/product';
 import Btn from '@/components/Btn';
-import NumberInput from '@/components/NumberInput/NumberInput';
-import {URL_IMAGE} from '@/config';
+import NumberInput from '@/components/NumberInput';
+import {URL_IMAGE} from '@/constants';
 import {Colors} from '@/styles';
 import {IconButton} from 'react-native-paper';
-import Badge from '@/components/Badge/Badge';
+import Badge from '@/components/Badge';
 import {useShoppingCart} from '../../context/ShoppingCartContext';
-import TextSeeMore from '@/components/Text/TextSeeMore';
+import TextSeeMore from '@/components/TextSeeMore';
 import { MarketBookingCartExtra } from '../../hooks/useMarketCartActions';
 
 interface ProductInfoProps {

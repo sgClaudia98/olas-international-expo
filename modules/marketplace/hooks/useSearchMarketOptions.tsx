@@ -13,7 +13,7 @@ import {
 } from '../services/interfaces/booking';
 import {useLocationContext} from '@/contexts/locationContext';
 import {Selection, useSearchContext} from '../context/SearchContext';
-import CONST from '@/constants';
+import {DEFAULT_DESTINATION} from '@/constants';
 import {PaginationRequest} from '@/services/interfaces/pagination';
 
 export interface IFilter extends Selection {
@@ -40,7 +40,7 @@ interface SearchMarketOptionsResult {
 
 const initFilter: IAllFilters = {
   mutation: {
-    destinationId: CONST.defaultDestination,
+    destinationId: DEFAULT_DESTINATION,
   },
 };
 
@@ -113,7 +113,7 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
 
       const fetchData = async () => {
         const request: SearchMarketBookingOptionsRequest = {
-          destinationId: activeDestination?.id || CONST.defaultDestination,
+          destinationId: activeDestination?.id || DEFAULT_DESTINATION,
           ...filter.mutation,
           optionsQuery: {
             ...filter.query,

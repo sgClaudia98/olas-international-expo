@@ -1,19 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { FC } from 'react';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/core';
-import {MarketplaceStackParamList} from '../layout/MarketplaceStack';
 import ProductInfo from '../components/product/ProductInfo';
 import {useGetProductsQuery} from '../services/api/BookingService';
 import {useLocationContext} from '@/contexts/locationContext';
-import Page from '@/layout/Page';
-import BackArrow from '@/components/BackArrow/BackArrow';
+import Page from '@/components/layout/Page';
+import BackArrow from '@/components/layout/BackArrow';
 
-type ProductDetailRouteProp = RouteProp<MarketplaceStackParamList, 'ProductsDetail'>;
-
-const ProductDetail = () => {
-  const route = useRoute<ProductDetailRouteProp>();
-  const navigation = useNavigation();
-  const {id} = route.params;
+const ProductDetail: FC<{id: string}> = ({id}) => {
+  
   const {activeDestination} = useLocationContext();
 
   const {data, error, isLoading} = useGetProductsQuery({
@@ -21,6 +16,7 @@ const ProductDetail = () => {
     destinationId: activeDestination?.id,
   });
   const goToProducts = () => {
+    /*
     navigation.navigate('MainLayout', {
       screen: 'Services',
       params: {
@@ -30,6 +26,7 @@ const ProductDetail = () => {
         },
       },
     });
+    */
   };
   return (
     <Page>

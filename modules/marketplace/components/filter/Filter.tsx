@@ -1,9 +1,9 @@
 import MultilevelCheckDropdown, {
   DropdownCheckItem,
-} from '@/components/Dropdown/MultilevelCheckDropdown';
-import MultilevelDropdown, {DropdownItem} from '@/components/Dropdown/MultilevelDropdown';
+} from '@/components/MultilevelCheckDropdown';
+import MultilevelDropdown, {DropdownItem} from '@/components/MultilevelDropdown';
 import {useEffect, useMemo, useState} from 'react';
-import {View, Text, StyleSheet, useWindowDimensions} from 'react-native';
+import {View, Text, StyleSheet, useWindowDimensions, ViewStyle, TextStyle} from 'react-native';
 import {useSearchContext} from '../../context/SearchContext';
 import {IAllFilters} from '../../hooks/useSearchMarketOptions';
 import {SearchMarketBookingOptionStats} from '../../services/interfaces/booking';
@@ -73,8 +73,8 @@ const Filters: React.FC<FiltersProps> = ({onItemClick, setFilter,stats}) => {
   };
 
   return (
-    <View style={styles.filters}>
-      <Text style={styles.filterHeader}>Filters</Text>
+    <View style={styles.filters as ViewStyle}>
+      <Text style={styles.filterHeader as TextStyle}>Filters</Text>
       <MultilevelDropdown
         title="Categories"
         items={mappedData}
