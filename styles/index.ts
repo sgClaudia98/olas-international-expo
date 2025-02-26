@@ -4,6 +4,7 @@ import * as Colors from "./colors"
 import * as Outlines from "./outlines"
 import * as Sizing from "./sizing"
 import * as Typography from "./typography"
+import { hexToRgb } from './utils';
 
 export {
   Colors,
@@ -112,9 +113,6 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(66, 75, 90, 0.15)'
   },
   defaultShadow: {
-    shadowColor: greyColor,
-    shadowOpacity: .2,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 0 }
+    boxShadow: `0px 0px 8px rgba(${hexToRgb(greyColor)}, 0.2)`,
   }
 });
