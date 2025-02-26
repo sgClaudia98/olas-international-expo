@@ -73,8 +73,8 @@ const Filters: React.FC<FiltersProps> = ({onItemClick, setFilter,stats}) => {
   };
 
   return (
-    <View style={styles.filters as ViewStyle}>
-      <Text style={styles.filterHeader as TextStyle}>Filters</Text>
+    <View style={styles.filters}>
+      <Text style={styles.filterHeader }>Filters</Text>
       <MultilevelDropdown
         title="Categories"
         items={mappedData}

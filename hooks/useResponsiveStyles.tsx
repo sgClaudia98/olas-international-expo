@@ -1,7 +1,7 @@
 import { RegisteredStyle, useWindowDimensions } from "react-native";
 import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from "react-native";
 
-type NamedStyles<T> = {[P in keyof T]: ViewStyle | TextStyle | ImageStyle};
+type NamedStyles<T> = {[P in keyof T]: any};
 
 // Define breakpoints (Desktop > Tablet > Mobile)
 const BREAKPOINTS = {
@@ -11,9 +11,9 @@ const BREAKPOINTS = {
 };
 
 type ResponsiveStyles<T> = {
-  desktop?: NamedStyles<T> | NamedStyles<any>; // Default to Desktop (Big Screens First)
-  tablet?: NamedStyles<T> | NamedStyles<any>;
-  mobile: NamedStyles<T> | NamedStyles<any>; // Mobile is the fallback (default)
+  desktop?: NamedStyles<T> ; // Default to Desktop (Big Screens First)
+  tablet?: NamedStyles<T>;
+  mobile: NamedStyles<T> ; // Mobile is the fallback (default)
 };
 
 export function useResponsiveStyles<T extends NamedStyles<T>>(styles: ResponsiveStyles<T>) {

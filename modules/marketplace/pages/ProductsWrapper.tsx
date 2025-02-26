@@ -64,7 +64,7 @@ const ProductsWrapper: React.FC = () => {
           </View>
         </View>
       </View>
-      <View style={styles.wrapper as ViewStyle}>
+      <View style={styles.wrapper}>
         {isSwitchOn && (
           <Filters
             onItemClick={handleItemClick}
@@ -85,7 +85,7 @@ const ProductsWrapper: React.FC = () => {
           pageSize={20}
           loading={loading}
         >
-          <View style={styles.products as ViewStyle}>
+          <View style={styles.products}>
             {items?.map((val) => (
               <ProductItem
                 key={`prodI-${val.id}-${val.product.id}`}
@@ -93,7 +93,7 @@ const ProductsWrapper: React.FC = () => {
                 style={
                   (isSwitchOn
                     ? styles.productOpen
-                    : styles.productClose) as ViewStyle
+                    : styles.productClose)
                 }
                 onClick={() => handleProductPress(val.product.id)}
               />
