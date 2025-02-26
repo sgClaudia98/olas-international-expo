@@ -3,6 +3,7 @@ import Page from "@/components/layout/Page";
 import { ThemedText } from "@/components/ThemedText";
 import { Href, useRouter } from "expo-router";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { View, Platform } from "react-native";
 
 export default function NewScreen() {
@@ -21,9 +22,14 @@ export default function NewScreen() {
     setSelectedCountry(country);
     setModalVisible(false); // Close the modal after selection
   };
+  const { t } = useTranslation();
+
   return (
     <Page>
     <View style={{gap: 2}}>
+
+      <ThemedText>{t('LANGUAGE')}</ThemedText>
+
       {Platform.OS != 'web' && (
         <Btn
           title="go to promo"
