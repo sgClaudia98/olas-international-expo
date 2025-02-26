@@ -7,6 +7,7 @@ import {useDispatch, UseDispatch} from 'react-redux';
 import { useRouter } from 'expo-router';
 import { logout } from '../slices/authSlice';
 import { useGetProfileQuery } from '../services/api/AccountService';
+import { hexToRgb } from '@/styles/utils';
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();
@@ -66,10 +67,7 @@ const styles = StyleSheet.create({
   profileCard: {
     paddingBottom: 20,
     backgroundColor: Colors.black.fifth,
-    shadowColor: Colors.black.primary,
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 8,
-    shadowOpacity: 0.5,
+    boxShadow: `0px 2px 8px rgba(${hexToRgb(Colors.black.primary)}, 0.5)`,
     borderRadius: 12,
     width: '35%',
   },

@@ -1,6 +1,7 @@
 import { ViewStyle, StyleSheet } from "react-native"
 
 import * as Colors from "./colors"
+import { hexToRgb } from "./utils"
 
 type BorderRadius = "small" | "base" | "large" | "max"
 export const borderRadius: Record<BorderRadius, number> = {
@@ -21,13 +22,7 @@ export const borderWidth: Record<BorderWidth, number> = {
 type Shadow = "base"
 export const shadow: Record<Shadow, ViewStyle> = {
   base: {
-    shadowColor: Colors.black.second,
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
+    boxShadow:  `0px 3px 4.65px rgba(${hexToRgb(Colors.black.second)}, 0.27)`, 
     elevation: 6,
   },
 }

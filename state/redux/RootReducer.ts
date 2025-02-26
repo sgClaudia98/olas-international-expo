@@ -19,8 +19,6 @@ export const store = configureStore({
       .concat(geoService.middleware),
 });
 
-// Load persisted auth state on app startup
-store.dispatch(loadAuthStateFromStorage());
 
 setupListeners(store.dispatch);
 
