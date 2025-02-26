@@ -66,9 +66,9 @@ const PaymentForm = ({
   const initialValues = useMemo(
     () => ({
       client: {
-        fullName: profile?.fullName ?? "",
-        phone: profile?.phone ?? "",
-        email: profile?.email ?? "",
+        fullName: profile?.client.fullName ?? '',
+        phone: profile?.client.phone ?? '',
+        email: profile?.client.email ?? '', 
       },
       beneficiary: {
         firstName: "",

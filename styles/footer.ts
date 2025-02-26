@@ -1,16 +1,17 @@
 import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {Colors} from '@/styles';
 import typography from '@/styles/typography';
+
 export interface FooterStyles {
   container: ViewStyle;
   logoSection: ViewStyle;
-  text: TextStyle; // Ensure text is always a TextStyle
+  text: TextStyle; 
   socialContainer: ViewStyle;
   footerMenu: ViewStyle;
-  sectionTitle: TextStyle; // Ensure sectionTitle is always a TextStyle
-  footerItemText: TextStyle; // Ensure footerItemText is always a TextStyle
+  sectionTitle: TextStyle; 
+  footerItemText: TextStyle; 
   bottomSection: ViewStyle;
-  copyright: TextStyle; // Ensure copyright is always a TextStyle
+  copyright: TextStyle; 
   paymentMethods: ViewStyle;
   logo: ImageStyle;
 }

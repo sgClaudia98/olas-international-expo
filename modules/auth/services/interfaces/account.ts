@@ -10,7 +10,9 @@ export interface IAuthResponse {
     refreshToken: string
 }
 
-export interface IAccountResponse extends Client { }
+export interface IAccountResponse {
+    client: Client
+}
 
 // active and debitCardNumber shouldnt be a property sent by the backend
 export interface IAccountPutRequest extends
