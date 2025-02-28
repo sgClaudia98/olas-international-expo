@@ -47,7 +47,6 @@ const Login: FunctionComponent<LoginProps> = () => {
     password: "",
   };
   const onSubmit = (values: FormValues) => {
-    console.debug(values);
     auth(values);
   };
 

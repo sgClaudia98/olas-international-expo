@@ -60,7 +60,6 @@ const authSlice = createSlice({
       state.token = undefined;
       state.refreshToken = undefined;
       AsyncStorage.removeItem(AUTH_KEY_STORAGE); // Clear storage on logout
-      console.debug('Logged out');
     },
     setAuthState: (state, { payload }: PayloadAction<AuthState>) => {
       state.user = payload.user;

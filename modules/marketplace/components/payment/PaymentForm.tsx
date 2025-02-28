@@ -61,7 +61,6 @@ const PaymentForm = ({
   const [step, setStep] = useState(1);
   const { data: profile, isLoading } = useGetProfileQuery();
 
-  console.log("profile data: ", profile);
 
   const initialValues = useMemo(
     () => ({
@@ -87,7 +86,6 @@ const PaymentForm = ({
     [profile]
   );
 
-  console.log(initialValues);
 
   const validationSchema = useMemo(
     () => (validationSchemas as ValidationSchemas)[step] || Yup.object(),
@@ -95,7 +93,6 @@ const PaymentForm = ({
   );
 
   const handleNextStep = (errors: FormikErrors<any>) => {
-    console.log("Errors:", errors);
 
     if (Object.keys(errors).length === 0) {
       setStep(step + 1);

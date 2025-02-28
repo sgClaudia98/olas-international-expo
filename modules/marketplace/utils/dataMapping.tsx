@@ -98,7 +98,6 @@ export function mapPriceRanges(minPrice: number, maxPrice: number): DropdownItem
   if (minPrice ==0 && maxPrice==0|| maxPrice - minPrice < 20) return [];
   
   const split = generateIntermediateValues(minPrice, maxPrice)
-  console.debug("S", split)
 
   return generatePriceRanges(split)
 }

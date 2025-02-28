@@ -52,11 +52,8 @@ export const ShoppingCartProvider = <T extends {id: number}, K extends T>({
   const [state, dispatch] = useReducer(shoppingCartReducer, {items: []});
   const [cartVisible, setCartVisible] = useState(false);
 
-  console.log(actions.price);
-
   // Sincronizar con la API si hay sesión
   useEffect(() => {
-    console.log('DATA:', actions.data);
     if (actions.data && actions.data.length > 0) {
       dispatch({type: 'SET_CART', payload: actions.data});
     }

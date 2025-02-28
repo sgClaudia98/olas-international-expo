@@ -88,7 +88,6 @@ const MultilevelDropdown: React.FC<MultilevelDropdownProps> = ({title, items, on
   const [activeTrace, setActiveTrace] = useState<any[]>([]);
   const [isOpen, setIsOpen] = useState(true);
   const _onItemClick = (trace: DropdownItem[]) => {
-    console.debug(trace, 'Active');
     setActiveTrace(trace);
     onItemClick(trace);
   };

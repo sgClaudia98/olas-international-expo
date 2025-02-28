@@ -53,7 +53,6 @@ const Filters: React.FC<FiltersProps> = ({onItemClick, setFilter,stats}) => {
   };
 
   const _onItemClick = (item: DropdownItem[]) => {
-    console.debug(item, 'onClick');
     setSelection({
       departmentId: +item[0]?.value,
       categoryId: +item[1]?.value,

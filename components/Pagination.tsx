@@ -19,7 +19,6 @@ const PaginatedContent: React.FC<PaginatedListProps> = ({ fetchItems, children, 
     setIsLoading(true);
     const offset = (page - 1) * pageSize;
     try {
-      console.log(pageSize, offset, "AAAAAA")
       await fetchItems(pageSize, offset);
     } catch (error) {
       console.error('Error fetching items:', error);

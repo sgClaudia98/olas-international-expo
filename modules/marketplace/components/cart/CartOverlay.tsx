@@ -31,7 +31,6 @@ const CartOverlay = <T extends {id: number}>({
       alert('Necesitas seleccionar una localidad.');
       return;
     }
-    console.log(activeDestination, destinationCountry);
     setShowPaymentModal(true);
   };
 

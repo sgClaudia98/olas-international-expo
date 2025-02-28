@@ -23,7 +23,6 @@ const DestinationSelector = () => {
     if (isSuccess && destinations.destinations) {
       const _dest = destinations.destinations;
       const initDest = _dest.find(v => v.id == DEFAULT_DESTINATION);
-      console.log(initDest, 'initDest');
       if (initDest) {
         setDestinations([initDest]);
         setSelected(initDest);
@@ -37,7 +36,6 @@ const DestinationSelector = () => {
   }, [destinations, isLoading]);
 
   const handleSelect = (value: string) => {
-    console.log(value, 'adsasda');
     const dest = destinations?.destinations?.find(v => v.id == +value);
     setSelected(dest);
     setDestinations(dest ? [dest] : []);

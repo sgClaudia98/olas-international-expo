@@ -22,7 +22,6 @@ const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, numberOfLines = 3 }
       containerRef.current.measure((x, y, width, height) => {
         const lineHeight = 24; // Adjust this according to your text's line height
         const lines = Math.floor(height / lineHeight);
-        console.log("AAAAA", lines , height, x, y , width)
         if (lines > numberOfLines) {
           setIsTruncated(true);
           setIsExpanded(false)

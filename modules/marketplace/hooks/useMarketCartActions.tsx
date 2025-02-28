@@ -104,7 +104,6 @@ export const useMarketCartActions = (): CartActions => {
 
   useEffect(() => {
     if (token) {
-      console.debug('Fetch cart');
       fetchCart();
     }
   }, []);

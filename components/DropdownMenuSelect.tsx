@@ -71,7 +71,6 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
   };
 
   const getButtonTitle = (newValue?: string): string => {
-    console.log(menuItems, newValue)
     const selectedLabel = menuItems.find((item) => item.value === newValue)?.label || menuItems[0]?.label;
   
     if (typeof buttonTitle === 'function') {
