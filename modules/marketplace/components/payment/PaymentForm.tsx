@@ -17,6 +17,11 @@ import {
 } from "../../services/api/BookingService";
 import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
 import { useGetProfileQuery } from "@/modules/auth/services/api/AccountService";
+import {
+  mapAgencyClientBookingsToUIBookings,
+  UIBooking,
+} from "../../utils/bookingMapping";
+import OrderSection from "./OrderSection";
 
 const mapValuesToPayload = (
   values: FormikValues
@@ -41,9 +46,7 @@ const mapValuesToPayload = (
         zipCode: beneficiary.address?.zipCode || "",
       },
     },
-    notes: { // TODO: this will have as many numbers as orders has the user
-      "1": notes || null,
-    },
+    notes,
   };
 };
 
@@ -62,14 +65,13 @@ const PaymentForm = ({
 }) => {
   const [step, setStep] = useState(1);
   const { data: profile, isLoading } = useGetProfileQuery();
-
-
+  
   const initialValues = useMemo(
     () => ({
       client: {
-        fullName: profile?.client.fullName ?? '',
-        phone: profile?.client.phone ?? '',
-        email: profile?.client.email ?? '', 
+        fullName: profile?.client.fullName ?? "",
+        phone: profile?.client.phone ?? "",
+        email: profile?.client.email ?? "",
       },
       beneficiary: {
         firstName: "",
@@ -84,10 +86,10 @@ const PaymentForm = ({
           zipCode: destinationCountry !== "CU" ? "" : "CU",
         },
       },
+      notes: {},
     }),
     [profile]
   );
-
 
   const validationSchema = useMemo(
     () => (validationSchemas as ValidationSchemas)[step] || Yup.object(),
@@ -95,20 +97,17 @@ const PaymentForm = ({
   );
 
   const handleNextStep = (errors: FormikErrors<any>) => {
-
     if (Object.keys(errors).length === 0) {
       setStep(step + 1);
     }
   };
 
-  const [notesEnabled, setNotesEnabled] = useState(false);
-
-  const notes: string = "";
-
   const [previewMarketBookingAPI, { isLoading: loadingBooking }] =
     usePreviewMarketBookingMutation();
 
   const [createMarketBookingAPI] = useCreateMarketBookingMutation();
+
+  const [preview, setPreview] = useState<UIBooking>();
 
   const createMarketBooking = async (
     values: FormikValues,
@@ -119,7 +118,7 @@ const PaymentForm = ({
       const response = preview
         ? await previewMarketBookingAPI(payload).unwrap()
         : await createMarketBookingAPI(payload).unwrap();
-
+      setPreview(mapAgencyClientBookingsToUIBookings(response.booking));
       if (response.success) {
         if (preview) setStep(3);
         else alert("Success");
@@ -135,7 +134,6 @@ const PaymentForm = ({
     <Formik
       initialValues={{
         ...initialValues,
-        notes,
       }}
       enableReinitialize={true}
       validationSchema={validationSchema}
@@ -276,7 +274,7 @@ const PaymentForm = ({
                     value={values.beneficiary.phone || ""}
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
-                    error={
+                    error={ 
                       !!(
                         touched.beneficiary?.phone && errors.beneficiary?.phone
                       )
@@ -451,68 +449,16 @@ const PaymentForm = ({
                   />
                 </View>
               </View>
-              <View style={styles.tablet.productTableContainer}>
-                <Text style={styles.tablet.orderText}>Order</Text>
-                <DataTable>
-                  <DataTable.Header style={styles.tablet.tableHeader}>
-                    <DataTable.Title>
-                      <Text style={styles.tablet.label}>Product</Text>
-                    </DataTable.Title>
-                    <DataTable.Title numeric>
-                      <Text style={styles.tablet.label}>Quantity</Text>
-                    </DataTable.Title>
-                    <DataTable.Title numeric>
-                      <Text style={styles.tablet.label}>Price</Text>
-                    </DataTable.Title>
-                  </DataTable.Header>
-                </DataTable>
-                {cartItems.map((item) => (
-                  <DataTable.Row
-                    key={`${item.data.id}-${item.data.product.id}`}
-                    style={styles.tablet.tableRow}
-                  >
-                    <DataTable.Cell>
-                      <Text style={styles.tablet.text}>
-                        {item.data.product.name}
-                      </Text>
-                    </DataTable.Cell>
-                    <DataTable.Cell numeric>
-                      <Text style={styles.tablet.text}>
-                        {item.data.quantity}
-                      </Text>
-                    </DataTable.Cell>
-                    <DataTable.Cell numeric>
-                      <Text style={styles.tablet.text}>${item.data.price}</Text>
-                    </DataTable.Cell>
-                  </DataTable.Row>
+              {preview &&
+                preview.details.map((booking) => (
+                  <OrderSection
+                    booking={booking}
+                    note={values.notes[booking.id]}
+                    onChangeNote={(value) =>
+                      handleChange(`notes.${booking.id}`)(value)
+                    }
+                  />
                 ))}
-                <View style={styles.tablet.separator}></View>
-                <View style={styles.tablet.commentsContainer}>
-                  <Button
-                    style={styles.tablet.commentsButton}
-                    onPress={() => setNotesEnabled(!notesEnabled)}
-                  >
-                    {notesEnabled ? "Close note" : "Open note"}
-                  </Button>
-                  {notesEnabled && (
-                    <textarea
-                      style={styles.tablet.commentsTextArea}
-                      rows={3}
-                      placeholder="Leave your comments here..."
-                      color={Colors.black.primary}
-                      onChange={handleChange("notes")}
-                      onBlur={handleBlur("notes")}
-                      value={values.notes}
-                    ></textarea>
-                  )}
-                  <Text style={styles.tablet.totalPrice}>
-                    Total $
-                    {cartItems
-                      .reduce((acc, item) => acc + item.data.price, 0)
-                      .toFixed(2)}
-                  </Text>
-                </View>
-              </View>
             </>
           )}
 
