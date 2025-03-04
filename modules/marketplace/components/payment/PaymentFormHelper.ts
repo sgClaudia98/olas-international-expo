@@ -1,5 +1,27 @@
 import * as Yup from 'yup';
 
+export interface PaymentFormValues {
+  client: {
+      fullName: string;
+      phone: string;
+      email: string;
+  };
+  beneficiary: {
+      firstName: string;
+      lastName: string;
+      phone: string;
+      idDocument: string;
+      address: {
+          state: string;
+          city: string;
+          line1: string;
+          line2: string;
+          zipCode: string;
+      };
+  };
+  notes: {};
+}
+
 const phoneNumberValidation = Yup.string()
   .matches(/^\+?[1-9]\d{6,14}$/, 'Invalid phone number. Must be a valid international format.')
   .required('Phone Number is required');

@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Client } from '../models/ClientModel';
+import { fetchUserProfileThunk } from './authThunks';
 
 const AUTH_KEY_STORAGE = 'auth';
 
@@ -14,6 +16,7 @@ export interface User {
   username: string;
   name: string;
   imageUrl: string;
+  details?: Client;
 }
 
 const initialState: AuthState = {
@@ -66,14 +69,30 @@ const authSlice = createSlice({
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
     },
+    setUserDetails: (state, { payload }: PayloadAction<Client>) => {
+      if (state.user) {
+        state.user.details = payload;
+      }
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUserProfileThunk.fulfilled, (state, { payload }) => {
+      if (state.user) {
+        console.debug('User details:', payload);
+        state.user.details = payload;
+      }
+    });
   },
 });
 
-export const { setCredentials, logout, setAuthState } = authSlice.actions;
+export const { setCredentials, logout, setAuthState, setUserDetails } = authSlice.actions;
 export default authSlice.reducer;
 
 // Async function to rehydrate state
 export const loadAuthStateFromStorage = () => async (dispatch: any) => {
   const storedAuth = await loadAuthState();
   dispatch(setAuthState(storedAuth));
+  if (storedAuth.token) {
+    dispatch(fetchUserProfileThunk());
+  }
 };

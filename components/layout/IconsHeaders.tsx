@@ -1,14 +1,15 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
+import { useAppSelector } from "@/hooks/useAppDispatch";
 
 const IconsHeader = () => {
   const router = useRouter();
   return (
     <Appbar.Header style={styles.appbar}>
-      <DestinationSelector/>
+      <DestinationSelector />
       <Appbar.Action icon="globe-model" />
       <Appbar.Action
         icon="account-circle-outline"
