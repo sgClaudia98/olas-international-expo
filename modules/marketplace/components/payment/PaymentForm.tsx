@@ -41,7 +41,9 @@ const mapValuesToPayload = (
         zipCode: beneficiary.address?.zipCode || "",
       },
     },
-    notes: notes,
+    notes: { // TODO: this will have as many numbers as orders has the user
+      "1": notes || null,
+    },
   };
 };
 
@@ -101,7 +103,8 @@ const PaymentForm = ({
 
   const [notesEnabled, setNotesEnabled] = useState(false);
 
-  const notes = "";
+  const notes: string = "";
+
   const [previewMarketBookingAPI, { isLoading: loadingBooking }] =
     usePreviewMarketBookingMutation();
 
