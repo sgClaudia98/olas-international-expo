@@ -94,7 +94,8 @@ const paymentFormStyles = {
     commentsTextArea: {
       backgroundColor: Colors.black.fifth,
       borderRadius: 5,
-      padding: 15
+      borderWidth: 0,
+      padding: 15,
     },
     totalPrice: {
       ...typography.title2B,

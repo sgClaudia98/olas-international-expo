@@ -18,9 +18,11 @@ const OrderSection: React.FC<OrderSectionProps> = ({
 }) => {
   const [notesEnabled, setNotesEnabled] = useState(false);
 
+  const { index, total } = booking;
+
   return (
     <View style={styles.tablet.productTableContainer}>
-      <Text style={styles.tablet.orderText}>Order</Text>
+      <Text style={styles.tablet.orderText}>Order {index+1} / {total} </Text>
       <DataTable>
         <DataTable.Header style={styles.tablet.tableHeader}>
           <DataTable.Title>

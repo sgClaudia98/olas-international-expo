@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { View, Text } from "react-native";
-import { Button, TextInput, DataTable } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { Formik, FormikErrors, FormikValues } from "formik";
 import * as Yup from "yup";
 
@@ -8,19 +8,15 @@ import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymen
 import StepProgress from "./StepProgress";
 
 import validationSchemas, { PaymentFormValues } from "./PaymentFormHelper";
-import { Colors } from "@/styles";
-import ContentBox from "./ContentBox";
 import {
   useCreateMarketBookingMutation,
   usePreviewMarketBookingMutation,
 } from "../../services/api/BookingService";
 import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
-import { useGetProfileQuery } from "@/modules/auth/services/api/AccountService";
 import {
   mapAgencyClientBookingsToUIBookings,
   UIBooking,
 } from "../../utils/bookingMapping";
-import OrderSection from "./OrderSection";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
