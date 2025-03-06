@@ -1,22 +1,24 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-paper';
-import { useFormikContext } from 'formik';
-import { Colors } from '@/styles';
-import { paymentFormStyles as styles } from '@/modules/marketplace/styles/paymentForm';
-import { PaymentFormValues } from '../PaymentFormHelper';
+import React from "react";
+import { View, Text } from "react-native";
+import { TextInput, HelperText } from "react-native-paper";
+import { useFormikContext } from "formik";
+import { Colors } from "@/styles";
+import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymentForm";
+import { PaymentFormValues } from "../PaymentFormHelper";
+import PhoneNumberSelector from "../PhoneNumberSelector";
 
 const Step1 = () => {
-  const { handleChange, handleBlur, values, errors, touched } = useFormikContext<PaymentFormValues>();
+  const { handleChange, handleBlur, values, errors, touched } =
+    useFormikContext<PaymentFormValues>();
 
   return (
     <>
       <Text style={styles.tablet.label}>Full Name</Text>
       <TextInput
         style={styles.tablet.input}
-        onChangeText={handleChange('client.fullName')}
-        onBlur={handleBlur('client.fullName')}
-        value={values.client.fullName || ''}
+        onChangeText={handleChange("client.fullName")}
+        onBlur={handleBlur("client.fullName")}
+        value={values.client.fullName || ""}
         textColor={Colors.black.primary}
         placeholderTextColor={Colors.black.primary}
         error={!!(touched.client?.fullName && errors.client?.fullName)}
@@ -28,18 +30,15 @@ const Step1 = () => {
       <View style={styles.tablet.twoColumnContainer}>
         <View style={styles.tablet.columnLeft}>
           <Text style={styles.tablet.label}>Phone Number</Text>
-          <TextInput
-            style={styles.tablet.input}
-            inputMode="tel"
-            onChangeText={handleChange('client.phone')}
-            onBlur={handleBlur('client.phone')}
-            value={values.client.phone || ''}
-            textColor={Colors.black.primary}
-            placeholderTextColor={Colors.black.primary}
-            error={!!(touched.client?.phone && errors.client?.phone)}
+          <PhoneNumberSelector
+            name="client.phone"
+            inputStyles={{ ...styles.tablet.input, marginBottom: 0 }}
+            defaultCountryCode="US"
           />
           {touched.client?.phone && errors.client?.phone && (
-            <Text style={styles.tablet.error}>{errors.client?.phone}</Text>
+            <HelperText type="error" visible>
+              {errors.client?.phone}
+            </HelperText>
           )}
         </View>
         <View style={styles.tablet.columnRight}>
@@ -47,9 +46,9 @@ const Step1 = () => {
           <TextInput
             style={styles.tablet.input}
             inputMode="email"
-            onChangeText={handleChange('client.email')}
-            onBlur={handleBlur('client.email')}
-            value={values.client.email || ''}
+            onChangeText={handleChange("client.email")}
+            onBlur={handleBlur("client.email")}
+            value={values.client.email || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
             error={!!(touched.client?.email && errors.client?.email)}

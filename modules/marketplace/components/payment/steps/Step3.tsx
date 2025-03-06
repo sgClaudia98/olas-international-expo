@@ -6,6 +6,13 @@ import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymen
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";
+import {
+  EmailIcon,
+  IdIcon,
+  MapPinIcon,
+  PhoneIcon,
+  ProfileIcon,
+} from "@/assets/icons/PaymentInfoIcons";
 
 const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
@@ -17,9 +24,18 @@ const Step3 = ({ preview }) => {
           <ContentBox
             title="Client"
             data={{
-              fullName: values.client.fullName || "",
-              email: values.client.email || "",
-              phoneNumber: values.client.phone || "",
+              fullName: {
+                icon: <ProfileIcon />,
+                value: values.client.fullName || "N/A",
+              },
+              email: {
+                icon: <EmailIcon />,
+                value: values.client.email || "N/A",
+              },
+              phoneNumber: {
+                icon: <PhoneIcon />,
+                value: values.client.phone || "N/A",
+              },
             }}
             backgroundColor={Colors.black.fifth}
           />
@@ -28,13 +44,32 @@ const Step3 = ({ preview }) => {
           <ContentBox
             title="Beneficiary"
             data={{
-              name:
-                values.beneficiary.firstName +
-                " " +
-                values.beneficiary.lastName,
-              identification: values.beneficiary.idDocument || "",
-              phoneNumber: values.beneficiary.phone || "",
-              address: values.beneficiary.address?.line1 || "",
+              name: {
+                icon: <ProfileIcon />,
+                value:
+                  `${values.beneficiary.firstName} ${values.beneficiary.lastName}` ||
+                  "N/A",
+              },
+              identification: {
+                icon: <IdIcon />,
+                value: values.beneficiary.idDocument || "N/A",
+              },
+              phoneNumber: {
+                icon: <PhoneIcon />,
+                value: values.beneficiary.phone || "N/A",
+              },
+              address: {
+                icon: <MapPinIcon />,
+                value: [
+                  values.beneficiary.address?.line1,
+                  values.beneficiary.address?.line2,
+                  values.beneficiary.address?.city,
+                  values.beneficiary.address?.state,
+                  values.beneficiary.address?.zipCode,
+                ]
+                  .filter((value) => value?.trim())
+                  .join(", "),
+              },
             }}
             backgroundColor={Colors.blue.fifth}
           />

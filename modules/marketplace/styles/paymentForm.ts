@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import { Colors } from '@/styles';
 import typography from '@/styles/typography';
+import theme from '@/styles/paperTheme';
 
 const paymentFormStyles = {
   mobile: StyleSheet.create({
@@ -8,10 +9,11 @@ const paymentFormStyles = {
   }),
   tablet: StyleSheet.create({
     formContainer: {
-        paddingHorizontal: 70,
         paddingTop: 50,
         paddingBottom: 60,
-        width: '100%',
+        maxWidth: 800,
+        minWidth: 600,
+        marginHorizontal: 'auto',
     },
     title: {
        ...typography.h3,
@@ -20,7 +22,7 @@ const paymentFormStyles = {
        color: Colors.black.primary,
     },
     error: {
-       color: 'red',
+       color: theme.colors.error,
        fontSize: 12,
        marginTop: -10,
        marginBottom: 10,
@@ -94,7 +96,8 @@ const paymentFormStyles = {
     commentsTextArea: {
       backgroundColor: Colors.black.fifth,
       borderRadius: 5,
-      padding: 15
+      borderWidth: 0,
+      padding: 15,
     },
     totalPrice: {
       ...typography.title2B,

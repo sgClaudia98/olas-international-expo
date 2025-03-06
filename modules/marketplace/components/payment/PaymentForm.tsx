@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { View, Text } from "react-native";
-import { Button, TextInput, DataTable } from "react-native-paper";
+import { Button, Portal } from "react-native-paper";
 import { Formik, FormikErrors, FormikValues } from "formik";
 import * as Yup from "yup";
 
@@ -8,19 +8,15 @@ import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymen
 import StepProgress from "./StepProgress";
 
 import validationSchemas, { PaymentFormValues } from "./PaymentFormHelper";
-import { Colors } from "@/styles";
-import ContentBox from "./ContentBox";
 import {
   useCreateMarketBookingMutation,
   usePreviewMarketBookingMutation,
 } from "../../services/api/BookingService";
 import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
-import { useGetProfileQuery } from "@/modules/auth/services/api/AccountService";
 import {
   mapAgencyClientBookingsToUIBookings,
   UIBooking,
 } from "../../utils/bookingMapping";
-import OrderSection from "./OrderSection";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
@@ -152,48 +148,54 @@ const PaymentForm = ({
         touched,
         isSubmitting,
       }) => (
-        <View style={styles.tablet.formContainer}>
-          <Text style={styles.tablet.title}>Booking steps</Text>
-          <StepProgress step={step - 1} />
+        <Portal.Host>
+          <View style={styles.tablet.formContainer}>
+            <Text style={styles.tablet.title}>Booking steps</Text>
+            <StepProgress step={step - 1} />
 
-          {step === 1 && <Step1 />}
+            {step === 1 && <Step1 />}
 
-          {step === 2 && <Step2 destinationCountry={destinationCountry} />}
+            {step === 2 && <Step2 destinationCountry={destinationCountry} />}
 
-          {step === 3 && <Step3 preview={preview} />}
+            {step === 3 && <Step3 preview={preview} />}
 
-          <View style={styles.tablet.buttonContainer}>
-            {step > 1 && (
-              <Button
-                mode="outlined"
-                onPress={() => setStep(step - 1)}
-                style={styles.tablet.button}
-                disabled={isSubmitting || loadingBooking}
-              >
-                Back
-              </Button>
-            )}
-            {step < 4 ? (
-              <Button
-                mode="contained"
-                onPress={() => handleNextStep(values, errors)}
-                disabled={isSubmitting || loadingBooking}
-                style={styles.tablet.button}
-              >
-                Next
-              </Button>
-            ) : (
-              <Button
-                mode="contained"
-                onPress={() => handleSubmit()}
-                disabled={isSubmitting}
-                style={styles.tablet.button}
-              >
-                Submit
-              </Button>
-            )}
+            <View style={styles.tablet.buttonContainer}>
+              {step > 1 && (
+                <Button
+                  mode="outlined"
+                  onPress={() => setStep(step - 1)}
+                  style={styles.tablet.button}
+                  disabled={isSubmitting || loadingBooking}
+                >
+                  Back
+                </Button>
+              )}
+              {step < 4 ? (
+                <Button
+                  mode="contained"
+                  onPress={() =>
+                    step === 2
+                      ? createMarketBooking(values, true)
+                      : handleNextStep(errors)
+                  }
+                  disabled={isSubmitting || loadingBooking}
+                  style={styles.tablet.button}
+                >
+                  Next
+                </Button>
+              ) : (
+                <Button
+                  mode="contained"
+                  onPress={() => handleSubmit()}
+                  disabled={isSubmitting}
+                  style={styles.tablet.button}
+                >
+                  Submit
+                </Button>
+              )}
+            </View>
           </View>
-        </View>
+        </Portal.Host>
       )}
     </Formik>
   );
