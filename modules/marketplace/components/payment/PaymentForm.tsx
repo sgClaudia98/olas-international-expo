@@ -96,8 +96,12 @@ const PaymentForm = ({
     [step]
   );
 
-  const handleNextStep = (errors: FormikErrors<any>) => {
+  const handleNextStep = (
+    values: PaymentFormValues,
+    errors: FormikErrors<any>
+  ) => {
     if (Object.keys(errors).length === 0) {
+      if (step === 2) createMarketBooking(values, true);
       setStep(step + 1);
     }
   };
@@ -172,11 +176,7 @@ const PaymentForm = ({
             {step < 4 ? (
               <Button
                 mode="contained"
-                onPress={() =>
-                  step === 2
-                    ? createMarketBooking(values, true)
-                    : handleNextStep(errors)
-                }
+                onPress={() => handleNextStep(values, errors)}
                 disabled={isSubmitting || loadingBooking}
                 style={styles.tablet.button}
               >
