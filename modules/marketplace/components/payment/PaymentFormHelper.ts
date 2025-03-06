@@ -1,16 +1,24 @@
 import * as Yup from 'yup';
 import { validatePhoneNumberWithErrors } from "./PhoneNumberHelper";
+import { parsePhoneNumber } from "./PhoneNumberHelper";
+import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
 
 export interface PaymentFormValues {
   client: {
       fullName: string;
-      phone: string;
+      phone: {
+        number: string;
+        code: string;
+      };
       email: string;
   };
   beneficiary: {
       firstName: string;
       lastName: string;
-      phone: string;
+      phone: {
+        number: string;
+        code: string;
+      };
       idDocument: string;
       address: {
           state: string;
@@ -23,15 +31,44 @@ export interface PaymentFormValues {
   notes: {};
 }
 
-const phoneNumberValidation = Yup.string()
-  .required("Phone number is required")
+export const mapValuesToPayload = (
+  values: PaymentFormValues
+): CreateMarketBookingRequest => {
+  const { client, beneficiary, notes } = values;
+  return {
+    client: {
+      fullName: client.fullName || "",
+      phone:  parsePhoneNumber(client.phone.number, client.phone.code, 0) || "",
+      email: client.email || "",
+    },
+    beneficiary: {
+      firstName: beneficiary.firstName || "",
+      lastName: beneficiary.lastName || "",
+      phone: parsePhoneNumber(beneficiary.phone.number, beneficiary.phone.code, 0) || "",
+      idDocument: beneficiary.idDocument || "",
+      address: {
+        line1: beneficiary.address?.line1 || "",
+        line2: beneficiary.address?.line2 || "",
+        city: beneficiary.address?.city || "",
+        state: beneficiary.address?.state || "",
+        zipCode: beneficiary.address?.zipCode || "",
+      },
+    },
+    notes,
+  };
+};
+
+const phoneNumberValidation = Yup.object().shape({
+  number: Yup.string().required("Phone number is required")
   .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
     const countryCode = this.parent?.code || "US";
+    
     if (!value) return this.createError({ message: "Phone number is required" });
 
     const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
     return isValid ? true : this.createError({ message: error });
-  });
+  })
+});
 
 
 const validationSchemas = {

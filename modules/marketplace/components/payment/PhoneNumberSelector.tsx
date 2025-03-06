@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useCallback } from "react";
+import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
-import { useTheme, HelperText } from "react-native-paper";
 import { PhoneNumberInput } from "react-native-paper-phone-number-input";
-import { validatePhoneNumberWithErrors } from "./PhoneNumberHelper";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 import { PaymentFormValues } from "./PaymentFormHelper";
+import { parsePhoneNumber } from "./PhoneNumberHelper";
+import { Colors } from "@/styles";
 
 polyfillCountryFlagEmojis();
 
@@ -14,6 +14,7 @@ interface PhoneNumberSelectorProps {
   inputStyles?: Record<string, any>;
   modalStyles?: Record<string, any>;
   defaultCountryCode: string;
+  error: boolean;
 }
 
 const PhoneNumberSelector: React.FC<PhoneNumberSelectorProps> = ({
@@ -21,83 +22,54 @@ const PhoneNumberSelector: React.FC<PhoneNumberSelectorProps> = ({
   inputStyles,
   modalStyles,
   defaultCountryCode,
+  error,
 }) => {
-  const theme = useTheme();
-  const { values, setFieldValue, setFieldTouched, setFieldError } =
+  const CODE = name + ".code";
+  const NUMBER = name + ".number";
+
+  const { values, setFieldValue, setFieldTouched } =
     useFormikContext<PaymentFormValues>();
 
-  // Obtener el número de teléfono como string desde Formik
-  const phoneValue = getNestedValue(values, name) || "";
+  const countryValue = getNestedValue(values, CODE) || defaultCountryCode;
+  const phoneValue = getNestedValue(values, NUMBER) || "";
 
-  // Estado interno para el código de país
-  const [countryCode, setCountryCode] = useState<string>(defaultCountryCode);
-
-  const [validationResult, setValidationResult] = useState<{
-    isValid: boolean;
-    error?: string;
-    formatted?: string;
-  }>({ isValid: true });
-
-  // Validación automática cuando cambia el número
-  useEffect(() => {
-    if (!phoneValue) return;
-
-    const result = validatePhoneNumberWithErrors(phoneValue, countryCode);
-    setValidationResult(result);
-
-    if (!result.isValid) {
-      setFieldError(name, result.error);
-    } else {
-      setFieldError(name, ""); // Limpiar error si es válido
-    }
-  }, [phoneValue, countryCode]);
-
-  // Manejo del cambio de número
   const handlePhoneChange = useCallback(
     (newNumber: string) => {
-      setFieldValue(name, newNumber); // Solo almacena el número como string
+      setFieldValue(NUMBER, newNumber);
     },
-    [setFieldValue, name]
+    [setFieldValue, NUMBER]
   );
 
-  // Manejo del evento blur
+  const handleCountryChange = (newCode) => setFieldValue(CODE, newCode);
+
   const handleBlur = useCallback(() => {
-    setFieldTouched(name, true);
-  }, [setFieldTouched, name]);
+    setFieldTouched(NUMBER, true);
+    setFieldValue(NUMBER, parsePhoneNumber(phoneValue, countryValue));
+  }, [setFieldTouched, NUMBER, countryValue, phoneValue]);
 
   return (
-    <View>
+    <>
       <PhoneNumberInput
         style={inputStyles}
-        code={countryCode}
-        setCode={setCountryCode}
+        code={countryValue}
+        setCode={handleCountryChange}
         phoneNumber={phoneValue}
         setPhoneNumber={handlePhoneChange}
         placeholder="Enter phone number"
-        textColor={inputStyles?.color || theme.colors.primary}
-        placeholderTextColor={inputStyles?.color || theme.colors.primary}
-        outlineColor={
-          validationResult.isValid ? theme.colors.primary : theme.colors.error
-        }
-        activeOutlineColor={
-          validationResult.isValid ? theme.colors.primary : theme.colors.error
-        }
-        modalContainerStyle={modalStyles}
+        textColor={inputStyles?.color || Colors.black.primary}
+        placeholderTextColor={inputStyles?.color || Colors.black.primary}
+        error={error}
+        modalContainerStyle={{
+          ...modalStyles,
+          borderRadius: 5,
+          maxWidth: 400,
+          marginHorizontal: "auto",
+          marginVertical: 40,
+        }}
         onBlur={handleBlur}
+        modalStyle={styles.modalStyles}
       />
-
-      {!validationResult.isValid && (
-        <HelperText type="error" visible>
-          {validationResult.error}
-        </HelperText>
-      )}
-
-      {validationResult.isValid && validationResult.formatted && (
-        <Text style={styles.formattedText}>
-          Formato Internacional: {validationResult.formatted}
-        </Text>
-      )}
-    </View>
+    </>
   );
 };
 
@@ -105,10 +77,9 @@ const getNestedValue = (obj: any, path: string): any =>
   path.split(".").reduce((acc, key) => (acc ? acc[key] : undefined), obj);
 
 const styles = StyleSheet.create({
-  formattedText: {
-    marginTop: 5,
-    fontSize: 14,
-    color: "gray",
+  modalStyles: {
+    backgroundColor: "rgba(8, 51, 102, 0.25)",
+    borderRadius: 10,
   },
 });
 

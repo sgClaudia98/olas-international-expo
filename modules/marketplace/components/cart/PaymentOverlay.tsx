@@ -24,14 +24,14 @@ const PaymentOverlay = <T extends { id: number }>({
     >
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          {renderForm(() => setPaymentFormVisible(false))}
           <Button
             mode="contained"
             onPress={() => setPaymentFormVisible(false)}
-            style={styles.closeModalButton}
+            style={{...styles.closeModalButton }}
           >
             <CloseIcon />
           </Button>
+          {renderForm(() => setPaymentFormVisible(false))}
         </View>
       </View>
     </Modal>

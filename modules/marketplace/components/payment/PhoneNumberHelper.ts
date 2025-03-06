@@ -1,4 +1,4 @@
-import { PhoneNumberUtil } from "google-libphonenumber";
+import { PhoneNumberUtil, PhoneNumberType } from "google-libphonenumber";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -11,13 +11,31 @@ export function validatePhoneNumberWithErrors(phoneNumber: string, countryCode: 
     const parsedNumber = phoneUtil.parseAndKeepRawInput(phoneNumber, countryCode);
 
     if (!phoneUtil.isValidNumber(parsedNumber)) {
-      return { isValid: false, error: "Invalid phone number for selected country." };
+      throw new Error("Invalid phone number format.");
     }
 
-    const formatted = phoneUtil.format(parsedNumber, 2);
-
-    return { isValid: true, formatted };
+    return { isValid: true };
   } catch (error) {
-    return { isValid: false, error: "Invalid phone number format." };
+    const exampleNumber = phoneUtil.getExampleNumberForType(countryCode, PhoneNumberType.MOBILE);
+    return { isValid: false, error: `Invalid phone number format. Valid format: ${phoneUtil.format(exampleNumber, 1)}` };
   }
 }
+
+export const parsePhoneNumber = (phoneNumber: string, countryCode: string, formatType = 2) => {
+  try {
+    const parsedNumber = phoneUtil.parseAndKeepRawInput(phoneNumber, countryCode);
+    return phoneUtil.format(parsedNumber, formatType);
+  } catch (error) {
+    return phoneNumber;
+  }
+}
+
+export const parseStringToPhoneNumber = (phoneNumber: string)  => {
+  const parsedNumber = phoneUtil.parse(phoneNumber)
+  
+  const code = parsedNumber.getCountryCode()
+  const number =  parsedNumber.getNationalNumber()
+
+  return { code, number } 
+}
+

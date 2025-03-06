@@ -13,6 +13,7 @@ import {
   PhoneIcon,
   ProfileIcon,
 } from "@/assets/icons/PaymentInfoIcons";
+import { parsePhoneNumber } from "../PhoneNumberHelper";
 
 const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
@@ -34,7 +35,9 @@ const Step3 = ({ preview }) => {
               },
               phoneNumber: {
                 icon: <PhoneIcon />,
-                value: values.client.phone || "N/A",
+                value:
+                parsePhoneNumber(values.client.phone.number, values.client.phone.code, 1) ||
+                  "N/A",
               },
             }}
             backgroundColor={Colors.black.fifth}
@@ -56,7 +59,7 @@ const Step3 = ({ preview }) => {
               },
               phoneNumber: {
                 icon: <PhoneIcon />,
-                value: values.beneficiary.phone || "N/A",
+                value: parsePhoneNumber(values.beneficiary.phone.number, values.beneficiary.phone.code, 1) || "N/A",
               },
               address: {
                 icon: <MapPinIcon />,

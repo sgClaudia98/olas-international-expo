@@ -12,7 +12,6 @@ import {
   useCreateMarketBookingMutation,
   usePreviewMarketBookingMutation,
 } from "../../services/api/BookingService";
-import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
 import {
   mapAgencyClientBookingsToUIBookings,
   UIBooking,
@@ -21,33 +20,8 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import { useAppSelector } from "@/hooks/useAppDispatch";
-
-const mapValuesToPayload = (
-  values: FormikValues
-): CreateMarketBookingRequest => {
-  const { client, beneficiary, notes } = values;
-  return {
-    client: {
-      fullName: client.fullName || "",
-      phone: client.phone || "",
-      email: client.email || "",
-    },
-    beneficiary: {
-      firstName: beneficiary.firstName || "",
-      lastName: beneficiary.lastName || "",
-      phone: beneficiary.phone || "",
-      idDocument: beneficiary.idDocument || "",
-      address: {
-        line1: beneficiary.address?.line1 || "",
-        line2: beneficiary.address?.line2 || "",
-        city: beneficiary.address?.city || "",
-        state: beneficiary.address?.state || "",
-        zipCode: beneficiary.address?.zipCode || "",
-      },
-    },
-    notes,
-  };
-};
+import { mapValuesToPayload } from "./PaymentFormHelper";
+import { parseStringToPhoneNumber } from "./PhoneNumberHelper";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
@@ -68,13 +42,21 @@ const PaymentForm = ({
   const initialValues = {
     client: {
       fullName: user?.details?.fullName ?? "",
-      phone: user?.details?.phone ?? "",
+      phone: user?.details?.phone
+        ? parseStringToPhoneNumber(user?.details?.phone)
+        : {
+            number: "",
+            code: "",
+          },
       email: user?.details?.email ?? "",
     },
     beneficiary: {
       firstName: "",
       lastName: "",
-      phone: "",
+      phone: {
+        number: "",
+        code: destinationCountry,
+      },
       idDocument: "",
       address: {
         state: province,
@@ -96,9 +78,10 @@ const PaymentForm = ({
     values: PaymentFormValues,
     errors: FormikErrors<any>
   ) => {
+    console.log("errors", errors);
     if (Object.keys(errors).length === 0) {
       if (step === 2) createMarketBooking(values, true);
-      setStep(step + 1);
+      else setStep(step + 1);
     }
   };
 
@@ -143,6 +126,7 @@ const PaymentForm = ({
         handleChange,
         handleBlur,
         handleSubmit,
+        validateForm,
         values,
         errors,
         touched,
@@ -174,9 +158,9 @@ const PaymentForm = ({
                 <Button
                   mode="contained"
                   onPress={() =>
-                    step === 2
-                      ? createMarketBooking(values, true)
-                      : handleNextStep(errors)
+                    validateForm(values).then((_errors) => {
+                      handleNextStep(values, _errors);
+                    })
                   }
                   disabled={isSubmitting || loadingBooking}
                   style={styles.tablet.button}
