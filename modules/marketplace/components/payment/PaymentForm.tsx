@@ -92,9 +92,12 @@ const PaymentForm = ({
     [step]
   );
 
-  const handleNextStep = (errors: FormikErrors<any>) => {
-    console.log(`Formik Errors: ${JSON.stringify(errors, null, 2)}`);
+  const handleNextStep = (
+    values: PaymentFormValues,
+    errors: FormikErrors<any>
+  ) => {
     if (Object.keys(errors).length === 0) {
+      if (step === 2) createMarketBooking(values, true);
       setStep(step + 1);
     }
   };
