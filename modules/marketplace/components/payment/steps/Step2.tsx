@@ -23,13 +23,9 @@ const Step2 = ({ destinationCountry }) => {
             value={values.beneficiary.firstName || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={
-              !!(
-                touched.beneficiary?.firstName && errors.beneficiary?.firstName
-              )
-            }
+            error={!!errors.beneficiary?.firstName}
           />
-          {touched.beneficiary?.firstName && errors.beneficiary?.firstName && (
+          {errors.beneficiary?.firstName && (
             <Text style={styles.tablet.error}>
               {errors.beneficiary?.firstName}
             </Text>
@@ -45,11 +41,9 @@ const Step2 = ({ destinationCountry }) => {
             value={values.beneficiary.lastName || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={
-              !!(touched.beneficiary?.lastName && errors.beneficiary?.lastName)
-            }
+            error={!!errors.beneficiary?.lastName}
           />
-          {touched.beneficiary?.lastName && errors.beneficiary?.lastName && (
+          {errors.beneficiary?.lastName && (
             <Text style={styles.tablet.error}>
               {errors.beneficiary.lastName}
             </Text>
@@ -62,13 +56,13 @@ const Step2 = ({ destinationCountry }) => {
           <Text style={styles.tablet.label}>Phone number</Text>
           <PhoneNumberSelector
             name="beneficiary.phone"
-            defaultCountryCode={destinationCountry}
             inputStyles={{ ...styles.tablet.input, marginBottom: 0 }}
+            defaultCountryCode="US"
+            error={!!errors.beneficiary?.phone?.number}
           />
-
-          {touched.beneficiary?.phone && errors.beneficiary?.phone && (
+          {errors.beneficiary?.phone?.number && (
             <Text style={{ ...styles.tablet.error, marginTop: 5 }}>
-              {errors.beneficiary?.phone}
+              {errors.beneficiary?.phone?.number}
             </Text>
           )}
         </View>
@@ -82,19 +76,13 @@ const Step2 = ({ destinationCountry }) => {
             value={values.beneficiary.idDocument || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={
-              !!(
-                touched.beneficiary?.idDocument &&
-                errors.beneficiary?.idDocument
-              )
-            }
+            error={!!errors.beneficiary?.idDocument}
           />
-          {touched.beneficiary?.idDocument &&
-            errors.beneficiary?.idDocument && (
-              <Text style={styles.tablet.error}>
-                {errors.beneficiary.idDocument}
-              </Text>
-            )}
+          {errors.beneficiary?.idDocument && (
+            <Text style={styles.tablet.error}>
+              {errors.beneficiary.idDocument}
+            </Text>
+          )}
         </View>
       </View>
 
@@ -119,19 +107,13 @@ const Step2 = ({ destinationCountry }) => {
             value={values.beneficiary.address?.city || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={
-              !!(
-                touched.beneficiary?.address?.city &&
-                errors.beneficiary?.address?.city
-              )
-            }
+            error={!!errors.beneficiary?.address?.city}
           />
-          {touched.beneficiary?.address?.city &&
-            errors.beneficiary?.address?.city && (
-              <Text style={styles.tablet.error}>
-                {errors.beneficiary?.address.city}
-              </Text>
-            )}
+          {errors.beneficiary?.address?.city && (
+            <Text style={styles.tablet.error}>
+              {errors.beneficiary?.address.city}
+            </Text>
+          )}
         </View>
       </View>
 
@@ -143,19 +125,13 @@ const Step2 = ({ destinationCountry }) => {
         value={values.beneficiary.address?.line1 || ""}
         textColor={Colors.black.primary}
         placeholderTextColor={Colors.black.primary}
-        error={
-          !!(
-            touched.beneficiary?.address?.line1 &&
-            errors.beneficiary?.address?.line1
-          )
-        }
+        error={!!errors.beneficiary?.address?.line1}
       />
-      {touched.beneficiary?.address?.line1 &&
-        errors.beneficiary?.address?.line1 && (
-          <Text style={styles.tablet.error}>
-            {errors.beneficiary?.address?.line1}
-          </Text>
-        )}
+      {errors.beneficiary?.address?.line1 && (
+        <Text style={styles.tablet.error}>
+          {errors.beneficiary?.address?.line1}
+        </Text>
+      )}
       {destinationCountry !== "CU" && (
         <>
           <Text style={styles.tablet.label}>Zip Code</Text>
@@ -166,19 +142,13 @@ const Step2 = ({ destinationCountry }) => {
             value={values.beneficiary.address?.zipCode || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={
-              !!(
-                touched.beneficiary?.address?.zipCode &&
-                errors.beneficiary?.address?.zipCode
-              )
-            }
+            error={!!errors.beneficiary?.address?.zipCode}
           />
-          {touched.beneficiary?.address?.zipCode &&
-            errors.beneficiary?.address?.zipCode && (
-              <Text style={styles.tablet.error}>
-                {errors.beneficiary?.address?.zipCode}
-              </Text>
-            )}
+          {errors.beneficiary?.address?.zipCode && (
+            <Text style={styles.tablet.error}>
+              {errors.beneficiary?.address?.zipCode}
+            </Text>
+          )}
         </>
       )}
       <Text style={styles.tablet.label}>Neighborhood (Reparto)</Text>
@@ -189,19 +159,13 @@ const Step2 = ({ destinationCountry }) => {
         value={values.beneficiary.address?.line2 || ""}
         textColor={Colors.black.primary}
         placeholderTextColor={Colors.black.primary}
-        error={
-          !!(
-            touched.beneficiary?.address?.line2 &&
-            errors.beneficiary?.address?.line2
-          )
-        }
+        error={!!errors.beneficiary?.address?.line2}
       />
-      {touched.beneficiary?.address?.line2 &&
-        errors.beneficiary?.address?.line2 && (
-          <Text style={styles.tablet.error}>
-            {errors.beneficiary?.address?.line2}
-          </Text>
-        )}
+      {errors.beneficiary?.address?.line2 && (
+        <Text style={styles.tablet.error}>
+          {errors.beneficiary?.address?.line2}
+        </Text>
+      )}
     </>
   );
 };

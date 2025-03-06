@@ -8,7 +8,7 @@ import { PaymentFormValues } from "../PaymentFormHelper";
 import PhoneNumberSelector from "../PhoneNumberSelector";
 
 const Step1 = () => {
-  const { handleChange, handleBlur, values, errors, touched } =
+  const { handleChange, handleBlur, values, errors } =
     useFormikContext<PaymentFormValues>();
 
   return (
@@ -21,9 +21,9 @@ const Step1 = () => {
         value={values.client.fullName || ""}
         textColor={Colors.black.primary}
         placeholderTextColor={Colors.black.primary}
-        error={!!(touched.client?.fullName && errors.client?.fullName)}
+        error={!!errors.client?.fullName}
       />
-      {touched.client?.fullName && errors.client?.fullName && (
+      {errors.client?.fullName && (
         <Text style={styles.tablet.error}>{errors.client?.fullName}</Text>
       )}
 
@@ -34,11 +34,12 @@ const Step1 = () => {
             name="client.phone"
             inputStyles={{ ...styles.tablet.input, marginBottom: 0 }}
             defaultCountryCode="US"
+            error={!!errors.client?.phone?.number}
           />
-          {touched.client?.phone && errors.client?.phone && (
-            <HelperText type="error" visible>
-              {errors.client?.phone}
-            </HelperText>
+          {errors.client?.phone?.number && (
+            <Text style={{ ...styles.tablet.error, marginTop: 5 }}>
+              {errors.client?.phone?.number}
+            </Text>
           )}
         </View>
         <View style={styles.tablet.columnRight}>
@@ -51,9 +52,9 @@ const Step1 = () => {
             value={values.client.email || ""}
             textColor={Colors.black.primary}
             placeholderTextColor={Colors.black.primary}
-            error={!!(touched.client?.email && errors.client?.email)}
+            error={!!errors.client?.email}
           />
-          {touched.client?.email && errors.client?.email && (
+          {errors.client?.email && (
             <Text style={styles.tablet.error}>{errors.client?.email}</Text>
           )}
         </View>
