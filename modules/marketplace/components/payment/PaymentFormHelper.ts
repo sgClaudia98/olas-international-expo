@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { validatePhoneNumberWithErrors } from "./PhoneNumberHelper";
 
 export interface PaymentFormValues {
   client: {
@@ -23,8 +24,15 @@ export interface PaymentFormValues {
 }
 
 const phoneNumberValidation = Yup.string()
-  .matches(/^\+?[1-9]\d{6,14}$/, 'Invalid phone number. Must be a valid international format.')
-  .required('Phone Number is required');
+  .required("Phone number is required")
+  .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
+    const countryCode = this.parent?.code || "US";
+    if (!value) return this.createError({ message: "Phone number is required" });
+
+    const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
+    return isValid ? true : this.createError({ message: error });
+  });
+
 
 const validationSchemas = {
   1: Yup.object().shape({
@@ -52,3 +60,4 @@ const validationSchemas = {
 };
 
 export default validationSchemas;
+
