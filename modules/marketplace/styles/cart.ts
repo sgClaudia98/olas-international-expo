@@ -108,7 +108,7 @@ const cartStyles = {
       top: 40,
       bottom: 40,
       right: 25,
-      width: "25%",
+      width: "40%",
       backgroundColor: "white",
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       borderRadius: 15,
