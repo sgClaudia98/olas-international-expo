@@ -4,8 +4,104 @@ import typography from '@/styles/typography';
 import theme from '@/styles/paperTheme';
 
 const paymentFormStyles = {
-  mobile: StyleSheet.create({
-    
+    mobile: StyleSheet.create({
+      formContainer: {
+        paddingTop: 50,
+        paddingBottom: 60,
+        maxWidth: 420,
+        minWidth: 350,
+        marginHorizontal: 'auto',
+    },
+    title: {
+      ...typography.h3,
+      marginBottom: 15,
+      textAlign: 'center',
+      color: Colors.black.primary,
+    },
+    error: {
+      color: theme.colors.error,
+      fontSize: 12,
+      marginTop: -10,
+      marginBottom: 10,
+    },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      marginTop: 20,
+    },
+    button: {
+      marginHorizontal: 5,
+    },
+    input: {
+      ...typography.body,
+      color: Colors.black.primary,
+      borderBottomColor: Colors.black.third,
+      backgroundColor: Colors.black.fifth,
+      height: 40,
+      marginBottom: 15,
+    },
+    label: {
+      ...typography.label,
+      marginBottom: 5,
+      color: Colors.black.second,
+    },
+    twoColumnContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    columnLeft: {
+      flex: 1,
+      marginRight: 10,
+    },
+    columnRight: {
+      flex: 2,
+    },
+    column: {
+        flex: 1,
+    },
+    text: {
+        ...typography.label,
+        color: Colors.black.primary,
+    },
+    productTableContainer: {
+      marginTop: 60,
+    },
+    orderText: {
+      ...typography.title2B,
+      fontWeight: 600,
+      color: Colors.black.primary,
+      marginBottom: 15,
+    },
+    tableHeader: {
+      borderBottomColor: Colors.black.fourth,
+    },
+    tableRow: {
+      borderBottomWidth: 0,
+    },
+    separator: {
+      height: 1,
+      backgroundColor: Colors.black.fourth,
+    },
+    commentsContainer: {
+      flex: 1,
+      justifyContent: 'flex-start',
+      marginTop: 15
+    },
+    commentsButton: {
+      alignSelf: 'flex-start',
+    },
+    commentsTextArea: {
+      backgroundColor: Colors.black.fifth,
+      borderRadius: 5,
+      borderWidth: 0,
+      padding: 15,
+    },
+    totalPrice: {
+      ...typography.title2B,
+      color:Colors.black.primary,
+      alignSelf: 'flex-end',
+      marginTop: 15
+    }
   }),
   tablet: StyleSheet.create({
     formContainer: {
@@ -105,7 +201,7 @@ const paymentFormStyles = {
       alignSelf: 'flex-end',
       marginTop: 15
     }
-  }),
+  })
 };
 
 const stepProgressStyles = StyleSheet.create({

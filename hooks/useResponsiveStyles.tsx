@@ -21,7 +21,7 @@ export function useResponsiveStyles<T extends NamedStyles<T>>(styles: Responsive
 
   // Prioritize Desktop > Tablet > Mobile
   if (width >= BREAKPOINTS.tablet && styles.desktop) return styles.desktop;
-  if (width >= BREAKPOINTS.mobile && styles.tablet) return styles.tablet;
+  if (width >= BREAKPOINTS.mobile && width <= BREAKPOINTS.tablet && styles.tablet) return styles.tablet;
   
   return styles.mobile; // Default to mobile-first if no match
 }
