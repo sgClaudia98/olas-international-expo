@@ -1,19 +1,18 @@
 import DropdownSelect from "@/components/DropdownSelect";
 
-import React, { useContext, useMemo, useState } from "react";
-import { View, Text, ViewStyle } from "react-native";
+import React, { useState } from "react";
+import { View, Text, useWindowDimensions } from "react-native";
 import { Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
 } from "../hooks/useSearchMarketOptions";
 import Filters from "../components/filter/Filter";
-import { useNavigation } from "@react-navigation/core";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
-import Page from "@/components/layout/Page";
 import { useRouter } from "expo-router";
+import ProductItemVertical from "../components/product/ProductItemVertical";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -28,6 +27,8 @@ const ProductsWrapper: React.FC = () => {
     setBeadCrumb(trace.map((t) => t.title).join(" / "));
   };
   const router = useRouter();
+
+  const { width: screenWidth } = useWindowDimensions();
 
   const handleProductPress = (id: number) => {
     router.push(`./detail/${id}`);
@@ -86,18 +87,23 @@ const ProductsWrapper: React.FC = () => {
           loading={loading}
         >
           <View style={styles.products}>
-            {items?.map((val) => (
-              <ProductItem
-                key={`prodI-${val.id}-${val.product.id}`}
-                item={val}
-                style={
-                  (isSwitchOn
-                    ? styles.productOpen
-                    : styles.productClose)
-                }
-                onClick={() => handleProductPress(val.product.id)}
-              />
-            ))}
+            {items?.map((val) =>
+              screenWidth > 768 ? (
+                <ProductItem
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={isSwitchOn ? styles.productOpen : styles.productClose}
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              ) : (
+                <ProductItemVertical
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={isSwitchOn ? styles.productOpen : styles.productClose}
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              )
+            )}
           </View>
         </PaginatedContent>
       </View>

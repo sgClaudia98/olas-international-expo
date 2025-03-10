@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Image, StyleProp, Pressable} from 'react-native';
+import {Text, View, Image, StyleProp, Pressable} from 'react-native';
 import React, {useState} from 'react';
 import {Colors} from '@/styles';
 import NumberInput from '@/components/NumberInput';

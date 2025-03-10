@@ -1,4 +1,5 @@
 import {Colors} from '@/styles';
+import typography from '@/styles/typography';
 import {StyleSheet} from 'react-native';
 
 // Estilos comunes
@@ -16,6 +17,7 @@ const commonProductStyles = StyleSheet.create({
     width: '100%',
   },
   name: {
+    color: Colors.black.primary,
     fontWeight: '400',
     lineHeight: 26,
     width: '100%',
@@ -200,4 +202,34 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
 });
 
-export {productItemStyles, productInfoStyles, productInShoppingCartStyles};
+const productVertical = StyleSheet.create({
+  ...productItemStyles,
+  productCard: {
+    backgroundColor: Colors.white.default,
+    borderRadius: 0,
+    shadowColor: Colors.white.default,
+    shadowRadius: 0,
+    boxShadow: 'none',
+    shadowOffset: {
+      height: 0,
+      width: 0
+    }
+  },
+  name: {
+    ...typography.label,
+    color: Colors.black.primary,
+    fontWeight: 600
+  },
+  price: {
+    ...typography.label,
+    color: Colors.black.primary,
+    fontWeight: 700,
+    fontSize: 18
+  },
+  actions: {
+    marginRight: 'auto',
+    gap: 10
+  }
+})
+
+export {productItemStyles, productInfoStyles, productInShoppingCartStyles, productVertical};

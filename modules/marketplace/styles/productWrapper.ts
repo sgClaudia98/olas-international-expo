@@ -12,13 +12,17 @@ const styles = {
       flex: 1,
       flexDirection: 'row',
     },
-    products: {},
+    products: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 10
+    },
     productOpen: {
-      width: '100%',
+      width: '48%',
       padding: 12,
     },
     productClose: {
-      width: '100%',
+      width: '40%',
       padding: 12,
     },
   }),
