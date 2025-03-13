@@ -8,6 +8,7 @@ import { logout } from "../slices/authSlice";
 import { useGetProfileQuery } from "../services/api/AccountService";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { profileStyles } from "@/modules/marketplace/styles/profile";
+import ProfileSkeleton from "@/modules/marketplace/components/skeletons/ProfileSkeleton";
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ export const Profile: FC<ViewProps> = () => {
   return (
     <>
       {isLoading ? (
-        <Text>Loading...</Text>
+        <ProfileSkeleton />
       ) : isError || !profile ? (
         <View>
           <Text style={{ marginBottom: 10 }}>

@@ -51,6 +51,7 @@ export const profileStyles = {
       paddingTop: 15,
       borderTopWidth: 1,
       borderTopColor: Colors.black.third,
+      alignItems: 'center'
     },
   }),
   tablet: StyleSheet.create({
