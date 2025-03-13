@@ -1,8 +1,13 @@
 import DropdownSelect from "@/components/DropdownSelect";
 
-import React, { useState } from "react";
-import { View, Text, useWindowDimensions } from "react-native";
-import { Switch } from "react-native-paper";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  useWindowDimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Button, Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -13,13 +18,18 @@ import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
 import { useRouter } from "expo-router";
 import ProductItemVertical from "../components/product/ProductItemVertical";
+import FilterDrawer from "../components/filter/FilterDrawer";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/styles";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
-  const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+
+  const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
+  const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
   const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
   const handleItemClick = (trace: any[]) => {
@@ -29,9 +39,28 @@ const ProductsWrapper: React.FC = () => {
   const router = useRouter();
 
   const { width: screenWidth } = useWindowDimensions();
+  const isMobile = screenWidth < 768;
 
   const handleProductPress = (id: number) => {
     router.push(`./detail/${id}`);
+  };
+
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  useEffect(() => {
+    if (data) setTotalProducts(data.totals);
+  }, [data]);
+
+  const toggleDesktopFilters = () => {
+    setShowDesktopFilters(!showDesktopFilters);
+  };
+
+  const openMobileDrawer = () => {
+    setShowMobileDrawer(true);
+  };
+
+  const closeMobileDrawer = () => {
+    setShowMobileDrawer(false);
   };
 
   return (
@@ -42,10 +71,25 @@ const ProductsWrapper: React.FC = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "wrap",
+          padding: 10,
         }}
       >
         <Text>{breadcrumb}</Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: isMobile ? "space-between" : "center",
+            width: isMobile ? "100%" : "auto",
+            marginTop: isMobile ? 10 : 0,
+          }}
+        >
+          <Text style={styles.productsQtyText}>
+            {totalProducts != 1
+              ? `${totalProducts} products`
+              : `${totalProducts} product`}
+          </Text>
           <DropdownSelect
             buttonTitle="Sort by:"
             menuItems={[
@@ -56,17 +100,39 @@ const ProductsWrapper: React.FC = () => {
             value="best_match"
             onSelect={(value) => console.log("Selected value:", value)}
           />
-          <View style={{ flexDirection: "row", paddingStart: 5 }}>
-            <Text style={{ paddingHorizontal: 10 }}>Show Filters</Text>
-            <Switch
-              value={isSwitchOn}
-              onValueChange={() => setIsSwitchOn(!isSwitchOn)}
-            />
-          </View>
+          {/* Renderizado condicional: Switch en desktop, botón de texto en móvil */}
+          {isMobile ? (
+            <TouchableOpacity onPress={openMobileDrawer}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  lineHeight: 24,
+                  fontWeight: 400,
+                  color: Colors.blue.second,
+                }}
+              >
+                Filters
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                flexDirection: "row",
+                paddingStart: 5,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ paddingHorizontal: 10 }}>Show Filters</Text>
+              <Switch
+                value={showDesktopFilters}
+                onValueChange={toggleDesktopFilters}
+              />
+            </View>
+          )}
         </View>
       </View>
       <View style={styles.wrapper}>
-        {isSwitchOn && (
+        {!isMobile && showDesktopFilters && (
           <Filters
             onItemClick={handleItemClick}
             setFilter={updateFilter}
@@ -80,6 +146,23 @@ const ProductsWrapper: React.FC = () => {
             }
           />
         )}
+
+        {isMobile && (
+          <Filters
+            onItemClick={handleItemClick}
+            setFilter={updateFilter}
+            stats={
+              stats && searchId
+                ? {
+                    data: stats,
+                    searchId: searchId,
+                  }
+                : undefined
+            }
+            isDrawerOpen={showMobileDrawer}
+            onCloseDrawer={closeMobileDrawer}
+          />
+        )}
         <PaginatedContent
           data={data}
           fetchItems={fetchPage}
@@ -88,18 +171,22 @@ const ProductsWrapper: React.FC = () => {
         >
           <View style={styles.products}>
             {items?.map((val) =>
-              screenWidth > 768 ? (
+              !isMobile ? (
                 <ProductItem
                   key={`prodI-${val.id}-${val.product.id}`}
                   item={val}
-                  style={isSwitchOn ? styles.productOpen : styles.productClose}
+                  style={
+                    showDesktopFilters
+                      ? styles.productOpen
+                      : styles.productClose
+                  }
                   onClick={() => handleProductPress(val.product.id)}
                 />
               ) : (
                 <ProductItemVertical
                   key={`prodI-${val.id}-${val.product.id}`}
                   item={val}
-                  style={isSwitchOn ? styles.productOpen : styles.productClose}
+                  style={styles.productOpen}
                   onClick={() => handleProductPress(val.product.id)}
                 />
               )
