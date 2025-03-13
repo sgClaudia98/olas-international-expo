@@ -3,13 +3,15 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
+import LanguageSelector from "../LanguageSelector";
 
 const IconsHeader = () => {
   const router = useRouter();
   return (
     <Appbar.Header style={styles.appbar}>
       <DestinationSelector/>
-      <Appbar.Action icon="globe-model" />
+      <LanguageSelector /> {/* Usa el selector de idioma */}
+      
       <Appbar.Action
         icon="account-circle-outline"
         onPress={() => router.navigate("/(main)/profile")}
