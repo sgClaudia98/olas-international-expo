@@ -44,7 +44,7 @@ const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 2
 };
 export type MenuItem = { label: string; value: string };
 interface DropdownMenuSelectProps {
-  buttonTitle: string| ((selectedOption: string) => string);
+  buttonTitle: string| ((selectedOption: MenuItem) => string);
   menuItems: MenuItem[];
   onSelect: (value: string) => void;
   icon?: string;
@@ -71,12 +71,12 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
   };
 
   const getButtonTitle = (newValue?: string): string => {
-    const selectedLabel = menuItems.find((item) => item.value === newValue)?.label || menuItems[0]?.label;
+    const sel = menuItems.find((item) => item.value === newValue) || menuItems[0];
   
     if (typeof buttonTitle === 'function') {
-      return buttonTitle(selectedLabel);
+      return buttonTitle(sel);
     }
-    return `${buttonTitle}: ${selectedLabel}`;
+    return `${buttonTitle}: ${sel.label}`;
   };
   
   const [title, setTitle] = useState<string>(getButtonTitle(value))

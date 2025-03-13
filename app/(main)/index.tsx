@@ -16,6 +16,7 @@ export default function NewScreen() {
     { id: "MX", name: "Mexico" },
     { id: "BR", name: "Brazil" },
   ];
+
   const [selectedCountry, setSelectedCountry] = useState<string>(
     countries[0].name
   ); // No country selected initially
@@ -29,6 +30,8 @@ export default function NewScreen() {
   return (
     <Page>
       <View style={{ gap: 2 }}>
+      <ThemedText>{t('LANGUAGE')}</ThemedText>
+
         {Platform.OS != "web" && (
           <Btn title="go to promo" onPress={() => router.navigate("/promos")} />
         )}

@@ -47,7 +47,7 @@ const DestinationSelector = () => {
     <View style={styles.container}>
       <DropdownSelect2
         icon="map-marker-outline"
-        buttonTitle={value => value}
+        buttonTitle={value => value?.label}
         onSelect={handleSelect}
         menuItems={data}
         iconSize={24}
