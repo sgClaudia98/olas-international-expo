@@ -24,8 +24,6 @@ const CartOverlay = <T extends {id: number}>({
 }: CartOverlayProps<T>) => {
 
   const styles = useResponsiveStyles(cartStyles)
-
-  console.log('styles', styles)
   
   return (
     <Modal
