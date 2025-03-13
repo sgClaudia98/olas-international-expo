@@ -1,3 +1,4 @@
+import PaymentWrapper from "@/modules/marketplace/components/payment/PaymentWrapper";
 import { SearchProvider } from "@/modules/marketplace/context/SearchContext";
 import { ShoppingCartProvider } from "@/modules/marketplace/context/ShoppingCartContext";
 import { useMarketCartActions } from "@/modules/marketplace/hooks/useMarketCartActions";
@@ -10,7 +11,8 @@ export default function MarketplaceLayout() {
 
   return (
     <SearchProvider >
-      <ShoppingCartProvider actions={marketCartActions}>
+      <ShoppingCartProvider actions={marketCartActions} 
+      renderPaymentForm={(closeModal) => <PaymentWrapper onClose={closeModal}/>}>
       <Stack
         screenOptions={{
           headerLeft: () => <MarketplaceLeftHeader />,

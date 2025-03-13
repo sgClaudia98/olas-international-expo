@@ -1,15 +1,16 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
 import LanguageSelector from "../LanguageSelector";
+import { useAppSelector } from "@/hooks/useAppDispatch";
 
 const IconsHeader = () => {
   const router = useRouter();
   return (
     <Appbar.Header style={styles.appbar}>
-      <DestinationSelector/>
+      <DestinationSelector />
       <LanguageSelector /> {/* Usa el selector de idioma */}
       
       <Appbar.Action

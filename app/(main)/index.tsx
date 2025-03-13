@@ -11,12 +11,14 @@ export default function NewScreen() {
   const [isModalVisible, setModalVisible] = useState(true); // Modal is visible by default
 
   const countries = [
-    {id: 'CU', name: 'Cuba'},
-    {id: 'VZ', name: 'Venezuela'},
-    {id: 'MX', name: 'Mexico'},
-    {id: 'BR', name: 'Brazil'},
+    { id: "CU", name: "Cuba" },
+    { id: "VZ", name: "Venezuela" },
+    { id: "MX", name: "Mexico" },
+    { id: "BR", name: "Brazil" },
   ];
-  const [selectedCountry, setSelectedCountry] = useState<string>(countries[0].name); // No country selected initially
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    countries[0].name
+  ); // No country selected initially
 
   const selectCountry = (country: string) => {
     setSelectedCountry(country);
@@ -26,43 +28,38 @@ export default function NewScreen() {
 
   return (
     <Page>
-    <View style={{gap: 2}}>
-
-      <ThemedText>{t('LANGUAGE')}</ThemedText>
-
-      {Platform.OS != 'web' && (
+      <View style={{ gap: 2 }}>
+        {Platform.OS != "web" && (
+          <Btn title="go to promo" onPress={() => router.navigate("/promos")} />
+        )}
         <Btn
-          title="go to promo"
-          onPress={() => router.navigate('/promos')}
+          title="go to auth"
+          onPress={() => router.navigate("/(auth)/login")}
         />
-      )}
-      <Btn
-        title="go to auth"
-        onPress={() => router.navigate('/(auth)/login')}
-      />
 
-      <Btn
-        title="View Profile"
-        onPress={() => router.navigate('/(main)/profile')}
-      />
+        <Btn
+          title="View Profile"
+          onPress={() => router.navigate("/(main)/profile")}
+        />
 
-      <Btn
-        title="Marketplace"
-        onPress={() =>router.navigate('/(main)/services/market')
-        }
-      />
-      <Btn
-        title="Travel"
-        onPress={() =>router.navigate('/(main)/services/travel')}
-      />
+        <Btn
+          title="Marketplace"
+          onPress={() => router.navigate("/(main)/services/market")}
+        />
+        <Btn
+          title="Travel"
+          onPress={() => router.navigate("/(main)/services/travel")}
+        />
 
-      {/* Main Screen Content */}
-      <ThemedText>
-        {selectedCountry ? `You selected: ${selectedCountry}` : 'No country selected yet'}
-      </ThemedText>
+        {/* Main Screen Content */}
+        <ThemedText>
+          {selectedCountry
+            ? `You selected: ${selectedCountry}`
+            : "No country selected yet"}
+        </ThemedText>
 
-      {/* <CountrySelectorModal selectedCountry={selectedCountry} countries={countries} onSelectCountry={selectCountry} visible={isModalVisible} /> */}
-    </View>
-  </Page>
+        {/* <CountrySelectorModal selectedCountry={selectedCountry} countries={countries} onSelectCountry={selectCountry} visible={isModalVisible} /> */}
+      </View>
+    </Page>
   );
 }

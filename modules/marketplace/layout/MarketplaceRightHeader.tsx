@@ -30,10 +30,6 @@ export default function MarketplaceRightHeader() {
   };
 
   const total = state.items.length;
-  console.debug('total', total, state.items);
-  useEffect(() => {
-    console.debug('RRR', state.items);
-  }, [state.items]);
   
   return (
     <View style={styles.container}>

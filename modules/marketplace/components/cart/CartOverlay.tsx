@@ -2,10 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Pressable, ScrollView, Modal} from 'react-native';
 import {Button} from 'react-native-paper';
 import {CartItem} from '../../reducers/ShoppingCartReducer';
-import PaymentForm from '../payment/PaymentForm';
-import {CloseIcon} from '@/assets/icons/CloseIcon';
 import {cartStyles as styles} from '../../styles/cart';
-import {useLocationContext} from '@/contexts/locationContext';
 
 interface CartOverlayProps<T extends {id: number}> {
   visible: boolean;
@@ -13,6 +10,7 @@ interface CartOverlayProps<T extends {id: number}> {
   cartItems: CartItem<T>[];
   renderItem: (item: CartItem<T>, index: number) => React.JSX.Element;
   totalAmount: number;
+  openPaymentForm: () => void;
 }
 
 const CartOverlay = <T extends {id: number}>({
@@ -21,20 +19,9 @@ const CartOverlay = <T extends {id: number}>({
   cartItems,
   renderItem,
   totalAmount,
+  openPaymentForm,
 }: CartOverlayProps<T>) => {
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-
-  const {activeDestination, destinationCountry} = useLocationContext();
-
-  const handleOpenPaymentForm = () => {
-    if (!activeDestination) {
-      alert('Necesitas seleccionar una localidad.');
-      return;
-    }
-    console.log(activeDestination, destinationCountry);
-    setShowPaymentModal(true);
-  };
-
+  
   return (
     <Modal
       visible={visible}
@@ -58,36 +45,14 @@ const CartOverlay = <T extends {id: number}>({
             {totalAmount > 0 && (
               <Button
                 mode="contained"
-                onPress={() => handleOpenPaymentForm()}>
+                onPress={() => openPaymentForm()}>
                 Proceed to Pay
               </Button>
             )}
           </View>
         </View>
 
-        {activeDestination && destinationCountry && (
-          <Modal
-            visible={showPaymentModal}
-            animationType="fade"
-            transparent={true}
-            onRequestClose={() => setShowPaymentModal(false)}>
-            <View style={styles.modalOverlay}>
-              <View style={styles.modalContent}>
-                <PaymentForm
-                  cartItems={cartItems}
-                  province={activeDestination.name}
-                  destinationCountry={destinationCountry?.code ?? ''}
-                />
-                <Button
-                  mode="contained"
-                  onPress={() => setShowPaymentModal(false)}
-                  style={styles.closeModalButton}>
-                  <CloseIcon />
-                </Button>
-              </View>
-            </View>
-          </Modal>
-        )}
+        
       </View>
     </Modal>
   );

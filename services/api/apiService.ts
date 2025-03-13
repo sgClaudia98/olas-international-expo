@@ -3,14 +3,14 @@ import {decodeToken} from 'react-jwt';
 import {RootState} from '@/state';
 import { accountService } from '@/modules/auth/services/api/AccountService';
 import { logout, setCredentials, User } from '@/modules/auth/slices/authSlice';
+import { BASE_URL } from '@/constants';
+import { fetchUserProfileThunk } from '@/modules/auth/slices/authThunks';
 
 const constructBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, {getState}) => {
       const token = (getState() as RootState).auth.token;
-
-      console.debug(token, 'Token to header');
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
@@ -43,22 +43,25 @@ export const baseQueryWithReauth = async (
   const baseQuery = constructBaseQuery(baseUrl);
   let result = await baseQuery(args, api, extraOptions);
   const {token, refreshToken} = (api.getState() as RootState).auth;
-  console.debug(result, 'Result 1 ', token, refreshToken);
-
+  
   // Check if the token has expired and needs refreshing
   if (token && isTokenExpired(token)) {
     try {
-      console.debug('token expired', token);
       if (refreshToken) {
         // Call the refresh token endpoint using the refresh token
-        const refreshResponse = await api.dispatch(
-          accountService.endpoints.refreshToken.initiate({refreshToken}),
-        );
+        const refreshResponse = await fetch(`${BASE_URL}/api/v1/client/refresh-token`, { // Replace with your actual refresh token endpoint
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refreshToken }),
+        });
 
-        if (refreshResponse.data?.accessToken) {
-          const {accessToken, refreshToken} = refreshResponse.data;
+        const refreshData = await refreshResponse.json();
+
+        if (refreshData.accessToken) {
+          const {accessToken, refreshToken} = refreshData;
           const decoded: any = decodeToken(accessToken);
-          console.debug(decoded, 'Decoded');
           // Update the state with new credentials
           api.dispatch(
             setCredentials({
@@ -72,6 +75,9 @@ export const baseQueryWithReauth = async (
               refreshToken: refreshToken, // Keep the refreshToken the same
             }),
           );
+          api.dispatch(
+            fetchUserProfileThunk(),
+          );
 
           // Retry the original query with the new token
           result = await baseQuery(args, api, extraOptions);
@@ -82,22 +88,26 @@ export const baseQueryWithReauth = async (
         throw new Error('No refresh token available');
       }
     } catch (error) {
-      console.error('Reauthentication failed. Logging out:', error);
+      console.error('API Reauthentication failed. Logging out:', error);
       api.dispatch(logout()); // Log out if the refresh token fails
     }
   } else if (result?.meta?.response?.status === 403 || result?.meta?.response?.status === 401) {
-    console.debug('Token not expired but 401/403');
     // If not expired but still 401/403, attempt refresh anyway
     try {
       const refreshToken = (api.getState() as RootState).auth.refreshToken;
 
       if (refreshToken) {
-        const refreshResponse = await api.dispatch(
-          accountService.endpoints.refreshToken.initiate({refreshToken}),
-        );
+        const refreshResponse = await fetch(`${BASE_URL}/api/v1/client/refresh-token`, { // Replace with your actual refresh token endpoint
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refreshToken }),
+        });
+        const refreshData = await refreshResponse.json();
 
-        if (refreshResponse.data?.accessToken) {
-          const newToken = refreshResponse.data.accessToken;
+        if (refreshData?.accessToken) {
+          const newToken = refreshData.accessToken;
           const decoded: any = decodeToken(newToken);
 
           api.dispatch(
@@ -112,14 +122,16 @@ export const baseQueryWithReauth = async (
               refreshToken: refreshToken,
             }),
           );
-
+          api.dispatch(
+            fetchUserProfileThunk(),
+          );
           result = await baseQuery(args, api, extraOptions);
         } else {
           throw new Error('Failed to refresh token');
         }
       }
     } catch (error) {
-      console.error('Reauthentication failed. Logging out:', error);
+      console.error('API Reauthentication failed. Logging out 2:', error);
       api.dispatch(logout());
     }
   }

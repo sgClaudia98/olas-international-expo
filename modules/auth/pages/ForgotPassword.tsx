@@ -62,7 +62,6 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   };
 
   const onSubmit = (values: IResetPasswordRequest) => {
-    console.debug("Submitted values:", values);
     resetPass(values);
   };
 

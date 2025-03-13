@@ -14,6 +14,7 @@ const theme: MD3Theme = {
     onSurfaceDisabled: Colors.white.default,
     onSurface: Colors.black.second,
     onSurfaceVariant: Colors.black.primary,
+    error: Colors.red.primary,
     elevation: {
       ...DefaultTheme.colors.elevation,
       level2: Colors.white.default,

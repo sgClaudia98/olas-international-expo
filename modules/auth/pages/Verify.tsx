@@ -39,7 +39,6 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
   };
 
   const onSubmit = (values: IVerifyRequest) => {
-    console.debug("Submitted:", values);
     verify(values);
   };
 
@@ -47,7 +46,7 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
     if (isError) {
       //TODO:  Manejar error de token expired
       console.error("Error");
-    } else if (isSuccess && data) {
+    } else if (isSuccess && data as any) {
       navigation.dispatch(StackActions.replace("Auth", { screen: "Login" }));
     }
   }, [isLoading]);

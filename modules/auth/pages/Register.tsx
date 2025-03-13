@@ -59,7 +59,6 @@ const Register: FunctionComponent<RegisterProps> = () => {
     receiveNewsLetter: false,
   };
   const onSubmit = (values: FormValues) => {
-    console.debug("Values", values);
     setEmail(values.email);
     signup(values);
   };
@@ -155,7 +154,6 @@ const Register: FunctionComponent<RegisterProps> = () => {
               <Btn
                 title="Sign Up"
                 onPress={() => {
-                  console.log(errors);
                   handleSubmit();
                 }}
                 disabled={isLoading}

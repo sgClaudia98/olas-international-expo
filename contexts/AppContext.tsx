@@ -12,7 +12,6 @@ import {
 import { PaperProvider } from "react-native-paper";
 import theme from "@/styles/paperTheme";
 import { MainLayoutProvider } from "./mainLayoutContext";
-import { loadAuthStateFromStorage } from "@/modules/auth/slices/authSlice";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -20,11 +19,6 @@ interface AppProvidersProps {
 
 export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const colorScheme = useColorScheme();
-
-  useEffect(() => {
-    // Load persisted auth state on app startup
-    store.dispatch(loadAuthStateFromStorage());
-  }, []);
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>

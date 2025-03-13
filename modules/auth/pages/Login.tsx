@@ -12,6 +12,7 @@ import { setCredentials, User } from "@/modules/auth/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { decodeToken } from "react-jwt";
 import { Link, useRouter } from "expo-router";
+import { fetchUserProfileThunk } from "../slices/authThunks";
 
 interface FormValues {
   email: string;
@@ -47,7 +48,6 @@ const Login: FunctionComponent<LoginProps> = () => {
     password: "",
   };
   const onSubmit = (values: FormValues) => {
-    console.debug(values);
     auth(values);
   };
 
@@ -55,19 +55,7 @@ const Login: FunctionComponent<LoginProps> = () => {
     if (isError) {
       console.error("Error");
     } else if (isSuccess && data) {
-      const decoded: any = decodeToken(data.accessToken);
-      dispatch(
-        setCredentials({
-          user: {
-            name: decoded?.sub,
-            username: decoded?.sub,
-            userId: decoded?.sub,
-            imageUrl: `https://storageaccountsocial.blob.core.windows.net/avatars/${decoded?.sub}.png`,
-          } as User,
-          token: data.accessToken,
-          refreshToken: data.refreshToken,
-        })
-      );
+      
 
       goToMain();
     }
