@@ -19,7 +19,7 @@ const Page: React.FC<PageProps> = ({ children }) => {
             minHeight: '100%',
             backgroundColor: 'white',
             paddingTop: 40,
-            paddingHorizontal: 40,
+            paddingHorizontal: 20,
           }}>
           {children}
         </View>
