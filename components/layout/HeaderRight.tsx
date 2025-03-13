@@ -1,20 +1,29 @@
-import { useRouter } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
 import { useAppSelector } from "@/hooks/useAppDispatch";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
-const IconsHeader = () => {
+const HeaderRight = ({ navigation }) => {
+  const { isMobile } = useBreakpoints();
+
   const router = useRouter();
   return (
     <Appbar.Header style={styles.appbar}>
-      <DestinationSelector />
-      <Appbar.Action icon="globe-model" />
-      <Appbar.Action
-        icon="account-circle-outline"
-        onPress={() => router.navigate("/(main)/profile")}
-      />
+      {isMobile ? (
+        <Appbar.Action icon="menu" onPress={() => navigation.toggleDrawer()} />
+      ) : (
+        <>
+          <DestinationSelector />
+          <Appbar.Action icon="globe-model" />
+          <Appbar.Action
+            icon="account-circle-outline"
+            onPress={() => router.navigate("/(main)/profile")}
+          />
+        </>
+      )}
     </Appbar.Header>
   );
 };
@@ -51,4 +60,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6e6",
   },
 });
-export default IconsHeader;
+export default HeaderRight;
