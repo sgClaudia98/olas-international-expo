@@ -2,18 +2,14 @@ import React from "react";
 import { Platform, Pressable, StyleSheet, View, Image } from "react-native";
 
 import { useRouter } from "expo-router";
+import Logo from "../Logo";
 
 const LogoHeader = () => {
   const router = useRouter();
 
   return (
     <View style={styles.logo}>
-      <Pressable key={"logo-touch"} onPress={() => router.navigate("/(main)")}>
-        <Image
-          source={require("@/assets/images/logo_large.svg")}
-          style={{ alignSelf: "center" }}
-        />
-      </Pressable>
+      <Logo />
     </View>
   );
 };

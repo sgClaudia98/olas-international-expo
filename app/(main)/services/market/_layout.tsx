@@ -1,10 +1,11 @@
 import PaymentWrapper from "@/modules/marketplace/components/payment/PaymentWrapper";
 import { SearchProvider } from "@/modules/marketplace/context/SearchContext";
 import { ShoppingCartProvider } from "@/modules/marketplace/context/ShoppingCartContext";
+import {header, mobileHeader} from "@/modules/marketplace/layout/header";
+
 import { useMarketCartActions } from "@/modules/marketplace/hooks/useMarketCartActions";
-import MarketplaceLeftHeader from "@/modules/marketplace/layout/MarketplaceLeftHeader";
-import MarketplaceRightHeader from "@/modules/marketplace/layout/MarketplaceRightHeader";
 import { Stack } from "expo-router";
+import React from "react";
 
 export default function MarketplaceLayout() {
   const marketCartActions = useMarketCartActions(); // Get the actions for the market cart
@@ -14,12 +15,7 @@ export default function MarketplaceLayout() {
       <ShoppingCartProvider actions={marketCartActions} 
       renderPaymentForm={(closeModal) => <PaymentWrapper onClose={closeModal}/>}>
       <Stack
-        screenOptions={{
-          headerLeft: () => <MarketplaceLeftHeader />,
-          headerRight: () => <MarketplaceRightHeader />,
-          headerTitle: "",
-          headerShadowVisible: false,
-        }}
+        screenOptions={mobileHeader}
       />
       </ShoppingCartProvider>
     </SearchProvider>
