@@ -32,6 +32,7 @@ export default function RootLayout() {
     return null;
   }
 
+  console.debug("isMobile", isMobile);
   return (
     <AppProviders>
       {isMobile ? (
@@ -54,10 +55,10 @@ export default function RootLayout() {
         </GestureHandlerRootView>
       ) : (
         <Stack
-          screenOptions={({ route }) =>
+          screenOptions={({ route, navigation }) =>
             route.path != "/promos"
               ? {
-                  ...screenHeaderLogoOption,
+                  ...screenHeaderLogoOption({ navigation }),
                   headerStyle: { backgroundColor: "white" },
                 }
               : { headerShown: false }
