@@ -41,8 +41,8 @@ export default function NewScreen() {
         />
 
         <Btn
-          title="Marketplace"
-          onPress={() => router.navigate("/(main)/services/market")}
+          title="Products view"
+          onPress={() => router.navigate("/(main)/services/market/products")}
         />
         <Btn
           title="Travel"
