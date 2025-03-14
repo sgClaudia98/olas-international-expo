@@ -6,8 +6,10 @@ import {header, mobileHeader} from "@/modules/marketplace/layout/header";
 import { useMarketCartActions } from "@/modules/marketplace/hooks/useMarketCartActions";
 import { Stack } from "expo-router";
 import React from "react";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 export default function MarketplaceLayout() {
+  const {isMobile} = useBreakpoints();
   const marketCartActions = useMarketCartActions(); // Get the actions for the market cart
 
   return (
@@ -15,7 +17,7 @@ export default function MarketplaceLayout() {
       <ShoppingCartProvider actions={marketCartActions} 
       renderPaymentForm={(closeModal) => <PaymentWrapper onClose={closeModal}/>}>
       <Stack
-        screenOptions={mobileHeader}
+        screenOptions={isMobile ? mobileHeader : header}
       />
       </ShoppingCartProvider>
     </SearchProvider>
