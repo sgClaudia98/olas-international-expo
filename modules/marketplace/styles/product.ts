@@ -213,7 +213,17 @@ const productVertical = StyleSheet.create({
     shadowOffset: {
       height: 0,
       width: 0
-    }
+    },
+    minHeight: 300,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 120,
+    height: 120,
+    objectFit: 'cover',
   },
   name: {
     ...typography.label,
@@ -228,7 +238,8 @@ const productVertical = StyleSheet.create({
   },
   actions: {
     marginRight: 'auto',
-    gap: 10
+    gap: 10,
+    flexWrap: 'wrap',
   }
 })
 

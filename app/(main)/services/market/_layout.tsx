@@ -1,3 +1,4 @@
+import React from "react";
 import PaymentWrapper from "@/modules/marketplace/components/payment/PaymentWrapper";
 import { SearchProvider } from "@/modules/marketplace/context/SearchContext";
 import { ShoppingCartProvider } from "@/modules/marketplace/context/ShoppingCartContext";

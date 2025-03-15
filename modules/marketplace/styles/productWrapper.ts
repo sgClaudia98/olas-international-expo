@@ -39,11 +39,12 @@ const styles = {
       flex: 1,
       flexDirection: "row",
       alignItems: "flex-start",
+      gap: 10,
     },
     products: {
       flex: 1,
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-between",
       flexWrap: "wrap",
       padding: 10,
       marginHorizontal: -12,
