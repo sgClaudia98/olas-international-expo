@@ -254,6 +254,8 @@ const productVertical = StyleSheet.create({
     paddingTop: 16,
     paddingLeft: 0,
     paddingRight: 0,
+    maxWidth: 150,
+    flex: 1,
   },
   addBtn: {
     marginLeft: 15,
