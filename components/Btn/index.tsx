@@ -8,7 +8,7 @@ import {
 } from '@/styles/buttons';
 import {Button, useTheme} from 'react-native-paper';
 import {Colors} from '@/styles';
-import {View, ViewStyle} from 'react-native';
+import {StyleSheet, TextStyle, View, ViewStyle} from 'react-native';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 
 interface ButtonProps {
@@ -20,6 +20,7 @@ interface ButtonProps {
   loading?: boolean;
   icon?: IconSource;
   iconRight?: boolean;
+  style?: TextStyle;
 }
 
 const Btn: React.FC<ButtonProps> = ({
@@ -31,6 +32,7 @@ const Btn: React.FC<ButtonProps> = ({
   loading = false,
   icon,
   iconRight,
+  style = {},
 }) => {
   const mode = variant == 'primary' ? 'contained' : 'outlined';
   const colors = {
@@ -54,7 +56,7 @@ const Btn: React.FC<ButtonProps> = ({
         mode={mode}
         disabled={disabled}
         style={getContainerStyleV2(variant)}
-        labelStyle={getTextStyleV2()}
+        labelStyle={StyleSheet.flatten([getTextStyleV2(), style])}
         contentStyle={getButtonStyleV2(size, iconRight ? reverse : undefined)}>
         {title}
       </Button>
