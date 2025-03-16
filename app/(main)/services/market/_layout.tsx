@@ -6,7 +6,6 @@ import {header, mobileHeader} from "@/modules/marketplace/layout/header";
 
 import { useMarketCartActions } from "@/modules/marketplace/hooks/useMarketCartActions";
 import { Stack } from "expo-router";
-import React from "react";
 
 export default function MarketplaceLayout() {
   const marketCartActions = useMarketCartActions(); // Get the actions for the market cart

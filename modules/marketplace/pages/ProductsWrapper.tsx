@@ -21,6 +21,7 @@ import ProductItemVertical from "../components/product/ProductItemVertical";
 import FilterDrawer from "../components/filter/FilterDrawer";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/styles";
+import NoSearchResults from "@/components/NoSearchResults";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -163,35 +164,40 @@ const ProductsWrapper: React.FC = () => {
             onCloseDrawer={closeMobileDrawer}
           />
         )}
+
         <PaginatedContent
           data={data}
           fetchItems={fetchPage}
           pageSize={20}
           loading={loading}
         >
-          <View style={styles.products}>
-            {items?.map((val) =>
-              !isMobile ? (
-                <ProductItem
-                  key={`prodI-${val.id}-${val.product.id}`}
-                  item={val}
-                  style={
-                    showDesktopFilters
-                      ? styles.productOpen
-                      : styles.productClose
-                  }
-                  onClick={() => handleProductPress(val.product.id)}
-                />
-              ) : (
-                <ProductItemVertical
-                  key={`prodI-${val.id}-${val.product.id}`}
-                  item={val}
-                  style={styles.productOpen}
-                  onClick={() => handleProductPress(val.product.id)}
-                />
-              )
-            )}
-          </View>
+          {items.length === 0 ? (
+            <NoSearchResults />
+          ) : (
+            <View style={styles.products}>
+              {items?.map((val) =>
+                !isMobile ? (
+                  <ProductItem
+                    key={`prodI-${val.id}-${val.product.id}`}
+                    item={val}
+                    style={
+                      showDesktopFilters
+                        ? styles.productOpen
+                        : styles.productClose
+                    }
+                    onClick={() => handleProductPress(val.product.id)}
+                  />
+                ) : (
+                  <ProductItemVertical
+                    key={`prodI-${val.id}-${val.product.id}`}
+                    item={val}
+                    style={styles.productOpen}
+                    onClick={() => handleProductPress(val.product.id)}
+                  />
+                )
+              )}
+            </View>
+          )}
         </PaginatedContent>
       </View>
     </>
