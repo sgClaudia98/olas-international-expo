@@ -18,7 +18,7 @@ const Page: React.FC<PageProps> = ({ children }) => {
             display: 'flex',
             minHeight: '100%',
             backgroundColor: 'white',
-            paddingTop: 40,
+            paddingTop: 20,
             paddingHorizontal: 20,
           }}>
           {children}

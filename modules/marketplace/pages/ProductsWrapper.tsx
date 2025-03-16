@@ -1,13 +1,14 @@
 import DropdownSelect from "@/components/DropdownSelect";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import {
   View,
   Text,
   useWindowDimensions,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import { Button, Switch } from "react-native-paper";
+import { Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -18,10 +19,9 @@ import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
 import { useRouter } from "expo-router";
 import ProductItemVertical from "../components/product/ProductItemVertical";
-import FilterDrawer from "../components/filter/FilterDrawer";
-import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/styles";
 import NoSearchResults from "@/components/NoSearchResults";
+import BannerSlider from "../components/banners/BannerSlider";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -66,6 +66,7 @@ const ProductsWrapper: React.FC = () => {
 
   return (
     <>
+      <BannerSlider />
       <View
         style={{
           marginBottom: 5,
