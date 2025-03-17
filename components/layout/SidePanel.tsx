@@ -1,20 +1,23 @@
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { appLinks, links } from "./links";
 import { useRouter } from "expo-router";
 import { Colors } from "@/styles";
 import DestinationSelector from "../DestinationSelector";
-import { Button, Icon, IconButton } from "react-native-paper";
+import { Button, Divider, Icon, IconButton } from "react-native-paper";
 import Logo from "../Logo";
+import { MainLayoutcontext } from "@/contexts/mainLayoutContext";
 
 const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
   const route = useRouter();
+  const {serviceMenu} = useContext(MainLayoutcontext);
 
   const handleNavigate = (to: string) => {
     route.push(to as any);
   };
   const _links = Platform.OS == "web" ? links : appLinks;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,6 +64,27 @@ const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
             Profile
           </Text>
         </Button>
+        <Divider style={{width: "100%"}} bold />
+        {serviceMenu.map((link, index) => (
+          <Button
+            key={`hb-${index}`}
+            onPress={() => handleNavigate(link.route)}
+            style={[
+              styles.menuItem,
+              // route.name === link.route ? styles.activeMenuItem : null,
+            ]}
+          >
+            <Text
+              style={[
+                styles.menuText,
+                { color: Colors.black.primary },
+                // route.name === link.route ? styles.activeMenuText : null,
+              ]}
+            >
+              {link.label}
+            </Text>
+          </Button>
+        ))}
       </View>
     </View>
   );

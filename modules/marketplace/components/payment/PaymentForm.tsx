@@ -4,7 +4,7 @@ import { Button, Portal } from "react-native-paper";
 import { Formik, FormikErrors, FormikValues } from "formik";
 import * as Yup from "yup";
 
-import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymentForm";
+import { paymentFormStyles } from "@/modules/marketplace/styles/paymentForm";
 import StepProgress from "./StepProgress";
 
 import validationSchemas, { PaymentFormValues } from "./PaymentFormHelper";
@@ -22,6 +22,7 @@ import Step3 from "./steps/Step3";
 import { useAppSelector } from "@/hooks/useAppDispatch";
 import { mapValuesToPayload } from "./PaymentFormHelper";
 import { parseStringToPhoneNumber } from "./PhoneNumberHelper";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
@@ -38,6 +39,8 @@ const PaymentForm = ({
 }) => {
   const [step, setStep] = useState(1);
   const { user } = useAppSelector((state) => state.auth);
+
+  const styles = useResponsiveStyles(paymentFormStyles)
 
   const initialValues = {
     client: {
@@ -133,8 +136,8 @@ const PaymentForm = ({
         isSubmitting,
       }) => (
         <Portal.Host>
-          <View style={styles.tablet.formContainer}>
-            <Text style={styles.tablet.title}>Booking steps</Text>
+          <View style={styles.formContainer}>
+            <Text style={styles.title}>Booking steps</Text>
             <StepProgress step={step - 1} />
 
             {step === 1 && <Step1 />}
@@ -143,12 +146,12 @@ const PaymentForm = ({
 
             {step === 3 && <Step3 preview={preview} />}
 
-            <View style={styles.tablet.buttonContainer}>
+            <View style={styles.buttonContainer}>
               {step > 1 && (
                 <Button
                   mode="outlined"
                   onPress={() => setStep(step - 1)}
-                  style={styles.tablet.button}
+                  style={styles.button}
                   disabled={isSubmitting || loadingBooking}
                 >
                   Back
@@ -163,7 +166,7 @@ const PaymentForm = ({
                     })
                   }
                   disabled={isSubmitting || loadingBooking}
-                  style={styles.tablet.button}
+                  style={styles.button}
                 >
                   Next
                 </Button>
@@ -172,7 +175,7 @@ const PaymentForm = ({
                   mode="contained"
                   onPress={() => handleSubmit()}
                   disabled={isSubmitting}
-                  style={styles.tablet.button}
+                  style={styles.button}
                 >
                   Submit
                 </Button>

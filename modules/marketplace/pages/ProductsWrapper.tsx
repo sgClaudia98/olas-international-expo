@@ -1,26 +1,38 @@
 import DropdownSelect from "@/components/DropdownSelect";
 
-import React, { useContext, useMemo, useState } from "react";
-import { View, Text, ViewStyle } from "react-native";
-import { Switch } from "react-native-paper";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  useWindowDimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Button, Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
 } from "../hooks/useSearchMarketOptions";
 import Filters from "../components/filter/Filter";
-import { useNavigation } from "@react-navigation/core";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
-import Page from "@/components/layout/Page";
 import { useRouter } from "expo-router";
+import ProductItemVertical from "../components/product/ProductItemVertical";
+import FilterDrawer from "../components/filter/FilterDrawer";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/styles";
+import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
+  const {isMobile} = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
-  const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+
+  const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
+  const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
   const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
   const handleItemClick = (trace: any[]) => {
@@ -29,43 +41,41 @@ const ProductsWrapper: React.FC = () => {
   };
   const router = useRouter();
 
+  const { width: screenWidth } = useWindowDimensions();
+
   const handleProductPress = (id: number) => {
     router.push(`./detail/${id}`);
   };
 
+  const [totalProducts, setTotalProducts] = useState(0);
+
+  useEffect(() => {
+    if (data) setTotalProducts(data.totals);
+  }, [data]);
+
+  const toggleDesktopFilters = () => {
+    setShowDesktopFilters(!showDesktopFilters);
+  };
+
+  const openMobileDrawer = () => {
+    setShowMobileDrawer(true);
+  };
+
+  const closeMobileDrawer = () => {
+    setShowMobileDrawer(false);
+  };
+
   return (
     <>
-      <View
-        style={{
-          marginBottom: 5,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Text>{breadcrumb}</Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <DropdownSelect
-            buttonTitle="Sort by:"
-            menuItems={[
-              { label: "Best match", value: "best_match" },
-              { label: "Lowest price", value: "lowest_price" },
-              { label: "Highest price", value: "highest_price" },
-            ]}
-            value="best_match"
-            onSelect={(value) => console.log("Selected value:", value)}
-          />
-          <View style={{ flexDirection: "row", paddingStart: 5 }}>
-            <Text style={{ paddingHorizontal: 10 }}>Show Filters</Text>
-            <Switch
-              value={isSwitchOn}
-              onValueChange={() => setIsSwitchOn(!isSwitchOn)}
-            />
-          </View>
-        </View>
-      </View>
+      <ProductsWrapperHeader
+        toggleFilters={toggleDesktopFilters}
+        openMobileDrawer={openMobileDrawer}
+        total={totalProducts}
+        breadcrumb={breadcrumb}
+        isOpenFilters={showDesktopFilters}
+      />
       <View style={styles.wrapper}>
-        {isSwitchOn && (
+        {!isMobile && showDesktopFilters && (
           <Filters
             onItemClick={handleItemClick}
             setFilter={updateFilter}
@@ -79,6 +89,23 @@ const ProductsWrapper: React.FC = () => {
             }
           />
         )}
+
+        {isMobile && (
+          <Filters
+            onItemClick={handleItemClick}
+            setFilter={updateFilter}
+            stats={
+              stats && searchId
+                ? {
+                    data: stats,
+                    searchId: searchId,
+                  }
+                : undefined
+            }
+            isDrawerOpen={showMobileDrawer}
+            onCloseDrawer={closeMobileDrawer}
+          />
+        )}
         <PaginatedContent
           data={data}
           fetchItems={fetchPage}
@@ -86,18 +113,27 @@ const ProductsWrapper: React.FC = () => {
           loading={loading}
         >
           <View style={styles.products}>
-            {items?.map((val) => (
-              <ProductItem
-                key={`prodI-${val.id}-${val.product.id}`}
-                item={val}
-                style={
-                  (isSwitchOn
-                    ? styles.productOpen
-                    : styles.productClose)
-                }
-                onClick={() => handleProductPress(val.product.id)}
-              />
-            ))}
+            {items?.map((val) =>
+              !isMobile ? (
+                <ProductItem
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={
+                    showDesktopFilters
+                      ? styles.productOpen
+                      : styles.productClose
+                  }
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              ) : (
+                <ProductItemVertical
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={styles.productOpen}
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              )
+            )}
           </View>
         </PaginatedContent>
       </View>

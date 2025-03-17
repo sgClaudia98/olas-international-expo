@@ -47,6 +47,7 @@ export default function RootLayout() {
                     ...screenHeaderLogoOption({ navigation }),
                     drawerPosition: "right",
                     drawerType: "back",
+                    initialRouteName: "/(main)/services/market",
                     headerStyle: { backgroundColor: "white" },
                   }
                 : { headerShown: false }
@@ -59,6 +60,7 @@ export default function RootLayout() {
             route.path != "/promos"
               ? {
                   ...screenHeaderLogoOption({ navigation }),
+                  initialRouteName: "/(main)/services/market",
                   headerStyle: { backgroundColor: "white" },
                 }
               : { headerShown: false }

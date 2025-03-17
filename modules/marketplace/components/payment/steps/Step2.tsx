@@ -58,6 +58,7 @@ const Step2 = ({ destinationCountry }) => {
             name="beneficiary.phone"
             inputStyles={{ ...styles.tablet.input, marginBottom: 0 }}
             defaultCountryCode="US"
+            disableCountrySelection={true}
             error={!!errors.beneficiary?.phone?.number}
           />
           {errors.beneficiary?.phone?.number && (

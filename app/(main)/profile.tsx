@@ -1,3 +1,4 @@
+import React from "react";
 import Page from "@/components/layout/Page";
 import { Profile } from "@/modules/auth/pages/Profile";
 
