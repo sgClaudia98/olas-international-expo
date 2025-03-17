@@ -55,8 +55,5 @@
     "experiments": {
       "typedRoutes": true
     }
-  },
-  "extra": {
-      "initialRoute": "/(main)/services/market"
-    }
+  }
 }
