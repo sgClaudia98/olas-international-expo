@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Animated, Easing } from "react-native";
 import { useEffect, useRef } from "react";
 import { Colors } from "@/styles";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const Skeleton = ({ width, height, style }) => {
   const opacity = useRef(new Animated.Value(0.3)).current;
@@ -35,7 +36,7 @@ const Skeleton = ({ width, height, style }) => {
         {
           width,
           height,
-          backgroundColor: "#E1E9EE",
+          backgroundColor: Colors.black.third,
           borderRadius: 4,
           opacity,
         },
@@ -46,6 +47,8 @@ const Skeleton = ({ width, height, style }) => {
 };
 
 const ProfileSkeleton = () => {
+  const styles = useResponsiveStyles(profileSkeletonStyles)
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -72,54 +75,103 @@ const ProfileSkeleton = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    maxWidth: 400,
-    borderRadius: 12,
-    backgroundColor: Colors.white.default,
-    shadowColor: Colors.black.default,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
-    overflow: "hidden",
-  },
-  header: {
-    backgroundColor: Colors.blue.primary,
-    paddingTop: 40,
-    paddingBottom: 30,
-    paddingHorizontal: 30,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  avatar: {
-    borderRadius: 37.5,
-  },
-  textContainer: {
-    marginLeft: 16,
-    justifyContent: "center",
-  },
-  nameText: {
-    marginBottom: 8,
-  },
-  emailText: {},
-  content: {
-    padding: 16,
-    backgroundColor: "white",
-  },
-  menuItem: {
-    marginBottom: 16,
-  },
-  footer: {
-    padding: 16,
-    borderTopWidth: 1,
-    borderTopColor: Colors.black.third,
-    alignItems: "center",
-  },
-  button: {
-    borderRadius: 20,
-  },
-});
+const profileSkeletonStyles = {
+  mobile: StyleSheet.create({
+    container: {
+      width: "100%",
+      borderRadius: 12,
+      backgroundColor: Colors.black.fifth,
+      shadowColor: Colors.black.default,
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      elevation: 2,
+      overflow: "hidden",
+    },
+    header: {
+      backgroundColor: Colors.blue.primary,
+      paddingTop: 40,
+      paddingBottom: 30,
+      paddingHorizontal: 30,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    avatar: {
+      borderRadius: 37.5,
+    },
+    textContainer: {
+      marginLeft: 16,
+      justifyContent: "center",
+    },
+    nameText: {
+      marginBottom: 8,
+    },
+    emailText: {},
+    content: {
+      padding: 16,
+      backgroundColor: Colors.black.fifth,
+    },
+    menuItem: {
+      marginBottom: 16,
+    },
+    footer: {
+      padding: 16,
+      borderTopWidth: 1,
+      borderTopColor: Colors.black.third,
+      alignItems: "flex-end",
+    },
+    button: {
+      borderRadius: 20,
+    },
+  }),
+  tablet: StyleSheet.create({
+    container: {
+      width: "35%",
+      borderRadius: 12,
+      backgroundColor: Colors.black.fifth,
+      shadowColor: Colors.black.default,
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.2,
+      shadowRadius: 2,
+      elevation: 2,
+      overflow: "hidden",
+    },
+    header: {
+      backgroundColor: Colors.blue.primary,
+      paddingTop: 40,
+      paddingBottom: 30,
+      paddingHorizontal: 30,
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    avatar: {
+      borderRadius: 37.5,
+    },
+    textContainer: {
+      marginLeft: 16,
+      justifyContent: "center",
+    },
+    nameText: {
+      marginBottom: 8,
+    },
+    emailText: {},
+    content: {
+      padding: 16,
+      backgroundColor: Colors.black.fifth,
+    },
+    menuItem: {
+      marginBottom: 16,
+    },
+    footer: {
+      padding: 16,
+      borderTopWidth: 1,
+      borderTopColor: Colors.black.third,
+      alignItems: "flex-end",
+    },
+    button: {
+      borderRadius: 20,
+    },
+  }),
+};
 
 export default ProfileSkeleton;

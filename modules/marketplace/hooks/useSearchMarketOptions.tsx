@@ -51,7 +51,7 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
   const [data, setData] = useState<SearchMarketBookingOptionsResponse>();
   const [filter, setFilter] = useState<IAllFilters>(initFilter);
   const [loading, setLoading] = useState(false);
-  const [forcePOST, setForcePOST] = useState(false);
+  const [forcePOST, setForcePOST] = useState(false);  
 
   const [searchMarketOptions] = useSearchMarketOptionsMutation();
   const [triggerQuery, {data: queryData, isFetching}] = useLazyGetSearchMarketOptionsQuery();

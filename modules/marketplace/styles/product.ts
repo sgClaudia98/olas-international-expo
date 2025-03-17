@@ -206,7 +206,6 @@ const productVertical = StyleSheet.create({
     ...productItemStyles.image,
     width: 150,
     height: 150,
-
   },
   nameContainer: {
     padding: 0,
@@ -230,7 +229,12 @@ const productVertical = StyleSheet.create({
     shadowOffset: {
       height: 0,
       width: 0
-    }
+    },
+    minHeight: 300,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   name: {
     ...typography.label,
@@ -249,6 +253,7 @@ const productVertical = StyleSheet.create({
     gap: 10,
     flexDirection: 'row',
     marginTop: 20,
+    flexWrap: 'wrap', // Posible bug
   },
   innerContainer: {
     paddingTop: 16,

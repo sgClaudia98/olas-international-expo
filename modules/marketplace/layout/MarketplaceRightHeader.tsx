@@ -1,10 +1,21 @@
-import {Colors} from '@/styles';
-import React, {useEffect} from 'react';
-import {View, Text, TextInput, Pressable, StyleSheet, Image, Platform} from 'react-native';
-import {Badge, IconButton} from 'react-native-paper';
-import {useShoppingCart} from '../context/ShoppingCartContext';
-import {MarketBookingCartItem, MarketBookingOption} from '../services/interfaces/booking';
-import {MarketBookingCartExtra} from '../hooks/useMarketCartActions';
+import { Colors } from "@/styles";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  StyleSheet,
+  Image,
+  Platform,
+} from "react-native";
+import { Badge, IconButton } from "react-native-paper";
+import { useShoppingCart } from "../context/ShoppingCartContext";
+import {
+  MarketBookingCartItem,
+  MarketBookingOption,
+} from "../services/interfaces/booking";
+import { MarketBookingCartExtra } from "../hooks/useMarketCartActions";
 
 import {useNavigation} from '@react-navigation/core';
 import {MainLayoutStateService} from '@/reducers/mainLayoutReducer';
@@ -29,26 +40,20 @@ export default function MarketplaceRightHeader() {
   };
 
   const total = state.items.length;
-  
+
   return (
     <View style={styles.container}>
-      <HeaderBar
-        links={links}
-        textColor={Colors.black.second}
-      />
+      <HeaderBar links={links} textColor={Colors.black.second} />
       <View>
         <IconButton
           icon="cart-outline"
           iconColor={Colors.black.second}
           onPress={openCart}
         />
-        <Badge
-          visible={total > 0}
-          style={[styles.badge]}>
+        <Badge visible={total > 0} style={[styles.badge]}>
           {total}
         </Badge>
       </View>
     </View>
   );
 }
-

@@ -65,7 +65,7 @@ const styles = {
     products: {
       ...desktop.products,
       flexDirection: "row",
-      justifyContent: "center",
+      justifyContent: "space-between",
       flexWrap: "wrap",
       gap: 16,
     },

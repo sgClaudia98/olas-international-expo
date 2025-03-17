@@ -16,35 +16,39 @@ export default function MarketplaceLeftHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
   const {data, selection, setSelection, setProductName} = useSearchContext();
   const route = useRouter();
-    
-  const [department, setDepartment] = useState<string>(selection?.departmentId?.toString() || '');
+
+  const [department, setDepartment] = useState<string>(
+    selection?.departmentId?.toString() || ""
+  );
   const menuItems = useMemo(() => {
     const all_cat = {
-      label: 'All Categories',
-      value: '',
+      label: "All Categories",
+      value: "",
     };
-    const dep = data?.map(v => {
-      return {label: v.name, value: v.id.toString()};
+    const dep = data?.map((v) => {
+      return { label: v.name, value: v.id.toString() };
     });
     return dep ? [all_cat, ...dep] : [all_cat];
   }, [data]);
-  
+
   const onDepartmentSelected = (value: string) => {
     setDepartment(value);
-    setSelection({departmentId: value == '' ? undefined : +value, categoryId: undefined});
+    setSelection({
+      departmentId: value == "" ? undefined : +value,
+      categoryId: undefined,
+    });
     navigateToProducts();
   };
 
   const onProductSearch = (value: string) => {
-    if (setProductName)
-    setProductName(value);
+    if (setProductName) setProductName(value);
     navigateToProducts();
   };
 
   // modify this function to navigate to the correct screen
   const navigateToProducts = () => {
-    route.push('/(main)/services/market/products'); 
-  }
+    route.push("/(main)/services/market/products");
+  };
 
   return (
     <View style={styles.container}>
@@ -73,4 +77,3 @@ export default function MarketplaceLeftHeader() {
     </View>
   );
 }
-

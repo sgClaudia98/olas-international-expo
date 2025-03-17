@@ -1,13 +1,14 @@
 import DropdownSelect from "@/components/DropdownSelect";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import {
   View,
   Text,
   useWindowDimensions,
   TouchableOpacity,
+  Image,
 } from "react-native";
-import { Button, Switch } from "react-native-paper";
+import { Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -18,11 +19,11 @@ import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
 import { useRouter } from "expo-router";
 import ProductItemVertical from "../components/product/ProductItemVertical";
-import FilterDrawer from "../components/filter/FilterDrawer";
-import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/styles";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
+import NoSearchResults from "@/components/NoSearchResults";
+import BannerSlider from "../components/banners/BannerSlider";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -67,6 +68,7 @@ const ProductsWrapper: React.FC = () => {
 
   return (
     <>
+      <BannerSlider />
       <ProductsWrapperHeader
         toggleFilters={toggleDesktopFilters}
         openMobileDrawer={openMobileDrawer}
@@ -106,35 +108,40 @@ const ProductsWrapper: React.FC = () => {
             onCloseDrawer={closeMobileDrawer}
           />
         )}
+
         <PaginatedContent
           data={data}
           fetchItems={fetchPage}
           pageSize={20}
           loading={loading}
         >
-          <View style={styles.products}>
-            {items?.map((val) =>
-              !isMobile ? (
-                <ProductItem
-                  key={`prodI-${val.id}-${val.product.id}`}
-                  item={val}
-                  style={
-                    showDesktopFilters
-                      ? styles.productOpen
-                      : styles.productClose
-                  }
-                  onClick={() => handleProductPress(val.product.id)}
-                />
-              ) : (
-                <ProductItemVertical
-                  key={`prodI-${val.id}-${val.product.id}`}
-                  item={val}
-                  style={styles.productOpen}
-                  onClick={() => handleProductPress(val.product.id)}
-                />
-              )
-            )}
-          </View>
+          {items.length === 0 ? (
+            <NoSearchResults />
+          ) : (
+            <View style={styles.products}>
+              {items?.map((val) =>
+                !isMobile ? (
+                  <ProductItem
+                    key={`prodI-${val.id}-${val.product.id}`}
+                    item={val}
+                    style={
+                      showDesktopFilters
+                        ? styles.productOpen
+                        : styles.productClose
+                    }
+                    onClick={() => handleProductPress(val.product.id)}
+                  />
+                ) : (
+                  <ProductItemVertical
+                    key={`prodI-${val.id}-${val.product.id}`}
+                    item={val}
+                    style={styles.productOpen}
+                    onClick={() => handleProductPress(val.product.id)}
+                  />
+                )
+              )}
+            </View>
+          )}
         </PaginatedContent>
       </View>
     </>
