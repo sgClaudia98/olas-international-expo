@@ -3,8 +3,7 @@ import { layout } from "@/styles/sizing";
 import typography from "@/styles/typography";
 import { StyleSheet, ViewStyle } from "react-native";
 
-
-const desktop=  StyleSheet.create({
+const desktop = StyleSheet.create({
   productsQtyText: {
     ...typography.label,
     color: Colors.black.primary,
@@ -14,8 +13,8 @@ const desktop=  StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
-    gap: 20,  
-    minHeight: 'auto'
+    gap: 20,
+    minHeight: "auto",
   },
   products: {
     flex: 1,
@@ -36,11 +35,28 @@ const desktop=  StyleSheet.create({
     width: "20%",
     padding: 12,
   },
-})
+  filterActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  filterActionContainer: {
+    marginBottom: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    padding: 10,
+  },
+});
 
 const styles = {
   mobile: StyleSheet.create({
     ...desktop,
+    productsQtyText: {
+      ...desktop.productsQtyText,
+      marginRight: 0,
+    },
     wrapper: {
       ...desktop.wrapper,
       gap: 0,
@@ -54,10 +70,22 @@ const styles = {
       gap: 16,
     },
     productOpen: {
-      width: 'auto',
+      width: "auto",
     },
     productClose: {
-      width: 'auto',
+      width: "auto",
+    },
+
+    filterActions: {
+      ...desktop.filterActions,
+      justifyContent: "space-between",
+      width: "100%",
+      marginTop: 10,
+    },
+    filterActionContainer: {
+      ...desktop.filterActionContainer,
+      padding: 21,
+      marginBottom: 20,
     },
   }),
   tablet: StyleSheet.create({

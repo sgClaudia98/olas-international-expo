@@ -90,8 +90,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   };
 
   const selectedLabel =
-    menuItems.find((item) => item.value === value)?.label ||
-    menuItems[0]?.label;
+    menuItems.find((item) => item.value === value)?.label;
 
   return (
     <View style={styles.container}>

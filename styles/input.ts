@@ -66,10 +66,11 @@ export const inputStyles = StyleSheet.create({
 export const inputHeight = {
   height: 40,
   minHeight: 40,
-  widht: "100%",
+  width: "100%",
 };
 
 export const inputStyle = {
   ...inputHeight,
   lineHeight: 1,
 };
+

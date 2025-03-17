@@ -1,9 +1,8 @@
 import Btn from "@/components/Btn";
 import Page from "@/components/layout/Page";
 import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Platform } from "react-native";
 
 export default function NewScreen() {

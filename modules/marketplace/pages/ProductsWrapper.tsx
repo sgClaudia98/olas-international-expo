@@ -21,9 +21,12 @@ import ProductItemVertical from "../components/product/ProductItemVertical";
 import FilterDrawer from "../components/filter/FilterDrawer";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/styles";
+import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
+  const {isMobile} = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
@@ -39,7 +42,6 @@ const ProductsWrapper: React.FC = () => {
   const router = useRouter();
 
   const { width: screenWidth } = useWindowDimensions();
-  const isMobile = screenWidth < 768;
 
   const handleProductPress = (id: number) => {
     router.push(`./detail/${id}`);
@@ -65,72 +67,13 @@ const ProductsWrapper: React.FC = () => {
 
   return (
     <>
-      <View
-        style={{
-          marginBottom: 5,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          padding: 10,
-        }}
-      >
-        <Text>{breadcrumb}</Text>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: isMobile ? "space-between" : "center",
-            width: isMobile ? "100%" : "auto",
-            marginTop: isMobile ? 10 : 0,
-          }}
-        >
-          <Text style={styles.productsQtyText}>
-            {totalProducts != 1
-              ? `${totalProducts} products`
-              : `${totalProducts} product`}
-          </Text>
-          <DropdownSelect
-            buttonTitle="Sort by:"
-            menuItems={[
-              { label: "Best match", value: "best_match" },
-              { label: "Lowest price", value: "lowest_price" },
-              { label: "Highest price", value: "highest_price" },
-            ]}
-            value="best_match"
-            onSelect={(value) => console.log("Selected value:", value)}
-          />
-          {/* Renderizado condicional: Switch en desktop, botón de texto en móvil */}
-          {isMobile ? (
-            <TouchableOpacity onPress={openMobileDrawer}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  lineHeight: 24,
-                  fontWeight: 400,
-                  color: Colors.blue.second,
-                }}
-              >
-                Filters
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <View
-              style={{
-                flexDirection: "row",
-                paddingStart: 5,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ paddingHorizontal: 10 }}>Show Filters</Text>
-              <Switch
-                value={showDesktopFilters}
-                onValueChange={toggleDesktopFilters}
-              />
-            </View>
-          )}
-        </View>
-      </View>
+      <ProductsWrapperHeader
+        toggleFilters={toggleDesktopFilters}
+        openMobileDrawer={openMobileDrawer}
+        total={totalProducts}
+        breadcrumb={breadcrumb}
+        isOpenFilters={showDesktopFilters}
+      />
       <View style={styles.wrapper}>
         {!isMobile && showDesktopFilters && (
           <Filters
