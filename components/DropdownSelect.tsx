@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Menu, Button, Icon } from 'react-native-paper';
-import { Colors } from '@/styles';
-import { selectRightSizeStyle, selectSizeStyle, selectTextStyle } from '@/styles/buttons';
+import React, { useState } from "react";
+import { View, StyleSheet } from "react-native";
+import { Menu, Button, Icon } from "react-native-paper";
+import { Colors } from "@/styles";
+import {
+  selectRightSizeStyle,
+  selectSizeStyle,
+  selectTextStyle,
+} from "@/styles/buttons";
 
 interface SelectBtnProps {
   title: string;
   onPress: () => void;
   disabled?: boolean;
+  themeColors?: {
+    primary: string;
+    outline: string;
+    onSurfaceDisabled: string;
+  };
 }
 
-const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress, disabled = false }) => {
-  const colors = {
+const SelectBtn: React.FC<SelectBtnProps> = ({
+  title,
+  onPress,
+  disabled = false,
+  themeColors,
+}) => {
+  const defaultColors = {
     primary: Colors.blue.second,
     outline: Colors.blue.second,
     onSurfaceDisabled: Colors.black.third,
   };
+
+  const colors = themeColors || defaultColors;
+
   return (
     <Button
       theme={{ colors }}
@@ -23,17 +40,13 @@ const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress, disabled = false 
       mode="outlined"
       disabled={disabled}
       style={{
-        width: 'auto',
+        width: "auto",
         borderRadius: 50,
       }}
       labelStyle={selectTextStyle}
       contentStyle={selectRightSizeStyle}
       icon={({ size, color }) => (
-        <Icon
-          source="chevron-down"
-          size={20}
-          color={color}
-        />
+        <Icon source="chevron-down" size={20} color={color} />
       )}
     >
       {title}
@@ -42,10 +55,16 @@ const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress, disabled = false 
 };
 
 interface DropdownSelectProps {
-  buttonTitle: string| ((selectedOption: string) => string);
+  buttonTitle: string | ((selectedOption: string) => string);
   menuItems: { label: string; value: string }[];
   onSelect: (value: string) => void;
   value?: string;
+
+  themeColors?: {
+    primary: string;
+    outline: string;
+    onSurfaceDisabled: string;
+  };
 }
 
 const DropdownSelect: React.FC<DropdownSelectProps> = ({
@@ -53,6 +72,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   menuItems,
   onSelect,
   value,
+  themeColors,
 }) => {
   const [visible, setVisible] = useState(false);
   const openMenu = () => setVisible(true);
@@ -63,14 +83,15 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     closeMenu();
   };
   const getButtonTitle = (): string => {
-    if (typeof buttonTitle === 'function') {
+    if (typeof buttonTitle === "function") {
       return buttonTitle(selectedLabel);
     }
     return `${buttonTitle}: ${selectedLabel}`;
   };
-  
+
   const selectedLabel =
-    menuItems.find((item) => item.value === value)?.label || menuItems[0]?.label;
+    menuItems.find((item) => item.value === value)?.label ||
+    menuItems[0]?.label;
 
   return (
     <View style={styles.container}>
@@ -80,6 +101,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
         mode="elevated"
         anchor={
           <SelectBtn
+            themeColors={themeColors}
             onPress={openMenu}
             title={getButtonTitle()}
           />
@@ -89,7 +111,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
       >
         {menuItems.map((item) => (
           <Menu.Item
-          key={`mlvldds-${item.value}`}
+            key={`mlvldds-${item.value}`}
             onPress={() => handleSelect(item.value)}
             title={item.label}
           />
@@ -101,8 +123,8 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    marginVertical: 'auto',
+    flexDirection: "row",
+    marginVertical: "auto",
   },
   menu: {
     borderRadius: 15,
