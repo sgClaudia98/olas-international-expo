@@ -1,9 +1,8 @@
-import { useNavigation, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
-import { useAppSelector } from "@/hooks/useAppDispatch";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 const HeaderRight = ({ navigation }) => {

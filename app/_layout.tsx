@@ -5,6 +5,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
+import '@/i18n'; 
 
 import { Text, View } from "react-native";
 import { screenHeaderLogoOption } from "@/components/layout";
