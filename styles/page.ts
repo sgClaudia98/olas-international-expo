@@ -13,7 +13,8 @@ const tablet = StyleSheet.create({
     minHeight: "100%",
     backgroundColor: "white",
     paddingTop: 20,
-    paddingHorizontal: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
 });
 

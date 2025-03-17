@@ -71,9 +71,13 @@ const styles = {
     },
     productOpen: {
       width: "auto",
+      flexGrow: 1,
+      flexShrink: 1, 
     },
     productClose: {
       width: "auto",
+      flexGrow: 1,
+      flexShrink: 1, 
     },
 
     filterActions: {
