@@ -59,6 +59,7 @@ const ProductItemVertical: React.FC<ProductItemProps> = ({
             style={styles.image}
             resizeMode="cover"
           />
+          <View style={styles.imageOverlay} />
           <IconButton
             style={styles.favorite}
             onPress={() => setIsFavorite(!isFavorite)}
@@ -69,7 +70,7 @@ const ProductItemVertical: React.FC<ProductItemProps> = ({
             <DiscountBadge value={Number(`-${discount.toFixed(0)}%`)} />
           )}
         </View>
-        <Card.Content>
+        <Card.Content style={styles.innerContainer}>
           <View style={styles.nameContainer}>
             <Text style={styles.name}>{item.product.name}</Text>
           </View>
@@ -83,29 +84,27 @@ const ProductItemVertical: React.FC<ProductItemProps> = ({
               </Text>
             )}
           </View>
-        </Card.Content>
-        <Card.Actions style={styles.actions}>
-          <Pressable>
+        <View style={styles.actions}>
+          <Pressable style={{ marginStart: 0, justifyContent: "flex-start"}}>
             <select
               id={item.id.toString()}
               style={{
                 backgroundColor: "#F4F4F4",
-                paddingTop: 8,
-                paddingRight: 10,
-                paddingLeft: 10,
-                paddingBottom: 8,
+                padding: "8px", 
                 border: 0,
+                lineHeight: 12,
                 borderRadius: 20,
-                width: 60
+                fontSize: 12,
               }}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+              {Array.from({ length: item.maxQuantity ? item.maxQuantity : 30 }, (_, i) => (
+                <option value={i+1}>{i+1}</option>
+              ))}
             </select>
           </Pressable>
-          <Btn size="small" title="Añadir" onPress={() => _addToCart()} />
-        </Card.Actions>
+          <Btn style={styles.addBtn} size="small" title="Añadir" onPress={() => _addToCart()} />
+        </View>
+        </Card.Content>
       </Card>
     </Pressable>
   );

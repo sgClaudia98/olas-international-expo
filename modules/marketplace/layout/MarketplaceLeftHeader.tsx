@@ -9,6 +9,8 @@ import SearchInput from '@/components/ui/SearchInput';
 import DropdownMenuSelect from '@/components/DropdownMenuSelect';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import {leftStyles as responsiveStyle} from '../styles/header';
+import DropdownSelect from '@/components/DropdownSelect';
+import { Colors } from '@/styles';
 
 export default function MarketplaceLeftHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -53,11 +55,16 @@ export default function MarketplaceLeftHeader() {
       {/* Top Section */}
       <View style={styles.topSection}>
           {/* Location Dropdown */}
-          <DropdownMenuSelect
-            buttonTitle={(value) => (value ? value : "All Categories")}
+          <DropdownSelect
+            buttonTitle={value => (value ? value : 'All Categories')}
             menuItems={menuItems}
             value={department}
             onSelect={onDepartmentSelected}
+            themeColors={{
+                primary: Colors.black.primary,
+                outline: 'transparent',
+                onSurfaceDisabled: Colors.black.third,
+              }}
           />
 
           {/* Search Bar */}

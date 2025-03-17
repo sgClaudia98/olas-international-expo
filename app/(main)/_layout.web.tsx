@@ -12,6 +12,7 @@ export default function TabLayout() {
           headerShown: false,
         })}
       >
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen
           name="explore"
           options={{ headerShown: false, title: "EXPLORE" }}
@@ -19,7 +20,6 @@ export default function TabLayout() {
         <Stack.Screen name="profile" options={{}} />
         <Stack.Screen name="information" options={{}} />
         <Stack.Screen name="settings" options={{}} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
       <AuthRequestModal />
     </>

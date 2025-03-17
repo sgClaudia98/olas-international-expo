@@ -57,8 +57,8 @@ const productItemStyles = StyleSheet.create({
   },
   image: {
     ...commonProductStyles.image, // Reutilizamos la propiedad image
-    width: 200,
-    height: 200,
+    width: 225,
+    height: 225,
   },
   name: {
     ...commonProductStyles.name, // Reutilizamos la propiedad name
@@ -73,12 +73,10 @@ const productItemStyles = StyleSheet.create({
     fontSize: 22,
   },
   favorite: {
+    display: "none",
     position: 'absolute',
     top: 2,
     left: 2,
-  },
-  actions: {
-    ...commonProductStyles.actions, // Reutilizamos las acciones
   },
 });
 
@@ -204,6 +202,24 @@ const productInShoppingCartStyles = StyleSheet.create({
 
 const productVertical = StyleSheet.create({
   ...productItemStyles,
+  image: {
+    ...productItemStyles.image,
+    width: 150,
+    height: 150,
+  },
+  nameContainer: {
+    padding: 0,
+  },
+  imageOverlay: {
+    ...productItemStyles.image,
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
   productCard: {
     backgroundColor: Colors.white.default,
     borderRadius: 0,
@@ -220,11 +236,6 @@ const productVertical = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    width: 120,
-    height: 120,
-    objectFit: 'cover',
-  },
   name: {
     ...typography.label,
     color: Colors.black.primary,
@@ -234,13 +245,29 @@ const productVertical = StyleSheet.create({
     ...typography.label,
     color: Colors.black.primary,
     fontWeight: 700,
-    fontSize: 18
+    fontSize: 16
   },
   actions: {
-    marginRight: 'auto',
+    paddingHorizontal: 0,
+    justifyContent: "flex-start",
     gap: 10,
-    flexWrap: 'wrap',
-  }
+    flexDirection: 'row',
+    marginTop: 20,
+    flexWrap: 'wrap', // Posible bug
+  },
+  innerContainer: {
+    paddingTop: 16,
+    paddingLeft: 0,
+    paddingRight: 0,
+    maxWidth: 150,
+    flex: 1,
+  },
+  addBtn: {
+    marginLeft: 15,
+    marginRight: 15,
+    fontSize: 12,
+    lineHeight: 12,
+  },
 })
 
 export {productItemStyles, productInfoStyles, productInShoppingCartStyles, productVertical};

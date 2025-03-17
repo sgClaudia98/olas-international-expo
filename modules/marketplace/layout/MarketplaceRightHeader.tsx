@@ -23,13 +23,9 @@ import HeaderBar, { MenuLink } from '@/components/layout/HeaderBar';
 import { useAppSelector } from '@/hooks/useAppDispatch';
 import {rightStyles as responsiveStyle} from '../styles/header';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
+import { links } from './header';
 
-const links: MenuLink[] = [
-  //{label: 'Market', route: 'Marketplace', navigation:getServiceNavigation("Marketplace") },
-  { label: "Preguntas Frecuentes", route: "faq" },
-  { label: "Envíos", route: "shipments" },
-  { label: "Pedidos", route: "orders" },
-];
+
 
 export default function MarketplaceRightHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
