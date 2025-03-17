@@ -1,3 +1,4 @@
+import React from "react";
 import PaymentForm from "./PaymentForm";
 import { useLocationContext } from "@/contexts/locationContext";
 

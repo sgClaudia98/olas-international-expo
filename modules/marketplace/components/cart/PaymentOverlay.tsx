@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Modal } from "react-native";
-import { cartStyles as styles } from "../../styles/cart";
+import { cartStyles } from "../../styles/cart";
 import { Button } from "react-native-paper";
 import { CloseIcon } from "@/assets/icons/CloseIcon";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 interface PaymentOverlayProps<T extends { id: number }> {
   visible: boolean;
@@ -15,6 +16,8 @@ const PaymentOverlay = <T extends { id: number }>({
   renderForm,
   setPaymentFormVisible,
 }: PaymentOverlayProps<T>) => {
+  const styles = useResponsiveStyles(cartStyles)
+
   return (
     <Modal
       visible={visible}

@@ -12,16 +12,16 @@ polyfillCountryFlagEmojis();
 interface PhoneNumberSelectorProps {
   name: string; // "client.phone" | "beneficiary.phone"
   inputStyles?: Record<string, any>;
-  modalStyles?: Record<string, any>;
   defaultCountryCode: string;
+  disableCountrySelection?: boolean;
   error: boolean;
 }
 
 const PhoneNumberSelector: React.FC<PhoneNumberSelectorProps> = ({
   name,
   inputStyles,
-  modalStyles,
   defaultCountryCode,
+  disableCountrySelection,
   error,
 }) => {
   const CODE = name + ".code";
@@ -55,19 +55,13 @@ const PhoneNumberSelector: React.FC<PhoneNumberSelectorProps> = ({
         setCode={handleCountryChange}
         phoneNumber={phoneValue}
         setPhoneNumber={handlePhoneChange}
+        includeCountries={disableCountrySelection ? [countryValue] : undefined}
+        modalContainerStyle={styles.modalContainer}
+        modalStyle={styles.modalStyles}
         placeholder="Enter phone number"
         textColor={inputStyles?.color || Colors.black.primary}
-        placeholderTextColor={inputStyles?.color || Colors.black.primary}
-        error={error}
-        modalContainerStyle={{
-          ...modalStyles,
-          borderRadius: 5,
-          maxWidth: 400,
-          marginHorizontal: "auto",
-          marginVertical: 40,
-        }}
         onBlur={handleBlur}
-        modalStyle={styles.modalStyles}
+        error={error}
       />
     </>
   );
@@ -77,6 +71,12 @@ const getNestedValue = (obj: any, path: string): any =>
   path.split(".").reduce((acc, key) => (acc ? acc[key] : undefined), obj);
 
 const styles = StyleSheet.create({
+  modalContainer: {
+    borderRadius: 5,
+    maxWidth: 400,
+    marginHorizontal: "auto",
+    marginVertical: 40,
+  },
   modalStyles: {
     backgroundColor: "rgba(8, 51, 102, 0.25)",
     borderRadius: 10,

@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Pressable, ScrollView, Modal} from 'react-native';
 import {Button} from 'react-native-paper';
 import {CartItem} from '../../reducers/ShoppingCartReducer';
-import {cartStyles as styles} from '../../styles/cart';
+import {cartStyles} from '../../styles/cart';
+import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 
 interface CartOverlayProps<T extends {id: number}> {
   visible: boolean;
@@ -21,6 +22,8 @@ const CartOverlay = <T extends {id: number}>({
   totalAmount,
   openPaymentForm,
 }: CartOverlayProps<T>) => {
+
+  const styles = useResponsiveStyles(cartStyles)
   
   return (
     <Modal

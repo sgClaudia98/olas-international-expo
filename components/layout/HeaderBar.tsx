@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 
 import { useRouter } from "expo-router";
 import { Colors } from "@/styles";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import responsiveStyle from "../../styles/headerBar";
 
 interface HeaderBarProps {
   links: MenuLink[];
@@ -18,6 +20,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   links,
   textColor = Colors.black.primary,
 }) => {
+  const styles = useResponsiveStyles(responsiveStyle);
   const route = useRouter();
 
   const handleNavigate = (to: string) => {
@@ -50,30 +53,5 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  menuContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    paddingHorizontal: 10,
-    marginLeft: 40,
-  },
-  menuItem: {
-    marginHorizontal: 10,
-    paddingVertical: 5,
-    borderBottomWidth: 2,
-    borderBottomColor: "transparent",
-  },
-  activeMenuItem: {
-    borderBottomColor: "#007BFF",
-  },
-  menuText: {
-    fontSize: 16,
-  },
-  activeMenuText: {
-    fontWeight: "bold",
-    color: "#007BFF",
-  },
-});
 
 export default HeaderBar;

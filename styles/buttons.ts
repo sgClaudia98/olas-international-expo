@@ -31,6 +31,7 @@ const sizeStyles: Record<ButtonSize, ViewStyle> = {
     },
   };
 
+
 // Base styles for text
 export const baseTextStyle: TextStyle = {
   textAlign: "center",
@@ -143,6 +144,6 @@ const containerBorderStyle: ViewStyle = {
 
 export const getContainerStyleV2 = (variant: ButtonVariant): ViewStyle => {
   return StyleSheet.flatten([
-    variant == "primary" ? containerStyle : containerBorderStyle,
+    variant == "primary" ? containerStyle : containerBorderStyle
   ])
 }
