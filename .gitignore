@@ -6,6 +6,7 @@ node_modules/
 # .locks
 package-lock.json
 yarn.lock
+build/
 
 # Expo
 .expo/

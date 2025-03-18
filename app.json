@@ -36,7 +36,8 @@
             "DEFAULT"
           ]
         }
-      ]
+      ],
+      "package": "com.olasinternational"
     },
     "web": {
       "bundler": "metro",
@@ -58,6 +59,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "531deab5-894b-4468-8ab4-bbd0f4c4ff75"
+      }
     }
   }
 }
