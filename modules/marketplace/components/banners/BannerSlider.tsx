@@ -6,9 +6,9 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  Text,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  useWindowDimensions,
 } from "react-native";
 
 import { URL_IMAGE } from "@/constants";
@@ -16,10 +16,9 @@ import { useBanner } from "../../hooks/useBanner";
 import { Colors } from "@/styles";
 import { BannerSliderSkeleton } from "../skeletons/BannerSliderSkeleton";
 
-const { width } = Dimensions.get("window");
-
 const BannerSlider = ({ height = 250 }: { height?: number }) => {
   const { banners, loading } = useBanner();
+  const { width } = useWindowDimensions();
 
   const mediaList = useMemo(
     () =>
@@ -55,10 +54,11 @@ const BannerSlider = ({ height = 250 }: { height?: number }) => {
   return (
     <>
       {loading ? (
-        <BannerSliderSkeleton />
+        <BannerSliderSkeleton height={height} />
       ) : (
         <View style={styles.container}>
           <FlatList
+            scrollEnabled={false}
             ref={flatListRef}
             data={mediaList}
             keyExtractor={(item, index) => `media-${item.mediaId}-${index}`}
