@@ -44,7 +44,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
   return (
     <Searchbar
-      placeholder="Search"
+      placeholder="Nombre del producto"
       onChangeText={handleChangeText}
       value={searchQuery} // Display the immediate value in the Searchbar
       style={inputHeight}

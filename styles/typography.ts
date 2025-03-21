@@ -1,8 +1,8 @@
-type FontWeight = 'normal' | 'bold' | 'semibold';
+import Fonts from "./fonts";
 
 type TypographyStyle = {
   fontSize: number;
-  fontWeight: FontWeight;
+  fontFamily: string;
   lineHeight?: number;
 };
 
@@ -22,48 +22,48 @@ type Typography = {
 const typography: Typography = {
   h1: {
     fontSize: 36,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     lineHeight: 42,
   },
   h2: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     lineHeight: 42,
   },
   h3: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
     lineHeight: 26,
   },
   body: {
     fontSize: 16,
-    fontWeight: 'normal',
+    fontFamily: Fonts.regular,
     lineHeight: 24,
   },
   bodyHighlight: {
     fontSize: 16,
-    fontWeight: 'normal',
+    fontFamily: Fonts.regular,
     lineHeight: 24,
   },
   title2B: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: Fonts.bold,
   },
   categoriesTitle: {
     fontSize: 22,
-    fontWeight: 'semibold',
+    fontFamily: Fonts.semibold,
   },
   filterTitle: {
     fontSize: 18,
-    fontWeight: 'semibold',
+    fontFamily: Fonts.semibold,
   },
   selectedItems: {
     fontSize: 13,
-    fontWeight: 'semibold',
+    fontFamily: Fonts.semibold,
   },
   label: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontFamily: Fonts.regular,
     lineHeight: 24,
   }
 };

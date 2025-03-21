@@ -1,4 +1,5 @@
 import {Colors} from '@/styles';
+import Fonts from '@/styles/fonts';
 import typography from '@/styles/typography';
 import {StyleSheet} from 'react-native';
 
@@ -21,6 +22,7 @@ const commonProductStyles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 26,
     width: '100%',
+    marginBottom: 6,
   },
   prices: {
     flexDirection: 'row',
@@ -238,12 +240,14 @@ const productVertical = StyleSheet.create({
   },
   name: {
     ...typography.label,
+    fontFamily: Fonts.bold,
     color: Colors.black.primary,
     fontWeight: 600
   },
   price: {
     ...typography.label,
     color: Colors.black.primary,
+    fontFamily: Fonts.bold,
     fontWeight: 700,
     fontSize: 16
   },
