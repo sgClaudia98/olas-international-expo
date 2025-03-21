@@ -2,6 +2,7 @@ import { PaginationResponse } from "@/services/interfaces/pagination";
 import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import NoSearchResults from "./NoSearchResults";
+import ProductWrapperSkeleton from "@/modules/marketplace/components/skeletons/ProductWrapperSkeleton";
 
 interface PaginatedListProps {
   data?: PaginationResponse;
@@ -55,7 +56,8 @@ const PaginatedContent: React.FC<PaginatedListProps> = ({
   return (
     <>
       {loading ? (
-        <Text>Loading...</Text>
+        // <Text>Loading...</Text>
+        <ProductWrapperSkeleton />
       ) : totalPages > 0 ? (
         <View style={styles.container}>
           {children}
