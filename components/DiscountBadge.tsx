@@ -2,6 +2,7 @@ import {Colors} from '@/styles';
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
+import { ThemedText } from './ThemedText';
 
 const DiscountBadge = ({value}: {value: number}) => {
   return (
@@ -16,7 +17,7 @@ const DiscountBadge = ({value}: {value: number}) => {
           fill={Colors.blue.second}
         />
       </Svg>
-      <Text style={styles.text}>-{value}%</Text>
+      <ThemedText style={styles.text}>-{value}%</ThemedText>
     </View>
   );
 };

@@ -14,13 +14,17 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import SidePanel from "@/components/layout/SidePanel";
+import { OpenSans_400Regular, OpenSans_600SemiBold, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const { isMobile } = useBreakpoints();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    OpenSansRegular: OpenSans_400Regular,
+    OpenSansSemiBold: OpenSans_600SemiBold,
+    OpenSansBold: OpenSans_700Bold,
+    Font: OpenSans_400Regular
   });
 
   useEffect(() => {

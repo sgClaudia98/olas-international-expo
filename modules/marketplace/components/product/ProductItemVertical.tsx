@@ -98,7 +98,7 @@ const ProductItemVertical: React.FC<ProductItemProps> = ({
               }}
             >
               {Array.from({ length: item.maxQuantity ? item.maxQuantity : 30 }, (_, i) => (
-                <option value={i+1}>{i+1}</option>
+                <option key={'opt-'+i} value={i+1}>{i+1}</option>
               ))}
             </select>
           </Pressable>

@@ -4,6 +4,7 @@ import footerStyles from '@/styles/footer';
 import { Visa, MasterCard, AmericanExpress, PayPal } from '@/assets/icons/PaymentBrands';
 import { WhatsApp, Facebook, Instagram } from '@/assets/icons/SocialMedia';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
+import { ThemedText } from '../ThemedText';
 
 interface SocialLink {
   component: React.ReactElement;
@@ -95,9 +96,9 @@ const Footer: React.FC<FooterProps> = ({
                     source={require("@/assets/images/logo-footer.svg")}
                     style={styles.logo}
                   />
-          <Text style={styles.text}>
+          <ThemedText style={styles.text}>
             Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...
-          </Text>
+          </ThemedText>
           <View style={styles.socialContainer}>
             {socialLinks.map((social, index) => (
               <Pressable
@@ -111,48 +112,55 @@ const Footer: React.FC<FooterProps> = ({
         <View style={styles.footerMenu}>
           {/* Services Section */}
           <View>
-            <Text style={styles.sectionTitle}>Servicios</Text>
+            <ThemedText style={styles.sectionTitle}>Servicios</ThemedText>
+            <View style={styles.footerItemContainer}>
             {services.map((service, index) => (
-              <Text
+              <ThemedText
                 key={index}
                 style={styles.footerItemText}>
                 {service.label}
-              </Text>
+              </ThemedText>
             ))}
+            </View>
           </View>
 
           {/* Information Section */}
           <View>
-            <Text style={styles.sectionTitle}>Información</Text>
+            <ThemedText style={styles.sectionTitle}>Información</ThemedText>
+            <View style={styles.footerItemContainer}>
             {information.map((info, index) => (
-              <Text
+              <ThemedText
                 key={index}
                 style={styles.footerItemText}>
                 {info.label}
-              </Text>
+              </ThemedText>
             ))}
+            </View>
           </View>
 
           {/* Contact Section */}
           <View>
-            <Text style={styles.sectionTitle}>Atención al cliente</Text>
-            <Text style={styles.footerItemText}>
+            <ThemedText style={styles.sectionTitle}>Atención al cliente</ThemedText>
+            <View style={styles.footerItemContainer}>
+            
+            <ThemedText style={styles.footerItemText}>
               {address.street},{'\n'}
               {address.city}, {address.state} {address.zip}
-            </Text>
+            </ThemedText>
             <Pressable onPress={handlePhonePress}>
-              <Text style={styles.footerItemText}>{phone}</Text>
+              <ThemedText style={styles.footerItemText}>{phone}</ThemedText>
             </Pressable>
             <Pressable onPress={handleEmailPress}>
-              <Text style={styles.footerItemText}>{email}</Text>
+              <ThemedText style={styles.footerItemText}>{email}</ThemedText>
             </Pressable>
+            </View>
           </View>
         </View>
       </View>
       <View style={styles.bottomSection}>
-        <Text style={styles.copyright}>
+        <ThemedText style={styles.copyright}>
           Olas International Services &copy; {new Date().getFullYear()} | Política de privacidad
-        </Text>
+        </ThemedText>
         <View style={styles.paymentMethods}>
           <Visa />
           <MasterCard />
