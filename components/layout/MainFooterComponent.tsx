@@ -112,6 +112,7 @@ const Footer: React.FC<FooterProps> = ({
           {/* Services Section */}
           <View>
             <Text style={styles.sectionTitle}>Servicios</Text>
+            <View style={styles.footerItemContainer}>
             {services.map((service, index) => (
               <Text
                 key={index}
@@ -119,11 +120,13 @@ const Footer: React.FC<FooterProps> = ({
                 {service.label}
               </Text>
             ))}
+            </View>
           </View>
 
           {/* Information Section */}
           <View>
             <Text style={styles.sectionTitle}>Información</Text>
+            <View style={styles.footerItemContainer}>
             {information.map((info, index) => (
               <Text
                 key={index}
@@ -131,11 +134,14 @@ const Footer: React.FC<FooterProps> = ({
                 {info.label}
               </Text>
             ))}
+            </View>
           </View>
 
           {/* Contact Section */}
           <View>
             <Text style={styles.sectionTitle}>Atención al cliente</Text>
+            <View style={styles.footerItemContainer}>
+            
             <Text style={styles.footerItemText}>
               {address.street},{'\n'}
               {address.city}, {address.state} {address.zip}
@@ -146,6 +152,7 @@ const Footer: React.FC<FooterProps> = ({
             <Pressable onPress={handleEmailPress}>
               <Text style={styles.footerItemText}>{email}</Text>
             </Pressable>
+            </View>
           </View>
         </View>
       </View>
