@@ -15,7 +15,9 @@ const desktop = StyleSheet.create({
     marginHorizontal: "auto",
   },
   logoSection: {
-    minWidth: 200,
+    minWidth: 150,
+    width: '100%',
+    maxWidth: 200
   },
   footerMenu: {
     flex: 1,
@@ -24,7 +26,7 @@ const desktop = StyleSheet.create({
     gap: 80,
   },
   logo: {
-    marginBottom: 25,
+    marginBottom: 27,
   },
   text: {
     color: Colors.blue.fourth,
@@ -83,10 +85,6 @@ const styles = {
       flexDirection: "column",
       width: "auto",
       marginHorizontal: 20 ,
-    },
-    logoSection: {
-      ...desktop.logoSection,
-      minWidth: "100%",
     },
     footerMenu: {
       ...desktop.footerMenu,
