@@ -1,14 +1,14 @@
-import { Colors } from "@/styles";
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, Dimensions, Animated } from "react-native";
-
-const { width } = Dimensions.get("window");
-const COLUMN_COUNT = 4;
-const ROW_COUNT = 5;
-const ITEM_WIDTH = width / COLUMN_COUNT - 16;
+import { View, StyleSheet, Animated } from "react-native";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import responsiveStyles from "@/modules/marketplace/styles/productWrapper";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 const ProductWrapperSkeleton = () => {
   const fadeAnim = useRef(new Animated.Value(0.3)).current;
+  const stylesResponsive = useResponsiveStyles(responsiveStyles);
+  const { isMobile } = useBreakpoints();
+  const skeletonCount = isMobile ? 6 : 12
 
   useEffect(() => {
     Animated.loop(
@@ -29,109 +29,43 @@ const ProductWrapperSkeleton = () => {
     return () => fadeAnim.stopAnimation();
   }, [fadeAnim]);
 
-  const SkeletonItem = () => (
-    <View style={styles.itemContainer}>
+  
+
+  const SkeletonItem = (index: number) => (
+    <View key={index} style={[stylesResponsive.productOpen, isMobile && {width: '48%'}]}>
       <Animated.View
-        style={[
-          styles.imageContainer,
-          styles.skeletonBase,
-          { opacity: fadeAnim },
-        ]}
+        style={[s.imageContainer, s.skeletonBase, { opacity: fadeAnim }]}
+      />
+      <Animated.View
+        style={[s.titleContainer, s.skeletonBase, { opacity: fadeAnim }]}
+      />
+      <Animated.View
+        style={[s.priceContainer, s.skeletonBase, { opacity: fadeAnim }]}
       />
 
-      <Animated.View
-        style={[
-          styles.titleContainer,
-          styles.skeletonBase,
-          { opacity: fadeAnim },
-        ]}
-      />
-
-      <Animated.View
-        style={[
-          styles.priceContainer,
-          styles.skeletonBase,
-          { opacity: fadeAnim },
-        ]}
-      />
-
-      <View style={styles.quantityContainer}>
+      <View style={s.actionsRow}>
         <Animated.View
-          style={[
-            styles.minusButton,
-            styles.skeletonBase,
-            { opacity: fadeAnim },
-          ]}
+          style={[s.qtyButton, s.skeletonBase, { opacity: fadeAnim }]}
         />
         <Animated.View
-          style={[
-            styles.quantityInput,
-            styles.skeletonBase,
-            { opacity: fadeAnim },
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.plusButton,
-            styles.skeletonBase,
-            { opacity: fadeAnim },
-          ]}
+          style={[s.addButton, s.skeletonBase, { opacity: fadeAnim }]}
         />
       </View>
-
-      <Animated.View
-        style={[styles.addButton, styles.skeletonBase, { opacity: fadeAnim }]}
-      />
     </View>
   );
 
-  const renderSkeletonGrid = () => {
-    const skeletonItems = [];
+  const skeletons = Array.from({ length: skeletonCount }, (_, i) => SkeletonItem(i));
 
-    for (let row = 0; row < ROW_COUNT; row++) {
-      const rowItems = [];
-
-      for (let col = 0; col < COLUMN_COUNT; col++) {
-        rowItems.push(<SkeletonItem key={`skeleton-${row}-${col}`} />);
-      }
-
-      skeletonItems.push(
-        <View key={`row-${row}`} style={styles.row}>
-          {rowItems}
-        </View>
-      );
-    }
-
-    return skeletonItems;
-  };
-
-  return <View style={styles.container}>{renderSkeletonGrid()}</View>;
+  return <View style={[stylesResponsive.products, isMobile && {flexWrap: 'wrap'}]}>{skeletons}</View>;
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 8,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  itemContainer: {
-    width: ITEM_WIDTH,
-    borderWidth: 0,
-    borderRadius: 8,
-    backgroundColor: Colors.white.default,
-    padding: 8,
-    elevation: 2,
-  },
+const s = StyleSheet.create({
   skeletonBase: {
     backgroundColor: "#e0e0e0",
   },
   imageContainer: {
     width: "100%",
-    height: ITEM_WIDTH,
+    aspectRatio: 1,
     borderRadius: 8,
     marginBottom: 8,
   },
@@ -139,6 +73,7 @@ const styles = StyleSheet.create({
     height: 16,
     marginBottom: 8,
     borderRadius: 4,
+    width: "100%",
   },
   priceContainer: {
     height: 20,
@@ -149,27 +84,26 @@ const styles = StyleSheet.create({
   quantityContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 12,
     height: 30,
   },
-  minusButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-  },
-  quantityInput: {
-    width: 40,
-    height: 30,
-    borderRadius: 4,
-  },
-  plusButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+  qtyButton: {
+    height: 40,
+    borderRadius: 20,
+    width: "30%",
   },
   addButton: {
     height: 40,
     borderRadius: 20,
+    width: "50%",
+  },
+  actionsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+    gap: 8,
   },
 });
 
