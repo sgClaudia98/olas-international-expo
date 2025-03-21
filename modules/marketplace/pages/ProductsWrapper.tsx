@@ -24,10 +24,11 @@ import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
 import BannerSlider from "../components/banners/BannerSlider";
+import ProductWrapperSkeleton from "../components/skeletons/ProductWrapperSkeleton";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const {isMobile} = useBreakpoints();
+  const { isMobile } = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
@@ -114,6 +115,7 @@ const ProductsWrapper: React.FC = () => {
           fetchItems={fetchPage}
           pageSize={20}
           loading={loading}
+          fallback={<ProductWrapperSkeleton />}
         >
           {items.length === 0 ? (
             <NoSearchResults />
