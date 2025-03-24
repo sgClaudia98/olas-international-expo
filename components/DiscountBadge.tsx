@@ -1,33 +1,50 @@
-import {Colors} from '@/styles';
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Svg, {Path} from 'react-native-svg';
-import { ThemedText } from './ThemedText';
+import { Colors } from "@/styles";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import Svg, { Path, Text as SvgText } from "react-native-svg";
+import Fonts from "@/styles/fonts";
 
-const DiscountBadge = ({value}: {value: number}) => {
+interface DiscountBadgeProps {
+  value: number;
+  color?: string;
+  textColor?: string;
+  variant?: "left"| "right"
+}
+
+const DiscountBadge: React.FC<DiscountBadgeProps> = ({
+  value,
+  color = Colors.blue.second,
+  textColor = 'white',
+  variant = "left"
+}) => {
   return (
     <View style={styles.container}>
-      <Svg
-        width="65"
-        height="22"
-        viewBox="0 0 65 22"
-        fill="none">
+      <Svg width="47" height="18" viewBox="0 0 47 18" fill="none">
         <Path
-          d="M64.2931 2.2071L58.6934 8.90733C58.3185 9.28232 58.3014 9.8848 58.6546 10.2804L64.0127 16.8341C64.588 17.4785 64.1306 18.5 63.2667 18.5H1.5C0.947715 18.5 0.5 18.0523 0.5 17.5V2.5C0.5 1.94772 0.947715 1.5 1.5 1.5H63.086C63.9769 1.5 64.423 2.57712 64.2931 3.2071Z"
-          fill={Colors.blue.second}
+          d="M45.6334 1.64015L40.4295 7.88546C40.1337 8.24042 40.1197 8.7518 40.3954 9.1225L45.812 16.4031C46.3028 17.0628 45.8319 18 45.0096 18L1 18C0.447715 18 0 17.5523 0 17L0 1C0 0.447715 0.447715 0 1 0L44.8651 0C45.7129 0 46.1761 0.988809 45.6334 1.64015Z"
+          fill={color}
+          transform={variant == "right" ? "scale(-1,1) translate(-46,0)" : ""}
         />
+        <SvgText
+          x={variant == "right" ? 11 : 6}
+          y="13"
+          fontSize="12"
+          fontFamily={Fonts.bold}
+          fill={textColor}
+        >
+          -{value.toFixed(0)} %
+        </SvgText>
       </Svg>
-      <ThemedText style={styles.text}>-{value}%</ThemedText>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
   },
   text: {
     color: Colors.white.default,
@@ -35,7 +52,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     fontWeight: 700,
     letterSpacing: 2,
-    position: 'absolute',
+    position: "absolute",
   },
 });
 

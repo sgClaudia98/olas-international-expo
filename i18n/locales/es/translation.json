@@ -1,4 +1,8 @@
 {
     "LANGUAGE.EN": "Inglés",
-    "LANGUAGE.ES": "Español"
+    "LANGUAGE.ES": "Español",
+    "ACTIONS.ADD": "Añadir",
+    "BEFORE": "Antes",
+    "VIEW_LESS": "Ver más",
+    "VIEW_MORE": "Ver menos"
 }

@@ -4,7 +4,6 @@ import { Colors } from "@/styles";
 import NumberInput from "@/components/NumberInput";
 import Btn from "@/components/Btn";
 import { Card, IconButton } from "react-native-paper";
-import Badge from "@/components/Badge";
 import {
   MarketBookingCartItem,
   MarketBookingOption,
@@ -34,7 +33,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
     MarketBookingCartExtra
   >();
   const { isMobile } = useBreakpoints();
-  const styles = useResponsiveStyles(responsiveStyles)
+  const styles = useResponsiveStyles(responsiveStyles);
 
   const discount = (item.discount * 100) / item.basePrice;
 
@@ -54,7 +53,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
 
   return (
     <Pressable onPress={onClick} style={[style]}>
-      <Card style={[styles.container,styles.productCard]}>
+      <Card style={[styles.container, styles.productCard]}>
         <View style={styles.imageContainer} id={item.id.toString()}>
           <Image
             source={{ uri: `${URL_IMAGE}${item.product.imageId}${imageSize}` }}
@@ -68,21 +67,19 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
             iconColor={isFavorite ? Colors.blue.second : Colors.black.second}
             icon={isFavorite ? "heart" : "heart-outline"}
           />
-  
-                 
 
-          {discount > 0 &&  (
-            isMobile ?
-            <DiscountBadge value={Number(`-${discount.toFixed(0)}%`)} />
-            :      <Badge
-            style={styles.badge}
-            text={`-${discount.toFixed(0)}%`}
-          />
+          {discount > 0 && (
+            <DiscountBadge
+              value={discount}
+              variant={isMobile ? "right" : "left"}
+            />
           )}
         </View>
         <Card.Content style={styles.innerContainer}>
           <View style={styles.nameContainer}>
-            <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail">{item.product.name}</Text>
+            <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail">
+              {item.product.name}
+            </Text>
           </View>
           <View style={styles.prices}>
             <Text style={styles.price}>
@@ -94,30 +91,43 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
               </Text>
             )}
           </View>
-        <View style={styles.actions}>
-          <Pressable style={{ marginStart: 0, justifyContent: "flex-start"}}>
-            {isMobile ? 
-          <select
-          id={item.id.toString()}
-          style={{
-            backgroundColor: "#F4F4F4",
-            padding: "8px", 
-            border: 0,
-            lineHeight: 12,
-            borderRadius: 20,
-            fontSize: 12,
-          }}
-          >
-              {Array.from({ length: item.maxQuantity ? item.maxQuantity : 30 }, (_, i) => (
-                <option key={'opt-'+i} value={i+1}>{i+1}</option>
-              ))}
-            </select>
-            : 
-            <NumberInput initialValue={initialAmount} onChange={setAmount} />
-            }
-          </Pressable>
-          <Btn style={styles.addBtn} size="small" title="Añadir" onPress={() => _addToCart()} />
-        </View>
+          <View style={styles.actions}>
+            <Pressable style={{ marginStart: 0, justifyContent: "flex-start" }}>
+              {isMobile ? (
+                <select
+                  id={item.id.toString()}
+                  style={{
+                    backgroundColor: "#F4F4F4",
+                    padding: "8px",
+                    border: 0,
+                    lineHeight: 12,
+                    borderRadius: 20,
+                    fontSize: 12,
+                  }}
+                >
+                  {Array.from(
+                    { length: item.maxQuantity ? item.maxQuantity : 30 },
+                    (_, i) => (
+                      <option key={"opt-" + i} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    )
+                  )}
+                </select>
+              ) : (
+                <NumberInput
+                  initialValue={initialAmount}
+                  onChange={setAmount}
+                />
+              )}
+            </Pressable>
+            <Btn
+              style={styles.addBtn}
+              size="small"
+              title="Añadir"
+              onPress={() => _addToCart()}
+            />
+          </View>
         </Card.Content>
       </Card>
     </Pressable>

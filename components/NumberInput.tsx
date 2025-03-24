@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import React, { useState } from 'react';
 import { IconButton } from 'react-native-paper';
 import { Colors } from '@/styles';
@@ -7,9 +7,10 @@ interface NumberInputProps {
   onChange?: (value: number) => void; // Callback for notifying parent component
   initialValue?: number; // Optional initial value
   size?: 'small' | 'default'; // Size variation
+  style?: ViewStyle;
 }
 
-const NumberInput: React.FC<NumberInputProps> = ({ onChange, initialValue = 1, size = 'default' }) => {
+const NumberInput: React.FC<NumberInputProps> = ({ onChange, initialValue = 1, size = 'default', style }) => {
   const [amount, setAmount] = useState(initialValue);
 
   const handleChange = (value: number) => {
@@ -23,7 +24,7 @@ const NumberInput: React.FC<NumberInputProps> = ({ onChange, initialValue = 1, s
   const isSmall = size === 'small';
 
   return (
-    <View style={[styles.container, isSmall && styles.containerSmall]}>
+    <View style={[styles.container, isSmall && styles.containerSmall, style]}>
       <IconButton
         icon="minus"
         style={[styles.icons, isSmall && styles.iconsSmall]}
