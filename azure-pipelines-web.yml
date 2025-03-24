@@ -1,7 +1,5 @@
-pr:
-  branches:
-    include:
-      - master
+pr: none
+trigger: none
 
 variables:
   - group: OlasInternational_RN # Keep this, assuming it has necessary secrets
