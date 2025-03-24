@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropdownSelect2, {MenuItem} from './DropdownMenuSelect';
 
 const LanguageSelector = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [visible, setVisible] = React.useState(false);
 
   const openMenu = () => setVisible(true);
@@ -17,6 +17,7 @@ const LanguageSelector = () => {
     i18n.changeLanguage(lng);
     closeMenu();
   };
+  
   const getSavedLanguage = async () => {
     let savedLanguage = await AsyncStorage.getItem("language");
     console.debug("savedLanguage", savedLanguage);
@@ -37,13 +38,12 @@ const LanguageSelector = () => {
         buttonTitle={value => value?.value}
         onSelect={changeLanguage}
         menuItems={[
-          { label: "English", value: "en" },
-          { label: "Español", value: "es" },
+          { label: t("LANGUAGE.EN"), value: "en" },
+          { label: t("LANGUAGE.ES"), value: "es" },
         ]}
         iconSize={24}
         value={i18n.language}
-      />
-    
+    />
   );
 };
 
