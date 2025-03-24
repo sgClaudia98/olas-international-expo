@@ -2,9 +2,9 @@ import { useWindowDimensions } from "react-native";
 
 // Define breakpoints (Desktop > Tablet > Mobile)
 export const BREAKPOINTS = {
-  mobile: 768, // Below 768px = Mobile
-  tablet: 1024, // 768px - 1023px = Tablet
-  desktop: 1280, // 1024px+ = Desktop
+  mobile: 480, 
+  tablet: 768, 
+  desktop: 1280, 
   // > 1280px = Big Desktop
 };
 

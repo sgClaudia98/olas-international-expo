@@ -81,7 +81,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     onItemClick(item);
 
-    if (isMobile && onCloseDrawer) {
+    if (isTablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -96,21 +96,21 @@ const Filters: React.FC<FiltersProps> = ({
       },
     });
 
-    if (isMobile && onCloseDrawer) {
+    if (isTablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
 
   const { width: screenWidth } = useWindowDimensions();
-  const isMobile = screenWidth < 768;
+  const isTablet = screenWidth < 768;
 
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    if (isMobile) {
+    if (isTablet) {
       setDrawerVisible(isDrawerOpen);
     }
-  }, [isDrawerOpen, isMobile]);
+  }, [isDrawerOpen, isTablet]);
 
   const filterContent = (
     <>
@@ -131,9 +131,9 @@ const Filters: React.FC<FiltersProps> = ({
 
   return (
     <>
-      {!isMobile && <View style={styles.filters}>{filterContent}</View>}
+      {!isTablet && <View style={styles.filters}>{filterContent}</View>}
 
-      {isMobile && (
+      {isTablet && (
         <FilterDrawer
           visible={isDrawerOpen && drawerVisible}
           onClose={onCloseDrawer}

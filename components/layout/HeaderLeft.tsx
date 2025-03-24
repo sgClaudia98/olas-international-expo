@@ -7,10 +7,10 @@ import { appLinks, links } from "./links";
 
 
 const HeaderLeft = () => {
-  const {isMobile} =useBreakpoints();
+  const {isTablet} =useBreakpoints();
   return <View style={{flexDirection: "row"}}>
     <LogoHeader />
-    {!isMobile && <HeaderBar links={Platform.OS == 'web' ? links : appLinks} />}
+    {!isTablet && <HeaderBar links={Platform.OS == 'web' ? links : appLinks} />}
   </View>
 }
 

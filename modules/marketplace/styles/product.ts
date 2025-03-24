@@ -1,95 +1,178 @@
-import {Colors} from '@/styles';
-import Fonts from '@/styles/fonts';
-import typography from '@/styles/typography';
-import {StyleSheet} from 'react-native';
+import { Colors } from "@/styles";
+import Fonts from "@/styles/fonts";
+import typography from "@/styles/typography";
+import { StyleSheet } from "react-native";
+
+const IMAGE_SIZE = {
+  mobile: 150,
+  tablet: 225,
+};
 
 // Estilos comunes
 const commonProductStyles = StyleSheet.create({
   imageContainer: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     borderRadius: 10,
-    marginHorizontal: 'auto',
+    marginHorizontal: "auto",
   },
   nameContainer: {
     paddingVertical: 8,
-    width: '100%',
+    width: "100%",
   },
   name: {
+    fontFamily: Fonts.bold,
     color: Colors.black.primary,
-    fontWeight: '400',
+    fontWeight: "400",
     lineHeight: 26,
-    width: '100%',
+    width: "100%",
     marginBottom: 6,
   },
   prices: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 4,
   },
   price: {
-    fontWeight: 700,
+    fontFamily: Fonts.bold,
+    color: Colors.black.primary,
     lineHeight: 26,
+    fontSize: 22,
   },
   oldPrice: {
+    fontFamily: Fonts.regular,
     fontSize: 16,
     color: Colors.black.second,
-    textDecorationLine: 'line-through',
+    textDecorationLine: "line-through",
   },
   actions: {
     marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 
 // Estilos para el item de producto en la lista
-const productItemStyles = StyleSheet.create({
+const productItemTablet = StyleSheet.create({
   ...commonProductStyles,
-  container: {
-    width: 200,
-    justifyContent: 'space-between',
-    marginBottom: 16, // Espacio entre productos
-  },
-  badge: {
-    position: 'absolute',
-    top: 20,
-    right: 0,
-  },
   image: {
-    ...commonProductStyles.image, // Reutilizamos la propiedad image
-    width: 225,
-    height: 225,
+    ...commonProductStyles.image, 
+    width: IMAGE_SIZE.tablet,
+    height: IMAGE_SIZE.tablet,
   },
   name: {
-    ...commonProductStyles.name, // Reutilizamos la propiedad name
+    ...commonProductStyles.name, 
     fontSize: 18,
   },
   prices: {
     ...commonProductStyles.prices,
-    alignItems: 'baseline',
+    alignItems: "baseline",
   },
   price: {
-    ...commonProductStyles.price, // Reutilizamos la propiedad price
+    ...commonProductStyles.price,
     fontSize: 22,
+  },
+  container: {
+    marginHorizontal: "auto",
+    width: IMAGE_SIZE.tablet,
+    justifyContent: "space-between",
+    marginBottom: 16, 
+  },
+  badge: {
+    position: "absolute",
+    top: 20,
+    right: 0,
   },
   favorite: {
     display: "none",
-    position: 'absolute',
+    position: "absolute",
     top: 2,
     left: 2,
   },
+  innerContainer: {
+    paddingTop: 16,
+    paddingLeft: 0,
+    paddingRight: 0,
+    maxWidth: IMAGE_SIZE.tablet,
+    flex: 1,
+  },
+  addBtn: undefined,
+  imageOverlay: {
+    width: IMAGE_SIZE.tablet,
+    height: IMAGE_SIZE.tablet,
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    position: "absolute",
+    borderRadius: 10,
+  },
+  productCard: {
+    backgroundColor: Colors.white.default,
+    borderRadius: 0,
+    shadowColor: Colors.white.default,
+    shadowRadius: 0,
+    boxShadow: "none",
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+    minHeight: 300,
+  },
+  actions: {
+    paddingHorizontal: 0,
+    justifyContent: "flex-start",
+    gap: 10,
+    flexDirection: "row",
+    marginTop: 20,
+    flexWrap: "wrap", // Posible bug
+  },
 });
+
+const productItemStyles = {
+  mobile: StyleSheet.create({
+    ...productItemTablet,
+    innerContainer: {
+      ...productItemTablet.innerContainer,
+      maxWidth: IMAGE_SIZE.tablet,
+    },
+    price: {
+      ...productItemTablet.price,
+      fontSize: 16,
+    },
+    image: {
+      ...productItemTablet.image,
+      width: IMAGE_SIZE.mobile,
+      height: IMAGE_SIZE.mobile,
+    },
+    imageOverlay: {
+      ...productItemTablet.imageOverlay,
+      width: IMAGE_SIZE.mobile,
+      height: IMAGE_SIZE.mobile,
+      backgroundColor: "red"
+    },
+    nameContainer: {
+      ...productItemTablet.nameContainer,
+      padding: 0,
+    },
+    addBtn: {
+      marginLeft: 15,
+      marginRight: 15,
+      fontSize: 12,
+      lineHeight: 12,
+    },
+  }),
+  tablet: productItemTablet,
+};
 
 // Estilos para la vista detallada del producto
 const productInfoStyles = StyleSheet.create({
   ...commonProductStyles,
   container: {
-    width: '100%',
+    width: "100%",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   badge: {
     paddingStart: 5,
@@ -103,19 +186,19 @@ const productInfoStyles = StyleSheet.create({
   },
   image: {
     ...commonProductStyles.image, // Reutilizamos la propiedad image
-    width: '100%',
+    width: "100%",
     height: 470,
     paddingRight: 20,
   },
   name: {
     ...commonProductStyles.name, // Reutilizamos la propiedad name
     fontSize: 28,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 3,
   },
   prices: {
     ...commonProductStyles.prices,
-    alignItems: 'center',
+    alignItems: "center",
   },
   price: {
     ...commonProductStyles.price, // Reutilizamos la propiedad price
@@ -142,22 +225,22 @@ const productInfoStyles = StyleSheet.create({
 const productInShoppingCartStyles = StyleSheet.create({
   ...commonProductStyles,
   container: {
-    width: '100%',
+    width: "100%",
     paddingBottom: 10,
     paddingRight: 10,
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#EBEFF3',
+    borderBottomColor: "#EBEFF3",
   },
   imageAndDetailsContainer: {
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
   },
   image: {
     borderRadius: 5,
     width: 80,
     height: 80,
-    objectFit: 'contain',
+    objectFit: "contain",
     marginRight: 15,
   },
   textContainer: {
@@ -177,14 +260,14 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
   trashIcon: {
     marginTop: 5,
-    cursor: 'pointer',
+    cursor: "pointer",
   },
   quantityAndTotalContainer: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
     columnGap: 40,
   },
   amountContainer: {
@@ -202,76 +285,4 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
 });
 
-const productVertical = StyleSheet.create({
-  ...productItemStyles,
-  image: {
-    ...productItemStyles.image,
-    width: 150,
-    height: 150,
-  },
-  nameContainer: {
-    padding: 0,
-  },
-  imageOverlay: {
-    ...productItemStyles.image,
-    backgroundColor: 'rgba(0, 0, 0, 0.04)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
-  },
-  productCard: {
-    backgroundColor: Colors.white.default,
-    borderRadius: 0,
-    shadowColor: Colors.white.default,
-    shadowRadius: 0,
-    boxShadow: 'none',
-    shadowOffset: {
-      height: 0,
-      width: 0
-    },
-    minHeight: 300,
-  },
-  imageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  name: {
-    ...typography.label,
-    fontFamily: Fonts.bold,
-    color: Colors.black.primary,
-    fontWeight: 600
-  },
-  price: {
-    ...typography.label,
-    color: Colors.black.primary,
-    fontFamily: Fonts.bold,
-    fontWeight: 700,
-    fontSize: 16
-  },
-  actions: {
-    paddingHorizontal: 0,
-    justifyContent: "flex-start",
-    gap: 10,
-    flexDirection: 'row',
-    marginTop: 20,
-    flexWrap: 'wrap', // Posible bug
-  },
-  innerContainer: {
-    paddingTop: 16,
-    paddingLeft: 0,
-    paddingRight: 0,
-    maxWidth: 150,
-    flex: 1,
-  },
-  addBtn: {
-    marginLeft: 15,
-    marginRight: 15,
-    fontSize: 12,
-    lineHeight: 12,
-  },
-})
-
-export {productItemStyles, productInfoStyles, productInShoppingCartStyles, productVertical};
+export { productItemStyles, productInfoStyles, productInShoppingCartStyles };

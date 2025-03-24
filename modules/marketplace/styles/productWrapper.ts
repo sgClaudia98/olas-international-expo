@@ -28,11 +28,11 @@ const desktop = StyleSheet.create({
     rowGap: 10,
   },
   productOpen: {
-    width: "25%",
+    width: "30%",
     padding: 12,
   },
   productClose: {
-    width: "20%",
+    width: "25%",
     padding: 12,
   },
   filterActions: {
@@ -108,5 +108,16 @@ const styles = {
     },
   }),
   desktop,
+  bigDesktop: StyleSheet.create({
+    ...desktop,
+    productOpen: {
+      ...desktop.productOpen,
+      width: "25%",
+    },
+    productClose: {
+      ...desktop.productClose,
+      width: "20%",
+    },
+  })
 };
 export default styles;

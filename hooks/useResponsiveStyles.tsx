@@ -1,17 +1,12 @@
 import { RegisteredStyle, useWindowDimensions } from "react-native";
 import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from "react-native";
+import { BREAKPOINTS } from "./useBreakpoints";
 
 type NamedStyles<T> = {[P in keyof T]: any};
 
-// Define breakpoints (Desktop > Tablet > Mobile)
-const BREAKPOINTS = {
-  mobile: 768,    // Below 768px = Mobile
-  tablet: 1024,   // 768px - 1023px = Tablet
-  desktop: 1280,  // 1024px+ = Desktop
-};
-
 type ResponsiveStyles<T> = {
-  desktop?: NamedStyles<T> ; // Default to Desktop (Big Screens First)
+  bigDesktop?: NamedStyles<T> ; 
+  desktop?: NamedStyles<T> ;
   tablet?: NamedStyles<T>;
   mobile: NamedStyles<T> ; // Mobile is the fallback (default)
 };
@@ -20,8 +15,17 @@ export function useResponsiveStyles<T extends NamedStyles<T>>(styles: Responsive
   const { width } = useWindowDimensions();
 
   // Prioritize Desktop > Tablet > Mobile
-  if (width >= BREAKPOINTS.tablet && styles.desktop) return styles.desktop;
-  if (width >= BREAKPOINTS.mobile && styles.tablet) return styles.tablet;
-  
+  if (width >= BREAKPOINTS.desktop && styles.bigDesktop){
+    console.debug("BIGDESKTOP")
+    return styles.bigDesktop
+  }
+  if (width >= BREAKPOINTS.tablet && styles.desktop){
+    console.debug("DESKTOP")
+    return styles.desktop;}
+  if (width >= BREAKPOINTS.mobile && styles.tablet) {
+    console.debug("TABLET")
+    return styles.tablet
+  };
+  console.debug("MOBILE", width)
   return styles.mobile; // Default to mobile-first if no match
 }

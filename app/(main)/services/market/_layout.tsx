@@ -11,11 +11,11 @@ import { MainLayoutcontext } from "@/contexts/mainLayoutContext";
 import { links } from "@/modules/marketplace/layout/header";
 
 export default function MarketplaceLayout() {
-  const { isMobile } = useBreakpoints();
+  const { isTablet } = useBreakpoints();
   const { setServiceMenu } = useContext(MainLayoutcontext);
   const marketCartActions = useMarketCartActions(); // Get the actions for the market cart
 
-  const updateServiceMenu = () => setServiceMenu(isMobile ? links : []);
+  const updateServiceMenu = () => setServiceMenu(isTablet ? links : []);
 
   useEffect(() => {
     updateServiceMenu();
@@ -23,7 +23,7 @@ export default function MarketplaceLayout() {
 
   useEffect(() => {
     updateServiceMenu();
-  }, [isMobile]);
+  }, [isTablet]);
 
   return (
     <SearchProvider>
@@ -33,7 +33,7 @@ export default function MarketplaceLayout() {
           <PaymentWrapper onClose={closeModal} />
         )}
       >
-        <Stack screenOptions={isMobile ? mobileHeader : header} />
+        <Stack screenOptions={isTablet ? mobileHeader : header} />
       </ShoppingCartProvider>
     </SearchProvider>
   );

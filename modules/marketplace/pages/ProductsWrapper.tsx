@@ -11,7 +11,6 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
 import { useRouter } from "expo-router";
-import ProductItemVertical from "../components/product/ProductItemVertical";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
@@ -111,25 +110,17 @@ const ProductsWrapper: React.FC = () => {
           ) : (
             <View style={styles.products}>
               {items?.map((val) =>
-                !isMobile ? (
+                
                   <ProductItem
                     key={`prodI-${val.id}-${val.product.id}`}
                     item={val}
                     style={
-                      showDesktopFilters
+                      showDesktopFilters || isMobile
                         ? styles.productOpen
                         : styles.productClose
                     }
                     onClick={() => handleProductPress(val.product.id)}
                   />
-                ) : (
-                  <ProductItemVertical
-                    key={`prodI-${val.id}-${val.product.id}`}
-                    item={val}
-                    style={styles.productOpen}
-                    onClick={() => handleProductPress(val.product.id)}
-                  />
-                )
               )}
             </View>
           )}
