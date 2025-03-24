@@ -6,15 +6,14 @@ import {productInfoResponsiveStyles as responsiveStyles} from '../../styles/prod
 import Btn from '@/components/Btn';
 import NumberInput from '@/components/NumberInput';
 import {URL_IMAGE} from '@/constants';
-import {Colors} from '@/styles';
-import {IconButton} from 'react-native-paper';
-import Badge from '@/components/Badge';
 import {useShoppingCart} from '../../context/ShoppingCartContext';
 import TextSeeMore from '@/components/TextSeeMore';
 import { MarketBookingCartExtra } from '../../hooks/useMarketCartActions';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import { useTranslation } from 'react-i18next';
 import { ThemedText } from '@/components/ThemedText';
+import { useBreakpoints } from '@/hooks/useBreakpoints';
+import DiscountBadge from '@/components/DiscountBadge';
 
 interface ProductInfoProps {
   item: MarketBookingOption; // Add the type for the item prop
@@ -28,11 +27,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
   const styles =useResponsiveStyles(responsiveStyles)
   const [amount, setAmount] = useState(initialAmount);
   const {addToCart} = useShoppingCart<MarketBookingCartItem, MarketBookingCartExtra>();
-
+  const {isMobile} = useBreakpoints()
   // Calculate the new price after discount
   const discount = (item.discount * 100) / item.basePrice;
   (item.discount * 100) / item.basePrice;
-  const imageSize = `?width=800&height=470`;
+  const imageSize = isMobile ? `?width=400&height=400` : `?width=800&height=470`;
   const symbol = 'USD'; //item.saleCurrency.symbol
 
   const _showImage = () => {
@@ -74,9 +73,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
             {item.price.toFixed(2)} {symbol} {/* Use the currency symbol */}
           </ThemedText>
           {discount != 0 && (
-            <Badge
-              style={styles.badge}
-              text={`-${discount.toFixed(0)}%`}
+            <DiscountBadge
+              value={discount}
             />
           )}
           {item.discount != 0 && (
@@ -91,7 +89,6 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
             <NumberInput
               initialValue={initialAmount}
               onChange={setAmount}
-              style={styles.numberInput}
             />
             <Btn
             style={styles.addBtn}

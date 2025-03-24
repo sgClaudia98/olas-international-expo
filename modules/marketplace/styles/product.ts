@@ -269,6 +269,11 @@ const productInfoResponsiveStyles = {
     detailsContainer: {
       paddingHorizontal: 0,
     },
+    image: {
+      ...productInfoStyles.image,
+
+    aspectRatio: 1,
+    },
     name:{
       ...productInfoStyles.name,
       fontSize: 22,

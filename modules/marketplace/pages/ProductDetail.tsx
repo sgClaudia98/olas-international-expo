@@ -31,7 +31,7 @@ const ProductDetail: FC<{id: string}> = ({id}) => {
   return (
     <Page>
       <BackArrow fallback={goToProducts} />
-      {data && <ProductInfo item={data.option} />}
+      {data && <ProductInfo item={{...data.option, description: "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.", discount: 15}} />}
     </Page>
   );
 };
