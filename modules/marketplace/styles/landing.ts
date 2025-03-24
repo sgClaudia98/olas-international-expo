@@ -62,19 +62,48 @@ export const categoriesSliderStyles = StyleSheet.create({
   container: {
     marginVertical: 150,
     flexDirection: "column",
+    justifyContent: 'center',
     alignItems: "center",
+    paddingHorizontal: 20,
   },
   smallHeading: {
     ...typography.bodyHighlight,
     color: Colors.black.primary,
+    fontWeight: 600,
   },
   heading: {
     ...typography.h1,
     color: Colors.black.primary,
   },
-  sliderContainer: {
+  reviewsWrapper: {
     marginTop: 50,
+    width: '100%',    
   },
+  reviewContainer: {
+    padding: 30,
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 25,
+    borderRadius: 9,
+    borderWidth: 1,
+    borderColor: Colors.blue.second,
+  },
+  text: {
+    ...typography.label,
+    color: Colors.black.primary,
+    textAlign: "center",
+  },
+  authorText: {
+    ...typography.label,
+    color: Colors.black.primary,
+    fontWeight: 700,
+  },
+  activeColor: {
+    backgroundColor: Colors.blue.second
+  },
+  dotColor: {
+    backgroundColor: Colors.blue.third
+  }
 });
 
 export const popularBrandsStyles = StyleSheet.create({
@@ -101,68 +130,68 @@ export const popularBrandsStyles = StyleSheet.create({
 });
 
 export const shopExperienceStyles = StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      maxWidth: 1180,
-      marginHorizontal: "auto",
-      marginBottom: 150,
-    },
-    textContent: {
-      flexDirection: "column",
-      width: "45%",
-    },
-    heading: {
-      ...typography.h1,
-      color: Colors.black.primary,
-      marginBottom: 75,
-    },
-    itemsContainer: {
-        flexDirection: 'row',
-        gap: 20,
-        marginBottom: 40,
-    },
-    iconContainer: {
-        width: 50,
-        height: 50,
-        backgroundColor: Colors.black.primary,
-        borderRadius: '50%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textContainer: {
-        flexDirection: 'column',
-        gap: 8,
-        width: 350
-    },
-    text: {
-      ...typography.title2B,
-      color: Colors.black.primary,
-      fontWeight: 600,
-    },
-    subText: {
-      ...typography.label,
-      color: Colors.black.primary,
-    },
-    imageContainer: {
-        width: '50%'
-    },
-    image: {
-      width: 695,
-      height: 895,
-    },
-  });
+  container: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: 1180,
+    marginHorizontal: "auto",
+    marginBottom: 150,
+  },
+  textContent: {
+    flexDirection: "column",
+    width: "45%",
+  },
+  heading: {
+    ...typography.h1,
+    color: Colors.black.primary,
+    marginBottom: 75,
+  },
+  itemsContainer: {
+    flexDirection: "row",
+    gap: 20,
+    marginBottom: 40,
+  },
+  iconContainer: {
+    width: 50,
+    height: 50,
+    backgroundColor: Colors.black.primary,
+    borderRadius: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textContainer: {
+    flexDirection: "column",
+    gap: 8,
+    width: 350,
+  },
+  text: {
+    ...typography.title2B,
+    color: Colors.black.primary,
+    fontWeight: 600,
+  },
+  subText: {
+    ...typography.label,
+    color: Colors.black.primary,
+  },
+  imageContainer: {
+    width: "50%",
+  },
+  image: {
+    width: 695,
+    height: 895,
+  },
+});
 
-  export const productSliderStyles = StyleSheet.create({
-    container: {
-        marginHorizontal: 'auto',
-        maxWidth: 980,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-    }, 
-    heading: {
-        ...typography.h2,
-        color: Colors.black.primary
-    }
-  })
+export const productSliderStyles = StyleSheet.create({
+  container: {
+    marginHorizontal: "auto",
+    maxWidth: 980,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+  },
+  heading: {
+    ...typography.h2,
+    color: Colors.black.primary,
+  },
+});

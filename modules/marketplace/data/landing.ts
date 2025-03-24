@@ -108,3 +108,27 @@ export const shopExperienceData: ShopExperienceData[] = [
     icon: React.createElement(Support247Icon),
   },
 ];
+
+export interface Review {
+  rate: number;
+  text: string;
+  author?: string;
+}
+
+export const reviews: Review[] = [
+  {
+    rate: 3,
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+    author: "Maxin Will",
+  },
+  {
+    rate: 3,
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+    author: "Maxin Will",
+  },
+  {
+    rate: 3,
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamcoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation ullamco.",
+    author: "Maxin Will",
+  },
+];

@@ -12,7 +12,7 @@ import Categories from "../components/landing/Categories";
 import CategoriesSlider from "../components/landing/CategoriesSlider";
 import PopularBrands from "../components/landing/PopularBrands";
 import GirlWithBagSection from "../components/landing/GirlWithBagSection";
-import ProductSlider from "../components/landing/ProductSlider";
+import ProductSlider from "../components/landing/BestProducts";
 import ExperienceFromYourMobile from "../components/landing/ExperienceFromYourMobile";
 import Testimonials from "../components/landing/Testimonials";
 import NewsletterSection from "../components/landing/NewsletterSection";
@@ -107,7 +107,9 @@ const LandingWrapper: React.FC = () => {
           <View style={{ width: "100%" }}>
             <BottomImage />
           </View>
-          <View style={{width: '90%', justifyContent: 'center', margin: 'auto'}}>
+          <View
+            style={{ width: "90%", justifyContent: "center", margin: "auto" }}
+          >
             <Footer />
           </View>
         </>
