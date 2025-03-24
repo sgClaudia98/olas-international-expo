@@ -32,7 +32,7 @@ const ProductWrapperSkeleton = () => {
   
 
   const SkeletonItem = (index: number) => (
-    <View key={index} style={[stylesResponsive.productOpen, isMobile && {width: '48%'}]}>
+    <View key={index} style={[stylesResponsive.productOpen, isMobile && {width: '40%'}]}>
       <Animated.View
         style={[s.imageContainer, s.skeletonBase, { opacity: fadeAnim }]}
       />
