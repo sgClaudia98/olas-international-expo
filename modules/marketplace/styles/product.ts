@@ -16,12 +16,18 @@ const commonProductStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  imageOverlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.04)",
+    position: "absolute",
+    borderRadius: 10,
+  },
   image: {
     borderRadius: 10,
     marginHorizontal: "auto",
   },
   nameContainer: {
     width: "100%",
+    marginBottom: 5,
   },
   name: {
     fontFamily: Fonts.regular,
@@ -101,11 +107,9 @@ const productItemTablet = StyleSheet.create({
   },
   addBtn: undefined,
   imageOverlay: {
+    ...commonProductStyles.imageOverlay,
     width: PROD_IMAGE_SIZE.tablet,
     height: PROD_IMAGE_SIZE.tablet,
-    backgroundColor: "rgba(0, 0, 0, 0.04)",
-    position: "absolute",
-    borderRadius: 10,
   },
   productCard: {
     backgroundColor: Colors.white.default,
@@ -186,22 +190,29 @@ const productInfoStyles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
         flexDirection: "row",
+        gap: 57
   },
   badge: {
     paddingStart: 5,
   },
   imageContainer: {
-    ...commonProductStyles.imageContainer, // Reutilizamos la propiedad image
+    ...commonProductStyles.imageContainer,
+    width: "100%",
+  },
+  imageOverlay: {
+    ...commonProductStyles.imageOverlay,
+    width: "100%",
+    aspectRatio: 600/470,
+    height: "auto",
   },
   detailsContainer: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingVertical: 25,
   },
   image: {
     ...commonProductStyles.image, // Reutilizamos la propiedad image
     width: "100%",
-    height: 470,
-    paddingRight: 20,
+    aspectRatio: 600/470,
   },
   name: {
     ...commonProductStyles.name, // Reutilizamos la propiedad name
@@ -212,6 +223,7 @@ const productInfoStyles = StyleSheet.create({
   prices: {
     ...commonProductStyles.prices,
     alignItems: "center",
+    marginBottom: 25
   },
   price: {
     ...commonProductStyles.price, // Reutilizamos la propiedad price
@@ -232,8 +244,50 @@ const productInfoStyles = StyleSheet.create({
     paddingTop: 24,
     borderTopWidth: 2,
     borderTopColor: Colors.black.fourth,
+    marginTop: 44,
   },
+  numberInput: {
+    backgroundColor: "transparent"
+  },
+  addBtn: {
+    minWidth: 60
+  }
 });
+
+const productInfoResponsiveStyles = {
+  mobile: StyleSheet.create({
+    ...productInfoStyles,
+    container: {
+      ...productInfoStyles.container,
+      flexDirection: "column",
+      width: "auto"
+    },
+    imageContainer: {
+      height: "auto",
+      marginBottom: 20
+    },
+    detailsContainer: {
+      paddingHorizontal: 0,
+    },
+    name:{
+      ...productInfoStyles.name,
+      fontSize: 22,
+      lineHeight: 24
+    },
+    price: {
+      ...productInfoStyles.price,
+      fontSize: 16,
+      lineHeight: 24,
+    },
+    oldPrice: {
+      ...productInfoStyles.oldPrice,
+      paddingStart: 10,
+      fontSize: 10,
+      lineHeight: 16
+    }
+  }),
+  desktop: productInfoStyles
+}
 
 const productInShoppingCartStyles = StyleSheet.create({
   ...commonProductStyles,
@@ -298,4 +352,4 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
 });
 
-export { productItemStyles, productInfoStyles, productInShoppingCartStyles };
+export { productItemStyles, productInfoResponsiveStyles, productInShoppingCartStyles };

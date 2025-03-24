@@ -2,7 +2,7 @@ import {StyleProp, Image, Text, View, ViewStyle, Pressable, Linking} from 'react
 import React, {useState} from 'react';
 import {MarketBookingCartItem, MarketBookingOption} from '../../services/interfaces/booking';
 
-import {productInfoStyles as styles} from '../../styles/product';
+import {productInfoResponsiveStyles as responsiveStyles} from '../../styles/product';
 import Btn from '@/components/Btn';
 import NumberInput from '@/components/NumberInput';
 import {URL_IMAGE} from '@/constants';
@@ -12,6 +12,9 @@ import Badge from '@/components/Badge';
 import {useShoppingCart} from '../../context/ShoppingCartContext';
 import TextSeeMore from '@/components/TextSeeMore';
 import { MarketBookingCartExtra } from '../../hooks/useMarketCartActions';
+import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
+import { useTranslation } from 'react-i18next';
+import { ThemedText } from '@/components/ThemedText';
 
 interface ProductInfoProps {
   item: MarketBookingOption; // Add the type for the item prop
@@ -20,8 +23,9 @@ interface ProductInfoProps {
 const initialAmount = 1;
 
 const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
+  const {t} = useTranslation()
   const [isFavorite, setIsFavorite] = useState(false); // Initialize state for favorite
-
+  const styles =useResponsiveStyles(responsiveStyles)
   const [amount, setAmount] = useState(initialAmount);
   const {addToCart} = useShoppingCart<MarketBookingCartItem, MarketBookingCartExtra>();
 
@@ -50,29 +54,25 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
   
   return (
     <View style={[styles.container, style]}>
-      <View
-        style={{
-          flex: 1,
-          position: 'relative',
-        }}
-        id={item.id.toString()}>
+     
         {/* Make sure id is a string */}
-        <Pressable onPress={_showImage}>
+        <Pressable onPress={_showImage}
+        style={styles.imageContainer} id={item.id.toString()}>
           <Image
             source={{uri: URL_IMAGE + item.product.imageId + imageSize}} // Use the product image
             style={styles.image}
             resizeMode="cover"
           />
+          <View style={styles.imageOverlay} />
         </Pressable>
-      </View>
       <View style={styles.detailsContainer}>
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>{item.product.name}</Text> {/* Use the product name */}
+          <ThemedText style={styles.name}>{item.product.name}</ThemedText> {/* Use the product name */}
         </View>
         <View style={styles.prices}>
-          <Text style={styles.price}>
-            {item.price ? item.price : item.price} {symbol} {/* Use the currency symbol */}
-          </Text>
+          <ThemedText style={styles.price}>
+            {item.price.toFixed(2)} {symbol} {/* Use the currency symbol */}
+          </ThemedText>
           {discount != 0 && (
             <Badge
               style={styles.badge}
@@ -80,9 +80,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
             />
           )}
           {item.discount != 0 && (
-            <Text style={styles.oldPrice}>
-              Before {item.basePrice} {symbol}
-            </Text>
+            <ThemedText style={styles.oldPrice}>
+              {t("BEFORE")} {item.basePrice.toFixed(2)} {symbol}
+            </ThemedText>
           )}
         </View>
         <TextSeeMore numberOfLines={3}>{item.description}</TextSeeMore>
@@ -91,13 +91,16 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
             <NumberInput
               initialValue={initialAmount}
               onChange={setAmount}
+              style={styles.numberInput}
             />
             <Btn
+            style={styles.addBtn}
               size="small"
-              title="Añadir"
+              title={t("ACTIONS.ADD")}
               onPress={_addToCart}
             />
           </View>
+          {/*
           <View style={{flexDirection: 'row', gap: 5, alignItems: 'center'}}>
             <IconButton
               style={styles.favorite}
@@ -107,6 +110,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({style, item}) => {
             />
             <Text>Add to wish list</Text>
           </View>
+            */}
         </View>
       </View>
     </View>
