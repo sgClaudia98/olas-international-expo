@@ -1,14 +1,7 @@
-import DropdownSelect from "@/components/DropdownSelect";
-
 import React, { useEffect, useId, useState } from "react";
 import {
-  View,
-  Text,
-  useWindowDimensions,
-  TouchableOpacity,
-  Image,
+  View
 } from "react-native";
-import { Switch } from "react-native-paper";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -19,15 +12,15 @@ import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
 import { useRouter } from "expo-router";
 import ProductItemVertical from "../components/product/ProductItemVertical";
-import { Colors } from "@/styles";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
 import BannerSlider from "../components/banners/BannerSlider";
+import ProductWrapperSkeleton from "../components/skeletons/ProductWrapperSkeleton";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const {isMobile} = useBreakpoints();
+  const { isMobile } = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
@@ -37,12 +30,9 @@ const ProductsWrapper: React.FC = () => {
 
   const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
   const handleItemClick = (trace: any[]) => {
-    //console.debug('Item Clicked', `Trace: ${trace.join(' / ')}`);
     setBeadCrumb(trace.map((t) => t.title).join(" / "));
   };
   const router = useRouter();
-
-  const { width: screenWidth } = useWindowDimensions();
 
   const handleProductPress = (id: number) => {
     router.push(`./detail/${id}`);
@@ -114,6 +104,7 @@ const ProductsWrapper: React.FC = () => {
           fetchItems={fetchPage}
           pageSize={20}
           loading={loading}
+          fallback={<ProductWrapperSkeleton />}
         >
           {items.length === 0 ? (
             <NoSearchResults />
