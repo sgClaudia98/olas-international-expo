@@ -22,7 +22,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
   isOpenFilters,
 }) => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const { isTablet } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
     <View
       style={styles.filterActionContainer}
     >
-      {!isTablet && <Text>{breadcrumb}</Text>}
+      {!lessThan.tablet  && <Text>{breadcrumb}</Text>}
       <View
         style={styles.filterActions}
       >
@@ -48,7 +48,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
           onSelect={setSelectedOption}
         />
         {/* Renderizado condicional: Switch en desktop, botón de texto en móvil */}
-        {isTablet ? (
+        {lessThan.tablet  ? (
           <TouchableOpacity onPress={openMobileDrawer}>
             <Text
               style={{

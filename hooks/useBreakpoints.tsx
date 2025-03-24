@@ -13,15 +13,22 @@ type BreakpointState = {
   isTablet: boolean;
   isDesktop: boolean;
   isBigDesktop: boolean;
+  lessThan: {
+    tablet: boolean,
+    desktop: boolean,
+  }
 }
 
 export function useBreakpoints(): BreakpointState {
   const { width } = useWindowDimensions();
-
   return {
     isMobile: width < BREAKPOINTS.mobile,
     isTablet: width >= BREAKPOINTS.mobile && width < BREAKPOINTS.tablet,
     isDesktop: width >= BREAKPOINTS.tablet && width < BREAKPOINTS.desktop,
     isBigDesktop: width >= BREAKPOINTS.desktop,
+    lessThan: {
+      tablet: width < BREAKPOINTS.tablet,
+      desktop: width < BREAKPOINTS.desktop,
+    }
   };
 }

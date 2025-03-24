@@ -82,7 +82,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
         </View>
         <Card.Content style={styles.innerContainer}>
           <View style={styles.nameContainer}>
-            <Text style={styles.name}>{item.product.name}</Text>
+            <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail">{item.product.name}</Text>
           </View>
           <View style={styles.prices}>
             <Text style={styles.price}>

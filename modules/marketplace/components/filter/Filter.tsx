@@ -20,6 +20,7 @@ import React from "react";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../../styles/filter";
 import FilterDrawer from "./FilterDrawer";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 interface FiltersProps {
   onItemClick: (item: any[]) => void;
@@ -81,7 +82,7 @@ const Filters: React.FC<FiltersProps> = ({
 
     onItemClick(item);
 
-    if (isTablet && onCloseDrawer) {
+    if (lessThan.tablet  && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -96,21 +97,20 @@ const Filters: React.FC<FiltersProps> = ({
       },
     });
 
-    if (isTablet && onCloseDrawer) {
+    if (lessThan.tablet  && onCloseDrawer) {
       onCloseDrawer();
     }
   };
 
-  const { width: screenWidth } = useWindowDimensions();
-  const isTablet = screenWidth < 768;
+  const {lessThan} = useBreakpoints();
 
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    if (isTablet) {
+    if (lessThan.tablet ) {
       setDrawerVisible(isDrawerOpen);
     }
-  }, [isDrawerOpen, isTablet]);
+  }, [isDrawerOpen, lessThan.tablet ]);
 
   const filterContent = (
     <>
@@ -131,9 +131,9 @@ const Filters: React.FC<FiltersProps> = ({
 
   return (
     <>
-      {!isTablet && <View style={styles.filters}>{filterContent}</View>}
+      {!lessThan.tablet  && <View style={styles.filters}>{filterContent}</View>}
 
-      {isTablet && (
+      {lessThan.tablet  && (
         <FilterDrawer
           visible={isDrawerOpen && drawerVisible}
           onClose={onCloseDrawer}

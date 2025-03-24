@@ -3,7 +3,7 @@ import Fonts from "@/styles/fonts";
 import typography from "@/styles/typography";
 import { StyleSheet } from "react-native";
 
-const IMAGE_SIZE = {
+export const PROD_IMAGE_SIZE = {
   mobile: 150,
   tablet: 225,
 };
@@ -21,16 +21,15 @@ const commonProductStyles = StyleSheet.create({
     marginHorizontal: "auto",
   },
   nameContainer: {
-    paddingVertical: 8,
     width: "100%",
   },
   name: {
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.regular,
     color: Colors.black.primary,
-    fontWeight: "400",
+    fontWeight: "600",
     lineHeight: 26,
     width: "100%",
-    marginBottom: 6,
+    marginBottom: 6,  
   },
   prices: {
     flexDirection: "row",
@@ -60,8 +59,8 @@ const productItemTablet = StyleSheet.create({
   ...commonProductStyles,
   image: {
     ...commonProductStyles.image, 
-    width: IMAGE_SIZE.tablet,
-    height: IMAGE_SIZE.tablet,
+    width: PROD_IMAGE_SIZE.tablet,
+    height: PROD_IMAGE_SIZE.tablet,
   },
   name: {
     ...commonProductStyles.name, 
@@ -77,7 +76,7 @@ const productItemTablet = StyleSheet.create({
   },
   container: {
     marginHorizontal: "auto",
-    width: IMAGE_SIZE.tablet,
+    width: PROD_IMAGE_SIZE.tablet,
     justifyContent: "space-between",
     marginBottom: 16, 
   },
@@ -96,13 +95,14 @@ const productItemTablet = StyleSheet.create({
     paddingTop: 16,
     paddingLeft: 0,
     paddingRight: 0,
-    maxWidth: IMAGE_SIZE.tablet,
+    paddingBottom: 0,
+    maxWidth: PROD_IMAGE_SIZE.tablet,
     flex: 1,
   },
   addBtn: undefined,
   imageOverlay: {
-    width: IMAGE_SIZE.tablet,
-    height: IMAGE_SIZE.tablet,
+    width: PROD_IMAGE_SIZE.tablet,
+    height: PROD_IMAGE_SIZE.tablet,
     backgroundColor: "rgba(0, 0, 0, 0.04)",
     position: "absolute",
     borderRadius: 10,
@@ -117,7 +117,7 @@ const productItemTablet = StyleSheet.create({
       height: 0,
       width: 0,
     },
-    minHeight: 300,
+    marginBottom: 20
   },
   actions: {
     paddingHorizontal: 0,
@@ -132,28 +132,42 @@ const productItemTablet = StyleSheet.create({
 const productItemStyles = {
   mobile: StyleSheet.create({
     ...productItemTablet,
+    container: {
+      ...productItemTablet.container,
+      width: PROD_IMAGE_SIZE.mobile
+    },
     innerContainer: {
       ...productItemTablet.innerContainer,
-      maxWidth: IMAGE_SIZE.tablet,
+      maxWidth: PROD_IMAGE_SIZE.tablet,
     },
     price: {
       ...productItemTablet.price,
       fontSize: 16,
+      lineHeight: 24,
     },
     image: {
       ...productItemTablet.image,
-      width: IMAGE_SIZE.mobile,
-      height: IMAGE_SIZE.mobile,
+      width: PROD_IMAGE_SIZE.mobile,
+      height: PROD_IMAGE_SIZE.mobile,
     },
     imageOverlay: {
       ...productItemTablet.imageOverlay,
-      width: IMAGE_SIZE.mobile,
-      height: IMAGE_SIZE.mobile,
-      backgroundColor: "red"
+      width: PROD_IMAGE_SIZE.mobile,
+      height: PROD_IMAGE_SIZE.mobile,
     },
     nameContainer: {
       ...productItemTablet.nameContainer,
       padding: 0,
+    },
+    name:{
+      ...productItemTablet.name,
+      fontSize: 14,
+      lineHeight: 14
+    },
+    oldPrice:{
+      ...productItemTablet.oldPrice,
+      fontSize: 10,
+      lineHeight: 16
     },
     addBtn: {
       marginLeft: 15,
@@ -171,8 +185,7 @@ const productInfoStyles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 20,
-    paddingVertical: 16,
-    flexDirection: "row",
+        flexDirection: "row",
   },
   badge: {
     paddingStart: 5,

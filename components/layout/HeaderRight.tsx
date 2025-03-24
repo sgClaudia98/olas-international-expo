@@ -7,12 +7,12 @@ import { useBreakpoints } from "@/hooks/useBreakpoints";
 import LanguageSelector from "../LanguageSelector";
 
 const HeaderRight = ({ navigation }) => {
-  const { isTablet } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
 
   const router = useRouter();
   return (
     <Appbar.Header style={styles.appbar}>
-      {isTablet ? (
+      {lessThan.tablet  ? (
         <Appbar.Action icon="menu" onPress={() => navigation.toggleDrawer()} />
       ) : (
         <>
