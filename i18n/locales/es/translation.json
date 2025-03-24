@@ -1,4 +1,8 @@
 {
     "LANGUAGE.EN": "Inglés",
-    "LANGUAGE.ES": "Español"
-}
+    "LANGUAGE.ES": "Español",
+    "MENU.FAQ": "Preguntas Frecuentes",
+    "MENU.SHIPMENTS": "Envíos",
+    "MENU.ORDERS": "Pedidos",
+    "FILTERS.CATEGORIES": "Categorías"
+} 

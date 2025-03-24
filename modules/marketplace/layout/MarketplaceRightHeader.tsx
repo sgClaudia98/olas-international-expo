@@ -24,11 +24,13 @@ import { useAppSelector } from '@/hooks/useAppDispatch';
 import {rightStyles as responsiveStyle} from '../styles/header';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import { links } from './header';
+import { useTranslation } from "react-i18next";
 
 
 
 export default function MarketplaceRightHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
+  const {t} = useTranslation();
   const {setCartVisible, state} = useShoppingCart<MarketBookingCartItem, MarketBookingCartExtra>();
   const {token} = useAppSelector(state => state.auth);
   const openCart = () => {
@@ -43,7 +45,7 @@ export default function MarketplaceRightHeader() {
 
   return (
     <View style={styles.container}>
-      <HeaderBar links={links} textColor={Colors.black.second} />
+      <HeaderBar links={links.map((v) => ({...v, label: t(v.label)}))} textColor={Colors.black.second} />
       <View>
         <IconButton
           icon="cart-outline"

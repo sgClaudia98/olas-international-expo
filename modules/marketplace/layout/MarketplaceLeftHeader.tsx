@@ -11,8 +11,10 @@ import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import {leftStyles as responsiveStyle} from '../styles/header';
 import DropdownSelect from '@/components/DropdownSelect';
 import { Colors } from '@/styles';
+import { useTranslation } from 'react-i18next';
 
 export default function MarketplaceLeftHeader() {
+  const {t} = useTranslation();
   const styles = useResponsiveStyles(responsiveStyle);
   const {data, selection, setSelection, setProductName} = useSearchContext();
   const route = useRouter();
@@ -20,11 +22,13 @@ export default function MarketplaceLeftHeader() {
   const [department, setDepartment] = useState<string>(
     selection?.departmentId?.toString() || ""
   );
+  const all_cat = {
+    label: t("FILTERS.CATEGORIES"),
+    value: "",
+  };
+
   const menuItems = useMemo(() => {
-    const all_cat = {
-      label: "All Categories",
-      value: "",
-    };
+    
     const dep = data?.map((v) => {
       return { label: v.name, value: v.id.toString() };
     });
@@ -56,7 +60,7 @@ export default function MarketplaceLeftHeader() {
       <View style={styles.topSection}>
           {/* Location Dropdown */}
           <DropdownSelect
-            buttonTitle={value => (value ? value : 'All Categories')}
+            buttonTitle={value => (value ? value : all_cat.label)}
             menuItems={menuItems}
             value={department}
             onSelect={onDepartmentSelected}
