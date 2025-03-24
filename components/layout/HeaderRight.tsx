@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
+import LanguageSelector from "../LanguageSelector";
 
 const HeaderRight = ({ navigation }) => {
   const { isMobile } = useBreakpoints();
@@ -16,7 +17,7 @@ const HeaderRight = ({ navigation }) => {
       ) : (
         <>
           <DestinationSelector />
-          <Appbar.Action icon="globe-model" />
+          <LanguageSelector />
           <Appbar.Action
             icon="account-circle-outline"
             onPress={() => router.navigate("/(main)/profile")}
