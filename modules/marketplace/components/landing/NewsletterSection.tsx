@@ -1,14 +1,33 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { categoriesSliderStyles as styles } from "../../styles/landing";
+import { Linking, Text, View } from "react-native";
+import { newsletterStyles as styles } from "../../styles/landing";
+import Btn from "@/components/Btn";
 
 const NewsletterSection = () => {
+  const email = "contact@olasservices.com"
+
+  const handleContact = async (): Promise<void> => {
+      try {
+        await Linking.openURL(`mailto:${email}`);
+      } catch (error) {
+        console.error("An error occurred", error);
+      }
+    };
+
   return (
-    <View style={{...styles.container, marginTop: 0}}>
+    <View style={{ ...styles.container, marginTop: 0 }}>
       <Text style={styles.smallHeading}>
         Recibe información de ofertas y descuentos
       </Text>
       <Text style={styles.heading}>Nuevos productos cada semana</Text>
+      <View style={styles.inputContainer}>
+        {/* Here should be placed an input text to enter the user's email to subscribe the newsletter */}
+        <Btn
+          title="Contáctenos"
+          variant="secondary"
+          onPress={() => handleContact()}
+        />
+      </View>
     </View>
   );
 };

@@ -97,10 +97,10 @@ const LandingWrapper: React.FC = () => {
             </SearchProvider>
           </View>
           <Categories />
-          <CategoriesSlider />
-          <PopularBrands />
+          {/* <CategoriesSlider /> */}
+          {/* <PopularBrands /> */}
           <GirlWithBagSection />
-          <ProductSlider />
+          {/* <ProductSlider /> */}
           <Testimonials />
           <ExperienceFromYourMobile />
           <NewsletterSection />

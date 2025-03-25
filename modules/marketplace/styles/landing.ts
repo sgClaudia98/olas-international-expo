@@ -136,7 +136,7 @@ export const shopExperienceStyles = StyleSheet.create({
     alignItems: "center",
     maxWidth: 1180,
     marginHorizontal: "auto",
-    marginBottom: 150,
+    marginTop: 150,
   },
   textContent: {
     flexDirection: "column",
@@ -195,3 +195,10 @@ export const productSliderStyles = StyleSheet.create({
     color: Colors.black.primary,
   },
 });
+
+export const newsletterStyles = StyleSheet.create({
+  ...categoriesSliderStyles,
+  inputContainer: {
+    marginTop: 20,
+  }
+})
