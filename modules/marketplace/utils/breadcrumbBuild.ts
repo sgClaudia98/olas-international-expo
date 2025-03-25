@@ -4,6 +4,7 @@ import {
   Product,
   ProductCategory,
 } from "../services/interfaces/booking";
+import { capitalizeWords } from "@/utils/string";
 const homeBreadcrumItem = {
   label: "ROUTE.HOME",
   route: "/",
@@ -29,14 +30,14 @@ const buildBreadcrumb = (
 
   if (department) {
     items.push({
-      label: department.name,
+      label: capitalizeWords(department.name),
       route: `${ROUTE}?departmentId=${department.id}`,
     });
   }
 
   if (category)
     items.push({
-      label: category.name,
+      label: capitalizeWords(category.name),
       route: `${ROUTE}?categoryId=${category.id}`,
     });
 

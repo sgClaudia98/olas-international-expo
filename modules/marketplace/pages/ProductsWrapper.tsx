@@ -19,19 +19,14 @@ import { buildBreadcrumb } from "../utils/breadcrumbBuild";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context/SearchContext";
 
-type SearchParams = {
-  categoryId?: string;
-  departmentId?: string;
-};
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const { departmentId, categoryId } = useLocalSearchParams<SearchParams>();
   const { isMobile } = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
-  const { selection, setSelectionIds } = useSearchContext();
+  const { selection } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
@@ -54,9 +49,10 @@ const ProductsWrapper: React.FC = () => {
       setTotalProducts(data.totals);
       let items = buildBreadcrumb();
       const ROUTE = "/services/market/products";
-      
+            
       if (selection.departmentId) {
         items.pop()
+        console.debug("1Sel", selection)
         items.push({
           label: selection.department,
           route: `${ROUTE}?departmentId=${selection.departmentId}`,
@@ -69,14 +65,7 @@ const ProductsWrapper: React.FC = () => {
       }
       setBreadcrumb(items);
     }
-  }, [data]);
-
-  useEffect(() => {
-    setSelectionIds({
-      departmentId: departmentId ? +departmentId : undefined,
-      categoryId: categoryId ? +categoryId : undefined,
-    });
-  }, []);
+  }, [data, selection.department, selection.category]);
 
   const toggleDesktopFilters = () => {
     setShowDesktopFilters(!showDesktopFilters);
