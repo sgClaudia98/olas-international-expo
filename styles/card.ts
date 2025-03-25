@@ -16,7 +16,7 @@ const desktop = StyleSheet.create({
   cardHeader: {
     ...baseStyle
   },
-  headerText: {
+  cardHeaderText: {
     fontSize: 22,
     lineHeight: 24
   },

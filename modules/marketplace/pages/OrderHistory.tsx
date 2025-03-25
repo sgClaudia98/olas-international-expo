@@ -20,7 +20,7 @@ export const OrderHistory: FC<ViewProps> = () => {
     <>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
-          <ThemedText style={styles.headerText}>
+          <ThemedText style={styles.cardHeaderText}>
             {t("PAGE.ORDER_HISTORY")}
           </ThemedText>
         </View>

@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { cardStyle } from "@/styles/card";
 
 const desktop = StyleSheet.create({
-    
+  
 })
 
 export const profileStyles = {
