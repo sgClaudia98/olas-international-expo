@@ -26,8 +26,7 @@ export const mobileHeader = {
 };
 
 export const links: MenuLink[] = [
-  //{label: 'Market', route: 'Marketplace', navigation:getServiceNavigation("Marketplace") },
-  {label: 'Preguntas Frecuentes', route: 'faq'},
-  {label: 'Envíos', route: 'shipments'},
-  {label: 'Pedidos', route: 'orders'},
+  {label: 'PAGE.FAQ', route: 'faq'},
+  {label: 'PAGE.SHIPMENTS', route: 'shipments'},
+  {label: 'PAGE.ORDERS', route: 'orders'},
 ];

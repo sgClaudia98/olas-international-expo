@@ -1,7 +1,8 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
     "i18n-ally.localesPaths": [
-        "i18n"
+        "i18n/locales"
     ],
-    "i18next.i18nPaths": "/Users/claudia/Documents/Work/Github/olas-international-expo/i18n,/Users/claudia/Documents/Work/Github/olas-international-expo/i18n/locales"
+    "i18next.i18nPaths": "/Users/claudia/Documents/Work/Github/olas-international-expo/i18n,/Users/claudia/Documents/Work/Github/olas-international-expo/i18n/locales",
+    "i18n-ally.keystyle": "nested"
 }
