@@ -11,8 +11,8 @@ import * as Colors from "@/styles/colors";
 import {
   useSendVerificationCodeMutation,
   useVerifyMutation,
-} from "@/modules/auth/services/api/AccountService";
-import { IVerifyRequest } from "@/modules/auth/services/interfaces/account";
+} from "../services/api/AccountService";
+import { IVerifyRequest } from "../services/interfaces/account";
 import { DOMAIN } from "@/constants";
 import { Card } from "react-native-paper";
 

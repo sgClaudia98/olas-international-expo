@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
-import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymentForm";
+import { paymentFormStyles as styles } from "../../../styles/paymentForm";
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";

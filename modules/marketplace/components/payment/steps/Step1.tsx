@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { TextInput, HelperText } from "react-native-paper";
 import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
-import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymentForm";
+import { paymentFormStyles as styles } from "../../../styles/paymentForm";
 import { PaymentFormValues } from "../PaymentFormHelper";
 import PhoneNumberSelector from "../PhoneNumberSelector";
 

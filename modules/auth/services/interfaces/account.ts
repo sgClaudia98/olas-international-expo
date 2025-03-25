@@ -1,4 +1,4 @@
-import { Client } from "@/modules/auth/models/ClientModel"
+import { Client } from "../../models/ClientModel"
 
 export interface IAuthRequest {
     email: string,

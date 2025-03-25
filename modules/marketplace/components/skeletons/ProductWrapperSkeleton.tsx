@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import responsiveStyles from "@/modules/marketplace/styles/productWrapper";
+import responsiveStyles from "../../styles/productWrapper";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 const ProductWrapperSkeleton = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Colors } from "@/styles";
-import { paymentFormStyles as styles } from "@/modules/marketplace/styles/paymentForm";
+import { paymentFormStyles as styles } from "../../styles/paymentForm";
 import { DataTable, Button } from "react-native-paper";
 import { UIBookingDetail } from "../../utils/bookingMapping";
 

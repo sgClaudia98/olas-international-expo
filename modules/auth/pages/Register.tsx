@@ -7,9 +7,9 @@ import * as Yup from "yup";
 import { testStyles } from "@/styles";
 import InputField from "@/components/ui/InputField";
 import Btn from "@/components/Btn";
-import { IAccountCreateRequest } from "@/modules/auth/services/interfaces/account";
+import { IAccountCreateRequest } from "../services/interfaces/account";
 // import CheckboxInput from "@/components/CheckboxInput";
-import { useSignupMutation } from "@/modules/auth/services/api/AccountService";
+import { useSignupMutation } from "../services/api/AccountService";
 import { DOMAIN } from "@/constants";
 import CheckboxInput from "@/components/ui/CheckboxInput";
 

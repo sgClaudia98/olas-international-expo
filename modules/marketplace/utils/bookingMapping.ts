@@ -15,6 +15,8 @@ export interface UIBookingDetail extends BookingDetail {
     quantity: number;
     price: number;
   }[];
+  index:number,
+  total:number,
 }
 export const mapAgencyClientBookingsToUIBookings = (
   booking: AgencyClientBooking
@@ -34,7 +36,7 @@ export const mapAgencyClientBookingsToUIBookings = (
             index: index,
             total: booking.details?.length || 0,
             items: [],
-          };
+          } as UIBookingDetail;
         });
         break;
     }

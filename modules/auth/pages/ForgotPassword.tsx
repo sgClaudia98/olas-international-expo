@@ -12,12 +12,12 @@ import InputField from "@/components/ui/InputField";
 import {
   useForgetPasswordMutation,
   useResetPasswordMutation,
-} from "@/modules/auth/services/api/AccountService";
+} from "../services/api/AccountService";
 
 import {
   IForgetPasswordRequest,
   IResetPasswordRequest,
-} from "@/modules/auth/services/interfaces/account";
+} from "../services/interfaces/account";
 import { DOMAIN } from "@/constants";
 import { Card } from "react-native-paper";
 import { useRouter } from "expo-router";

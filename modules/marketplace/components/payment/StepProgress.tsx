@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {stepProgressStyles as styles} from '@/modules/marketplace/styles/paymentForm';
+import {stepProgressStyles as styles} from '../../styles/paymentForm';
 
 const StepProgress = ({step}: {step: number}) => {
   const steps = ['Client', 'Beneficiary', 'Book'];
