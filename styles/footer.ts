@@ -16,8 +16,8 @@ const desktop = StyleSheet.create({
   },
   logoSection: {
     minWidth: 150,
-    width: '100%',
-    maxWidth: 200
+    width: "100%",
+    maxWidth: 200,
   },
   footerMenu: {
     flex: 1,
@@ -73,8 +73,8 @@ const desktop = StyleSheet.create({
   footerItemContainer: {
     flexDirection: "column",
     gap: 18,
-  }
-})
+  },
+});
 
 const styles = {
   mobile: StyleSheet.create({
@@ -84,7 +84,7 @@ const styles = {
       paddingHorizontal: 50,
       flexDirection: "column",
       width: "auto",
-      marginHorizontal: 20 ,
+      marginHorizontal: 20,
     },
     footerMenu: {
       ...desktop.footerMenu,
@@ -126,10 +126,10 @@ const styles = {
       flexDirection: "column",
       alignItems: "center",
       width: "auto",
-      marginHorizontal: 20 ,
+      marginHorizontal: 20,
     },
   }),
-  desktop
+  desktop,
 };
 
 export default styles;
