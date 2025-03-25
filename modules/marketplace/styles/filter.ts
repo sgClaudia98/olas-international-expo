@@ -5,7 +5,8 @@ import { StyleSheet } from "react-native";
 const styles = {
   mobile: StyleSheet.create({
     filters: {
-      padding: 20,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
       gap: 5,
     },
     filterHeader: {
@@ -16,24 +17,9 @@ const styles = {
   }),
   tablet: StyleSheet.create({
     filters: {
-      backgroundColor: Colors.black.fifth,
       borderRadius: 8,
-      padding: 20,
-      width: 225, // Fixed width for left panel
-      gap: 5,
-      alignSelf: 'stretch',
-    },
-    filterHeader: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-  }),
-  desktop: StyleSheet.create({
-    filters: {
-      backgroundColor: Colors.black.fifth,
-      borderRadius: 8,
-      padding: 20,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
       width: 225, // Fixed width for left panel
       gap: 5,
       alignSelf: 'stretch',

@@ -25,7 +25,6 @@ const desktop = StyleSheet.create({
     flexWrap: "wrap",
     padding: 10,
     marginHorizontal: -12.5,
-    marginTop: -12.5,
     gap: 25,
   },
   productOpen: {
