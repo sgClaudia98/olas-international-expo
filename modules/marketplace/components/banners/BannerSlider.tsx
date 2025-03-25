@@ -69,7 +69,7 @@ const BannerSlider = ({ height = 250 }: { height?: number }) => {
                 source={{
                   uri: `${URL_IMAGE}${item.mediaId}?width=600&height=250`,
                 }}
-                style={{ width, height, borderRadius: 5 }}
+                style={{ width, height, aspectRatio: width/height, zIndex: 10 }}
                 resizeMode="cover"
               />
             )}
@@ -106,14 +106,16 @@ const BannerSlider = ({ height = 250 }: { height?: number }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
     position: "relative",
+    borderRadius: 5,
+    overflow: 'hidden',
   },
   dotsContainer: {
-    bottom: 40,
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 10,
+    position: 'absolute',
+    width: '100%',
+    bottom: 20,
   },
   dot: {
     width: 10,
