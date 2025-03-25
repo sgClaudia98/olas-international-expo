@@ -20,7 +20,7 @@ const HeaderRight = ({ navigation }) => {
           <LanguageSelector />
           <Appbar.Action
             icon="account-circle-outline"
-            onPress={() => router.navigate("/(main)/profile")}
+            onPress={() => router.navigate("/(auth)/profile")}
           />
         </>
       )}

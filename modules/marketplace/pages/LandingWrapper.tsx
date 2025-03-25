@@ -66,7 +66,7 @@ const LandingWrapper: React.FC = () => {
 
             <Btn
               title="View Profile"
-              onPress={() => router.navigate("/(main)/profile")}
+              onPress={() => router.navigate("/(auth)/profile")}
             />
 
             <Btn

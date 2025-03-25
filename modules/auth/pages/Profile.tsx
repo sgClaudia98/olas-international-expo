@@ -7,19 +7,20 @@ import { useRouter } from "expo-router";
 import { logout } from "../slices/authSlice";
 import { useGetProfileQuery } from "../services/api/AccountService";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { profileStyles } from "@/modules/marketplace/styles/profile";
-import ProfileSkeleton from "@/modules/marketplace/components/skeletons/ProfileSkeleton";
+import { profileStyles } from "../styles/profile";
+import ProfileSkeleton from "../components/skeletons/ProfileSkeleton";
+import { ThemedText } from "@/components/ThemedText";
+import { useTranslation } from "react-i18next";
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const {t} = useTranslation();
   const { data: profile, isLoading, isError } = useGetProfileQuery();
 
   const styles = useResponsiveStyles(profileStyles);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    router.navigate("/(auth)/login");
+  const handleSave = () => {
+    // TODO
   };
 
   return (
@@ -38,33 +39,23 @@ export const Profile: FC<ViewProps> = () => {
           />
         </View>
       ) : (
-        <Card style={styles.profileCard}>
+        <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Image
-              source={{ uri: "https://placehold.co/75x75" }}
-              width={75}
-              height={75}
-              style={styles.avatar}
-              resizeMode="contain"
-            />
-            <View style={styles.profileInfoWrapper}>
-              <Text style={styles.profileInfo}>
-                {profile.client.fullName || "Unknown"}
-              </Text>
-              <Text style={styles.profileInfo}>{profile.client.email}</Text>
-            </View>
+              <ThemedText style={styles.headerText}>
+                {t("PAGE.PROFILE.HEADER")}
+              </ThemedText>
           </View>
-          <Card.Content style={styles.cardContent}>
-            <Text>Mi cuenta</Text>
-            <Text>Saldo</Text>
-            <Text>Historial</Text>
-            <Text>Métodos de pago</Text>
-            <Text>Tarjetas de regalo</Text>
-          </Card.Content>
-          <Card.Actions style={styles.cardFooter}>
-            <Button onPress={handleLogout}>Cerrar sesión</Button>
-          </Card.Actions>
-        </Card>
+          <View style={styles.cardContent}>
+            {/** This has to be  */}
+            <Text>First name</Text>
+            <Text>Last name</Text>
+            <Text>Phonenumber</Text>
+            <Text>Email</Text>
+          </View>
+          <View style={styles.cardFooter}>
+            <Btn title={t("ACTIONS.SAVE_CHANGES")} disabled onPress={handleSave}/>
+          </View>
+        </View>
       )}
     </>
   );
