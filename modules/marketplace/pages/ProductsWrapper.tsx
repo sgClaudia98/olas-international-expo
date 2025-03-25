@@ -1,7 +1,5 @@
-import React, { useEffect, useId, useState } from "react";
-import {
-  View
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -27,14 +25,18 @@ const ProductsWrapper: React.FC = () => {
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
-  const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
-  const handleItemClick = (trace: any[]) => {
-    setBeadCrumb(trace.map((t) => t.title).join(" / "));
-  };
+  // const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
+
+  // const handleItemClick = (trace: any[]) => {
+  //   setBeadCrumb(trace.map((t) => t.title).join(" / "));
+  // };
+
   const router = useRouter();
 
   const handleProductPress = (id: number) => {
-    router.push(`./detail/${id}`);
+    router.push({
+      pathname: `./detail/${id}`,
+    });
   };
 
   const [totalProducts, setTotalProducts] = useState(0);
@@ -62,13 +64,11 @@ const ProductsWrapper: React.FC = () => {
         toggleFilters={toggleDesktopFilters}
         openMobileDrawer={openMobileDrawer}
         total={totalProducts}
-        breadcrumb={breadcrumb}
         isOpenFilters={showDesktopFilters}
       />
       <View style={styles.wrapper}>
         {!isMobile && showDesktopFilters && (
           <Filters
-            onItemClick={handleItemClick}
             setFilter={updateFilter}
             stats={
               stats && searchId
@@ -83,7 +83,6 @@ const ProductsWrapper: React.FC = () => {
 
         {isMobile && (
           <Filters
-            onItemClick={handleItemClick}
             setFilter={updateFilter}
             stats={
               stats && searchId
@@ -109,19 +108,18 @@ const ProductsWrapper: React.FC = () => {
             <NoSearchResults />
           ) : (
             <View style={styles.products}>
-              {items?.map((val) =>
-                
-                  <ProductItem
-                    key={`prodI-${val.id}-${val.product.id}`}
-                    item={val}
-                    style={
-                      showDesktopFilters || isMobile
-                        ? styles.productOpen
-                        : styles.productClose
-                    }
-                    onClick={() => handleProductPress(val.product.id)}
-                  />
-              )}
+              {items?.map((val) => (
+                <ProductItem
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={
+                    showDesktopFilters || isMobile
+                      ? styles.productOpen
+                      : styles.productClose
+                  }
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              ))}
             </View>
           )}
         </PaginatedContent>
