@@ -27,6 +27,5 @@ export const mobileHeader = {
 
 export const links: MenuLink[] = [
   {label: 'PAGE.FAQ', route: 'faq'},
-  {label: 'PAGE.SHIPMENTS', route: 'shipments'},
-  {label: 'PAGE.ORDERS', route: 'orders'},
+  {label: 'PAGE.ORDERS', route: '/profile/order-history'},
 ];
