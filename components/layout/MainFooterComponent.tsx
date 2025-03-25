@@ -59,6 +59,10 @@ const information: NavigationLink[] = [
   { label: "PAGE.TERMS_AND_CONDITIONS", url: "/" },
   { label: "PAGE.RETURN_POLICY", url: "/" },
 ];
+const privacyPolicy: NavigationLink = {
+  label: "PAGE.PRIVACY_POLICY",
+  url: "/",
+};
 
 const Footer: React.FC<FooterProps> = ({
   email = "contact@olasservices.com",
@@ -115,10 +119,12 @@ const Footer: React.FC<FooterProps> = ({
       <View style={styles.container}>
         {/* Left Section */}
         <View style={styles.logoSection}>
-          <Image
-            source={require("@/assets/images/logo-footer.svg")}
-            style={styles.logo}
-          />
+          <Link href="/">
+            <Image
+              source={require("@/assets/images/logo-footer.svg")}
+              style={styles.logo}
+            />
+          </Link>
           <ThemedText style={styles.text}>{t("DESCRIPTION")}</ThemedText>
           <View style={styles.socialContainer}>
             {socialLinks.map((social, index) => (
@@ -188,7 +194,7 @@ const Footer: React.FC<FooterProps> = ({
       <View style={styles.bottomSection}>
         <ThemedText style={styles.copyright}>
           Olas International Services &copy; {new Date().getFullYear()} |{" "}
-          {t("PAGE.PRIVACY_POLICY")}
+          <Link href={privacyPolicy.url as any}>{t(privacyPolicy.label)}</Link>
         </ThemedText>
         <View style={styles.paymentMethods}>
           <Visa />
