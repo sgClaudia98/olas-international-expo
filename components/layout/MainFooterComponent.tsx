@@ -166,10 +166,9 @@ const Footer: React.FC<FooterProps> = ({
                   </ThemedText>
                 </Link>
               ))}
-              ∫
             </View>
           </View>
-          ∫{/* Contact Section */}
+          {/* Contact Section */}
           <View>
             <ThemedText style={styles.sectionTitle}>
               {t("HEADER.CUSTOMER_SERVICE")}
