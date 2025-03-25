@@ -4,5 +4,11 @@
     "MENU.FAQ": "Preguntas Frecuentes",
     "MENU.SHIPMENTS": "Envíos",
     "MENU.ORDERS": "Pedidos",
-    "FILTERS.CATEGORIES": "Categorías"
-} 
+    "ACTIONS.ADD": "Añadir",
+    "BEFORE": "Antes",
+    "VIEW_LESS": "Ver más",
+    "VIEW_MORE": "Ver menos",
+    "ROUTE.HOME": "Inicio",
+    "FILTERS.CATEGORIES": "Categorías",
+    "FILTER.ALL_CATEGORIES": "Categorías"
+}

@@ -1,8 +1,14 @@
 {
     "LANGUAGE.EN": "English",
     "LANGUAGE.ES": "Spanish",
+    "ACTIONS.ADD": "Add",
+    "BEFORE": "Before",
+    "VIEW_LESS": "View less",
+    "VIEW_MORE": "View more",
+    "ROUTE.HOME": "Home",
     "MENU.FAQ": "FAQs",
     "MENU.SHIPMENTS": "Shipments",
     "MENU.ORDERS": "Orders",
+    "FILTER.ALL_CATEGORIES": "All Categories",
     "FILTERS.CATEGORIES": "Categories"
 }

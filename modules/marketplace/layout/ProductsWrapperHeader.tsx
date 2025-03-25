@@ -5,12 +5,14 @@ import styles, { Colors } from "@/styles";
 import responsiveStyle from "../styles/productWrapper";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
+import { ThemedText } from "@/components/ThemedText";
+import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 
 interface ProductsWrapperHeaderProps {
   toggleFilters: () => void;
   openMobileDrawer: () => void;
   total: number;
-  breadcrumb: string;
+  breadcrumb?: BreadcrumbItem[];
   isOpenFilters: boolean;
 }
 
@@ -22,18 +24,16 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
   isOpenFilters,
 }) => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const { isMobile } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   return (
-    <View
-      style={styles.filterActionContainer}
-    >
-      {!isMobile && <Text>{breadcrumb}</Text>}
-      <View
-        style={styles.filterActions}
-      >
+    <View style={styles.filterActionContainer}>
+      {!lessThan.tablet && (
+        <Breadcrumb items={breadcrumb}/>
+      )}
+      <View style={styles.filterActions}>
         <Text style={styles.productsQtyText}>
           {total != 1 ? `${total} products` : `${total} product`}
         </Text>
@@ -48,7 +48,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
           onSelect={setSelectedOption}
         />
         {/* Renderizado condicional: Switch en desktop, botón de texto en móvil */}
-        {isMobile ? (
+        {lessThan.tablet ? (
           <TouchableOpacity onPress={openMobileDrawer}>
             <Text
               style={{

@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ViewStyle } from 'react-native';
 import { Colors } from '@/styles';  // Assuming you have predefined colors
+import { useTranslation } from 'react-i18next';
 
 interface TextSeeMoreProps {
+  isExpandable?: boolean;
   numberOfLines?: number; // Default is 3, but can be customized
   children: React.ReactNode; // Accept text or any React nodes as children
+  style?: ViewStyle
 }
 
-const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, numberOfLines = 3 }) => {
+const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, style, numberOfLines = 3 , isExpandable = true}) => {
+  const {t} = useTranslation();
   const [isExpanded, setIsExpanded] = useState(true);
   const [isTruncated, setIsTruncated] = useState(false); // To track if text is truncated
   const textRef = useRef<Text>(null);
@@ -36,7 +40,7 @@ const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, numberOfLines = 3 }
   }, []);
 
   return (
-    <View style={styles.container} ref={containerRef}>
+    <View style={style} ref={containerRef}>
       <Text
         ref={textRef}
         style={styles.text}
@@ -46,10 +50,10 @@ const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, numberOfLines = 3 }
         {children}
       </Text>
 
-      {isTruncated && (
+      {isTruncated && isExpandable && (
         <Pressable onPress={toggleText}>
           <Text style={styles.seeMoreText}>
-            {isExpanded ? 'See less' : 'See more'}
+            {isExpanded ? t("VIEW_LESS") : t("VIEW_MORE")}
           </Text>
         </Pressable>
       )}
@@ -58,9 +62,6 @@ const TextSeeMore: React.FC<TextSeeMoreProps> = ({ children, numberOfLines = 3 }
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
   text: {
     fontSize: 16,
     color: Colors.black.primary,

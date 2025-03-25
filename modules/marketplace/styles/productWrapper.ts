@@ -2,6 +2,7 @@ import { Colors } from "@/styles";
 import { layout } from "@/styles/sizing";
 import typography from "@/styles/typography";
 import { StyleSheet, ViewStyle } from "react-native";
+import { PROD_IMAGE_SIZE } from "./product";
 
 const desktop = StyleSheet.create({
   productsQtyText: {
@@ -23,17 +24,17 @@ const desktop = StyleSheet.create({
     alignItems: "flex-start",
     flexWrap: "wrap",
     padding: 10,
-    marginHorizontal: -12,
-    marginTop: -12,
-    rowGap: 10,
+    marginHorizontal: -12.5,
+    marginTop: -12.5,
+    gap: 25,
   },
   productOpen: {
-    width: "25%",
-    padding: 12,
+    width: "30%",
+    minWidth: PROD_IMAGE_SIZE.tablet
   },
   productClose: {
-    width: "20%",
-    padding: 12,
+    width: "25%",
+    minWidth: PROD_IMAGE_SIZE.tablet 
   },
   filterActions: {
     flexDirection: "row",
@@ -73,11 +74,13 @@ const styles = {
       width: "auto",
       flexGrow: 1,
       flexShrink: 1, 
+      minWidth: PROD_IMAGE_SIZE.mobile
     },
     productClose: {
       width: "auto",
       flexGrow: 1,
       flexShrink: 1, 
+      minWidth: PROD_IMAGE_SIZE.mobile
     },
 
     filterActions: {
@@ -108,5 +111,16 @@ const styles = {
     },
   }),
   desktop,
+  bigDesktop: StyleSheet.create({
+    ...desktop,
+    productOpen: {
+      ...desktop.productOpen,
+      width: "25%",
+    },
+    productClose: {
+      ...desktop.productClose,
+      width: "20%",
+    },
+  })
 };
 export default styles;

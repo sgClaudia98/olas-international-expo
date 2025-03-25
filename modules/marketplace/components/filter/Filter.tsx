@@ -20,9 +20,11 @@ import React from "react";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../../styles/filter";
 import FilterDrawer from "./FilterDrawer";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
+import { capitalizeWords } from "@/utils/string";
 
 interface FiltersProps {
-  onItemClick: (item: any[]) => void;
+  onItemClick?: (item: any[]) => void;
   setFilter: (value: IAllFilters) => void;
   stats?: {
     data: SearchMarketBookingOptionStats;
@@ -76,12 +78,14 @@ const Filters: React.FC<FiltersProps> = ({
   const _onItemClick = (item: DropdownItem[]) => {
     setSelection({
       departmentId: +item[0]?.value,
+      department: item[0]? capitalizeWords(item[0].title) : undefined,
       categoryId: +item[1]?.value,
+      category: item[1]? capitalizeWords(item[1].title) : undefined
     });
 
     onItemClick(item);
 
-    if (isMobile && onCloseDrawer) {
+    if (lessThan.tablet  && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -96,21 +100,20 @@ const Filters: React.FC<FiltersProps> = ({
       },
     });
 
-    if (isMobile && onCloseDrawer) {
+    if (lessThan.tablet  && onCloseDrawer) {
       onCloseDrawer();
     }
   };
 
-  const { width: screenWidth } = useWindowDimensions();
-  const isMobile = screenWidth < 768;
+  const {lessThan} = useBreakpoints();
 
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    if (isMobile) {
+    if (lessThan.tablet ) {
       setDrawerVisible(isDrawerOpen);
     }
-  }, [isDrawerOpen, isMobile]);
+  }, [isDrawerOpen, lessThan.tablet ]);
 
   const filterContent = (
     <>
@@ -131,9 +134,9 @@ const Filters: React.FC<FiltersProps> = ({
 
   return (
     <>
-      {!isMobile && <View style={styles.filters}>{filterContent}</View>}
+      {!lessThan.tablet  && <View style={styles.filters}>{filterContent}</View>}
 
-      {isMobile && (
+      {lessThan.tablet  && (
         <FilterDrawer
           visible={isDrawerOpen && drawerVisible}
           onClose={onCloseDrawer}

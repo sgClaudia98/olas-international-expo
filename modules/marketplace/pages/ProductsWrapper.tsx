@@ -1,7 +1,5 @@
-import React, { useEffect, useId, useState } from "react";
-import {
-  View
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import ProductItem from "../components/product/ProductItem";
 import useSearchMarketOptions, {
   IAllFilters,
@@ -10,13 +8,17 @@ import Filters from "../components/filter/Filter";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
-import { useRouter } from "expo-router";
-import ProductItemVertical from "../components/product/ProductItemVertical";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
 import BannerSlider from "../components/banners/BannerSlider";
 import ProductWrapperSkeleton from "../components/skeletons/ProductWrapperSkeleton";
+import { BreadcrumbItem } from "@/components/Breadcrumb";
+import { buildBreadcrumb } from "../utils/breadcrumbBuild";
+import { useTranslation } from "react-i18next";
+import { useSearchContext } from "../context/SearchContext";
+
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -24,25 +26,46 @@ const ProductsWrapper: React.FC = () => {
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
-
+  const { selection } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
-  const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
-  const handleItemClick = (trace: any[]) => {
-    setBeadCrumb(trace.map((t) => t.title).join(" / "));
-  };
+  const [breadcrumb, setBreadcrumb] = useState<BreadcrumbItem[]>(
+    buildBreadcrumb()
+  );
+
   const router = useRouter();
 
   const handleProductPress = (id: number) => {
-    router.push(`./detail/${id}`);
+    router.push({
+      pathname: `./detail/${id}`,
+    });
   };
 
   const [totalProducts, setTotalProducts] = useState(0);
 
   useEffect(() => {
-    if (data) setTotalProducts(data.totals);
-  }, [data]);
+    if (data) {
+      setTotalProducts(data.totals);
+      let items = buildBreadcrumb();
+      const ROUTE = "/services/market/products";
+            
+      if (selection.departmentId) {
+        items.pop()
+        console.debug("1Sel", selection)
+        items.push({
+          label: selection.department,
+          route: `${ROUTE}?departmentId=${selection.departmentId}`,
+        });
+        if (selection.category)
+          items.push({
+            label: selection.category,
+            route: `${ROUTE}?departmentId=${selection.departmentId}&categoryId=${selection.categoryId}`,
+          });
+      }
+      setBreadcrumb(items);
+    }
+  }, [data, selection.department, selection.category]);
 
   const toggleDesktopFilters = () => {
     setShowDesktopFilters(!showDesktopFilters);
@@ -63,13 +86,12 @@ const ProductsWrapper: React.FC = () => {
         toggleFilters={toggleDesktopFilters}
         openMobileDrawer={openMobileDrawer}
         total={totalProducts}
-        breadcrumb={breadcrumb}
         isOpenFilters={showDesktopFilters}
+        breadcrumb={breadcrumb}
       />
       <View style={styles.wrapper}>
         {!isMobile && showDesktopFilters && (
           <Filters
-            onItemClick={handleItemClick}
             setFilter={updateFilter}
             stats={
               stats && searchId
@@ -84,7 +106,6 @@ const ProductsWrapper: React.FC = () => {
 
         {isMobile && (
           <Filters
-            onItemClick={handleItemClick}
             setFilter={updateFilter}
             stats={
               stats && searchId
@@ -110,27 +131,18 @@ const ProductsWrapper: React.FC = () => {
             <NoSearchResults />
           ) : (
             <View style={styles.products}>
-              {items?.map((val) =>
-                !isMobile ? (
-                  <ProductItem
-                    key={`prodI-${val.id}-${val.product.id}`}
-                    item={val}
-                    style={
-                      showDesktopFilters
-                        ? styles.productOpen
-                        : styles.productClose
-                    }
-                    onClick={() => handleProductPress(val.product.id)}
-                  />
-                ) : (
-                  <ProductItemVertical
-                    key={`prodI-${val.id}-${val.product.id}`}
-                    item={val}
-                    style={styles.productOpen}
-                    onClick={() => handleProductPress(val.product.id)}
-                  />
-                )
-              )}
+              {items?.map((val) => (
+                <ProductItem
+                  key={`prodI-${val.id}-${val.product.id}`}
+                  item={val}
+                  style={
+                    showDesktopFilters || isMobile
+                      ? styles.productOpen
+                      : styles.productClose
+                  }
+                  onClick={() => handleProductPress(val.product.id)}
+                />
+              ))}
             </View>
           )}
         </PaginatedContent>

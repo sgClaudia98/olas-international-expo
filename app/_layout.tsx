@@ -19,7 +19,7 @@ import { OpenSans_400Regular, OpenSans_600SemiBold, OpenSans_700Bold } from "@ex
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { isMobile } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
   const [loaded] = useFonts({
     OpenSansRegular: OpenSans_400Regular,
     OpenSansSemiBold: OpenSans_600SemiBold,
@@ -37,10 +37,9 @@ export default function RootLayout() {
     return null;
   }
 
-  console.debug("isMobile", isMobile);
   return (
     <AppProviders>
-      {isMobile ? (
+      {lessThan.tablet ? (
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Drawer
             drawerContent={(props) => {
