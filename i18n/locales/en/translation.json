@@ -4,5 +4,7 @@
     "ACTIONS.ADD": "Add",
     "BEFORE": "Before",
     "VIEW_LESS": "View less",
-    "VIEW_MORE": "View more"
+    "VIEW_MORE": "View more",
+    "ROUTE.HOME": "Home",
+    "FILTER.ALL_CATEGORIES": "All Categories"
 }

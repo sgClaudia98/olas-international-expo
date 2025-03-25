@@ -1,10 +1,18 @@
-import React, {createContext, useContext, useState, ReactNode} from 'react';
-import {useGetDepartmentsQuery} from '../services/api/BookingService';
-import {Department} from '../services/interfaces/booking';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
+import { useGetDepartmentsQuery } from "../services/api/BookingService";
+import { Department } from "../services/interfaces/booking";
 
 export interface Selection {
   departmentId?: number;
+  department?: string;
   categoryId?: number;
+  category?: string;
 }
 
 interface SearchContextType {
@@ -13,6 +21,7 @@ interface SearchContextType {
   productName: string;
   setProductName?: (value: string) => void;
   setSelection: (args: Partial<Selection>) => void;
+  setSelectionIds: (args: Partial<Omit<Selection, "department" | "category">>) => void;
   clearProductName: () => void;
 }
 
@@ -25,25 +34,52 @@ interface SearchProviderProps {
 }
 
 // Proveedor del contexto
-export const SearchProvider: React.FC<SearchProviderProps> = ({children}) => {
+export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   // Obtener la data desde el hook
-  const {data} = useGetDepartmentsQuery();
+  const { data } = useGetDepartmentsQuery();
 
   // Estado para guardar la selección
   const [selection, setSelectionState] = useState<Selection>({});
   const [productName, setProductName] = useState<string>("");
 
   const clearProductName = () => {
-    setProductName("")
-  }
+    setProductName("");
+  };
 
   // Función para actualizar la selección
   const setSelection = (args: Partial<Selection>) => {
-    setSelectionState(prev => ({
+    setSelectionState((prev) => ({
       ...prev,
       ...args,
     }));
   };
+
+  // Expnsive calculation using useCallback
+  const setSelectionIds = useCallback(
+    (args: Partial<Omit<Selection, "department" | "category">>) => {
+      console.debug("SETTING SELECTION IDS")
+      const department = args.departmentId
+        ? data?.departments.find((dep) => dep.id === args.departmentId)
+        : args.categoryId
+        ? data?.departments.find((dep) =>
+            dep.categories.some((cat) => cat.id === args.categoryId)
+          )
+        : undefined;
+
+      // Buscar la categoría dentro del departamento almacenado
+      const category = args.categoryId
+        ? department?.categories.find((cat) => cat.id === args.categoryId)?.name
+        : undefined;
+
+      const sel: Selection = {
+        ...args,
+        department: department?.name, // Almacena el departamento completo
+        category,
+      };
+      setSelection(sel);
+    },
+    [data]
+  );
 
   // Valores que el contexto expone
   const value: SearchContextType = {
@@ -51,18 +87,23 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({children}) => {
     selection,
     productName,
     setSelection,
+    setSelectionIds,
     setProductName,
-    clearProductName
+    clearProductName,
   };
 
-  return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;
+  return (
+    <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
+  );
 };
 
 // Hook para usar el contexto
 export const useSearchContext = (): SearchContextType => {
   const context = useContext(SearchContext);
   if (!context) {
-    throw new Error('useSearchContext debe ser usado dentro de un SearchProvider');
+    throw new Error(
+      "useSearchContext debe ser usado dentro de un SearchProvider"
+    );
   }
   return context;
 };

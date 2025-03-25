@@ -1,56 +1,49 @@
 import React from "react";
 import { View, Pressable, StyleSheet } from "react-native";
 import { Colors } from "@/styles";
-import { useSearchContext } from "@/modules/marketplace/context/SearchContext";
 import { ThemedText } from "./ThemedText";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
-const Breadcrumb: React.FC = () => {
-  const BASE_CATEGORY = "All Categories";
+export interface BreadcrumbItem {
+  label: string;
+  route?: string;
+}
 
-  const { selection, setSelection, data } = useSearchContext();
+interface BreadcrumbProps {
+  items?: BreadcrumbItem[];
+}
 
-  const department = data?.find((d) => d.id === selection.departmentId);
-
-  const category = department?.categories?.find(
-    (c) => c.id === selection.categoryId
-  );
-
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ items = [] }) => {
+  const {t} = useTranslation();
   const router = useRouter();
 
-  const handleRouting = (departmentId = null, categoryId = null) => {
-    setSelection({ departmentId: departmentId, categoryId: categoryId });
-    router.push({
-      pathname: "/services/market/products",
-    });
+  const handleRouting = (route?: string) => {
+    if (route) {
+      router.push(route as any);
+    }
   };
 
   return (
     <View style={styles.row}>
-      {department && (
-        <Pressable onPress={() => handleRouting(department.id, null)}>
-          <ThemedText lightColor={Colors.blue.primary}>
-            {department.name}
-          </ThemedText>
-        </Pressable>
-      )}
-      {category && (
-        <>
-          <ThemedText lightColor={Colors.black.second}> / </ThemedText>
-          <Pressable onPress={() => handleRouting(department.id, category.id)}>
-            <ThemedText lightColor={Colors.blue.primary}>
-              {category.name}
+      {items.map((item, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && (
+            <ThemedText lightColor={Colors.black.second}> / </ThemedText>
+          )}
+          {item.route ? (
+            <Pressable onPress={() => handleRouting(item.route)}>
+              <ThemedText lightColor={Colors.blue.primary}>
+                {t(item.label)}
+              </ThemedText>
+            </Pressable>
+          ) : (
+            <ThemedText lightColor={Colors.black.primary}>
+              {t(item.label)}
             </ThemedText>
-          </Pressable>
-        </>
-      )}
-      {!department && !category && (
-        <Pressable onPress={() => handleRouting()}>
-          <ThemedText lightColor={Colors.blue.primary}>
-            {BASE_CATEGORY}
-          </ThemedText>
-        </Pressable>
-      )}
+          )}
+        </React.Fragment>
+      ))}
     </View>
   );
 };

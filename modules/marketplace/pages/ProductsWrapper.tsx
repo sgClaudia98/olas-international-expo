@@ -8,28 +8,36 @@ import Filters from "../components/filter/Filter";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
 import BannerSlider from "../components/banners/BannerSlider";
 import ProductWrapperSkeleton from "../components/skeletons/ProductWrapperSkeleton";
+import { BreadcrumbItem } from "@/components/Breadcrumb";
+import { buildBreadcrumb } from "../utils/breadcrumbBuild";
+import { useTranslation } from "react-i18next";
+import { useSearchContext } from "../context/SearchContext";
+
+type SearchParams = {
+  categoryId?: string;
+  departmentId?: string;
+};
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
+  const { departmentId, categoryId } = useLocalSearchParams<SearchParams>();
   const { isMobile } = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
-
+  const { selection, setSelectionIds } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
 
-  // const [breadcrumb, setBeadCrumb] = useState<string>("All categories");
-
-  // const handleItemClick = (trace: any[]) => {
-  //   setBeadCrumb(trace.map((t) => t.title).join(" / "));
-  // };
+  const [breadcrumb, setBreadcrumb] = useState<BreadcrumbItem[]>(
+    buildBreadcrumb()
+  );
 
   const router = useRouter();
 
@@ -42,8 +50,33 @@ const ProductsWrapper: React.FC = () => {
   const [totalProducts, setTotalProducts] = useState(0);
 
   useEffect(() => {
-    if (data) setTotalProducts(data.totals);
+    if (data) {
+      setTotalProducts(data.totals);
+      let items = buildBreadcrumb();
+      const ROUTE = "/services/market/products";
+      
+      if (selection.departmentId) {
+        items.pop()
+        items.push({
+          label: selection.department,
+          route: `${ROUTE}?departmentId=${selection.departmentId}`,
+        });
+        if (selection.category)
+          items.push({
+            label: selection.category,
+            route: `${ROUTE}?departmentId=${selection.departmentId}&categoryId=${selection.categoryId}`,
+          });
+      }
+      setBreadcrumb(items);
+    }
   }, [data]);
+
+  useEffect(() => {
+    setSelectionIds({
+      departmentId: departmentId ? +departmentId : undefined,
+      categoryId: categoryId ? +categoryId : undefined,
+    });
+  }, []);
 
   const toggleDesktopFilters = () => {
     setShowDesktopFilters(!showDesktopFilters);
@@ -65,6 +98,7 @@ const ProductsWrapper: React.FC = () => {
         openMobileDrawer={openMobileDrawer}
         total={totalProducts}
         isOpenFilters={showDesktopFilters}
+        breadcrumb={breadcrumb}
       />
       <View style={styles.wrapper}>
         {!isMobile && showDesktopFilters && (

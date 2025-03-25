@@ -6,13 +6,13 @@ import responsiveStyle from "../styles/productWrapper";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Switch } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import Breadcrumb from "@/components/Breadcrumb";
+import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 
 interface ProductsWrapperHeaderProps {
   toggleFilters: () => void;
   openMobileDrawer: () => void;
   total: number;
-  breadcrumb?: string;
+  breadcrumb?: BreadcrumbItem[];
   isOpenFilters: boolean;
 }
 
@@ -31,7 +31,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
   return (
     <View style={styles.filterActionContainer}>
       {!lessThan.tablet && (
-        <Breadcrumb />
+        <Breadcrumb items={breadcrumb}/>
       )}
       <View style={styles.filterActions}>
         <Text style={styles.productsQtyText}>

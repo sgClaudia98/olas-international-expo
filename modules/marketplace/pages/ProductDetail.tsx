@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ProductInfo from "../components/product/ProductInfo";
 import { useGetProductsQuery } from "../services/api/BookingService";
 import { useLocationContext } from "@/contexts/locationContext";
@@ -8,27 +8,30 @@ import BackArrow from "@/components/layout/BackArrow";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/styles";
 import Breadcrumb from "@/components/Breadcrumb";
+import { useTranslation } from "react-i18next";
+import { buildBreadcrumb } from "../utils/breadcrumbBuild";
 
 const ProductDetail: FC<{ id: string }> = ({ id }) => {
+  const { t } = useTranslation();
   const { activeDestination } = useLocationContext();
 
   const { data, error, isLoading } = useGetProductsQuery({
     productId: +id,
     destinationId: activeDestination?.id,
   });
-  const goToProducts = () => {
-    /*
-    navigation.navigate('MainLayout', {
-      screen: 'Services',
-      params: {
-        screen: 'Marketplace',
-        params: {
-          screen: 'Products',
-        },
-      },
-    });
-    */
-  };
+
+  const [breadcrumb, setBreadcrumb] = useState([]);
+
+  useEffect(() => {
+    if (data)
+      setBreadcrumb(
+        buildBreadcrumb(
+          undefined,
+          data.option.product.category,
+          data.option.product
+        )
+      );
+  }, [data]);
 
   return (
     <Page>
@@ -37,9 +40,7 @@ const ProductDetail: FC<{ id: string }> = ({ id }) => {
       ) : (
         <>
           <View style={styles.row}>
-            <BackArrow fallback={goToProducts} />
-            <Breadcrumb />
-            <ThemedText lightColor={Colors.black.second}> / {data.option.product.name}</ThemedText>
+            <Breadcrumb items={breadcrumb} />
           </View>
           {data && (
             <ProductInfo
@@ -62,6 +63,6 @@ export default ProductDetail;
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    flexWrap: 'wrap'
+    flexWrap: "wrap",
   },
 });

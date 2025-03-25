@@ -57,7 +57,7 @@ const SelectBtn: React.FC<SelectBtnProps> = ({
 interface DropdownSelectProps {
   buttonTitle: string | ((selectedOption: string) => string);
   menuItems: { label: string; value: string }[];
-  onSelect: (value: string) => void;
+  onSelect: (value: string, label: string) => void;
   value?: string;
 
   themeColors?: {
@@ -78,8 +78,8 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
-  const handleSelect = (value: string) => {
-    onSelect(value);
+  const handleSelect = (item: any) => {
+    onSelect(item.value, item.label);
     closeMenu();
   };
   const getButtonTitle = (): string => {
@@ -89,8 +89,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
     return `${buttonTitle}: ${selectedLabel}`;
   };
 
-  const selectedLabel =
-    menuItems.find((item) => item.value === value)?.label;
+  const selectedLabel = menuItems.find((item) => item.value === value)?.label;
 
   return (
     <View style={styles.container}>
@@ -111,7 +110,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({
         {menuItems.map((item) => (
           <Menu.Item
             key={`mlvldds-${item.value}`}
-            onPress={() => handleSelect(item.value)}
+            onPress={() => handleSelect(item)}
             title={item.label}
           />
         ))}
