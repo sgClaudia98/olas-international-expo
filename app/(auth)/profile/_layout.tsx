@@ -8,32 +8,34 @@ import { Colors } from "@/styles";
 import Breadcrumb from "@/components/Breadcrumb";
 import { homeBreadcrumItem } from "@/modules/marketplace/utils/breadcrumbBuild";
 import { useTranslation } from "react-i18next";
-import ProfileSideMenu, { ProfileSideMenuItem } from "@/modules/auth/components/ProfileSideMenu";
+import ProfileSideMenu, {
+  ProfileSideMenuItem,
+} from "@/modules/auth/components/ProfileSideMenu";
 
 export default function ProfileLayout() {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const items: ProfileSideMenuItem[] = [
     {
       label: "PAGE.PROFILE",
       route: "/profile",
-      icon: "profle"
+      icon: "profle",
+      exact: true,
     },
     {
       label: "PAGE.ORDER_HISTORY",
       route: "/profile/order-history",
-      icon: "time"
-    }
-  ]
+      icon: "time",
+    },
+  ];
 
   return (
     <Page backgroundColor={Colors.black.fifth}>
       <View style={styles.breadcrumbContainer}>
-
-      <Breadcrumb items={[homeBreadcrumItem, {label: t("PAGE.PROFILE")}]}/>
+        <Breadcrumb items={[homeBreadcrumItem, { label: t("PAGE.PROFILE") }]} />
       </View>
       <View style={styles.container}>
         <View style={styles.sideMenu}>
-          <ProfileSideMenu items={items}/>
+          <ProfileSideMenu items={items} />
         </View>
         <View style={styles.pageContent}>
           <Slot />
@@ -44,20 +46,19 @@ export default function ProfileLayout() {
 }
 
 const styles = StyleSheet.create({
-  breadcrumbContainer:{
+  breadcrumbContainer: {
     marginTop: 30,
   },
   container: {
     marginTop: 40,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
-  sideMenu: {
-  },
+  sideMenu: {},
   pageContent: {
     marginLeft: 70,
     justifyContent: "center",
     flexDirection: "row",
-    flex:1
+    flex: 1,
   },
 });

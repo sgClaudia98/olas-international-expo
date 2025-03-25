@@ -8,6 +8,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 export interface ProfileSideMenuItem {
   label: string;
   route: string;
+  exact?: boolean;
   icon: string;
 }
 
@@ -36,7 +37,7 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
             <ThemedText
               style={{
                 ...styles.menuText,
-                color: pathname == i.route ? activeColor : color,
+                color: (i.exact && pathname == i.route || !i.exact && pathname.startsWith(i.route)) ? activeColor : color,
               }}
             >
               {t(i.label)}
