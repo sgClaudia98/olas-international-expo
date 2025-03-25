@@ -30,7 +30,7 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
             <ToastManager textStyle={{
               fontFamily: Fonts.regular,
               fontSize: 16,
-            }} animationInTiming={500} animationOutTiming={500} height={"auto"} duration={20000} animationStyle={"upInUpOut"} position={"top"} positionValue={2}/>
+            }} showCloseIcon={false} animationInTiming={500} animationOutTiming={500} height={"auto"} duration={3000} animationStyle={"upInUpOut"} position={"top"} positionValue={2}/>
             <MainLayoutProvider>{children}</MainLayoutProvider>
           </LocationProvider>
         </Provider>
