@@ -64,7 +64,6 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    console.debug("SearchContext!!", departmentId, categoryId, data)
     if (data && (departmentId || categoryId))
       setSelectionIds({
         departmentId: +departmentId || undefined,
@@ -76,7 +75,6 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   const setSelectionIds = (
     args: Partial<Omit<Selection, "department" | "category">>
   ) => {
-    console.debug("SETTING SELECTION IDS", args);
     const department = args.departmentId
       ? data?.departments.find((dep) => dep.id === args.departmentId)
       : args.categoryId
@@ -95,7 +93,6 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
       department: capitalizeWords(department?.name), // Almacena el departamento completo
       category: capitalizeWords(category),
     };
-    console.debug("SETTING SELECTION IDS 2", sel);
     setSelection(sel);
   };
 

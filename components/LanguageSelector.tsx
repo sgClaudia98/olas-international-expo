@@ -20,11 +20,9 @@ const LanguageSelector = () => {
   
   const getSavedLanguage = async () => {
     let savedLanguage = await AsyncStorage.getItem("language");
-    console.debug("savedLanguage", savedLanguage);
     if (!savedLanguage) {
       savedLanguage = Localization.getLocales()[0].languageCode;
     }
-    console.debug("savedLanguage2", savedLanguage);
     return savedLanguage;
   };
 

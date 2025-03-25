@@ -15,7 +15,6 @@ import {useLocationContext} from '@/contexts/locationContext';
 import {Selection, useSearchContext} from '../context/SearchContext';
 import {DEFAULT_DESTINATION} from '@/constants';
 import {PaginationRequest} from '@/services/interfaces/pagination';
-import { useLocalSearchParams, useSearchParams } from 'expo-router/build/hooks';
 
 export interface IFilter extends Selection {
   destinationId?: number;
@@ -48,9 +47,7 @@ const initFilter: IAllFilters = {
 const useSearchMarketOptions = (): SearchMarketOptionsResult => {
   const {activeDestination} = useLocationContext();
   const {selection, productName} = useSearchContext();
-  const params = useLocalSearchParams()
-  console.debug(params)
-  
+
   const [searchId, setSearchId] = useState<number | null>(null);
   const [data, setData] = useState<SearchMarketBookingOptionsResponse>();
   const [filter, setFilter] = useState<IAllFilters>(initFilter);
