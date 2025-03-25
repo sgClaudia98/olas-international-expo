@@ -1,9 +1,11 @@
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/styles";
-import { Link, usePathname } from "expo-router";
+import { Link, usePathname, useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/authSlice";
 
 export interface ProfileSideMenuItem {
   label: string;
@@ -16,14 +18,17 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
   items,
 }) => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const dispatch = useDispatch();
   const pathname = usePathname();
 
   const activeColor = Colors.black.primary;
   const color = Colors.black.second;
 
   const handleLogout = () => {
-
-  }
+    dispatch(logout());
+    router.navigate("/");
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +42,11 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
             <ThemedText
               style={{
                 ...styles.menuText,
-                color: (i.exact && pathname == i.route || !i.exact && pathname.startsWith(i.route)) ? activeColor : color,
+                color:
+                  (i.exact && pathname == i.route) ||
+                  (!i.exact && pathname.startsWith(i.route))
+                    ? activeColor
+                    : color,
               }}
             >
               {t(i.label)}
@@ -47,7 +56,10 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
       </View>
 
       <View style={styles.line} />
-      <Pressable style={[styles.menuItem, styles.logoutItem]} onPress={handleLogout}>
+      <Pressable
+        style={[styles.menuItem, styles.logoutItem]}
+        onPress={handleLogout}
+      >
         <Text style={styles.icon}>icon</Text>
         <ThemedText style={{ ...styles.menuText, color }}>
           {t("LOGOUT")}
