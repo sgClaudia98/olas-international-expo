@@ -12,7 +12,7 @@ export const black: Record<Black, string> = {
   second: "#90A3BA",
   third: "#CED6E0",
   fourth: "#EBEFF3",
-  fifth: "#F4F4F4",
+  fifth: "#F3F5F8",
 };
 
 

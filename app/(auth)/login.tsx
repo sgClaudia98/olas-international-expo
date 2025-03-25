@@ -1,9 +1,10 @@
 import Page from "@/components/layout/Page";
 import Login from "@/modules/auth/pages/Login";
+import { Colors } from "@/styles";
 
 export default function LoginScreen() {
   return (
-    <Page>
+    <Page backgroundColor={Colors.black.fifth}>
       <Login />
     </Page>
   );

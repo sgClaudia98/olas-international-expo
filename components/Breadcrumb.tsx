@@ -29,16 +29,16 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items = [] }) => {
       {items.map((item, index) => (
         <React.Fragment key={index}>
           {index > 0 && (
-            <ThemedText lightColor={Colors.black.second}> / </ThemedText>
+            <ThemedText lightColor={Colors.black.second} style={styles.text}>{"   /   "}</ThemedText>
           )}
           {item.route ? (
             <Pressable onPress={() => handleRouting(item.route)}>
-              <ThemedText lightColor={Colors.blue.primary}>
+              <ThemedText lightColor={Colors.black.second} style={styles.text}>
                 {t(item.label)}
               </ThemedText>
             </Pressable>
           ) : (
-            <ThemedText lightColor={Colors.black.primary}>
+            <ThemedText lightColor={Colors.black.second} style={styles.text}>
               {t(item.label)}
             </ThemedText>
           )}
@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginBottom: 12,
   },
+  text: {
+    fontSize: 14,
+    letterSpacing: 0.2,
+  }
 });
 
 export default Breadcrumb;

@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 const tablet = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
   scrollContent: {
     flexGrow: 1,
@@ -11,8 +10,8 @@ const tablet = StyleSheet.create({
   pageContainer: {
     display: "flex",
     minHeight: "100%",
-    backgroundColor: "white",
     padding: 20,
+    marginHorizontal: 85
   },
 });
 
@@ -22,6 +21,7 @@ const styles = {
     pageContainer: {
       ...tablet.pageContainer,
       paddingHorizontal: 10,
+      marginHorizontal: 0,
       minHeight: 0
     },
   }),
