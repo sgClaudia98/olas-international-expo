@@ -4,5 +4,7 @@
     "ACTIONS.ADD": "Añadir",
     "BEFORE": "Antes",
     "VIEW_LESS": "Ver más",
-    "VIEW_MORE": "Ver menos"
+    "VIEW_MORE": "Ver menos",
+    "ROUTE.HOME": "Inicio",
+    "FILTER.ALL_CATEGORIES": "Categorías"
 }

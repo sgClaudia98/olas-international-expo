@@ -21,9 +21,10 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../../styles/filter";
 import FilterDrawer from "./FilterDrawer";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
+import { capitalizeWords } from "@/utils/string";
 
 interface FiltersProps {
-  onItemClick: (item: any[]) => void;
+  onItemClick?: (item: any[]) => void;
   setFilter: (value: IAllFilters) => void;
   stats?: {
     data: SearchMarketBookingOptionStats;
@@ -77,7 +78,9 @@ const Filters: React.FC<FiltersProps> = ({
   const _onItemClick = (item: DropdownItem[]) => {
     setSelection({
       departmentId: +item[0]?.value,
+      department: item[0]? capitalizeWords(item[0].title) : undefined,
       categoryId: +item[1]?.value,
+      category: item[1]? capitalizeWords(item[1].title) : undefined
     });
 
     onItemClick(item);

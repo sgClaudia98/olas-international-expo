@@ -11,6 +11,7 @@ import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import {leftStyles as responsiveStyle} from '../styles/header';
 import DropdownSelect from '@/components/DropdownSelect';
 import { Colors } from '@/styles';
+import { capitalizeWords } from '@/utils/string';
 
 export default function MarketplaceLeftHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -31,11 +32,13 @@ export default function MarketplaceLeftHeader() {
     return dep ? [all_cat, ...dep] : [all_cat];
   }, [data]);
 
-  const onDepartmentSelected = (value: string) => {
+  const onDepartmentSelected = (value: string, label: string) => {
     setDepartment(value);
     setSelection({
       departmentId: value == "" ? undefined : +value,
+      department: label == "" ? undefined : capitalizeWords(label),
       categoryId: undefined,
+      category: undefined
     });
     navigateToProducts();
   };

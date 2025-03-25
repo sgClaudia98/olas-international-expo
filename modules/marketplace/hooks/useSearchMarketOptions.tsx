@@ -47,6 +47,7 @@ const initFilter: IAllFilters = {
 const useSearchMarketOptions = (): SearchMarketOptionsResult => {
   const {activeDestination} = useLocationContext();
   const {selection, productName} = useSearchContext();
+
   const [searchId, setSearchId] = useState<number | null>(null);
   const [data, setData] = useState<SearchMarketBookingOptionsResponse>();
   const [filter, setFilter] = useState<IAllFilters>(initFilter);
