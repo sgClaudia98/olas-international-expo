@@ -1,14 +1,24 @@
 {
     "LANGUAGE.EN": "English",
     "LANGUAGE.ES": "Spanish",
+    "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
     "ACTIONS.ADD": "Add",
     "BEFORE": "Before",
     "VIEW_LESS": "View less",
     "VIEW_MORE": "View more",
     "ROUTE.HOME": "Home",
-    "MENU.FAQ": "FAQs",
-    "MENU.SHIPMENTS": "Shipments",
-    "MENU.ORDERS": "Orders",
+    "MODULE.TRAVEL": "Travel",
+    "MODULE.MARKET": "Market",
+    "PAGE.SHIPMENTS": "Shipments",
+    "PAGE.ORDERS": "Orders",
+    "PAGE.ABOUT_US": "About us",
+    "PAGE.FAQ": "FAQs",
+    "PAGE.TERMS_AND_CONDITIONS": "Terms and conditions",
+    "PAGE.RETURN_POLICY": "Return policy",
+    "PAGE.PRIVACY_POLICY": "Privacy policy",
     "FILTER.ALL_CATEGORIES": "All Categories",
-    "FILTERS.CATEGORIES": "Categories"
+    "FILTERS.CATEGORIES": "Categories",
+    "HEADER.SERVICES": "Services",
+    "HEADER.INFORMATION": "Information",
+    "HEADER.CUSTOMER_SERVICE": "Customer service"
 }

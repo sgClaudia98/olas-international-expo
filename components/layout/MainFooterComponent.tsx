@@ -1,10 +1,24 @@
-import React from 'react';
-import {View, Text, StyleSheet, Pressable, Linking, Image} from 'react-native';
-import footerStyles from '@/styles/footer';
-import { Visa, MasterCard, AmericanExpress, PayPal } from '@/assets/icons/PaymentBrands';
-import { WhatsApp, Facebook, Instagram } from '@/assets/icons/SocialMedia';
-import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
-import { ThemedText } from '../ThemedText';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Linking,
+  Image,
+} from "react-native";
+import footerStyles from "@/styles/footer";
+import {
+  Visa,
+  MasterCard,
+  AmericanExpress,
+  PayPal,
+} from "@/assets/icons/PaymentBrands";
+import { WhatsApp, Facebook, Instagram } from "@/assets/icons/SocialMedia";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { ThemedText } from "../ThemedText";
+import { useTranslation } from "react-i18next";
+import { Link } from "expo-router";
 
 interface SocialLink {
   component: React.ReactElement;
@@ -21,6 +35,7 @@ interface FooterProps {
   phone?: string;
   address?: {
     street: string;
+    addressLink?: string;
     city: string;
     state: string;
     zip: string;
@@ -28,37 +43,38 @@ interface FooterProps {
 }
 
 const socialLinks: SocialLink[] = [
-  {component: <WhatsApp />, url: 'https://whatsapp.com'},
-  {component: <Facebook />, url: 'https://facebook.com'},
-  {component: <Instagram />, url: 'https://instagram.com'},
+  { component: <WhatsApp />, url: "https://whatsapp.com" },
+  { component: <Facebook />, url: "https://facebook.com" },
+  { component: <Instagram />, url: "https://instagram.com" },
 ];
 
 const services: NavigationLink[] = [
-  {label: 'Viajes', url: ''},
-  {label: 'Compras', url: ''},
-  {label: 'Recargas', url: ''},
-  {label: 'Trámites', url: ''},
+  { label: "MODULE.TRAVEL", url: "/services/travel" },
+  { label: "MODULE.MARKET", url: "/services/market" },
 ];
 
 const information: NavigationLink[] = [
-  {label: 'Nosotros', url: ''},
-  {label: 'Preguntas frecuentes', url: ''},
-  {label: 'Términos y condiciones', url: ''},
-  {label: 'Política de devolución', url: ''},
+  { label: "PAGE.ABOUT_US", url: "/" },
+  { label: "PAGE.FAQ", url: "/" },
+  { label: "PAGE.TERMS_AND_CONDITIONS", url: "/" },
+  { label: "PAGE.RETURN_POLICY", url: "/" },
 ];
 
 const Footer: React.FC<FooterProps> = ({
-  email = 'contact@olasservices.com',
-  phone = '(780) 358-9595',
+  email = "contact@olasservices.com",
+  phone = "(780) 358-9595",
   address = {
-    street: '9611 Fontainebleau Blvd',
-    city: 'Miami',
-    state: 'FL',
-    zip: '33172',
+    addressLink:
+      "https://www.google.com/maps/search/?api=1&query=9507+SW+40th+St+Miami+FL+33165",
+    street: "9611 Fontainebleau Blvd",
+    city: "Miami",
+    state: "FL",
+    zip: "33172",
   },
 }) => {
+  const { t } = useTranslation();
   const styles = useResponsiveStyles(footerStyles);
-  
+
   const handleSocialPress = async (url: string): Promise<void> => {
     try {
       const supported = await Linking.canOpenURL(url);
@@ -68,23 +84,30 @@ const Footer: React.FC<FooterProps> = ({
         console.error(`Don't know how to open this URL: ${url}`);
       }
     } catch (error) {
-      console.error('An error occurred', error);
+      console.error("An error occurred", error);
     }
   };
 
+  const handleAddressPress = async (): Promise<void> => {
+    try {
+      if (address.addressLink) await Linking.openURL(address.addressLink);
+    } catch (error) {
+      console.error("An error occurred", error);
+    }
+  };
   const handleEmailPress = async (): Promise<void> => {
     try {
       await Linking.openURL(`mailto:${email}`);
     } catch (error) {
-      console.error('An error occurred', error);
+      console.error("An error occurred", error);
     }
   };
 
   const handlePhonePress = async (): Promise<void> => {
     try {
-      await Linking.openURL(`tel:${phone.replace(/[^0-9]/g, '')}`);
+      await Linking.openURL(`tel:${phone.replace(/[^0-9]/g, "")}`);
     } catch (error) {
-      console.error('An error occurred', error);
+      console.error("An error occurred", error);
     }
   };
   return (
@@ -92,18 +115,17 @@ const Footer: React.FC<FooterProps> = ({
       <View style={styles.container}>
         {/* Left Section */}
         <View style={styles.logoSection}>
-           <Image
-                    source={require("@/assets/images/logo-footer.svg")}
-                    style={styles.logo}
-                  />
-          <ThemedText style={styles.text}>
-            Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...
-          </ThemedText>
+          <Image
+            source={require("@/assets/images/logo-footer.svg")}
+            style={styles.logo}
+          />
+          <ThemedText style={styles.text}>{t("DESCRIPTION")}</ThemedText>
           <View style={styles.socialContainer}>
             {socialLinks.map((social, index) => (
               <Pressable
                 key={index}
-                onPress={() => handleSocialPress(social.url)}>
+                onPress={() => handleSocialPress(social.url)}
+              >
                 {social.component}
               </Pressable>
             ))}
@@ -112,54 +134,61 @@ const Footer: React.FC<FooterProps> = ({
         <View style={styles.footerMenu}>
           {/* Services Section */}
           <View>
-            <ThemedText style={styles.sectionTitle}>Servicios</ThemedText>
+            <ThemedText style={styles.sectionTitle}>
+              {t("HEADER.SERVICES")}
+            </ThemedText>
             <View style={styles.footerItemContainer}>
-            {services.map((service, index) => (
-              <ThemedText
-                key={index}
-                style={styles.footerItemText}>
-                {service.label}
-              </ThemedText>
-            ))}
+              {services.map((service, index) => (
+                <Link href={service.url as any}>
+                  <ThemedText key={index} style={styles.footerItemText}>
+                    {t(service.label)}
+                  </ThemedText>
+                </Link>
+              ))}
             </View>
           </View>
-
           {/* Information Section */}
           <View>
-            <ThemedText style={styles.sectionTitle}>Información</ThemedText>
+            <ThemedText style={styles.sectionTitle}>
+              {t("HEADER.INFORMATION")}
+            </ThemedText>
             <View style={styles.footerItemContainer}>
-            {information.map((info, index) => (
-              <ThemedText
-                key={index}
-                style={styles.footerItemText}>
-                {info.label}
-              </ThemedText>
-            ))}
+              {information.map((info, index) => (
+                <Link href={info.url as any}>
+                  <ThemedText key={index} style={styles.footerItemText}>
+                    {t(info.label)}
+                  </ThemedText>
+                </Link>
+              ))}
+              ∫
             </View>
           </View>
-
-          {/* Contact Section */}
+          ∫{/* Contact Section */}
           <View>
-            <ThemedText style={styles.sectionTitle}>Atención al cliente</ThemedText>
-            <View style={styles.footerItemContainer}>
-            
-            <ThemedText style={styles.footerItemText}>
-              {address.street},{'\n'}
-              {address.city}, {address.state} {address.zip}
+            <ThemedText style={styles.sectionTitle}>
+              {t("HEADER.CUSTOMER_SERVICE")}
             </ThemedText>
-            <Pressable onPress={handlePhonePress}>
-              <ThemedText style={styles.footerItemText}>{phone}</ThemedText>
-            </Pressable>
-            <Pressable onPress={handleEmailPress}>
-              <ThemedText style={styles.footerItemText}>{email}</ThemedText>
-            </Pressable>
+            <View style={styles.footerItemContainer}>
+              <Pressable onPress={handleAddressPress}>
+                <ThemedText style={styles.footerItemText}>
+                  {address.street},{"\n"}
+                  {address.city}, {address.state} {address.zip}
+                </ThemedText>
+              </Pressable>
+              <Pressable onPress={handlePhonePress}>
+                <ThemedText style={styles.footerItemText}>{phone}</ThemedText>
+              </Pressable>
+              <Pressable onPress={handleEmailPress}>
+                <ThemedText style={styles.footerItemText}>{email}</ThemedText>
+              </Pressable>
             </View>
           </View>
         </View>
       </View>
       <View style={styles.bottomSection}>
         <ThemedText style={styles.copyright}>
-          Olas International Services &copy; {new Date().getFullYear()} | Política de privacidad
+          Olas International Services &copy; {new Date().getFullYear()} |{" "}
+          {t("PAGE.PRIVACY_POLICY")}
         </ThemedText>
         <View style={styles.paymentMethods}>
           <Visa />
@@ -171,6 +200,5 @@ const Footer: React.FC<FooterProps> = ({
     </View>
   );
 };
-
 
 export default Footer;
