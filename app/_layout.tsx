@@ -15,6 +15,7 @@ import { Drawer } from "expo-router/drawer";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import SidePanel from "@/components/layout/SidePanel";
 import { OpenSans_400Regular, OpenSans_600SemiBold, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
