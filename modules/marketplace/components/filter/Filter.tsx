@@ -23,7 +23,7 @@ import FilterDrawer from "./FilterDrawer";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 interface FiltersProps {
-  onItemClick: (item: any[]) => void;
+  onItemClick?: (item: any[]) => void;
   setFilter: (value: IAllFilters) => void;
   stats?: {
     data: SearchMarketBookingOptionStats;
@@ -80,7 +80,7 @@ const Filters: React.FC<FiltersProps> = ({
       categoryId: +item[1]?.value,
     });
 
-    onItemClick(item);
+    // onItemClick(item);
 
     if (lessThan.tablet  && onCloseDrawer) {
       onCloseDrawer();
