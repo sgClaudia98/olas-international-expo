@@ -18,12 +18,19 @@ const desktop = StyleSheet.create({
 const styles = {
   mobile: StyleSheet.create({
     ...desktop,
+    
     pageContainer: {
+      minHeight: "60%",
       paddingHorizontal: 10,
-      marginHorizontal: 10
+      marginHorizontal: 10,
+      paddingBottom: 20,
     },
   }),
   desktop,
+};
+
+export const breadcrumbContainer = {
+  marginTop: 30,
 };
 
 export default styles;

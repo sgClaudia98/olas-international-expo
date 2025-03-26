@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import ProfileSideMenu, {
   ProfileSideMenuItem,
 } from "@/modules/auth/components/ProfileSideMenu";
+import { breadcrumbContainer } from "@/styles/page";
 
 export default function ProfileLayout() {
   const { t } = useTranslation();
@@ -46,9 +47,7 @@ export default function ProfileLayout() {
 }
 
 const styles = StyleSheet.create({
-  breadcrumbContainer: {
-    marginTop: 30,
-  },
+  breadcrumbContainer,
   container: {
     marginTop: 40,
     flexDirection: "row",

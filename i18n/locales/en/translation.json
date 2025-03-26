@@ -25,5 +25,9 @@
   "LOGOUT": "Log out",
   "PROFILE_SETTINGS": "Profile Settings",
   "PAGE.PROFILE.HEADER": "Profile information",
-  "ACTIONS.SAVE_CHANGES": "Save changes"
+  "ACTIONS.SAVE_CHANGES": "Save changes",
+  "PAGE.LOGIN": "Login",
+  "PAGE.REGISTER": "Register",
+  "PAGE.RESET_PASSWORD": "Reset password",
+  "PAGE.VERIFY": "Verify account"
 }
