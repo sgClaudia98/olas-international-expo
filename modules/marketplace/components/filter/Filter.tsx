@@ -47,6 +47,9 @@ const Filters: React.FC<FiltersProps> = ({
   );
 
   const [priceRange, setPriceRange] = useState<DropdownItem[]>([]);
+  
+  const [activeCategoryTrace, setActiveCategoryTrace] = useState<DropdownItem[]>([])
+  const [activePriceTrace, setActivePriceTrace] = useState<DropdownItem[]>([])
 
   useEffect(() => {
     setPriceRange(
@@ -74,6 +77,8 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const _onItemClick = (item: DropdownItem[]) => {
+    setActiveCategoryTrace(item)
+
     setSelection({
       departmentId: +item[0]?.value,
       department: item[0]? capitalizeWords(item[0].title) : undefined,
@@ -87,6 +92,8 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   const _onSelectPrice = (trace: DropdownItem[]) => {
+    setActivePriceTrace(trace)
+
     const lastItem = trace[trace.length - 1];
     const [minPrice, maxPrice] = lastItem.value.split("-");
     setFilter({
@@ -117,12 +124,14 @@ const Filters: React.FC<FiltersProps> = ({
         title="Categories"
         items={mappedData}
         onItemClick={_onItemClick}
+        activeTrace={activeCategoryTrace}
       />
       {priceRange.length > 0 && (
         <MultilevelDropdown
           title="Price"
           items={priceRange}
           onItemClick={_onSelectPrice}
+          activeTrace={activePriceTrace}
         />
       )}
     </>
