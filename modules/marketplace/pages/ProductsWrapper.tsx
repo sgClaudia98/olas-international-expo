@@ -18,6 +18,7 @@ import { BreadcrumbItem } from "@/components/Breadcrumb";
 import { buildBreadcrumb } from "../utils/breadcrumbBuild";
 import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context/SearchContext";
+import { SortOption, useSort } from "../hooks/useSort";
 
 
 const ProductsWrapper: React.FC = () => {
@@ -29,6 +30,10 @@ const ProductsWrapper: React.FC = () => {
   const { selection } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
+
+  const [sortBy, setSortBy] = useState<SortOption>(null);
+
+  const sortedItems = useSort(items, sortBy);
 
   const [breadcrumb, setBreadcrumb] = useState<BreadcrumbItem[]>(
     buildBreadcrumb()
@@ -88,6 +93,8 @@ const ProductsWrapper: React.FC = () => {
         total={totalProducts}
         isOpenFilters={showDesktopFilters}
         breadcrumb={breadcrumb}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       />
       <View style={styles.wrapper}>
         {!isMobile && showDesktopFilters && (
@@ -127,11 +134,11 @@ const ProductsWrapper: React.FC = () => {
           loading={loading}
           fallback={<ProductWrapperSkeleton />}
         >
-          {items.length === 0 ? (
+          {sortedItems.length === 0 ? (
             <NoSearchResults />
           ) : (
             <View style={styles.products}>
-              {items?.map((val) => (
+              {sortedItems?.map((val) => (
                 <ProductItem
                   key={`prodI-${val.id}-${val.product.id}`}
                   item={val}
