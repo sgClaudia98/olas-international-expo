@@ -28,11 +28,13 @@ const desktop = StyleSheet.create({
     gap: 25,
   },
   productOpen: {
-    width: "30%",
-    minWidth: PROD_IMAGE_SIZE.tablet
+    flex:1,
+    maxWidth: "30%",
+    minWidth: PROD_IMAGE_SIZE.tablet,
   },
   productClose: {
-    width: "25%",
+    flex:1,
+    maxWidth: "25%",
     minWidth: PROD_IMAGE_SIZE.tablet 
   },
   filterActions: {
@@ -65,22 +67,19 @@ const styles = {
     products: {
       ...desktop.products,
       flexDirection: "row",
-      justifyContent: "space-between",
       flexWrap: "wrap",
       gap: 16,
     },
     productOpen: {
-      width: "auto",
-      flexGrow: 1,
-      flexShrink: 1, 
-      minWidth: PROD_IMAGE_SIZE.mobile
+      ...desktop.productOpen,
+      minWidth: PROD_IMAGE_SIZE.mobile,
+      maxWidth: "45%"
     },
     productClose: {
-      width: "auto",
-      flexGrow: 1,
-      flexShrink: 1, 
-      minWidth: PROD_IMAGE_SIZE.mobile
-    },
+      ...desktop.productClose,
+      minWidth: PROD_IMAGE_SIZE.mobile,
+      maxWidth: "45%"
+      },
 
     filterActions: {
       ...desktop.filterActions,
@@ -102,11 +101,11 @@ const styles = {
     },
     productOpen: {
       ...desktop.productOpen,
-      width: "45%",
+      maxWidth: "45%",
     },
     productClose: {
       ...desktop.productClose,
-      width: "30%",
+      maxWidth: "30%",
     },
   }),
   desktop,
@@ -114,11 +113,11 @@ const styles = {
     ...desktop,
     productOpen: {
       ...desktop.productOpen,
-      width: "25%",
+      maxWidth: "20%",
     },
     productClose: {
       ...desktop.productClose,
-      width: "20%",
+      maxWidth: "15%",
     },
   })
 };

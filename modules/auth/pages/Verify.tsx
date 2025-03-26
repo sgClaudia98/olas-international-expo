@@ -15,6 +15,8 @@ import {
 import { IVerifyRequest } from "../services/interfaces/account";
 import { DOMAIN } from "@/constants";
 import { Card } from "react-native-paper";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { cardStyle } from "@/styles/card";
 
 const validationSchema = Yup.object({
   token: Yup.string()
@@ -29,6 +31,7 @@ interface VerifyProps {
 
 const Verify: FunctionComponent<VerifyProps> = (params) => {
   const navigation = useNavigation();
+  const style = useResponsiveStyles(cardStyle);
   const { token, email } = params;
   const [verify, { isLoading, isError, isSuccess, error, data }] =
     useVerifyMutation(); // Destructure to get mutation states
@@ -46,7 +49,7 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
     if (isError) {
       //TODO:  Manejar error de token expired
       console.error("Error");
-    } else if (isSuccess && data as any) {
+    } else if (isSuccess && (data as any)) {
       navigation.dispatch(StackActions.replace("Auth", { screen: "Login" }));
     }
   }, [isLoading]);
@@ -70,8 +73,8 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
   //TODO: countdown for resend code
 
   return (
-    <Card style={{ marginHorizontal: "auto", backgroundColor: "white" }}>
-      <Card.Content>
+     <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
+         <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -117,8 +120,8 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
             </View>
           )}
         </Formik>
-      </Card.Content>
-    </Card>
+      </View>
+    </View>
   );
 };
 

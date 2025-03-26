@@ -16,6 +16,9 @@ import { MarketBookingCartExtra } from "../../hooks/useMarketCartActions";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import DiscountBadge from "@/components/DiscountBadge";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import DropdownSelect from "@/components/DropdownSelect";
+import DropdownMenuSelect from "@/components/DropdownMenuSelect";
+import NumberSelect from "@/components/NumberSelect";
 
 interface ProductItemProps {
   item: MarketBookingOption; // Add the type for the item prop
@@ -52,8 +55,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
   };
 
   return (
-    <Pressable onPress={onClick} style={[style]}>
-      <Card style={[styles.container, styles.productCard]}>
+    <Pressable onPress={onClick} style={style}>
+      <View style={[styles.container, styles.productCard]}>
         <View style={styles.imageContainer} id={item.id.toString()}>
           <Image
             source={{ uri: `${URL_IMAGE}${item.product.imageId}${imageSize}` }}
@@ -75,7 +78,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
             />
           )}
         </View>
-        <Card.Content style={styles.innerContainer}>
+        <View style={styles.innerContainer}>
           <View style={styles.nameContainer}>
             <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail">
               {item.product.name}
@@ -94,26 +97,11 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
           <View style={styles.actions}>
             <Pressable style={{ marginStart: 0, justifyContent: "flex-start" }}>
               {isMobile ? (
-                <select
-                  id={item.id.toString()}
-                  style={{
-                    backgroundColor: "#F4F4F4",
-                    padding: "8px",
-                    border: 0,
-                    lineHeight: 12,
-                    borderRadius: 20,
-                    fontSize: 12,
-                  }}
-                >
-                  {Array.from(
-                    { length: item.maxQuantity ? item.maxQuantity : 30 },
-                    (_, i) => (
-                      <option key={"opt-" + i} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    )
-                  )}
-                </select>
+                <NumberSelect
+                  length={item.maxQuantity}
+                  value={amount}
+                  onSelect={setAmount}
+                />
               ) : (
                 <NumberInput
                   initialValue={initialAmount}
@@ -128,8 +116,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
               onPress={() => _addToCart()}
             />
           </View>
-        </Card.Content>
-      </Card>
+        </View>
+      </View>
     </Pressable>
   );
 };

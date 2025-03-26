@@ -21,6 +21,8 @@ import {
 import { DOMAIN } from "@/constants";
 import { Card } from "react-native-paper";
 import { useRouter } from "expo-router";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { cardStyle } from "@/styles/card";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -49,6 +51,7 @@ interface ForgotPasswordProps {
 
 const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   const router = useRouter();
+  const style = useResponsiveStyles(cardStyle);
 
   const [forgetPass, _] = useForgetPasswordMutation(); // Destructure to get mutation states
   const [resetPass, responseResetPass] = useResetPasswordMutation();
@@ -94,8 +97,8 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   };
 
   return (
-    <Card style={{ marginHorizontal: "auto", backgroundColor: "white" }}>
-      <Card.Content>
+   <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
+          <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -190,8 +193,8 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
             </View>
           )}
         </Formik>
-      </Card.Content>
-    </Card>
+      </View>
+    </View>
   );
 };
 

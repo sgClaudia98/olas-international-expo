@@ -30,5 +30,9 @@
   "FORMLABEL.LAST_NAME": "Last Name",
   "FORMLABEL.PHONE_NUMBER": "Phone Number",
   "FORMLABEL.EMAIL": "Email",
-  "PAGE.ORDER_DETAIL": "Order details"
+  "PAGE.ORDER_DETAIL": "Order details",
+  "PAGE.LOGIN": "Login",
+  "PAGE.REGISTER": "Register",
+  "PAGE.RESET_PASSWORD": "Reset password",
+  "PAGE.VERIFY": "Verify account"
 }

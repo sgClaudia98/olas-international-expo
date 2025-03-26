@@ -23,7 +23,7 @@ import { SortOption, useSort } from "../hooks/useSort";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const { isMobile } = useBreakpoints();
+  const { lessThan } = useBreakpoints();
 
   const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
     useSearchMarketOptions();
@@ -97,7 +97,7 @@ const ProductsWrapper: React.FC = () => {
         setSortBy={setSortBy}
       />
       <View style={styles.wrapper}>
-        {!isMobile && showDesktopFilters && (
+        {!lessThan.tablet && showDesktopFilters && (
           <Filters
             setFilter={updateFilter}
             stats={
@@ -111,7 +111,7 @@ const ProductsWrapper: React.FC = () => {
           />
         )}
 
-        {isMobile && (
+        {lessThan.tablet && (
           <Filters
             setFilter={updateFilter}
             stats={
@@ -143,7 +143,7 @@ const ProductsWrapper: React.FC = () => {
                   key={`prodI-${val.id}-${val.product.id}`}
                   item={val}
                   style={
-                    showDesktopFilters || isMobile
+                    showDesktopFilters || lessThan.tablet
                       ? styles.productOpen
                       : styles.productClose
                   }
