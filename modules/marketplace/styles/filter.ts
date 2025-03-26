@@ -2,33 +2,42 @@ import { Colors } from "@/styles";
 import { layout } from "@/styles/sizing";
 import { StyleSheet } from "react-native";
 
+const desktop = StyleSheet.create({
+  filters: {
+    borderRadius: 8,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    width: 225, // Fixed width for left panel
+    gap: 5,
+    alignSelf: "stretch",
+  },
+  filterHeader: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+});
+
 const styles = {
   mobile: StyleSheet.create({
     filters: {
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      gap: 5,
+      ...desktop.filters,
+      width: '100%',
     },
     filterHeader: {
+      ...desktop.filterHeader,
       fontSize: 14,
-      fontWeight: "bold",
-      marginBottom: 10,
     },
   }),
   tablet: StyleSheet.create({
     filters: {
-      borderRadius: 8,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
-      width: 225, // Fixed width for left panel
-      gap: 5,
-      alignSelf: 'stretch',
+      ...desktop.filters,
     },
     filterHeader: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
+      ...desktop.filterHeader
     },
   }),
+  ...desktop
 };
+
 export default styles;
