@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/authSlice";
-
+import { Icon } from "react-native-paper";
 export interface ProfileSideMenuItem {
   label: string;
   route: string;
@@ -38,7 +38,16 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
       <View style={styles.menu}>
         {items.map((i, index) => (
           <Link key={index} href={i.route as any} style={styles.menuItem}>
-            <Text style={styles.icon}>{"[ico]"}</Text>
+            <Icon
+              source={i.icon ? i.icon : "[ico]"}
+              size={20}
+              color={
+                (i.exact && pathname == i.route) ||
+                (!i.exact && pathname.startsWith(i.route))
+                  ? activeColor
+                  : color
+              }
+            />
             <ThemedText
               style={{
                 ...styles.menuText,
@@ -60,7 +69,7 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
         style={[styles.menuItem, styles.logoutItem]}
         onPress={handleLogout}
       >
-        <Text style={styles.icon}>icon</Text>
+        <Icon source={require("@/assets/icons/svg/Logout.svg")} size={20} />
         <ThemedText style={{ ...styles.menuText, color }}>
           {t("LOGOUT")}
         </ThemedText>
@@ -83,12 +92,15 @@ const styles = StyleSheet.create({
     gap: 23,
   },
   menuItem: {
+    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 10,
+    gap: 16,
   },
   logoutItem: {
     marginVertical: 32,
+    gap: 16,
   },
   icon: {
     marginRight: 16,

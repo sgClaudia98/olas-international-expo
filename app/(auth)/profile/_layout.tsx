@@ -18,13 +18,13 @@ export default function ProfileLayout() {
     {
       label: "PAGE.PROFILE",
       route: "/profile",
-      icon: "profle",
+      icon: "account-circle-outline",
       exact: true,
     },
     {
       label: "PAGE.ORDER_HISTORY",
       route: "/profile/order-history",
-      icon: "time",
+      icon: "history",
     },
   ];
 
