@@ -11,6 +11,7 @@ import {
   ProductCategoriesResponse,
   ProductResponse,
   RemoveMarketBookingCartItemRequest,
+  SearchAgencyClientMarketBookingRequest,
   SearchMarketBookingOptionsRequest,
   SearchMarketBookingOptionsResponse,
   UpdateMarketBookingCartRequest,
@@ -141,6 +142,13 @@ export const bookingService = createApi({
       }),
     }),
     
+    searchMarketBookings: builder.mutation<AgencyClientBookingResponse, SearchAgencyClientMarketBookingRequest>({
+      query: (body) => ({
+        url: `/bookings/market/booking/search`, // Endpoint de la API
+        method: 'POST',
+        body: { ...body, preview: false }, // El cuerpo de la solicitud
+      }),
+    }),
   }),
 });
 
@@ -161,6 +169,7 @@ export const {
   useCreateMarketBookingMutation,
   usePreviewMarketBookingMutation,
   useGetBookingByIdQuery,
+  useSearchMarketBookingsMutation,
 } = bookingService;
 
 export const bookingEndpoints = bookingService.endpoints;

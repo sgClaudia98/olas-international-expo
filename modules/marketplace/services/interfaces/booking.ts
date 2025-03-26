@@ -1,5 +1,6 @@
 import {IError} from '@/services/interfaces/error';
 import {PaginationRequest, PaginationResponse} from '@/services/interfaces/pagination';
+import { EBookingStatus } from './bookingDetail';
 
 export interface Currency {
   id: number;
@@ -15,6 +16,8 @@ export type EBookingType = 'Undefined' | 'Car' | 'Market';
 export type ESortByProperty = 'Price';
 
 export type ESortMode = 'Asc' | 'Desc';
+
+export type ESortByBookingProperty = "BookingDate";
 
 export interface MarketBookingOption {
   type: EBookingType;
@@ -101,7 +104,20 @@ export interface SearchMarketBookingOptions {
   sortMode?: ESortMode;
 }
 
-//
+
+export interface SearchAgencyClientMarketBookingRequest {
+  offset?: number | null;
+  limit?: number | null;
+  fromBookingDate?: string | null; // Date-time string (ISO 8601 format)
+  endBookingDate?: string | null; // Date-time string (ISO 8601 format)
+  status?: EBookingStatus;
+  reference?: string | null;
+  id?: number | null;
+  sortBy?: ESortByBookingProperty;
+  sortMode?: ESortMode;
+}
+
+
 export interface GetSearchMarketBookingOptionsRequest
   extends SearchMarketBookingOptions,
     PaginationRequest {

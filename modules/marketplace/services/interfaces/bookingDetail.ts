@@ -1,5 +1,5 @@
 import {IError} from '@/services/interfaces/error';
-import {Currency, EBookingType, Product} from './booking';
+import {Currency, EBookingType, ESortMode, Product} from './booking';
 export type EBookingStatus =
   | 'Requested'
   | 'Processing'
@@ -18,6 +18,7 @@ export type EMarketBookingDetailStatus =
   | 'Cancelled'
   | 'Penalties'
   | 'Delivered';
+
 
 export interface BookingDetail {
   bookingType: EBookingType;
