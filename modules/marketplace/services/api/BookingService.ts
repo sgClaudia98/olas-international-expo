@@ -11,6 +11,7 @@ import {
   ProductCategoriesResponse,
   ProductResponse,
   RemoveMarketBookingCartItemRequest,
+  SearchAgencyClientBookingResponse,
   SearchAgencyClientMarketBookingRequest,
   SearchMarketBookingOptionsRequest,
   SearchMarketBookingOptionsResponse,
@@ -142,9 +143,9 @@ export const bookingService = createApi({
       }),
     }),
     
-    searchMarketBookings: builder.mutation<AgencyClientBookingResponse, SearchAgencyClientMarketBookingRequest>({
+    searchMarketBookings: builder.mutation<SearchAgencyClientBookingResponse, SearchAgencyClientMarketBookingRequest>({
       query: (body) => ({
-        url: `/bookings/market/booking/search`, // Endpoint de la API
+        url: `/market/booking/search`, // Endpoint de la API
         method: 'POST',
         body: { ...body, preview: false }, // El cuerpo de la solicitud
       }),

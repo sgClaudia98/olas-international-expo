@@ -101,6 +101,7 @@ export interface AgencyClientBooking {
   details?: BookingDetail[] | null; // This can be CarBookingDetail or MarketBookingDetail
 }
 
+
 export interface AgencyClientBookingResponse {
   booking: AgencyClientBooking;
   success: boolean;

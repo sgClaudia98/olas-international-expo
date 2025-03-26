@@ -1,6 +1,6 @@
 import {IError} from '@/services/interfaces/error';
 import {PaginationRequest, PaginationResponse} from '@/services/interfaces/pagination';
-import { EBookingStatus } from './bookingDetail';
+import { AgencyClientBooking, EBookingStatus } from './bookingDetail';
 
 export interface Currency {
   id: number;
@@ -115,6 +115,16 @@ export interface SearchAgencyClientMarketBookingRequest {
   id?: number | null;
   sortBy?: ESortByBookingProperty;
   sortMode?: ESortMode;
+}
+
+interface ValSearchAgencyClientBooking extends PaginationResponse{
+  bookings: AgencyClientBooking[];
+}
+
+export interface SearchAgencyClientBookingResponse {
+  value: ValSearchAgencyClientBooking;
+  success: boolean;
+  error?: IError;
 }
 
 
