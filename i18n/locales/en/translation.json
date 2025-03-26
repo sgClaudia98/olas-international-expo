@@ -29,5 +29,6 @@
   "FORMLABEL.FIRST_NAME": "First Name",
   "FORMLABEL.LAST_NAME": "Last Name",
   "FORMLABEL.PHONE_NUMBER": "Phone Number",
-  "FORMLABEL.EMAIL": "Email"
+  "FORMLABEL.EMAIL": "Email",
+  "PAGE.ORDER_DETAIL": "Order details"
 }
