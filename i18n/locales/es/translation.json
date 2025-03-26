@@ -25,5 +25,9 @@
   "LOGOUT": "Cerrar sesión",
   "PROFILE_SETTINGS": "Ajustes de Perfil",
  "PAGE.PROFILE.HEADER": "Información del perfil",
-  "ACTIONS.SAVE_CHANGES": "Guardar cambios"
+  "ACTIONS.SAVE_CHANGES": "Guardar cambios",
+  "FORMLABEL.FIRST_NAME": "Nombre",
+  "FORMLABEL.LAST_NAME": "Apellidos",
+  "FORMLABEL.PHONE_NUMBER": "Teléfono",
+  "FORMLABEL.EMAIL": "Correo electrónico"
 }
