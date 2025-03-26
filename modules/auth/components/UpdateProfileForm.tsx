@@ -94,6 +94,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.firstName}
+                    disabled
                   />
                   {errors.firstName && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -116,6 +117,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.lastName}
+                    disabled
                   />
                   {errors.lastName && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -136,6 +138,8 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     inputStyles={{ ...styles.formInput, marginBottom: 0 }}
                     name="phone"
                     defaultCountryCode="US"
+                    disableCountrySelection
+                    disabled
                     error={!!errors.phone?.number}
                   />
                   {errors.phone?.number && (
@@ -160,6 +164,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.email}
+                    disabled
                   />
                   {errors.email && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -170,7 +175,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
               </View>
             </View>
           </View>
-          <View style={styles.cardFooter}>
+          <View style={{...styles.cardFooter, display: "none"}}>
             <Btn
               title={t("ACTIONS.SAVE_CHANGES")}
               disabled={_.isEqual(values, initialValues)}

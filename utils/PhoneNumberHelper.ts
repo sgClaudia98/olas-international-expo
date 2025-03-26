@@ -5,10 +5,6 @@ const phoneUtil = PhoneNumberUtil.getInstance();
 
 export function validatePhoneNumberWithErrors(phoneNumber: string, countryCode: string) {
   try {
-    if (!phoneNumber || phoneNumber.trim() === "") {
-      return { isValid: false, error: "Phone number is required." };
-    }
-
     const parsedNumber = phoneUtil.parseAndKeepRawInput(phoneNumber, countryCode);
 
     if (!phoneUtil.isValidNumber(parsedNumber)) {
@@ -45,8 +41,18 @@ export const phoneNumberValidation = Yup.object().shape({
   .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
     const countryCode = this.parent?.code || "US";
     
-    if (!value) return this.createError({ message: "Phone number is required" });
+    if (!value || value.trim() === "") return this.createError({ message: "Phone number is required" });
 
+    const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
+    return isValid ? true : this.createError({ message: error });
+  })
+});
+
+export const phoneNumberValidationNotRequired = Yup.object().shape({
+  number: Yup.string()
+  .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
+    const countryCode = this.parent?.code || "US";
+    if (!value || value.trim() === "") return true
     const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
     return isValid ? true : this.createError({ message: error });
   })

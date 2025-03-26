@@ -14,6 +14,7 @@ interface PhoneNumberSelectorProps {
   defaultCountryCode: string;
   disableCountrySelection?: boolean;
   error: boolean;
+  disabled?:boolean
 }
 
 const PhoneNumberSelector = <T,>({
@@ -21,6 +22,7 @@ const PhoneNumberSelector = <T,>({
   inputStyles,
   defaultCountryCode,
   disableCountrySelection,
+  disabled = false,
   error,
 }: PhoneNumberSelectorProps) => {
   const CODE = name + ".code";
@@ -60,6 +62,7 @@ const PhoneNumberSelector = <T,>({
         textColor={inputStyles?.color || Colors.black.primary}
         onBlur={handleBlur}
         error={error}
+        disabled={disabled}
       />
     </>
   );
