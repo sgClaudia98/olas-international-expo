@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const tablet = StyleSheet.create({
+const desktop = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -17,15 +17,13 @@ const tablet = StyleSheet.create({
 
 const styles = {
   mobile: StyleSheet.create({
-    ...tablet,
+    ...desktop,
     pageContainer: {
-      ...tablet.pageContainer,
       paddingHorizontal: 10,
-      marginHorizontal: 0,
-      minHeight: 0
+      marginHorizontal: 10
     },
   }),
-  tablet,
+  desktop,
 };
 
 export default styles;

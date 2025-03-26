@@ -52,8 +52,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
   };
 
   return (
-    <Pressable onPress={onClick} style={[style]}>
-      <Card style={[styles.container, styles.productCard]}>
+    <Pressable onPress={onClick} style={style}>
+      <View style={[styles.container, styles.productCard]}>
         <View style={styles.imageContainer} id={item.id.toString()}>
           <Image
             source={{ uri: `${URL_IMAGE}${item.product.imageId}${imageSize}` }}
@@ -75,7 +75,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
             />
           )}
         </View>
-        <Card.Content style={styles.innerContainer}>
+        <View style={styles.innerContainer}>
           <View style={styles.nameContainer}>
             <Text style={styles.name} numberOfLines={2} ellipsizeMode="tail">
               {item.product.name}
@@ -128,8 +128,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
               onPress={() => _addToCart()}
             />
           </View>
-        </Card.Content>
-      </Card>
+        </View>
+      </View>
     </Pressable>
   );
 };

@@ -65,8 +65,11 @@ const productItemTablet = StyleSheet.create({
   ...commonProductStyles,
   image: {
     ...commonProductStyles.image, 
-    width: PROD_IMAGE_SIZE.tablet,
-    height: PROD_IMAGE_SIZE.tablet,
+    minWidth: PROD_IMAGE_SIZE.tablet,
+    minHeight: PROD_IMAGE_SIZE.tablet,
+    height: "100%",
+    width: "100%",
+    aspectRatio: 1,
   },
   name: {
     ...commonProductStyles.name, 
@@ -81,8 +84,6 @@ const productItemTablet = StyleSheet.create({
     fontSize: 22,
   },
   container: {
-    marginHorizontal: "auto",
-    width: PROD_IMAGE_SIZE.tablet,
     justifyContent: "space-between",
     marginBottom: 16, 
   },
@@ -99,28 +100,18 @@ const productItemTablet = StyleSheet.create({
   },
   innerContainer: {
     paddingTop: 16,
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingBottom: 0,
-    maxWidth: PROD_IMAGE_SIZE.tablet,
     flex: 1,
   },
   addBtn: undefined,
   imageOverlay: {
     ...commonProductStyles.imageOverlay,
-    width: PROD_IMAGE_SIZE.tablet,
-    height: PROD_IMAGE_SIZE.tablet,
+    minWidth: PROD_IMAGE_SIZE.tablet,
+    minHeight: PROD_IMAGE_SIZE.tablet,
+    aspectRatio: 1,
+    height: "100%",
+    width: "100%"
   },
   productCard: {
-    backgroundColor: Colors.white.default,
-    borderRadius: 0,
-    shadowColor: Colors.white.default,
-    shadowRadius: 0,
-    boxShadow: "none",
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
     marginBottom: 20
   },
   actions: {
@@ -138,11 +129,11 @@ const productItemStyles = {
     ...productItemTablet,
     container: {
       ...productItemTablet.container,
-      width: PROD_IMAGE_SIZE.mobile
+      minWidth: PROD_IMAGE_SIZE.mobile
     },
     innerContainer: {
       ...productItemTablet.innerContainer,
-      maxWidth: PROD_IMAGE_SIZE.tablet,
+      minWidth: PROD_IMAGE_SIZE.mobile,
     },
     price: {
       ...productItemTablet.price,
@@ -151,13 +142,13 @@ const productItemStyles = {
     },
     image: {
       ...productItemTablet.image,
-      width: PROD_IMAGE_SIZE.mobile,
-      height: PROD_IMAGE_SIZE.mobile,
+      minWidth: PROD_IMAGE_SIZE.mobile,
+      minHeight: PROD_IMAGE_SIZE.mobile,
     },
     imageOverlay: {
       ...productItemTablet.imageOverlay,
-      width: PROD_IMAGE_SIZE.mobile,
-      height: PROD_IMAGE_SIZE.mobile,
+      minWidth: PROD_IMAGE_SIZE.mobile,
+      minHeight: PROD_IMAGE_SIZE.mobile,
     },
     nameContainer: {
       ...productItemTablet.nameContainer,
