@@ -32,8 +32,7 @@ const commonProductStyles = StyleSheet.create({
   name: {
     fontFamily: Fonts.regular,
     color: Colors.black.primary,
-    fontWeight: "600",
-    lineHeight: 26,
+    fontWeight: 600,
     width: "100%",
     marginBottom: 6,  
   },
@@ -73,7 +72,9 @@ const productItemTablet = StyleSheet.create({
   },
   name: {
     ...commonProductStyles.name, 
+    lineHeight: 26,
     fontSize: 18,
+    minHeight: 52
   },
   prices: {
     ...commonProductStyles.prices,
@@ -157,7 +158,8 @@ const productItemStyles = {
     name:{
       ...productItemTablet.name,
       fontSize: 14,
-      lineHeight: 14
+      lineHeight: 14,
+      minHeight: 28
     },
     oldPrice:{
       ...productItemTablet.oldPrice,
