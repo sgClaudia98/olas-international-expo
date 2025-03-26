@@ -15,6 +15,8 @@ import CheckboxInput from "@/components/ui/CheckboxInput";
 
 import { Card } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { cardStyle } from "@/styles/card";
 
 interface FormValues extends IAccountCreateRequest {}
 
@@ -46,6 +48,7 @@ interface RegisterProps {}
 
 const Register: FunctionComponent<RegisterProps> = () => {
   const router = useRouter();
+  const style = useResponsiveStyles(cardStyle);
   const [signup, { isLoading, isError, isSuccess, error, data }] =
     useSignupMutation(); // Destructure to get mutation states
   const [email, setEmail] = React.useState("");
@@ -72,8 +75,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }, [isLoading]);
 
   return (
-    <Card style={{ marginHorizontal: "auto", backgroundColor: "white" }}>
-      <Card.Content>
+    <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
+          <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -141,7 +144,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 />
 
                 {/* Newsletter Checkbox */}
-                <View style={{ paddingHorizontal: 20, maxWidth: "80%" }}>
+                <View style={{ paddingHorizontal: 20, flexWrap: "wrap" }}>
                   <CheckboxInput
                     label="I accept to be contacted with offers and relevant information."
                     isChecked={values.receiveNewsLetter}
@@ -165,8 +168,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
             </View>
           )}
         </Formik>
-      </Card.Content>
-    </Card>
+      </View>
+    </View>
   );
 };
 

@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import { decodeToken } from "react-jwt";
 import { Link, useRouter } from "expo-router";
 import { fetchUserProfileThunk } from "../slices/authThunks";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { cardStyle } from "@/styles/card";
 
 interface FormValues {
   email: string;
@@ -31,6 +33,7 @@ interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const router = useRouter();
+  const style = useResponsiveStyles(cardStyle)
   const [auth, { isLoading, isError, isSuccess, error, data }] =
     useAuthMutation(); // Destructure to get mutation states
 
@@ -65,8 +68,8 @@ const Login: FunctionComponent<LoginProps> = () => {
   };
 
   return (
-    <Card style={{ marginHorizontal: "auto", backgroundColor: "white" }}>
-      <Card.Content>
+    <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
+      <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -148,8 +151,8 @@ const Login: FunctionComponent<LoginProps> = () => {
             </View>
           )}
         </Formik>
-      </Card.Content>
-    </Card>
+      </View>
+    </View>
   );
 };
 

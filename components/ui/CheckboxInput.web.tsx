@@ -16,7 +16,7 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable onPress={handleCheck} style={styles.container}>
             {/* Web-specific Checkbox component */}
             <CheckBox
                 value={isChecked}
@@ -25,21 +25,19 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
                 color={isChecked ? Colors.blue.primary: Colors.black.third}
             />
             {/* Label as Pressable */}
-            <Pressable onPress={handleCheck}>
                 <Text style={styles.text}>
                     {label}
                 </Text>
             </Pressable>
-        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     checkbox: {
+        marginTop: 4,
         marginRight: 10,
         width: 15,
         height: 15,
@@ -47,6 +45,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
+        flexShrink: 1,
         color: Colors.black.second,
     },
 });
