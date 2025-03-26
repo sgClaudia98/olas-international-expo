@@ -20,9 +20,6 @@ export const Profile: FC<ViewProps> = () => {
 
   const styles = useResponsiveStyles(profileStyles);
 
-  const handleSave = () => {
-    // TODO
-  };
 
   return (
     <>
@@ -46,16 +43,8 @@ export const Profile: FC<ViewProps> = () => {
               {t("PAGE.PROFILE.HEADER")}
             </ThemedText>
           </View>
-          <View style={styles.cardContent}>
             <UpdateProfileForm profile={profile} />
-          </View>
-          <View style={styles.cardFooter}>
-            <Btn
-              title={t("ACTIONS.SAVE_CHANGES")}
-              disabled
-              onPress={handleSave}
-            />
-          </View>
+          
         </View>
       )}
     </>

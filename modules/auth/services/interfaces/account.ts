@@ -16,7 +16,7 @@ export interface IAccountResponse {
 
 // active and debitCardNumber shouldnt be a property sent by the backend
 export interface IAccountPutRequest extends
-    Omit<Client, | 'email' | 'id' | 'active' | 'country' | 'fullName' | 'debitCardNumber'> {
+    Partial<Omit<Client, | 'email' | 'id' | 'active' | 'country' | 'fullName' | 'debitCardNumber'>> {
     receiveNewsLetter: boolean;
     preferredLanguage: string;
 }
