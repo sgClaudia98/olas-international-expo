@@ -1,7 +1,7 @@
 import { Text, View, ViewProps, Image } from "react-native";
 import React, { FC } from "react";
 import Btn from "@/components/Btn";
-import { Button, Card } from "react-native-paper";
+import { Button, Card, TextInput } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router";
 import { logout } from "../slices/authSlice";
@@ -11,10 +11,11 @@ import { profileStyles } from "../styles/profile";
 import ProfileSkeleton from "../components/skeletons/ProfileSkeleton";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
+import { UpdateProfileForm } from "./UpdateProfileForm";
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { data: profile, isLoading, isError } = useGetProfileQuery();
 
   const styles = useResponsiveStyles(profileStyles);
@@ -29,9 +30,9 @@ export const Profile: FC<ViewProps> = () => {
         <ProfileSkeleton />
       ) : isError || !profile ? (
         <View>
-          <Text style={{ marginBottom: 10 }}>
+          <ThemedText style={{ marginBottom: 10 }}>
             You have to log in to see your profile.
-          </Text>
+          </ThemedText>
           <Btn
             title="Login"
             onPress={() => router.navigate("/(auth)/login")}
@@ -41,19 +42,19 @@ export const Profile: FC<ViewProps> = () => {
       ) : (
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-              <ThemedText style={styles.cardHeaderText}>
-                {t("PAGE.PROFILE.HEADER")}
-              </ThemedText>
+            <ThemedText style={styles.cardHeaderText}>
+              {t("PAGE.PROFILE.HEADER")}
+            </ThemedText>
           </View>
           <View style={styles.cardContent}>
-            {/** This has to be  */}
-            <Text>First name</Text>
-            <Text>Last name</Text>
-            <Text>Phonenumber</Text>
-            <Text>Email</Text>
+            <UpdateProfileForm profile={profile} />
           </View>
           <View style={styles.cardFooter}>
-            <Btn title={t("ACTIONS.SAVE_CHANGES")} disabled onPress={handleSave}/>
+            <Btn
+              title={t("ACTIONS.SAVE_CHANGES")}
+              disabled
+              onPress={handleSave}
+            />
           </View>
         </View>
       )}

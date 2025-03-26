@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     flexDirection: "row",
+    flexWrap: 'wrap',
     justifyContent: "space-between",
   },
   sideMenu: {},
