@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
-import { validatePhoneNumberWithErrors } from "./PhoneNumberHelper";
-import { parsePhoneNumber } from "./PhoneNumberHelper";
 import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
+import { parsePhoneNumber, phoneNumberValidation } from '@/utils/PhoneNumberHelper';
 
 export interface PaymentFormValues {
   client: {
@@ -58,17 +57,6 @@ export const mapValuesToPayload = (
   };
 };
 
-const phoneNumberValidation = Yup.object().shape({
-  number: Yup.string().required("Phone number is required")
-  .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
-    const countryCode = this.parent?.code || "US";
-    
-    if (!value) return this.createError({ message: "Phone number is required" });
-
-    const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
-    return isValid ? true : this.createError({ message: error });
-  })
-});
 
 
 const validationSchemas = {

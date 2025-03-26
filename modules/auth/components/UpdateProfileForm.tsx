@@ -1,16 +1,17 @@
 import React from "react";
 import { Formik } from "formik";
 import { IAccountResponse } from "../services/interfaces/account";
-import { parseStringToPhoneNumber } from "@/modules/marketplace/components/payment/PhoneNumberHelper";
+import { parseStringToPhoneNumber } from "@/utils/PhoneNumberHelper";
 import { ThemedText } from "@/components/ThemedText";
 import { TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
-import PhoneNumberSelector from "@/modules/marketplace/components/payment/PhoneNumberSelector";
+import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 import { Toast } from "toastify-react-native";
 import { Colors } from "@/styles";
 import { useTranslation } from "react-i18next";
 import { profileStyles } from "../styles/profile";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { validationSchema } from "./UpdateProfileFormHelper";
 
 interface UpdateProfileFormProps {
   profile: IAccountResponse;
@@ -35,6 +36,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ profile })
   return (
     <Formik
       initialValues={initialValues}
+      validationSchema={validationSchema}
       onSubmit={() => Toast.success("Editing profile info")}
     >
       {({

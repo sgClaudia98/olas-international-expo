@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import { PhoneNumberUtil, PhoneNumberType } from "google-libphonenumber";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
@@ -39,3 +40,14 @@ export const parseStringToPhoneNumber = (phoneNumber: string)  => {
   return { code, number } 
 }
 
+export const phoneNumberValidation = Yup.object().shape({
+  number: Yup.string().required("Phone number is required")
+  .test("is-valid-phone", "Invalid phone number for selected country.", function (value) {
+    const countryCode = this.parent?.code || "US";
+    
+    if (!value) return this.createError({ message: "Phone number is required" });
+
+    const { isValid, error } = validatePhoneNumberWithErrors(value, countryCode);
+    return isValid ? true : this.createError({ message: error });
+  })
+});

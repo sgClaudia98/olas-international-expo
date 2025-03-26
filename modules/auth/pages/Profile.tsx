@@ -11,7 +11,7 @@ import { profileStyles } from "../styles/profile";
 import ProfileSkeleton from "../components/skeletons/ProfileSkeleton";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
-import { UpdateProfileForm } from "./UpdateProfileForm";
+import { UpdateProfileForm } from "../components/UpdateProfileForm";
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();

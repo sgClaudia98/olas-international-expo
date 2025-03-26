@@ -21,7 +21,7 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import { useAppSelector } from "@/hooks/useAppDispatch";
 import { mapValuesToPayload } from "./PaymentFormHelper";
-import { parseStringToPhoneNumber } from "./PhoneNumberHelper";
+import { parseStringToPhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 type ValidationSchemas = {

@@ -5,7 +5,7 @@ import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
 import { paymentFormStyles as styles } from "../../../styles/paymentForm";
 import { PaymentFormValues } from "../PaymentFormHelper";
-import PhoneNumberSelector from "../PhoneNumberSelector";
+import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 
 const Step1 = () => {
   const { handleChange, handleBlur, values, errors } =

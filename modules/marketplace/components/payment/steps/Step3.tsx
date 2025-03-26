@@ -13,7 +13,7 @@ import {
   PhoneIcon,
   ProfileIcon,
 } from "@/assets/icons/PaymentInfoIcons";
-import { parsePhoneNumber } from "../PhoneNumberHelper";
+import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 
 const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();

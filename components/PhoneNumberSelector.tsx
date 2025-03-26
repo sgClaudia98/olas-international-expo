@@ -3,9 +3,8 @@ import { StyleSheet } from "react-native";
 import { useFormikContext } from "formik";
 import { PhoneNumberInput } from "react-native-paper-phone-number-input";
 import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
-import { PaymentFormValues } from "./PaymentFormHelper";
-import { parsePhoneNumber } from "./PhoneNumberHelper";
 import { Colors } from "@/styles";
+import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 
 polyfillCountryFlagEmojis();
 
@@ -17,18 +16,17 @@ interface PhoneNumberSelectorProps {
   error: boolean;
 }
 
-const PhoneNumberSelector: React.FC<PhoneNumberSelectorProps> = ({
+const PhoneNumberSelector = <T,>({
   name,
   inputStyles,
   defaultCountryCode,
   disableCountrySelection,
   error,
-}) => {
+}: PhoneNumberSelectorProps) => {
   const CODE = name + ".code";
   const NUMBER = name + ".number";
 
-  const { values, setFieldValue, setFieldTouched } =
-    useFormikContext<PaymentFormValues>();
+  const { values, setFieldValue, setFieldTouched } = useFormikContext<T>();
 
   const countryValue = getNestedValue(values, CODE) || defaultCountryCode;
   const phoneValue = getNestedValue(values, NUMBER) || "";
