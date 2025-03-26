@@ -107,6 +107,11 @@ const styles = {
       ...desktop.productClose,
       maxWidth: "30%",
     },
+    filterActions: {
+      ...desktop.filterActionContainer,
+      justifyContent: 'space-between',
+      width: '100%'
+    }
   }),
   desktop,
   bigDesktop: StyleSheet.create({
