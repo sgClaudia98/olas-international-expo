@@ -51,7 +51,12 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             {t("PAGE.ORDER_DETAIL")}
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
-          <Link style={{color: Colors.blue.second}} href={"/profile/order-history"}>{t('BACK')}</Link>
+          <Link
+            style={{ color: Colors.blue.second }}
+            href={"/profile/order-history"}
+          >
+            {t("BACK")}
+          </Link>
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardColumnLeft}>
@@ -192,36 +197,39 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                     {shipment.total} {t("PRODUCTS").toLowerCase()}
                   </ThemedText>
                 </View>
+
+                <ThemedText>{shipment.status}</ThemedText>
                 <DataTable>
-        <DataTable.Header style={styles.tableProductHeader}>
-          <DataTable.Title>
-            <ThemedText style={styles.tableLabel}>Product</ThemedText>
-          </DataTable.Title>
-          <DataTable.Title numeric>
-            <ThemedText style={styles.tableLabel}>Quantity</ThemedText>
-          </DataTable.Title>
-          <DataTable.Title numeric>
-            <ThemedText style={styles.tableLabel}>Price</ThemedText>
-          </DataTable.Title>
-        </DataTable.Header>
-        {shipment.items.map((item) => (
-        <DataTable.Row
-          key={`${booking.id}-${item.id}`}
-          style={styles.tableProductRow}
-        >
-          <DataTable.Cell>
-            <ThemedText>{item.name}</ThemedText>
-          </DataTable.Cell>
-          <DataTable.Cell numeric>
-            <ThemedText>{item.quantity}</ThemedText>
-          </DataTable.Cell>
-          <DataTable.Cell numeric>
-            <ThemedText>${item.price.toFixed(2)}</ThemedText>
-          </DataTable.Cell>
-        </DataTable.Row>
-      ))}
-      </DataTable>
-     
+                  <DataTable.Header style={styles.tableProductHeader}>
+                    <DataTable.Title>
+                      <ThemedText style={styles.tableLabel}>Product</ThemedText>
+                    </DataTable.Title>
+                    <DataTable.Title numeric>
+                      <ThemedText style={styles.tableLabel}>
+                        Quantity
+                      </ThemedText>
+                    </DataTable.Title>
+                    <DataTable.Title numeric>
+                      <ThemedText style={styles.tableLabel}>Price</ThemedText>
+                    </DataTable.Title>
+                  </DataTable.Header>
+                  {shipment.items.map((item) => (
+                    <DataTable.Row
+                      key={`${booking.id}-${item.id}`}
+                      style={styles.tableProductRow}
+                    >
+                      <DataTable.Cell>
+                        <ThemedText>{item.name}</ThemedText>
+                      </DataTable.Cell>
+                      <DataTable.Cell numeric>
+                        <ThemedText>{item.quantity}</ThemedText>
+                      </DataTable.Cell>
+                      <DataTable.Cell numeric>
+                        <ThemedText>${item.price.toFixed(2)}</ThemedText>
+                      </DataTable.Cell>
+                    </DataTable.Row>
+                  ))}
+                </DataTable>
               </>
             ))
           )}
