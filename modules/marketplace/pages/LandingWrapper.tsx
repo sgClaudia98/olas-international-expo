@@ -17,7 +17,7 @@ import ExperienceFromYourMobile from "../components/landing/ExperienceFromYourMo
 import Testimonials from "../components/landing/Testimonials";
 import NewsletterSection from "../components/landing/NewsletterSection";
 import BottomImage from "../components/landing/BottomImage";
-import Footer from "@/components/layout/MainFooterComponent";
+import Footer from "@/components/layout/Footer";
 import Btn from "@/components/Btn";
 import { ThemedText } from "@/components/ThemedText";
 import { useRouter } from "expo-router";

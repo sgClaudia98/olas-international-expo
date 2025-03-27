@@ -4,6 +4,7 @@ import typography from "@/styles/typography";
 
 const desktop = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: Colors.black.primary,
     paddingVertical: 60,
     paddingHorizontal: 100,
@@ -11,8 +12,6 @@ const desktop = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 25,
     gap: 40,
-    width: "100%",
-    marginHorizontal: "auto",
   },
   logoSection: {
     minWidth: 150,
@@ -84,7 +83,6 @@ const styles = {
       paddingHorizontal: 50,
       flexDirection: "column",
       width: "auto",
-      marginHorizontal: 20,
     },
     footerMenu: {
       ...desktop.footerMenu,
@@ -126,7 +124,6 @@ const styles = {
       flexDirection: "column",
       alignItems: "center",
       width: "auto",
-      marginHorizontal: 20,
     },
   }),
   desktop,

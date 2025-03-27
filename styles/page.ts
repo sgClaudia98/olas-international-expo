@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from "@/hooks/useBreakpoints";
 import { StyleSheet } from "react-native";
 
 const desktop = StyleSheet.create({
@@ -6,27 +7,42 @@ const desktop = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
+    minHeight: "100%",
+    paddingHorizontal: 20,
+    marginHorizontal: 85,
   },
   pageContainer: {
     display: "flex",
     minHeight: "100%",
-    padding: 20,
-    marginHorizontal: 85
   },
 });
 
 const styles = {
   mobile: StyleSheet.create({
     ...desktop,
-    
-    pageContainer: {
-      minHeight: "60%",
+    scrollContent: {
+      ...desktop.scrollContent,
       paddingHorizontal: 10,
       marginHorizontal: 10,
       paddingBottom: 20,
     },
   }),
+  tablet: StyleSheet.create({
+    ...desktop,
+    scrollContent: {
+      ...desktop.scrollContent,
+      marginHorizontal: 25,
+    },
+  }),
   desktop,
+  bigDesktop: StyleSheet.create({
+    ...desktop,
+    scrollContent: {
+      ...desktop.scrollContent,
+      alignSelf: "center",
+      maxWidth: BREAKPOINTS.desktop,
+    },
+  }),
 };
 
 export const breadcrumbContainer = {

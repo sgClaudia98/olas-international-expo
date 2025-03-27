@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { SafeAreaView, ScrollView, View, StyleSheet, ViewStyle } from "react-native";
-import Footer from "./MainFooterComponent";
+import Footer from "./Footer";
 import { ThemedView } from "../ThemedView";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../../styles/page";
@@ -21,6 +21,7 @@ const Page: React.FC<PageProps> = ({ children, backgroundColor = Colors.white.de
         showsHorizontalScrollIndicator={false}
       >
         <View style={{...styles.pageContainer, backgroundColor}}>{children}</View>
+      
         <Footer />
       </ScrollView>
     </SafeAreaView>

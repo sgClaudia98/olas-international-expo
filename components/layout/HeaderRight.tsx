@@ -5,16 +5,17 @@ import { Appbar } from "react-native-paper";
 import DestinationSelector from "../DestinationSelector";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import LanguageSelector from "../LanguageSelector";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import headerStyles from "@/styles/header"
 
 const HeaderRight = ({ navigation }) => {
-  const { lessThan } = useBreakpoints();
+  const styles = useResponsiveStyles(headerStyles)
+  const { isMobile, lessThan } = useBreakpoints();
 
   const router = useRouter();
   return (
-    <Appbar.Header style={styles.appbar}>
-      {lessThan.tablet  ? (
-        <Appbar.Action icon="menu" onPress={() => navigation.toggleDrawer()} />
-      ) : (
+    <Appbar.Header style={styles.containerRight}>
+      {!isMobile && (
         <>
           <DestinationSelector />
           <LanguageSelector />
@@ -23,6 +24,9 @@ const HeaderRight = ({ navigation }) => {
             onPress={() => router.navigate("/(auth)/profile")}
           />
         </>
+      )}
+      {lessThan.tablet && (
+        <Appbar.Action icon="menu" onPress={() => navigation.toggleDrawer()} />
       )}
     </Appbar.Header>
   );
@@ -35,29 +39,4 @@ const HeaderRight = ({ navigation }) => {
       <NotifyIcon />
     </Pressable>
  */
-const styles = StyleSheet.create({
-  appbar: {
-    backgroundColor: "transparent",
-    elevation: 0,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 8,
-  },
-  language: {
-    fontSize: 16,
-    color: "#555",
-    marginRight: 8,
-  },
-  flexGrow: {
-    flexGrow: 1,
-  },
-  categoryScroll: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
-  },
-  chip: {
-    marginRight: 8,
-    backgroundColor: "#e6e6e6",
-  },
-});
 export default HeaderRight;

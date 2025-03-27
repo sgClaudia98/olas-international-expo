@@ -2,7 +2,7 @@ import React,  { useContext, useEffect } from "react";
 import PaymentWrapper from "@/modules/marketplace/components/payment/PaymentWrapper";
 import { SearchProvider } from "@/modules/marketplace/context/SearchContext";
 import { ShoppingCartProvider } from "@/modules/marketplace/context/ShoppingCartContext";
-import { header, mobileHeader } from "@/modules/marketplace/layout/header";
+import { header } from "@/modules/marketplace/layout/header";
 
 import { useMarketCartActions } from "@/modules/marketplace/hooks/useMarketCartActions";
 import { Stack } from "expo-router";
@@ -33,7 +33,7 @@ export default function MarketplaceLayout() {
           <PaymentWrapper onClose={closeModal} />
         )}
       >
-        <Stack screenOptions={lessThan.tablet  ? mobileHeader : header} />
+        <Stack screenOptions={header()} />
       </ShoppingCartProvider>
     </SearchProvider>
   );

@@ -1,10 +1,14 @@
 import { Stack, Tabs } from "expo-router";
-import React from "react";
-
+import React, { useEffect } from "react";
+import * as SystemUI from 'expo-system-ui';
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { AuthRequestModal } from "@/components/layout/AuthRequestModal";
 
 export default function TabLayout() {
+  useEffect(() => {
+
+    SystemUI.setBackgroundColorAsync("#fffff");
+  }, [])
   return (
     <>
       <Stack

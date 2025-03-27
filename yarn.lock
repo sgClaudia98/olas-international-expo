@@ -7072,8 +7072,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-"toastify-react-native@file:../toastify-react-native":
+toastify-react-native@^6.0.0:
   version "6.0.0"
+  resolved "https://registry.yarnpkg.com/toastify-react-native/-/toastify-react-native-6.0.0.tgz#de3d7d92cb69ddaef920e676f31d914ac2f29549"
+  integrity sha512-Aqk+IR0ljJ9/Vh4dcx/DF1ahWGNo03xxBpieJqI3z41Q25e4L7SdCFfqikSv2aeQ50/sHojPxLD47ghDHqPxQQ==
   dependencies:
     react-native-modal "*"
     react-native-vector-icons "*"

@@ -12,15 +12,14 @@ import { screenHeaderLogoOption } from "@/components/layout";
 import { AppProviders } from "@/contexts/AppContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
-import { useBreakpoints } from "@/hooks/useBreakpoints";
+import { BREAKPOINTS, useBreakpoints } from "@/hooks/useBreakpoints";
 import SidePanel from "@/components/layout/SidePanel";
 import { OpenSans_400Regular, OpenSans_600SemiBold, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
-
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { lessThan } = useBreakpoints();
   const [loaded] = useFonts({
     OpenSansRegular: OpenSans_400Regular,
     OpenSansSemiBold: OpenSans_600SemiBold,
@@ -40,7 +39,6 @@ export default function RootLayout() {
 
   return (
     <AppProviders>
-      {lessThan.tablet ? (
         <GestureHandlerRootView style={{ flex: 1 }}>
           <Drawer
             drawerContent={(props) => {
@@ -51,7 +49,8 @@ export default function RootLayout() {
                 ? {
                     ...screenHeaderLogoOption({ navigation }),
                     drawerPosition: "right",
-                    drawerType: "back",
+                    headerShadowVisible: false,
+                    drawerType: "back",   
                     initialRouteName: "/(main)/services/market",
                     headerStyle: { backgroundColor: "white" },
                   }
@@ -59,19 +58,7 @@ export default function RootLayout() {
             }
           />
         </GestureHandlerRootView>
-      ) : (
-        <Stack
-          screenOptions={({ route, navigation }) =>
-            route.path != "/promos"
-              ? {
-                  ...screenHeaderLogoOption({ navigation }),
-                  initialRouteName: "/(main)/services/market",
-                  headerStyle: { backgroundColor: "white" },
-                }
-              : { headerShown: false }
-          }
-        />
-      )}
+     
       <StatusBar style="auto" />
     </AppProviders>
   );
