@@ -9,7 +9,7 @@ const SvgArrowBack = (props: SvgProps) => (
     {...props}
   >
     <Path
-      stroke="currentColor"
+      stroke={props.color}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.44}

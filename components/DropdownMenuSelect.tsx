@@ -3,17 +3,18 @@ import { View, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Menu, Button, Icon } from 'react-native-paper';
 import { Colors } from '@/styles';
 import { selectSizeStyle, selectTextStyle } from '@/styles/buttons';
+import IconSvg, { IconNames } from './ui/IconSvg';
 
 interface SelectBtnProps {
   title: string;
   onPress: () => void;
-  icon: string;
+  icon: IconNames;
   iconSize?: number;
   disabled?: boolean;
   textStyle?: TextStyle
 }
 
-const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 20 ,disabled = false, textStyle={} }) => {
+const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 17 ,disabled = false, textStyle={} }) => {
   const colors = {
     primary: Colors.black.primary,
     outline: Colors.black.primary,
@@ -32,8 +33,8 @@ const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 2
       labelStyle={{...selectTextStyle, ...textStyle}}
       contentStyle={selectSizeStyle}
       icon={({ size, color }) => (
-        <Icon
-          source={icon}
+        <IconSvg
+          name={icon}
           size={iconSize}
           color={color}
         />
@@ -48,7 +49,7 @@ interface DropdownMenuSelectProps {
   buttonTitle: string| ((selectedOption: MenuItem) => string);
   menuItems: MenuItem[];
   onSelect: (value: string) => void;
-  icon?: string;
+  icon: IconNames;
   iconSize?: number;
   value?: string;
   textStyle?: TextStyle
@@ -58,7 +59,7 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
   buttonTitle,
   menuItems,
   onSelect,
-  icon = "menu",
+  icon = "Arrow",
   iconSize,
   value,
   textStyle,
@@ -68,26 +69,26 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
   const closeMenu = () => setVisible(false);
 
   const handleSelect = (newValue: string) => {
-    setTitle(getButtonTitle(newValue))
+    setTitle(getButtonTitle(newValue));
     onSelect(newValue);
     closeMenu();
   };
 
   const getButtonTitle = (newValue?: string): string => {
-    const sel = menuItems.find((item) => item.value === newValue) || menuItems[0];
-  
-    if (typeof buttonTitle === 'function') {
+    const sel =
+      menuItems.find((item) => item.value === newValue) || menuItems[0];
+
+    if (typeof buttonTitle === "function") {
       return buttonTitle(sel);
     }
     return `${buttonTitle}: ${sel.label}`;
   };
-  
-  const [title, setTitle] = useState<string>(getButtonTitle(value))
+
+  const [title, setTitle] = useState<string>(getButtonTitle(value));
 
   useEffect(() => {
     setTitle(getButtonTitle(value));
   }, [value]);
-  
 
   return (
     <View style={styles.container}>
@@ -109,7 +110,7 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
       >
         {menuItems.map((item) => (
           <Menu.Item
-          key={`mlvldds2-${item.value}`}
+            key={`mlvldds2-${item.value}`}
             onPress={() => handleSelect(item.value)}
             title={item.label}
           />

@@ -8,17 +8,13 @@ import {
   Image,
 } from "react-native";
 import footerStyles from "@/styles/footer";
-import {
-  Visa,
-  MasterCard,
-  AmericanExpress,
-  PayPal,
-} from "@/assets/icons/PaymentBrands";
-import { WhatsApp, Facebook, Instagram } from "@/assets/icons/SocialMedia";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "../ThemedText";
 import { useTranslation } from "react-i18next";
 import { Link } from "expo-router";
+import IconSvg from "../ui/IconSvg";
+import { Colors } from "@/styles";
+import { AmericanExpress, Mastercard, Paypal, Visa } from "../icons";
 
 interface SocialLink {
   component: React.ReactElement;
@@ -43,9 +39,9 @@ interface FooterProps {
 }
 
 const socialLinks: SocialLink[] = [
-  { component: <WhatsApp />, url: "https://whatsapp.com" },
-  { component: <Facebook />, url: "https://facebook.com" },
-  { component: <Instagram />, url: "https://instagram.com" },
+  { component: <IconSvg name="WhatsApp" size={20} />, url: "https://whatsapp.com" },
+  { component: <IconSvg name="Facebook" size={20} />, url: "https://facebook.com" },
+  { component: <IconSvg name="Instagram" size={20} />, url: "https://instagram.com" },
 ];
 
 const services: NavigationLink[] = [
@@ -115,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({
     }
   };
   return (
-    <View >
+    <View>
       <View style={styles.container}>
         {/* Left Section */}
         <View style={styles.logoSection}>
@@ -196,10 +192,10 @@ const Footer: React.FC<FooterProps> = ({
           <Link href={privacyPolicy.url as any}>{t(privacyPolicy.label)}</Link>
         </ThemedText>
         <View style={styles.paymentMethods}>
-          <Visa />
-          <MasterCard />
-          <AmericanExpress />
-          <PayPal />
+          <Visa width={31.72} height={10.26} color={Colors.black.primary} />
+          <Mastercard width={20.95} height={12.95} color={Colors.black.primary} />
+          <AmericanExpress width={12.95} height={12.95} color={Colors.black.primary} />
+          <Paypal width={10.52} height={12.95} color={Colors.black.primary} />
         </View>
       </View>
     </View>

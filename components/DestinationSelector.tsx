@@ -7,6 +7,7 @@ import {Destination} from '@/services/interfaces/geo';
 import {useLocationContext} from '@/contexts/locationContext';
 import {capitalizeWords} from '@/utils/string';
 import { DEFAULT_DESTINATION } from '@/constants';
+import { Colors } from '@/styles';
 
 const DestinationSelector = () => {
   const {destinationCountry, setDestinations} = useLocationContext();
@@ -46,12 +47,12 @@ const DestinationSelector = () => {
   return (
     <View style={styles.container}>
       <DropdownSelect2
-        icon="map-marker-outline"
+        icon="Location"
         buttonTitle={value => value?.label}
         onSelect={handleSelect}
         menuItems={data}
-        iconSize={24}
-        textStyle={{maxWidth: 130, fontSize: 16, lineHeight:24}}
+        iconSize={17}
+        textStyle={{color: Colors.blue.second, maxWidth: 130, fontSize: 16, lineHeight:24}}
         value={selected?.id.toString()}
       />
     </View>

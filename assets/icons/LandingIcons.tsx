@@ -149,7 +149,7 @@ export const FastDeliveryIcon: React.FC<IconProps> = ({
   width = 24,
   height = 24,
   fill = "none",
-  stroke = Colors.blue.sixth,
+  stroke = Colors.blue.fifth,
 }) => {
   return (
     <>
@@ -167,7 +167,7 @@ export const SafePaymentIcon: React.FC<IconProps> = ({
   width = 22,
   height = 25,
   fill = "none",
-  stroke = Colors.blue.sixth,
+  stroke = Colors.blue.fifth,
 }) => {
   return (
     <>
@@ -193,7 +193,7 @@ export const Support247Icon: React.FC<IconProps> = ({
   width = 25,
   height = 26,
   fill = "none",
-  stroke = Colors.blue.sixth,
+  stroke = Colors.blue.fifth,
 }) => {
   return (
     <>

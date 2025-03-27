@@ -18,14 +18,13 @@ export const black: Record<Black, string> = {
 
 
 
-type Blue = "primary" | "second" | "third" | "fourth" | "fifth" | "sixth";
+type Blue = "primary" | "second" | "third" | "fourth" | "fifth";
 export const blue: Record<Blue, string> = {
   primary: "#0078D9", 
   second: "#1A94F7", 
   third: "#8CC9FB", 
   fourth: "#D1EAFD",
-  fifth: "#D1EAFD80",
-  sixth: '#E8F5FE',
+  fifth: "#E8F5FE",
 };
 
 // Red color

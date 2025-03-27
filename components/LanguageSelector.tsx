@@ -3,7 +3,8 @@ import { Menu, Appbar, IconButton, Button } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import * as Localization from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import DropdownSelect2, {MenuItem} from './DropdownMenuSelect';
+import DropdownSelect2, { MenuItem } from "./DropdownMenuSelect";
+import { Colors } from "@/styles";
 
 const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
@@ -17,7 +18,7 @@ const LanguageSelector = () => {
     i18n.changeLanguage(lng);
     closeMenu();
   };
-  
+
   const getSavedLanguage = async () => {
     let savedLanguage = await AsyncStorage.getItem("language");
     if (!savedLanguage) {
@@ -32,17 +33,20 @@ const LanguageSelector = () => {
 
   return (
     <DropdownSelect2
-        icon="globe-model"
-        buttonTitle={value => value?.value}
-        onSelect={changeLanguage}
-        menuItems={[
-          { label: t("LANGUAGE.EN"), value: "en" },
-          { label: t("LANGUAGE.ES"), value: "es" },
-          { label: t("LANGUAGE.PT"), value: "pt" },
-          { label: t("LANGUAGE.FR"), value: "fr" },
-        ]}
-        iconSize={24}
-        value={i18n.language}
+      icon="Languaje"
+      buttonTitle={(value) => value?.value}
+      onSelect={changeLanguage}
+      menuItems={[
+        { label: t("LANGUAGE.EN"), value: "en" },
+        { label: t("LANGUAGE.ES"), value: "es" },
+        { label: t("LANGUAGE.PT"), value: "pt" },
+        { label: t("LANGUAGE.FR"), value: "fr" },
+      ]}
+      iconSize={17}
+      textStyle={{
+        color: Colors.black.second,
+      }}
+      value={i18n.language}
     />
   );
 };

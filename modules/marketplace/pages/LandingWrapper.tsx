@@ -22,6 +22,7 @@ import Btn from "@/components/Btn";
 import { ThemedText } from "@/components/ThemedText";
 import { useRouter } from "expo-router";
 import IconSvg from "@/components/ui/IconSvg";
+import { Colors } from "@/styles";
 
 const LandingWrapper: React.FC = () => {
   const router = useRouter();
@@ -60,7 +61,7 @@ const LandingWrapper: React.FC = () => {
                 onPress={() => router.navigate("/promos")}
               />
             )}
-            <IconSvg name="ArrowBack"/>
+            <IconSvg size={24} name="User" color2={Colors.black.fourth}/>
             <Btn
               title="go to auth"
               onPress={() => router.navigate("/(auth)/login")}

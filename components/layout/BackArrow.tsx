@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { NavigationProp, useNavigation } from '@react-navigation/core';
-import { ArrowBackIcon } from '@/assets/icons/ArrowBackIcon';
+import IconSvg from '../ui/IconSvg';
 
 
 interface BackArrowProps {
@@ -25,7 +25,7 @@ const BackArrow: React.FC<BackArrowProps> = ({ fallback }) => {
       onPress={goBack}
       role="button"
       style={{ marginLeft: -16, paddingVertical: 4, paddingHorizontal: 8 }}>
-      <ArrowBackIcon />
+      <IconSvg name='ArrowBack' />
     </Pressable>
   );
 };

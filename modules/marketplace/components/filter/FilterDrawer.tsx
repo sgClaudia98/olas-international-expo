@@ -9,8 +9,8 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import { CloseIcon } from "@/assets/icons/CloseIcon";
 import { Colors } from "@/styles";
+import IconSvg from "@/components/ui/IconSvg";
 
 interface FilterDrawerProps {
   visible: boolean;
@@ -35,7 +35,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({
           <View style={styles.header}>
             <Text style={styles.title}>Filters</Text>
             <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-              <CloseIcon />
+              <IconSvg name="Close" />
             </TouchableOpacity>
           </View>
           <View style={styles.content}>{children}</View>

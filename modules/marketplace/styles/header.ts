@@ -54,8 +54,8 @@ const rightDesktopStyles = StyleSheet.create({
   },
   badge: {
     position: "absolute",
-    top: 0,
-    right: 2,
+    top: -10,
+    right: -12,
   }
 })
 

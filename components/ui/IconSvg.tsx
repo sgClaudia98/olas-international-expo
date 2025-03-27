@@ -4,8 +4,10 @@ import * as icons from "../icons";
 import { Text, TextStyle } from "react-native";
 import { Colors } from "@/styles";
 
+export type IconNames = Exclude<keyof typeof icons, "Mastercard" | "Paypal" | "AmericanExpress" | "Visa">;
+
 interface IconProps extends SvgProps {
-  name: keyof typeof icons;
+  name: IconNames;
   size?: number;
   color?: string;
   containerStyle?: TextStyle;
@@ -15,15 +17,17 @@ const IconSvg: React.FC<IconProps> = ({
   name,
   size = 24,
   color = Colors.blue.primary,
-  containerStyle = {},
   ...props
 }) => {
   const Component = icons[name];
+  if (!Component) return <Text>?</Text>
   return (
-    <Text style={{ color, ...containerStyle }}>
-      <Component width={size} height={size} 
-    viewBox="0 0 20 20" {...props} />
-    </Text>
+      <Component
+        width={size}
+        height={size}
+        color={color}
+        {...props}
+      />
   );
 };
 

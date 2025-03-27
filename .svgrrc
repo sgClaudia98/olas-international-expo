@@ -3,7 +3,9 @@
   "native": true,
   "typescript": true,
   "replaceAttrValues": {
-    "#083366": "currentColor"
+    "#083366": "{props.color}",
+    "#1A94F7": "{props.color}",
+    "#E8F5FE": "{props.color2}"
   },
   "dimensions": false,
   "outDir": "components/icons",
