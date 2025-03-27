@@ -34,5 +34,11 @@
   "PAGE.LOGIN": "Login",
   "PAGE.REGISTER": "Register",
   "PAGE.RESET_PASSWORD": "Reset password",
-  "PAGE.VERIFY": "Verify account"
+  "PAGE.VERIFY": "Verify account",
+  "RECEIVER_HEADING": "Beneficiary",
+  "CUSTOMER_HEADING": "Client",
+  "SUMMARY_HEADING": "Summary",
+  "PRODUCTS": "Products",
+  "SHIPPING": "Shipping",
+  "DISCOUNT": "Discount"
 }

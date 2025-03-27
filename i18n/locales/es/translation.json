@@ -34,5 +34,11 @@
   "PAGE.LOGIN": "Iniciar sesión",
   "PAGE.REGISTER": "Registrarse",
   "PAGE.RESET_PASSWORD": "Restablecer contraseña",
-  "PAGE.VERIFY": "Verificar cuenta"
+  "PAGE.VERIFY": "Verificar cuenta",
+  "RECEIVER_HEADING": "Destinatario",
+  "CUSTOMER_HEADING": "Comprador",
+  "SUMMARY_HEADING": "Resumen",
+  "PRODUCTS": "Productos",
+  "SHIPPING": "Envío",
+  "DISCOUNT": "Descuento"
 }
