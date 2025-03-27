@@ -4,9 +4,11 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import styles, { Colors } from "@/styles";
 import responsiveStyle from "../styles/productWrapper";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Switch } from "react-native";
+import { View, Text, TouchableOpacity} from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
+import { Switch } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 interface ProductsWrapperHeaderProps {
   toggleFilters: () => void;
@@ -23,6 +25,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
   breadcrumb,
   isOpenFilters,
 }) => {
+  const {t} = useTranslation();
   const styles = useResponsiveStyles(responsiveStyle);
   const { lessThan } = useBreakpoints();
 
@@ -35,7 +38,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
       )}
       <View style={styles.filterActions}>
         <Text style={styles.productsQtyText}>
-          {total != 1 ? `${total} products` : `${total} product`}
+        {t("PRODUCTS.TOTAL", { count: total })}
         </Text>
         <DropdownSelect
           buttonTitle={(value) => (value ? value : "Sort by")}
@@ -58,7 +61,7 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
                 color: Colors.blue.second,
               }}
             >
-              Filters
+              {t('FILTERS.LABEL')}
             </Text>
           </TouchableOpacity>
         ) : (
@@ -69,8 +72,9 @@ const ProductsWrapperHeader: React.FC<ProductsWrapperHeaderProps> = ({
               alignItems: "center",
             }}
           >
-            <Text style={{ paddingHorizontal: 10 }}>Show Filters</Text>
-            <Switch value={isOpenFilters} onValueChange={toggleFilters} />
+            <Text style={{ paddingHorizontal: 10 }}>{t('SHOW_FILTERS')}</Text>
+            <Switch 
+            value={isOpenFilters} onValueChange={toggleFilters} />
           </View>
         )}
       </View>

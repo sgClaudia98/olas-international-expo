@@ -38,6 +38,8 @@ const LanguageSelector = () => {
         menuItems={[
           { label: t("LANGUAGE.EN"), value: "en" },
           { label: t("LANGUAGE.ES"), value: "es" },
+          { label: t("LANGUAGE.PT"), value: "pt" },
+          { label: t("LANGUAGE.FR"), value: "fr" },
         ]}
         iconSize={24}
         value={i18n.language}

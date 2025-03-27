@@ -2,11 +2,14 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import translationEn from "./locales/en/translation.json";
 import translationEs from "./locales/es/translation.json";
+import translationPt from "./locales/pt/translation.json";
+import translationFr from "./locales/fr/translation.json";
 
 const resources = {
     "en": { translation: translationEn },
     "es": { translation: translationEs },
-  
+    "pt": { translation: translationPt },
+    "fr": { translation: translationFr },
 };
 
 const initI18n = async () => {
