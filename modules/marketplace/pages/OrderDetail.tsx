@@ -152,9 +152,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                   <View>
                     <View style={styles.resumeItem}>
                       <ThemedText>
-                        {t("PRODUCTS.TOTAL", {
-                          count: booking.total,
-                        }).toLowerCase()}
+                        {t("PRODUCTS_HEADING")} ({booking.total})
                       </ThemedText>
                       <ThemedText>$ {booking.price.toFixed(2)}</ThemedText>
                     </View>

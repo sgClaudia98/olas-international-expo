@@ -72,5 +72,6 @@
     "TOTAL_zero": "{{count}} productos",
     "TOTAL_one": "{{count}} producto",
     "TOTAL_other": "{{count}} productos"
-  }
+  },
+  "PRODUCTS_HEADING": "Productos"
 }
