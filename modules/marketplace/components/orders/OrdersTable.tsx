@@ -6,25 +6,28 @@ import { AgencyClientBooking } from "../../services/interfaces/bookingDetail";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/styles";
 import { Link } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) => {
   const styles = useResponsiveStyles(orderStyles);
+
+  const { t } = useTranslation();
 
   return (
     <>
       <DataTable>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>
-            <ThemedText lightColor={Colors.black.second}>Número</ThemedText>
+            <ThemedText lightColor={Colors.black.second}>{t("NUMBER")}</ThemedText>
           </DataTable.Title>
           <DataTable.Title>
-            <ThemedText lightColor={Colors.black.second}>Fecha</ThemedText>
+            <ThemedText lightColor={Colors.black.second}>{t("DATE")}</ThemedText>
           </DataTable.Title>
           <DataTable.Title>
-            <ThemedText lightColor={Colors.black.second}>Precio</ThemedText>
+            <ThemedText lightColor={Colors.black.second}>{t("PRICE")}</ThemedText>
           </DataTable.Title>
           <DataTable.Title>
-            <ThemedText lightColor={Colors.black.second}>Estatus</ThemedText>
+            <ThemedText lightColor={Colors.black.second}>{t("STATUS")}</ThemedText>
           </DataTable.Title>
           <DataTable.Title>
             <ThemedText></ThemedText>

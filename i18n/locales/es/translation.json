@@ -40,5 +40,9 @@
   "SUMMARY_HEADING": "Resumen",
   "PRODUCTS": "Productos",
   "SHIPPING": "Envío",
-  "DISCOUNT": "Descuento"
+  "DISCOUNT": "Descuento",
+  "NUMBER": "Número",
+  "DATE": "Fecha",
+  "PRICE": "Precio",
+  "STATUS": "Estado"
 }
