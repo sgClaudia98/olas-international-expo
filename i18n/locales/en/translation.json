@@ -45,5 +45,6 @@
   "NUMBER": "Number",
   "DATE": "Date",
   "PRICE": "Price",
-  "STATUS": "Status"
+  "STATUS": "Status",
+  "BACK": "Go back"
 }

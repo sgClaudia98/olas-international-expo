@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
@@ -51,6 +51,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             {t("PAGE.ORDER_DETAIL")}
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
+          <Link style={{color: Colors.blue.second}} href={"/profile/order-history"}>{t('BACK')}</Link>
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardColumnLeft}>
