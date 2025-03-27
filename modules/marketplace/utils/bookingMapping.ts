@@ -6,6 +6,7 @@ import {
 
 export interface UIBooking extends AgencyClientBooking {
   details: UIBookingDetail[];
+  total: number;
 }
 
 export interface UIBookingDetail extends BookingDetail {
@@ -15,22 +16,26 @@ export interface UIBookingDetail extends BookingDetail {
     quantity: number;
     price: number;
   }[];
-  index:number,
-  total:number,
+  index: number;
+  total: number;
 }
 export const mapAgencyClientBookingsToUIBookings = (
   booking: AgencyClientBooking
 ): UIBooking => {
   let uiBookingDetails: UIBookingDetail[] = [];
+  let _total: number = 0;
   if (booking.details) {
     switch (booking.details[0].bookingType) {
       case "Market":
-        uiBookingDetails = mapBookingDetailsToUIBookingDetails(
+        const { details, total } = mapBookingDetailsToUIBookingDetails(
           booking.details as MarketBookingDetail[]
         );
+        uiBookingDetails = details;
+        _total = total;
         break;
       default:
         uiBookingDetails = booking.details.map((detail, index) => {
+          _total += booking.details?.length || 0;
           return {
             ...detail,
             index: index,
@@ -45,13 +50,15 @@ export const mapAgencyClientBookingsToUIBookings = (
   return {
     ...booking,
     details: uiBookingDetails,
+    total: _total,
   };
 };
 
 const mapBookingDetailsToUIBookingDetails = (
   details: MarketBookingDetail[]
-): UIBookingDetail[] => {
-  return details.map((detail, index) => {
+): { details: UIBookingDetail[]; total: number } => {
+  let total = 0;
+  const items = details.map((detail, index) => {
     let items = detail.productDetails?.map((productDetail) => {
       let id = productDetail.id || 0;
       let name = productDetail.product.name || "N/A";
@@ -59,7 +66,7 @@ const mapBookingDetailsToUIBookingDetails = (
       let price = productDetail.price || 0;
       return { id, name, quantity, price };
     });
-
+    total += detail.productDetails.length;
     return {
       ...detail,
       index: index,
@@ -67,4 +74,5 @@ const mapBookingDetailsToUIBookingDetails = (
       items: items || [],
     };
   });
+  return { details: items, total };
 };

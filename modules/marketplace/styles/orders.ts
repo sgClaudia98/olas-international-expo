@@ -52,8 +52,36 @@ const desktop = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 8,
     flexDirection: "row",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+    gap:10,
+  },
+  shipmentHeader: {
+    flexDirection: "row",
+    gap:14 
+  },
+  badge: {
+    backgroundColor: Colors.black.fifth,
+    paddingHorizontal: 10,
+    lineHeight: 24,
+    fontSize: 14,
+    borderRadius: 3,
+  },
+  tableProductHeader: {
+    borderBottomWidth: 0,
+    paddingHorizontal: 15,
+  },
+  tableProductRow: {
+    backgroundColor: Colors.black.fifth,
+    borderRadius: 5,
+    borderBottomWidth: 0,
+    paddingHorizontal: 30
+  },
+  tableLabel: { 
+    color: Colors.black.second,
+    fontSize: 14,
+    lineHeight: 22,
+    paddingVertical: 10
+  },
 });
 
 export const orderStyles = {
