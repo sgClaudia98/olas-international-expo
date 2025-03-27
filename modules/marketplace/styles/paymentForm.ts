@@ -68,6 +68,7 @@ const desktop = StyleSheet.create({
   twoColumnContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    flexWrap: "wrap",
   },
   columnLeft: {
     flex: 1,
@@ -78,6 +79,13 @@ const desktop = StyleSheet.create({
   },
   column: {
     flex: 1,
+  },
+  contentBoxStyle: {
+    borderRadius: 8,
+    minHeight: 240,
+    marginHorizontal: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 18,
   },
   text: {
     ...typography.label,
@@ -124,21 +132,22 @@ const desktop = StyleSheet.create({
   },
 });
 
-const paymentFormStyles = {
+export const paymentFormStyles = {
   mobile: StyleSheet.create({
     modalOverlay: {
       ...desktop.modalOverlay,
     },
     modalContent: {
       ...desktop.modalContent,
+      maxWidth: 360,
     },
     closeModalButton: {
       ...desktop.closeModalButton,
     },
     formContainer: {
       ...desktop.formContainer,
-      maxWidth: 420,
-      minWidth: 350,
+      minWidth: 320,
+      paddingBottom: 20,
     },
     title: {
       ...desktop.title,
@@ -160,15 +169,24 @@ const paymentFormStyles = {
     },
     twoColumnContainer: {
       ...desktop.twoColumnContainer,
+      flexDirection: "column",
     },
     columnLeft: {
       ...desktop.columnLeft,
+      flex: 1,
+      marginRight: 0,
     },
     columnRight: {
       ...desktop.columnRight,
+      flex: 1,
     },
     column: {
       ...desktop.column,
+      flex: 1,
+    },
+    contentBoxStyle: {
+      ...desktop.contentBoxStyle,
+      minHeight: 'auto',
     },
     text: {
       ...desktop.text,
@@ -202,11 +220,91 @@ const paymentFormStyles = {
     },
   }),
   tablet: StyleSheet.create({
+    modalOverlay: {
+      ...desktop.modalOverlay,
+    },
+    modalContent: {
+      ...desktop.modalContent,
+      maxWidth: 600,
+    },
+    closeModalButton: {
+      ...desktop.closeModalButton,
+    },
+    formContainer: {
+      ...desktop.formContainer,
+      maxWidth: 600,
+      minWidth: 400,
+    },
+    title: {
+      ...desktop.title,
+    },
+    error: {
+      ...desktop.error,
+    },
+    buttonContainer: {
+      ...desktop.buttonContainer,
+    },
+    button: {
+      ...desktop.button,
+    },
+    input: {
+      ...desktop.input,
+    },
+    label: {
+      ...desktop.label,
+    },
+    twoColumnContainer: {
+      ...desktop.twoColumnContainer,
+    },
+    columnLeft: {
+      ...desktop.columnLeft,
+    },
+    columnRight: {
+      ...desktop.columnRight,
+    },
+    column: {
+      ...desktop.column,
+    },
+    contentBoxStyle: {
+      ...desktop.contentBoxStyle
+    },
+    text: {
+      ...desktop.text,
+    },
+    productTableContainer: {
+      ...desktop.productTableContainer,
+    },
+    orderText: {
+      ...desktop.orderText,
+    },
+    tableHeader: {
+      ...desktop.tableHeader,
+    },
+    tableRow: {
+      ...desktop.tableRow,
+    },
+    separator: {
+      ...desktop.separator,
+    },
+    commentsContainer: {
+      ...desktop.commentsContainer,
+    },
+    commentsButton: {
+      ...desktop.commentsButton,
+    },
+    commentsTextArea: {
+      ...desktop.commentsTextArea,
+    },
+    totalPrice: {
+      ...desktop.totalPrice,
+    },
+  }),
+  desktop: StyleSheet.create({
     ...desktop,
   }),
 };
 
-const stepProgressStyles = StyleSheet.create({
+const stepProgressDesktop = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "center",
@@ -275,4 +373,99 @@ const stepProgressStyles = StyleSheet.create({
   },
 });
 
-export { paymentFormStyles, stepProgressStyles };
+export const stepProgressStyles = {
+  mobile: StyleSheet.create({
+    container: {
+      ...stepProgressDesktop.container,
+      marginBottom: 25,
+    },
+    stepWrapper: {
+      ...stepProgressDesktop.stepWrapper,
+    },
+    stepContainer: {
+      ...stepProgressDesktop.stepContainer,
+    },
+    step: {
+      ...stepProgressDesktop.step,
+    },
+    stepActive: {
+      ...stepProgressDesktop.stepActive,
+    },
+    stepCompleted: {
+      ...stepProgressDesktop.stepCompleted,
+    },
+    stepNumber: {
+      ...stepProgressDesktop.stepNumber,
+    },
+    stepNumberActive: {
+      ...stepProgressDesktop.stepNumberActive,
+    },
+    stepNumberCompleted: {
+      ...stepProgressDesktop.stepNumberCompleted,
+    },
+    stepText: {
+      ...stepProgressDesktop.stepText,
+    },
+    stepTextActive: {
+      ...stepProgressDesktop.stepTextActive,
+    },
+    stepTextCompleted: {
+      ...stepProgressDesktop.stepTextCompleted,
+    },
+    line: {
+      ...stepProgressDesktop.line,
+      width: 40,
+    },
+    lineCompleted: {
+      ...stepProgressDesktop.lineCompleted,
+    },
+  }),
+  tablet: StyleSheet.create({
+    container: {
+      ...stepProgressDesktop.container,
+    },
+    stepWrapper: {
+      ...stepProgressDesktop.stepWrapper,
+    },
+    stepContainer: {
+      ...stepProgressDesktop.stepContainer,
+    },
+    step: {
+      ...stepProgressDesktop.step,
+    },
+    stepActive: {
+      ...stepProgressDesktop.stepActive,
+    },
+    stepCompleted: {
+      ...stepProgressDesktop.stepCompleted,
+    },
+    stepNumber: {
+      ...stepProgressDesktop.stepNumber,
+    },
+    stepNumberActive: {
+      ...stepProgressDesktop.stepNumberActive,
+    },
+    stepNumberCompleted: {
+      ...stepProgressDesktop.stepNumberCompleted,
+    },
+    stepText: {
+      ...stepProgressDesktop.stepText,
+    },
+    stepTextActive: {
+      ...stepProgressDesktop.stepTextActive,
+    },
+    stepTextCompleted: {
+      ...stepProgressDesktop.stepTextCompleted,
+    },
+    line: {
+      ...stepProgressDesktop.line,
+      width: 65,
+    },
+    lineCompleted: {
+      ...stepProgressDesktop.lineCompleted,
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...stepProgressDesktop,
+  }),
+};
