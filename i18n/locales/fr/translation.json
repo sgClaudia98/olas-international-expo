@@ -1,0 +1,56 @@
+{
+  "LANGUAGE": {
+    "EN": "Inglés",
+    "ES": "Español",
+    "FR": "Français",
+    "PT": "Portugais"
+  },
+  "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
+  "ACTIONS": {
+    "ADD": "Ajouter",
+    "SAVE_CHANGES": "Enregistrer les modifications"
+  },
+  "BEFORE": "Avant",
+  "VIEW": {
+    "LESS": "Voir moins",
+    "MORE": "Voir plus"
+  },
+  "ROUTE": {
+    "HOME": "Accueil"
+  },
+  "MODULE": {
+    "TRAVEL": "Voyages",
+    "MARKET": "Marché"
+  },
+  "PAGE": {
+    "ORDERS": "Commandes",
+    "ABOUT_US": "À propos de nous",
+    "FAQ": "FAQ",
+    "TERMS_AND_CONDITIONS": "Termes et conditions",
+    "RETURN_POLICY": "Politique de retour",
+    "PRIVACY_POLICY": "Politique de confidentialité",
+    "PROFILE": "Profil",
+    "ORDER_HISTORY": "Historique des commandes",
+    "PROFILE.HEADER": "Informations du profil",
+    "LOGIN": "Se connecter",
+    "REGISTER": "S'inscrire",
+    "RESET_PASSWORD": "Réinitialiser le mot de passe",
+    "VERIFY": "Vérifier le compte"
+  },
+  "FILTERS": {
+    "ALL_CATEGORIES": "Toutes les Catégories",
+    "CATEGORIES": "Catégories"
+  },
+  "HEADER": {
+    "SERVICES": "Services",
+    "INFORMATION": "Informations",
+    "CUSTOMER_SERVICE": "Service client"
+  },
+  "LOGOUT": "Se déconnecter",
+  "PROFILE_SETTINGS": "Paramètres du profil",
+  "PRODUCTS": {
+    "TOTAL_zero": "{{count}} produits",
+    "TOTAL_one": "{{count}} produit",
+    "TOTAL_other": "{{count}} produits"
+  }
+}

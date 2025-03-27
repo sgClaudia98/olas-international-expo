@@ -25,11 +25,13 @@ import {rightStyles as responsiveStyle} from '../styles/header';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import { links } from './header';
 import { useTranslation } from "react-i18next";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
 
 
 
 export default function MarketplaceRightHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
+  const {lessThan} = useBreakpoints();
   const {t} = useTranslation();
   const {setCartVisible, state} = useShoppingCart<MarketBookingCartItem, MarketBookingCartExtra>();
   const {token} = useAppSelector(state => state.auth);
@@ -44,8 +46,11 @@ export default function MarketplaceRightHeader() {
   const total = state.items.length;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerRight}>
+      {!lessThan.mid && 
+
       <HeaderBar links={links.map((v) => ({...v, label: t(v.label)}))} textColor={Colors.black.second} />
+      }
       <View>
         <IconButton
           icon="cart-outline"

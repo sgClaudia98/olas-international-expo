@@ -58,7 +58,7 @@ export default function MarketplaceLeftHeader() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerLeft}>
       {/* Top Section */}
       <View style={styles.topSection}>
           {/* Location Dropdown */}

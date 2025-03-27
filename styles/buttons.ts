@@ -52,6 +52,7 @@ export const selectTextStyle: TextStyle = {
   lineHeight: 24,
   fontSize: 16,
   fontWeight: 400,
+  overflow: "hidden"
 }
 export const selectSizeStyle: ViewStyle = {
   paddingVertical: 5,

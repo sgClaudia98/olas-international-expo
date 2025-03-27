@@ -11,7 +11,7 @@ const homeBreadcrumItem = {
 };
 
 const allCategoriesBreadcrumbItem = {
-  label: "FILTER.ALL_CATEGORIES",
+  label: "FILTERS.ALL_CATEGORIES",
   route: "/services/market/products",
 };
 

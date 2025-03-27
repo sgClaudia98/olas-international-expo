@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { Menu, Button, Icon } from 'react-native-paper';
 import { Colors } from '@/styles';
 import { selectSizeStyle, selectTextStyle } from '@/styles/buttons';
@@ -10,9 +10,10 @@ interface SelectBtnProps {
   icon: string;
   iconSize?: number;
   disabled?: boolean;
+  textStyle?: TextStyle
 }
 
-const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 20 ,disabled = false }) => {
+const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 20 ,disabled = false, textStyle={} }) => {
   const colors = {
     primary: Colors.black.primary,
     outline: Colors.black.primary,
@@ -25,10 +26,10 @@ const SelectBtn: React.FC<SelectBtnProps> = ({ title, onPress,icon, iconSize = 2
       mode="text"
       disabled={disabled}
       style={{
-        width: 'auto',
+        width: '100%',
         borderRadius: 50,
       }}
-      labelStyle={selectTextStyle}
+      labelStyle={{...selectTextStyle, ...textStyle}}
       contentStyle={selectSizeStyle}
       icon={({ size, color }) => (
         <Icon
@@ -50,6 +51,7 @@ interface DropdownMenuSelectProps {
   icon?: string;
   iconSize?: number;
   value?: string;
+  textStyle?: TextStyle
 }
 
 const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
@@ -59,6 +61,7 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
   icon = "menu",
   iconSize,
   value,
+  textStyle,
 }) => {
   const [visible, setVisible] = useState(false);
   const openMenu = () => setVisible(true);
@@ -98,6 +101,7 @@ const DropdownMenuSelect: React.FC<DropdownMenuSelectProps> = ({
             title={title}
             icon={icon}
             iconSize={iconSize}
+            textStyle={textStyle}
           />
         }
         anchorPosition="bottom"
