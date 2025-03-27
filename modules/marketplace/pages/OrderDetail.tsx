@@ -40,17 +40,13 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
     });
   }, []);
 
-  const beneficiary = data?.value.bookings[0]?.details[0].beneficiary;  
+  const beneficiary = data?.value.bookings[0]?.details[0].beneficiary;
 
   return (
     <>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
-          <ThemedText
-            
-            type="defaultBold"
-            style={styles.cardHeaderText}
-          >
+          <ThemedText type="defaultBold" style={styles.cardHeaderText}>
             {t("PAGE.ORDER_DETAIL")}
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
@@ -141,62 +137,41 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             </View>
           </View>
           <View style={styles.cardColumnRight}>
-            <View style={{...styles.cardContent, flex:1 }}>
-              <ThemedText type="defaultBold">
-                {t("SUMMARY_HEADING")}
-              </ThemedText>
+            <View style={{ ...styles.cardContent, flex: 1 }}>
+              <ThemedText type="defaultBold">{t("SUMMARY_HEADING")}</ThemedText>
               {isLoading ? (
                 <ActivityIndicator />
               ) : (
-                <View style={{flex: 1, justifyContent: "space-between"}}>
-                  
-                  {data?.value.bookings.map((booking) => (
-                    
-                  <View>
-                      <View style={styles.resumeItem}>
-                  <ThemedText>
-                    {t("PRODUCTS")} (1){" "}
-                  </ThemedText>
-                        <ThemedText>
-                        $ {booking.price}
-                        </ThemedText>
-                      </View>
-                      <View style={styles.resumeItem}>
-                        <ThemedText>
-                          {t("SHIPPING")}
-                        </ThemedText>
-                        <ThemedText>
+                data?.value.bookings.map((booking) => (
+                  <View style={{ flex: 1, justifyContent: "space-between" }}>
+                    <View>
+                    <View style={styles.resumeItem}>
+                      <ThemedText>{t("PRODUCTS")} (1) </ThemedText>
+                      <ThemedText>$ {booking.price}</ThemedText>
+                    </View>
+                    <View style={styles.resumeItem}>
+                      <ThemedText>{t("SHIPPING")}</ThemedText>
+                      <ThemedText>
                         $ {booking?.details[0].bookingFee}
-                        </ThemedText>
-                      </View>
-                      <View style={styles.resumeItem}>
-                        <ThemedText >
-                          {t("DISCOUNT")} 
-                        </ThemedText>
-                        <ThemedText>
-                        $ {booking?.details[0].discount}
-                        </ThemedText>
-                      </View>
-                      <View style={styles.resumeTotal}>
-                        <ThemedText>
-                        {t("TOTAL")} 
-                        </ThemedText>
-                        <ThemedText>
-                        $ {booking.totalPrice}
-                        </ThemedText>
-                      </View>
-                      </View>
-                  ))}
-                  
-                </View>
+                      </ThemedText>
+                    </View>
+                    <View style={styles.resumeItem}>
+                      <ThemedText>{t("DISCOUNT")}</ThemedText>
+                      <ThemedText>$ {booking?.details[0].discount}</ThemedText>
+                    </View>
+                    </View>
+                    <View style={styles.resumeTotal}>
+                      <ThemedText>{t("TOTAL")}</ThemedText>
+                      <ThemedText>$ {booking.totalPrice}</ThemedText>
+                    </View>
+                  </View>
+                ))
               )}
             </View>
           </View>
         </View>
         <View style={styles.cardContent}>
-          <ThemedText  type="defaultBold">
-            {t("SHIPPING")}
-          </ThemedText>
+          <ThemedText type="defaultBold">{t("SHIPPING")}</ThemedText>
           {isLoading ? (
             <ActivityIndicator />
           ) : (
