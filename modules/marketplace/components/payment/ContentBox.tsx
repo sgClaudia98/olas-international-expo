@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, ViewStyle } from "react-native";
 import { Colors } from "@/styles";
 import typography from "@/styles/typography";
+import { ThemedText } from "@/components/ThemedText";
 
 interface ContentBoxProps {
   title?: string;
@@ -26,7 +27,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 }) => {
   return (
     <View style={[contentBoxStyle, shadow ? styles.shadowStyles : '', { backgroundColor }]}>
-      {title && <Text style={styles.title}>{title}</Text>}
+      {title && <ThemedText type="defaultBold" style={styles.title}>{title}</ThemedText>}
       {Object.entries(data).map(([key, item]) => {
         const { icon, value } =
           typeof item === "object" && item !== null
@@ -36,9 +37,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         return (
           <View key={key} style={styles.row}>
             {icon && <View style={styles.icon}>{icon}</View>}
-            <Text style={styles.text}>
+            <ThemedText style={styles.text}>
               {typeof value === "string" ? value : ""}
-            </Text>
+            </ThemedText>
           </View>
         );
       })}
@@ -48,7 +49,6 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 
 const styles = StyleSheet.create({
   title: {
-    ...typography.bodyHighlight,
     color: Colors.black.primary,
     fontWeight: "600",
     marginBottom: 15,
