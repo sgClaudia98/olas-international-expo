@@ -18,6 +18,7 @@ import { Colors } from "@/styles";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useGetProfileQuery } from "@/modules/auth/services/api/AccountService";
 import { orderStyles } from "../styles/orders";
+import { MarketBookingDetail } from "../services/interfaces/bookingDetail";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -41,14 +42,14 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
 
   const beneficiary = data?.value.bookings[0]?.details[0].beneficiary;
 
-  console.log(data)
+  console.log(data);
 
   return (
     <>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <ThemedText
-            lightColor={Colors.black.primary}
+            
             type="defaultBold"
             style={styles.cardHeaderText}
           >
@@ -114,10 +115,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                             icon: <ProfileIcon />,
                             value: profile.client.fullName || "N/A",
                           },
-                          email: {
-                            icon: <EmailIcon />,
-                            value: profile.client.email || "N/A",
-                          },
+
                           phoneNumber: {
                             icon: <PhoneIcon />,
                             value:
@@ -126,6 +124,10 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                                 profile.client?.country?.code,
                                 1
                               ) || "N/A",
+                          },
+                          email: {
+                            icon: <EmailIcon />,
+                            value: profile.client.email || "N/A",
                           },
                         }}
                         contentBoxStyle={{
@@ -141,43 +143,60 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             </View>
           </View>
           <View style={styles.cardColumnRight}>
-            <View style={styles.cardContent}>
-              <ThemedText lightColor={Colors.black.primary} type="defaultBold">
+            <View style={{...styles.cardContent, flex:1 }}>
+              <ThemedText type="defaultBold">
                 {t("SUMMARY_HEADING")}
               </ThemedText>
               {isLoading ? (
                 <ActivityIndicator />
               ) : (
-                <View>
-                  <ThemedText lightColor={Colors.black.primary}>
-                    {t("PRODUCTS")} ({data?.value.totals}){" "}
-                  </ThemedText>
+                <View style={{flex: 1, justifyContent: "space-between"}}>
+                  
                   {data?.value.bookings.map((booking) => (
-                    <View>
-                      <View>
-                        <ThemedText lightColor={Colors.black.primary}>
-                          {t("SHIPPING")} ${booking?.details[0].bookingFee}
+                    
+                  <View>
+                      <View style={styles.resumeItem}>
+                  <ThemedText>
+                    {t("PRODUCTS")} (1){" "}
+                  </ThemedText>
+                        <ThemedText>
+                        $ {booking.price}
                         </ThemedText>
                       </View>
-                      <View>
-                        <ThemedText lightColor={Colors.black.primary}>
-                          {t("DISCOUNT")} ${booking?.details[0].discount}
+                      <View style={styles.resumeItem}>
+                        <ThemedText>
+                          {t("SHIPPING")}
+                        </ThemedText>
+                        <ThemedText>
+                        $ {booking?.details[0].bookingFee}
                         </ThemedText>
                       </View>
-                      <View>
-                        <ThemedText lightColor={Colors.black.primary}>
-                          Total ${booking.totalPrice}
+                      <View style={styles.resumeItem}>
+                        <ThemedText >
+                          {t("DISCOUNT")} 
+                        </ThemedText>
+                        <ThemedText>
+                        $ {booking?.details[0].discount}
                         </ThemedText>
                       </View>
-                    </View>
+                      <View style={styles.resumeTotal}>
+                        <ThemedText>
+                        {t("TOTAL")} 
+                        </ThemedText>
+                        <ThemedText>
+                        $ {booking.totalPrice}
+                        </ThemedText>
+                      </View>
+                      </View>
                   ))}
+                  
                 </View>
               )}
             </View>
           </View>
         </View>
         <View style={styles.cardContent}>
-          <ThemedText lightColor={Colors.black.primary} type="defaultBold">
+          <ThemedText  type="defaultBold">
             {t("SHIPPING")}
           </ThemedText>
           {isLoading ? (

@@ -17,12 +17,13 @@ const desktop = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
+    gap: 10
   },
   cardColumnLeft: {
-    width: "70%",
+    flex: 1.7
   },
   cardColumnRight: {
-    width: "29%",
+    flex: 1
   },
   informationBoxesContainer: {
     flexDirection: "row",
@@ -36,62 +37,32 @@ const desktop = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.black.third,
   },
+  resumeItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    fontSize: 14,
+    lineHeight: 25,
+  },
+  resumeTotal: {
+    marginTop: 29,
+    width: "100%",
+    backgroundColor: Colors.black.fifth,
+    borderRadius: 5,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    flexDirection: "row",
+    justifyContent: "center"
+  }
 });
 
 export const orderStyles = {
   mobile: StyleSheet.create({
     ...cardStyle.mobile,
-    tableHeader: {
-      ...desktop.tableHeader,
-    },
-    tableRow: {
-      ...desktop.tableRow,
-    },
-    cardRow: {
-      ...desktop.cardRow,
-    },
-    cardColumnLeft: {
-      ...desktop.cardColumnLeft,
-    },
-    cardColumnRight: {
-      ...desktop.cardColumnRight,
-    },
-    informationBoxesContainer: {
-      ...desktop.informationBoxesContainer,
-    },
-    informationBox: {
-      ...desktop.informationBox,
-    },
-    verticalSeparator: {
-      ...desktop.verticalSeparator,
-    },
+    ...desktop,
   }),
   tablet: StyleSheet.create({
     ...cardStyle.tablet,
-    tableHeader: {
-      ...desktop.tableHeader,
-    },
-    tableRow: {
-      ...desktop.tableRow,
-    },
-    cardRow: {
-      ...desktop.cardRow,
-    },
-    cardColumnLeft: {
-      ...desktop.cardColumnLeft,
-    },
-    cardColumnRight: {
-      ...desktop.cardColumnRight,
-    },
-    informationBoxesContainer: {
-      ...desktop.informationBoxesContainer,
-    },
-    informationBox: {
-      ...desktop.informationBox,
-    },
-    verticalSeparator: {
-      ...desktop.verticalSeparator,
-    },
+    ...desktop
   }),
   desktop: StyleSheet.create({
     ...cardStyle.desktop,

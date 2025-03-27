@@ -35,12 +35,12 @@ export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) =
         bookings?.map((booking) => (
           <DataTable.Row key={`bkid-${booking.id}`} style={styles.tableRow}>
             <DataTable.Cell>
-              <ThemedText lightColor={Colors.black.primary}>
+              <ThemedText >
                 {booking.reference}
               </ThemedText>
             </DataTable.Cell>
             <DataTable.Cell>
-              <ThemedText lightColor={Colors.black.primary}>
+              <ThemedText >
                 {new Date(booking.bookingDate)
                   .toLocaleDateString("es-ES", {
                     day: "numeric",
@@ -51,12 +51,12 @@ export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) =
               </ThemedText>
             </DataTable.Cell>
             <DataTable.Cell>
-              <ThemedText lightColor={Colors.black.primary}>
+              <ThemedText >
                 {booking.totalPrice} USD
               </ThemedText>
             </DataTable.Cell>
             <DataTable.Cell>
-              <ThemedText lightColor={Colors.black.primary}>
+              <ThemedText >
                 {booking.status}
               </ThemedText>
             </DataTable.Cell>
