@@ -1,13 +1,13 @@
-import { Text, View, ViewProps, Image } from "react-native";
+import { View, ViewProps } from "react-native";
 import React, { FC, useEffect } from "react";
-import Btn from "@/components/Btn";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { orderStyles } from "../styles/orders";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { useSearchMarketBookingsMutation } from "../services/api/BookingService";
 import { ActivityIndicator } from "react-native-paper";
+import { orderStyles } from "@/styles/orders";
+import { OrdersTable } from "../components/orders/OrdersTable";
 
 const MAX_PER_PAGE = 5;
 
@@ -16,7 +16,7 @@ export const OrderHistory: FC<ViewProps> = () => {
   const { t } = useTranslation();
   const styles = useResponsiveStyles(orderStyles);
 
-  const [searchMarketOptions, { data , isLoading}] =
+  const [searchMarketOptions, { data, isLoading }] =
     useSearchMarketBookingsMutation();
 
   useEffect(() => {
@@ -35,17 +35,11 @@ export const OrderHistory: FC<ViewProps> = () => {
           </ThemedText>
         </View>
         <View style={styles.cardContent}>
-          {isLoading && <ActivityIndicator/>}
-          {data?.value.bookings.map((booking) => (
-            <View style={{flexDirection: "row", gap: 10}}>
-
-            <ThemedText>{booking.reference}</ThemedText>
-            <ThemedText>{booking.bookingDate}</ThemedText>
-            <ThemedText>{booking.totalPrice} USD</ThemedText>
-            <ThemedText>{booking.status}</ThemedText>
-            <Link href={`/profile/order-history/${booking.id}`}>eye icon</Link>
-            </View>
-          ))}
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <OrdersTable bookings={data?.value.bookings} />
+          )}
         </View>
       </View>
     </>
