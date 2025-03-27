@@ -13,7 +13,8 @@ const desktop = StyleSheet.create({
   modalContent: {
     maxWidth: 800,
     backgroundColor: "white",
-    padding: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 40,
     borderRadius: 10,
     alignItems: "center",
     position: "relative",
@@ -26,8 +27,7 @@ const desktop = StyleSheet.create({
     zIndex: 999,
   },
   formContainer: {
-    paddingTop: 50,
-    paddingBottom: 60,
+    paddingVertical: 40,
     maxWidth: 800,
     minWidth: 700,
     marginHorizontal: "auto",
