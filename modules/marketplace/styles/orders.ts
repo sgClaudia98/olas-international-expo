@@ -15,13 +15,26 @@ const desktop = StyleSheet.create({
   cardRow: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 10,
+    justifyContent: "space-between",
+    width: "100%",
   },
   cardColumnLeft: {
-    width: "75%",
+    width: "70%",
   },
   cardColumnRight: {
-    width: "25%",
+    width: "29%",
+  },
+  informationBoxesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  informationBox: {
+    width: "48%",
+  },
+  verticalSeparator: {
+    borderWidth: 1,
+    borderColor: Colors.black.third,
   },
 });
 
@@ -43,6 +56,15 @@ export const orderStyles = {
     cardColumnRight: {
       ...desktop.cardColumnRight,
     },
+    informationBoxesContainer: {
+      ...desktop.informationBoxesContainer,
+    },
+    informationBox: {
+      ...desktop.informationBox,
+    },
+    verticalSeparator: {
+      ...desktop.verticalSeparator,
+    },
   }),
   tablet: StyleSheet.create({
     ...cardStyle.tablet,
@@ -61,9 +83,22 @@ export const orderStyles = {
     cardColumnRight: {
       ...desktop.cardColumnRight,
     },
+    informationBoxesContainer: {
+      ...desktop.informationBoxesContainer,
+    },
+    informationBox: {
+      ...desktop.informationBox,
+    },
+    verticalSeparator: {
+      ...desktop.verticalSeparator,
+    },
   }),
   desktop: StyleSheet.create({
     ...cardStyle.desktop,
+    cardContent: {
+      ...cardStyle.desktop.cardContent,
+      minHeight: 250
+    },
     ...desktop,
   }),
 };
