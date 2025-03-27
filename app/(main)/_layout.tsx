@@ -1,8 +1,7 @@
 import { Tabs } from "expo-router";
 import React from "react";
-
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import { AuthRequestModal } from "@/components/layout/AuthRequestModal";
+import IconSvg from "@/components/ui/IconSvg";
 
 export default function TabLayout() {
   return (
@@ -19,7 +18,7 @@ export default function TabLayout() {
             headerShown: false,
             title: "Home",
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="house.fill" color={color} />
+              <IconSvg size={28} name="Home" color={color} />
             ),
           }}
         />
@@ -28,7 +27,7 @@ export default function TabLayout() {
           options={{
             animation: "shift",
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="paperplane.fill" color={color} />
+              <IconSvg size={28} name="User" color={color} />
             ),
           }}
         />
@@ -37,7 +36,7 @@ export default function TabLayout() {
           options={{
             animation: "shift",
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="paperplane.fill" color={color} />
+              <IconSvg size={28} name="Help" color={color} />
             ),
           }}
         />
@@ -46,7 +45,7 @@ export default function TabLayout() {
           options={{
             animation: "shift",
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="paperplane.fill" color={color} />
+              <IconSvg size={28} name="Settings" color={color} />
             ),
           }}
         />
