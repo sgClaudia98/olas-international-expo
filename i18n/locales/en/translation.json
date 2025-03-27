@@ -1,27 +1,52 @@
 {
-  "LANGUAGE.EN": "English",
-  "LANGUAGE.ES": "Spanish",
+  "LANGUAGE": {
+    "EN": "English",
+    "ES": "Spanish",
+    "FR": "French",
+    "PT": "Portuguese"
+  },
   "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
-  "ACTIONS.ADD": "Add",
+  "ACTIONS": {
+    "ADD": "Add",
+    "SAVE_CHANGES": "Save changes"
+  },
   "BEFORE": "Before",
-  "VIEW_LESS": "View less",
-  "VIEW_MORE": "View more",
-  "ROUTE.HOME": "Home",
-  "MODULE.TRAVEL": "Travel",
-  "MODULE.MARKET": "Market",
-  "PAGE.ORDERS": "Orders",
-  "PAGE.ABOUT_US": "About us",
-  "PAGE.FAQ": "FAQs",
-  "PAGE.TERMS_AND_CONDITIONS": "Terms and conditions",
-  "PAGE.RETURN_POLICY": "Return policy",
-  "PAGE.PRIVACY_POLICY": "Privacy policy",
-  "PAGE.PROFILE": "Profile",
-  "PAGE.ORDER_HISTORY": "Orders history",
-  "FILTER.ALL_CATEGORIES": "All Categories",
-  "FILTERS.CATEGORIES": "Categories",
-  "HEADER.SERVICES": "Services",
-  "HEADER.INFORMATION": "Information",
-  "HEADER.CUSTOMER_SERVICE": "Customer service",
+  "VIEW": {
+    "LESS": "View less",
+    "MORE": "View more"
+  },
+  "ROUTE": {
+    "HOME": "Home"
+  },
+  "MODULE": {
+    "TRAVEL": "Travel",
+    "MARKET": "Market"
+  },
+  "PAGE": {
+    "ORDERS": "Orders",
+    "ABOUT_US": "About us",
+    "FAQ": "FAQs",
+    "TERMS_AND_CONDITIONS": "Terms and conditions",
+    "RETURN_POLICY": "Return policy",
+    "PRIVACY_POLICY": "Privacy policy",
+    "PROFILE": "Profile",
+    "ORDER_HISTORY": "Orders history",
+    "PROFILE.HEADER": "Profile information",
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "RESET_PASSWORD": "Reset password",
+    "VERIFY": "Verify account"
+  },
+  "FILTERS": {
+    "ALL_CATEGORIES": "All Categories",
+    "CATEGORIES": "Categories",
+    "LABEL": "Filters"
+  },
+  "HEADER": {
+    "SERVICES": "Services",
+    "INFORMATION": "Information",
+    "CUSTOMER_SERVICE": "Customer service"
+  },
   "LOGOUT": "Log out",
   "PROFILE_SETTINGS": "Profile Settings",
   "PAGE.PROFILE.HEADER": "Profile information",
@@ -38,12 +63,18 @@
   "RECEIVER_HEADING": "Beneficiary",
   "CUSTOMER_HEADING": "Client",
   "SUMMARY_HEADING": "Summary",
-  "PRODUCTS": "Products",
   "SHIPPING": "Shipping",
   "DISCOUNT": "Discount",
   "TOTAL": "Total",
   "NUMBER": "Number",
   "DATE": "Date",
   "PRICE": "Price",
-  "STATUS": "Status"
+  "STATUS": "Status",
+  "BACK": "Go back",
+  "SHOW_FILTERS": "Show Filters",
+  "PRODUCTS": {
+    "TOTAL_zero": "{{count}} products",
+    "TOTAL_one": "{{count}} product",
+    "TOTAL_other": "{{count}} products"
+  }
 }

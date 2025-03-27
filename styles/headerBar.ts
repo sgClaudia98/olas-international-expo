@@ -7,6 +7,7 @@ const styles = {
       alignItems: "flex-start",
       backgroundColor: "#ffffff",
       paddingHorizontal: 10,
+      paddingVertical: 0,
     },
     menuItem: {
       marginHorizontal: 10,
@@ -31,6 +32,7 @@ const styles = {
       alignItems: "center",
       backgroundColor: "#ffffff",
       paddingHorizontal: 10,
+      paddingVertical: 23,
       marginLeft: 40,
     },
     menuItem: {

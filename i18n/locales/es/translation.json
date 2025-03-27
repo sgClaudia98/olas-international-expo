@@ -1,27 +1,51 @@
 {
-  "LANGUAGE.EN": "Inglés",
-  "LANGUAGE.ES": "Español",
+  "LANGUAGE": {
+    "EN": "Inglés",
+    "ES": "Español",
+    "FR": "Francés",
+    "PT": "Portugués"
+  },
   "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
-  "PAGE.ORDERS": "Pedidos",
-  "PAGE.ABOUT_US": "Nosotros",
-  "PAGE.FAQ": "Preguntas Frecuentes",
-  "PAGE.TERMS_AND_CONDITIONS": "Términos y condiciones",
-  "PAGE.RETURN_POLICY": "Política de devolución",
-  "PAGE.PRIVACY_POLICY": "Política de privacidad",
-  "PAGE.PROFILE": "Perfil",
-  "PAGE.ORDER_HISTORY": "Historial de órdenes",
-  "ACTIONS.ADD": "Añadir",
+  "ACTIONS": {
+    "ADD": "Añadir",
+    "SAVE_CHANGES": "Guardar cambios"
+  },
   "BEFORE": "Antes",
-  "VIEW_LESS": "Ver menos",
-  "VIEW_MORE": "Ver más",
-  "ROUTE.HOME": "Inicio",
-  "FILTERS.CATEGORIES": "Categorías",
-  "FILTER.ALL_CATEGORIES": "Todas las Categorías",
-  "MODULE.TRAVEL": "Viajes",
-  "MODULE.MARKET": "Mercado",
-  "HEADER.SERVICES": "Servicios",
-  "HEADER.INFORMATION": "Información",
-  "HEADER.CUSTOMER_SERVICE": "Atención al Cliente",
+  "VIEW": {
+    "LESS": "Ver menos",
+    "MORE": "Ver más"
+  },
+  "ROUTE": {
+    "HOME": "Inicio"
+  },
+  "MODULE": {
+    "TRAVEL": "Viajes",
+    "MARKET": "Mercado"
+  },
+  "PAGE": {
+    "ORDERS": "Pedidos",
+    "ABOUT_US": "Nosotros",
+    "FAQ": "Preguntas Frecuentes",
+    "TERMS_AND_CONDITIONS": "Términos y condiciones",
+    "RETURN_POLICY": "Política de devolución",
+    "PRIVACY_POLICY": "Política de privacidad",
+    "PROFILE": "Perfil",
+    "ORDER_HISTORY": "Historial de órdenes",
+    "PROFILE.HEADER": "Información del perfil",
+    "LOGIN": "Iniciar sesión",
+    "REGISTER": "Registrarse",
+    "RESET_PASSWORD": "Restablecer contraseña",
+    "VERIFY": "Verificar cuenta"
+  },
+  "FILTERS": {
+    "ALL_CATEGORIES": "Todas las Categorías",
+    "CATEGORIES": "Categorías"
+  },
+  "HEADER": {
+    "SERVICES": "Servicios",
+    "INFORMATION": "Información",
+    "CUSTOMER_SERVICE": "Atención al Cliente"
+  },
   "LOGOUT": "Cerrar sesión",
   "PROFILE_SETTINGS": "Ajustes de Perfil",
   "PAGE.PROFILE.HEADER": "Información del perfil",
@@ -38,11 +62,15 @@
   "RECEIVER_HEADING": "Destinatario",
   "CUSTOMER_HEADING": "Comprador",
   "SUMMARY_HEADING": "Resumen",
-  "PRODUCTS": "Productos",
   "SHIPPING": "Envío",
   "DISCOUNT": "Descuento",
   "NUMBER": "Número",
   "DATE": "Fecha",
   "PRICE": "Precio",
-  "STATUS": "Estado"
+  "STATUS": "Estado",
+  "PRODUCTS": {
+    "TOTAL_zero": "{{count}} productos",
+    "TOTAL_one": "{{count}} producto",
+    "TOTAL_other": "{{count}} productos"
+  }
 }

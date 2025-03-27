@@ -4,7 +4,8 @@ import { useWindowDimensions } from "react-native";
 export const BREAKPOINTS = {
   mobile: 480, 
   tablet: 768, 
-  desktop: 1280, 
+  mid: 1024,
+  desktop: 1440, 
   // > 1280px = Big Desktop
 };
 
@@ -15,6 +16,7 @@ type BreakpointState = {
   isBigDesktop: boolean;
   lessThan: {
     tablet: boolean,
+    mid: boolean,
     desktop: boolean,
   }
 }
@@ -28,6 +30,7 @@ export function useBreakpoints(): BreakpointState {
     isBigDesktop: width >= BREAKPOINTS.desktop,
     lessThan: {
       tablet: width < BREAKPOINTS.tablet,
+      mid: width < BREAKPOINTS.mid, 
       desktop: width < BREAKPOINTS.desktop,
     }
   };

@@ -15,7 +15,9 @@ const LogoHeader = () => {
 };
 const styles = StyleSheet.create({
   logo: {
-    marginLeft: 40,
+    alignSelf: "center",
+    marginLeft: 14,
+    paddingVertical: 15,
   },
 });
 

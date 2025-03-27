@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
@@ -51,6 +51,12 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             {t("PAGE.ORDER_DETAIL")}
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
+          <Link
+            style={{ color: Colors.blue.second }}
+            href={"/profile/order-history"}
+          >
+            {t("BACK")}
+          </Link>
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardColumnLeft}>
@@ -146,7 +152,9 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                   <View>
                     <View style={styles.resumeItem}>
                       <ThemedText>
-                        {t("PRODUCTS")} ({booking.total}){" "}
+                        {t("PRODUCTS.TOTAL", {
+                          count: booking.total,
+                        }).toLowerCase()}
                       </ThemedText>
                       <ThemedText>$ {booking.price.toFixed(2)}</ThemedText>
                     </View>
@@ -188,39 +196,44 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                     {t("SHIPPING")} {shipment.index + 1}
                   </ThemedText>
                   <ThemedText style={styles.badge}>
-                    {shipment.total} {t("PRODUCTS").toLowerCase()}
+                    {t("PRODUCTS.TOTAL", {
+                      count: shipment.total,
+                    }).toLowerCase()}
                   </ThemedText>
                 </View>
+
+                <ThemedText>{shipment.status}</ThemedText>
                 <DataTable>
-        <DataTable.Header style={styles.tableProductHeader}>
-          <DataTable.Title>
-            <ThemedText style={styles.tableLabel}>Product</ThemedText>
-          </DataTable.Title>
-          <DataTable.Title numeric>
-            <ThemedText style={styles.tableLabel}>Quantity</ThemedText>
-          </DataTable.Title>
-          <DataTable.Title numeric>
-            <ThemedText style={styles.tableLabel}>Price</ThemedText>
-          </DataTable.Title>
-        </DataTable.Header>
-        {shipment.items.map((item) => (
-        <DataTable.Row
-          key={`${booking.id}-${item.id}`}
-          style={styles.tableProductRow}
-        >
-          <DataTable.Cell>
-            <ThemedText>{item.name}</ThemedText>
-          </DataTable.Cell>
-          <DataTable.Cell numeric>
-            <ThemedText>{item.quantity}</ThemedText>
-          </DataTable.Cell>
-          <DataTable.Cell numeric>
-            <ThemedText>${item.price.toFixed(2)}</ThemedText>
-          </DataTable.Cell>
-        </DataTable.Row>
-      ))}
-      </DataTable>
-     
+                  <DataTable.Header style={styles.tableProductHeader}>
+                    <DataTable.Title>
+                      <ThemedText style={styles.tableLabel}>Product</ThemedText>
+                    </DataTable.Title>
+                    <DataTable.Title numeric>
+                      <ThemedText style={styles.tableLabel}>
+                        Quantity
+                      </ThemedText>
+                    </DataTable.Title>
+                    <DataTable.Title numeric>
+                      <ThemedText style={styles.tableLabel}>Price</ThemedText>
+                    </DataTable.Title>
+                  </DataTable.Header>
+                  {shipment.items.map((item) => (
+                    <DataTable.Row
+                      key={`${booking.id}-${item.id}`}
+                      style={styles.tableProductRow}
+                    >
+                      <DataTable.Cell>
+                        <ThemedText>{item.name}</ThemedText>
+                      </DataTable.Cell>
+                      <DataTable.Cell numeric>
+                        <ThemedText>{item.quantity}</ThemedText>
+                      </DataTable.Cell>
+                      <DataTable.Cell numeric>
+                        <ThemedText>${item.price.toFixed(2)}</ThemedText>
+                      </DataTable.Cell>
+                    </DataTable.Row>
+                  ))}
+                </DataTable>
               </>
             ))
           )}

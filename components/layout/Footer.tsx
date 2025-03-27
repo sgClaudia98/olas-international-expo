@@ -115,7 +115,7 @@ const Footer: React.FC<FooterProps> = ({
     }
   };
   return (
-    <View>
+    <View >
       <View style={styles.container}>
         {/* Left Section */}
         <View style={styles.logoSection}>

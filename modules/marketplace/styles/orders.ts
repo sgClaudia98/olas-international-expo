@@ -3,6 +3,18 @@ import { cardStyle } from "@/styles/card";
 import { Colors } from "@/styles";
 
 const desktop = StyleSheet.create({
+  cardHeader: {
+    ...cardStyle.desktop.cardHeader,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  cardContent: {
+    ...cardStyle.desktop.cardContent,
+    minHeight: 280,
+    maxHeight: 500,
+    flexWrap: 'wrap'
+  },
   tableHeader: {
     borderBottomWidth: 0,
     paddingHorizontal: 0,
@@ -90,6 +102,7 @@ export const orderStyles = {
     ...desktop,
     cardHeader: {
       ...cardStyle.mobile.cardHeader,
+      ...desktop.cardHeader,
       paddingLeft: 30,
     },
     cardRow: {
@@ -147,16 +160,6 @@ export const orderStyles = {
   }),
   desktop: StyleSheet.create({
     ...cardStyle.desktop,
-    cardHeader: {
-      ...cardStyle.desktop.cardHeader,
-      paddingLeft: 30,
-    },
-    cardContent: {
-      ...cardStyle.desktop.cardContent,
-      minHeight: 280,
-      maxHeight: 500,
-      flexWrap: 'wrap'
-    },
     ...desktop,
   }),
 };

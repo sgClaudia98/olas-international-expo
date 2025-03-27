@@ -51,6 +51,7 @@ const DestinationSelector = () => {
         onSelect={handleSelect}
         menuItems={data}
         iconSize={24}
+        textStyle={{maxWidth: 130, fontSize: 16, lineHeight:24}}
         value={selected?.id.toString()}
       />
     </View>
