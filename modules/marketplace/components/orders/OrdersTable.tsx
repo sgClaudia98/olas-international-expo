@@ -1,5 +1,5 @@
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { orderStyles } from "@/styles/orders";
+import { orderStyles } from "../../styles/orders";
 import React from "react";
 import { DataTable, Icon } from "react-native-paper";
 import { AgencyClientBooking } from "../../services/interfaces/bookingDetail";

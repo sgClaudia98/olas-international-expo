@@ -6,8 +6,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { useSearchMarketBookingsMutation } from "../services/api/BookingService";
 import { ActivityIndicator } from "react-native-paper";
-import { orderStyles } from "@/styles/orders";
 import { OrdersTable } from "../components/orders/OrdersTable";
+import { orderStyles } from "../styles/orders";
 
 const MAX_PER_PAGE = 5;
 
