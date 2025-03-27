@@ -1,293 +1,181 @@
 import typography from "@/styles/typography";
 import { StyleSheet } from "react-native";
 
+const desktop = StyleSheet.create({
+  overlay: {
+    flex: 1,
+    backgroundColor: "rgba(8, 51, 102, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cartContent: {
+    position: "absolute",
+    top: 40,
+    bottom: 40,
+    right: 25,
+    width: 350,
+    backgroundColor: "white",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+    borderRadius: 15,
+    padding: 20,
+  },
+  cartTitle: {
+    ...typography.h3,
+    marginBottom: 20,
+  },
+  closeButton: {
+    position: "absolute",
+    right: 20,
+    top: 20,
+  },
+  closeText: {
+    fontSize: 24,
+    color: "#333",
+  },
+  scrollViewContent: {
+    paddingBottom: 20,
+  },
+  cartItems: {
+    flexGrow: 1,
+  },
+  cartItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    marginRight: 10,
+  },
+  itemDetails: {
+    flex: 1,
+  },
+  itemName: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  itemPrice: {
+    fontSize: 14,
+    color: "#777",
+  },
+  itemQuantity: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  cartFooter: {
+    borderTopWidth: 1,
+    borderTopColor: "#ddd",
+    paddingTop: 10,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  totalText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+});
+
 const cartStyles = {
   mobile: StyleSheet.create({
     overlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.5)",
+      ...desktop.overlay,
     },
     cartContent: {
-      position: "absolute",
-      top: 40,
-      bottom: 40,
-      right: 25,
-      width: "75%",
-      backgroundColor: "white",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      borderRadius: 15,
-      padding: 20,
+      ...desktop.cartContent,
+      width: "80%",
     },
     cartTitle: {
-      ...typography.h3,
-      marginBottom: 20,
+      ...desktop.cartTitle,
     },
     closeButton: {
-      position: "absolute",
-      right: 20,
-      top: 20,
+      ...desktop.closeButton,
     },
     closeText: {
-      fontSize: 24,
-      color: "#333",
+      ...desktop.closeText,
     },
     scrollViewContent: {
-      paddingBottom: 20,
+      ...desktop.scrollViewContent,
     },
     cartItems: {
-      flexGrow: 1,
+      ...desktop.cartItems,
     },
     cartItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 15,
+      ...desktop.cartItem,
     },
     itemImage: {
-      width: 50,
-      height: 50,
-      borderRadius: 10,
-      marginRight: 10,
+      ...desktop.itemImage,
     },
     itemDetails: {
-      flex: 1,
+      ...desktop.itemDetails,
     },
     itemName: {
-      fontSize: 16,
-      fontWeight: "bold",
+      ...desktop.itemName,
     },
     itemPrice: {
-      fontSize: 14,
-      color: "#777",
+      ...desktop.itemPrice,
     },
     itemQuantity: {
-      fontSize: 16,
-      fontWeight: "bold",
+      ...desktop.itemQuantity,
     },
     cartFooter: {
-      borderTopWidth: 1,
-      borderTopColor: "#ddd",
-      paddingTop: 10,
-      marginTop: 10,
-      alignItems: "center",
+      ...desktop.cartFooter,
     },
     totalText: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    modalOverlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.25)",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    modalContent: {
-      width: "95%",
-      backgroundColor: "white",
-      padding: 20,
-      borderRadius: 10,
-      alignItems: "center",
-      position: "relative",
-    },
-    closeModalButton: {
-      position: "absolute",
-      right: 0,
-      top: 20,
-      backgroundColor: "transparent",
+      ...desktop.totalText,
     },
   }),
   tablet: StyleSheet.create({
     overlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.5)",
-      justifyContent: "center",
-      alignItems: "center",
+      ...desktop.overlay
     },
     cartContent: {
-      position: "absolute",
-      top: 40,
-      bottom: 40,
-      right: 25,
-      width: "40%",
-      backgroundColor: "white",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      borderRadius: 15,
-      padding: 20,
+      ...desktop.cartContent,
     },
     cartTitle: {
       ...typography.h3,
       marginBottom: 20,
     },
     closeButton: {
-      position: "absolute",
-      right: 20,
-      top: 20,
+      ...desktop.closeButton,
     },
     closeText: {
-      fontSize: 24,
-      color: "#333",
+      ...desktop.closeText,
     },
     scrollViewContent: {
-      paddingBottom: 20,
+      ...desktop.scrollViewContent,
     },
     cartItems: {
-      flexGrow: 1,
+      ...desktop.cartItems,
     },
     cartItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 15,
+      ...desktop.cartItem,
     },
     itemImage: {
-      width: 50,
-      height: 50,
-      borderRadius: 10,
-      marginRight: 10,
+      ...desktop.itemImage,
     },
     itemDetails: {
-      flex: 1,
+      ...desktop.itemDetails,
     },
     itemName: {
-      fontSize: 16,
-      fontWeight: "bold",
+      ...desktop.itemName,
     },
     itemPrice: {
-      fontSize: 14,
-      color: "#777",
+      ...desktop.itemPrice,
     },
     itemQuantity: {
-      fontSize: 16,
-      fontWeight: "bold",
+      ...desktop.itemQuantity,
     },
     cartFooter: {
-      borderTopWidth: 1,
-      borderTopColor: "#ddd",
-      paddingTop: 10,
-      marginTop: 10,
-      alignItems: "center",
+      ...desktop.cartFooter,
     },
     totalText: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    modalOverlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.25)",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    modalContent: {
-      width: "75%",
-      backgroundColor: "white",
-      padding: 20,
-      borderRadius: 10,
-      alignItems: "center",
-      position: "relative",
-    },
-    closeModalButton: {
-      position: "absolute",
-      right: 0,
-      top: 20,
-      backgroundColor: "transparent",
+      ...desktop.totalText,
     },
   }),
-  desktop: StyleSheet.create({
-    overlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.5)",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    cartContent: {
-      position: "absolute",
-      top: 40,
-      bottom: 40,
-      right: 25,
-      width: "25%",
-      backgroundColor: "white",
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      borderRadius: 15,
-      padding: 20,
-    },
-    cartTitle: {
-      ...typography.h3,
-      marginBottom: 20,
-    },
-    closeButton: {
-      position: "absolute",
-      right: 20,
-      top: 20,
-    },
-    closeText: {
-      fontSize: 24,
-      color: "#333",
-    },
-    scrollViewContent: {
-      paddingBottom: 20,
-    },
-    cartItems: {
-      flexGrow: 1,
-    },
-    cartItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 15,
-    },
-    itemImage: {
-      width: 50,
-      height: 50,
-      borderRadius: 10,
-      marginRight: 10,
-    },
-    itemDetails: {
-      flex: 1,
-    },
-    itemName: {
-      fontSize: 16,
-      fontWeight: "bold",
-    },
-    itemPrice: {
-      fontSize: 14,
-      color: "#777",
-    },
-    itemQuantity: {
-      fontSize: 16,
-      fontWeight: "bold",
-    },
-    cartFooter: {
-      borderTopWidth: 1,
-      borderTopColor: "#ddd",
-      paddingTop: 10,
-      marginTop: 10,
-      alignItems: "center",
-    },
-    totalText: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    modalOverlay: {
-      flex: 1,
-      backgroundColor: "rgba(8, 51, 102, 0.25)",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    modalContent: {
-      width: "50%",
-      backgroundColor: "white",
-      padding: 20,
-      borderRadius: 10,
-      alignItems: "center",
-      position: "relative",
-    },
-    closeModalButton: {
-      position: "absolute",
-      right: 0,
-      top: 20,
-      backgroundColor: "transparent",
-    },
-  })
-}
+  ...desktop,
+};
 
 export { cartStyles };
