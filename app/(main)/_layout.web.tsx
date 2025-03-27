@@ -1,7 +1,5 @@
 import { Stack, Tabs } from "expo-router";
 import React from "react";
-
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import { AuthRequestModal } from "@/components/layout/AuthRequestModal";
 
 export default function TabLayout() {

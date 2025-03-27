@@ -21,6 +21,7 @@ import Footer from "@/components/layout/MainFooterComponent";
 import Btn from "@/components/Btn";
 import { ThemedText } from "@/components/ThemedText";
 import { useRouter } from "expo-router";
+import IconSvg from "@/components/ui/IconSvg";
 
 const LandingWrapper: React.FC = () => {
   const router = useRouter();
@@ -59,6 +60,7 @@ const LandingWrapper: React.FC = () => {
                 onPress={() => router.navigate("/promos")}
               />
             )}
+            <IconSvg name="ArrowBack" />
             <Btn
               title="go to auth"
               onPress={() => router.navigate("/(auth)/login")}

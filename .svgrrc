@@ -1,0 +1,10 @@
+{
+  "removeTitle": false,
+  "native": true,
+  "typescript": true,
+  "replaceAttrValues": {
+    "#083366": "currentColor"
+  },
+  "outDir": "components/icons",
+  "ext": "tsx"
+}
