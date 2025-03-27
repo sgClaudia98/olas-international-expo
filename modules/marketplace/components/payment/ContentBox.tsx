@@ -7,15 +7,17 @@ interface ContentBoxProps {
   title?: string;
   data: Record<string, { icon?: JSX.Element; value: string } | string>;
   backgroundColor: string;
+  shadow?: boolean;
 }
 
 const ContentBox: React.FC<ContentBoxProps> = ({
   title,
   data,
   backgroundColor,
+  shadow,
 }) => {
   return (
-    <View style={[styles.contentBox, { backgroundColor }]}>
+    <View style={[styles.contentBox, shadow ? styles.shadowStyles : '', { backgroundColor }]}>
       {title && <Text style={styles.title}>{title}</Text>}
       {Object.entries(data).map(([key, item]) => {
         const { icon, value } =
@@ -26,7 +28,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         return (
           <View key={key} style={styles.row}>
             {icon && <View style={styles.icon}>{icon}</View>}
-            <Text style={styles.text}>{typeof value === "string" ? value : ""}</Text>
+            <Text style={styles.text}>
+              {typeof value === "string" ? value : ""}
+            </Text>
           </View>
         );
       })}
@@ -47,6 +51,8 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     minHeight: 240,
     marginHorizontal: 5,
+  },
+  shadowStyles: {
     elevation: 3, // shadow in Android
     shadowColor: "#000", // Shadow in iOS
     shadowOffset: { width: 0, height: 2 },
