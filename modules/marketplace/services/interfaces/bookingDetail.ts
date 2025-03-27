@@ -33,6 +33,7 @@ export interface BookingDetail {
   basePrice: number;
   bookingFee: number;
   policiesId?: number | null;
+  beneficiary: AgencyClient
 }
 
 export interface CarBookingDetail extends BookingDetail {
