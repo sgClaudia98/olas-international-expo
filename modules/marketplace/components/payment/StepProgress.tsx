@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {stepProgressStyles as styles} from '../../styles/paymentForm';
+import {stepProgressStyles} from '../../styles/paymentForm';
+import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 
 const StepProgress = ({step}: {step: number}) => {
   const steps = ['Client', 'Beneficiary', 'Book'];
+
+  const styles = useResponsiveStyles(stepProgressStyles)
 
   return (
     <View style={styles.container}>

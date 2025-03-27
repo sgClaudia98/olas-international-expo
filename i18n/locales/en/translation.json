@@ -76,5 +76,6 @@
     "TOTAL_zero": "{{count}} products",
     "TOTAL_one": "{{count}} product",
     "TOTAL_other": "{{count}} products"
-  }
+  },
+  "PRODUCTS_HEADING": "Products"
 }

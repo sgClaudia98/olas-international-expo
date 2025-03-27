@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
-import { paymentFormStyles as styles } from "../../../styles/paymentForm";
+import { paymentFormStyles, paymentFormStyles as styles } from "../../../styles/paymentForm";
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";
@@ -14,14 +14,17 @@ import {
   ProfileIcon,
 } from "@/assets/icons/PaymentInfoIcons";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
 
+  const styles = useResponsiveStyles(paymentFormStyles)
+
   return (
     <>
-      <View style={styles.tablet.twoColumnContainer}>
-        <View style={styles.tablet.column}>
+      <View style={styles.twoColumnContainer}>
+        <View style={styles.column}>
           <ContentBox
             title="Client"
             data={{
@@ -41,9 +44,10 @@ const Step3 = ({ preview }) => {
               },
             }}
             backgroundColor={Colors.black.fifth}
+            contentBoxStyle={styles.contentBoxStyle}
           />
         </View>
-        <View style={styles.tablet.column}>
+        <View style={styles.column}>
           <ContentBox
             title="Beneficiary"
             data={{
@@ -75,6 +79,7 @@ const Step3 = ({ preview }) => {
               },
             }}
             backgroundColor={Colors.blue.fifth}
+            contentBoxStyle={styles.contentBoxStyle}
           />
         </View>
       </View>
