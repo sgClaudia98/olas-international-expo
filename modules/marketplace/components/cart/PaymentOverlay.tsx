@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Modal } from "react-native";
-import { cartStyles } from "../../styles/cart";
+import { paymentFormStyles } from "../../styles/paymentForm";
 import { Button } from "react-native-paper";
 import { CloseIcon } from "@/assets/icons/CloseIcon";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
@@ -16,7 +16,7 @@ const PaymentOverlay = <T extends { id: number }>({
   renderForm,
   setPaymentFormVisible,
 }: PaymentOverlayProps<T>) => {
-  const styles = useResponsiveStyles(cartStyles)
+  const styles = useResponsiveStyles(paymentFormStyles);
 
   return (
     <Modal
@@ -30,7 +30,7 @@ const PaymentOverlay = <T extends { id: number }>({
           <Button
             mode="contained"
             onPress={() => setPaymentFormVisible(false)}
-            style={{...styles.closeModalButton }}
+            style={styles.closeModalButton}
           >
             <CloseIcon />
           </Button>
