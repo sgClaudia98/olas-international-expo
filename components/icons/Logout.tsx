@@ -3,10 +3,9 @@ import Svg, { Path } from "react-native-svg";
 import type { SvgProps } from "react-native-svg";
 const SvgLogout = (props: SvgProps) => (
   <Svg
-    
-    width={20}
-    height={20}
+    xmlns="http://www.w3.org/2000/svg"
     fill="none"
+    viewBox="0 0 20 20"
     {...props}
   >
     <Path

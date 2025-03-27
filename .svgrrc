@@ -5,6 +5,7 @@
   "replaceAttrValues": {
     "#083366": "currentColor"
   },
+  "dimensions": false,
   "outDir": "components/icons",
   "ext": "tsx"
 }

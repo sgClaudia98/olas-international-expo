@@ -21,7 +21,8 @@ const IconSvg: React.FC<IconProps> = ({
   const Component = icons[name];
   return (
     <Text style={{ color, ...containerStyle }}>
-      <Component width={size} height={size} {...props} />
+      <Component width={size} height={size} 
+    viewBox="0 0 20 20" {...props} />
     </Text>
   );
 };
