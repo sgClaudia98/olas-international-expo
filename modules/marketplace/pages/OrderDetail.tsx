@@ -40,9 +40,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
     });
   }, []);
 
-  const beneficiary = data?.value.bookings[0]?.details[0].beneficiary;
-
-  console.log(data);
+  const beneficiary = data?.value.bookings[0]?.details[0].beneficiary;  
 
   return (
     <>

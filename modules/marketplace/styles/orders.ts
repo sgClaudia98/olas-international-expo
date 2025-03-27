@@ -28,14 +28,15 @@ const desktop = StyleSheet.create({
   informationBoxesContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   informationBox: {
-    width: "48%",
+    flex: 2,
   },
   verticalSeparator: {
     borderWidth: 1,
     borderColor: Colors.black.third,
+    marginHorizontal: 30,
   },
   resumeItem: {
     flexDirection: "row",
@@ -59,16 +60,74 @@ export const orderStyles = {
   mobile: StyleSheet.create({
     ...cardStyle.mobile,
     ...desktop,
+    cardHeader: {
+      ...cardStyle.mobile.cardHeader,
+      paddingLeft: 30,
+    },
+    cardRow: {
+      ...desktop.cardRow,
+      flexDirection: 'column',
+    },
+    cardColumnLeft: {
+      ...desktop.cardColumnLeft,
+      width: '100%',
+      gap: 10,
+    },
+    cardColumnRight: {
+      ...desktop.cardColumnRight,
+      width: '100%',
+    },
+    verticalSeparator: {
+      ...desktop.verticalSeparator,
+      marginVertical: 20,
+      marginLeft: 20,
+    },
   }),
   tablet: StyleSheet.create({
     ...cardStyle.tablet,
-    ...desktop
+    ...desktop,
+    cardHeader: {
+      ...cardStyle.tablet.cardHeader,
+      paddingLeft: 30,
+    },
+    cardRow: {
+      ...desktop.cardRow,
+      flexDirection: 'column',
+      gap: 10,
+    },
+    cardColumnLeft: {
+      ...desktop.cardColumnLeft,
+      width: '100%',
+    },
+    cardColumnRight: {
+      ...desktop.cardColumnRight,
+      width: '100%',
+    },
+    informationBoxesContainer: {
+      ...desktop.informationBoxesContainer,
+      flexDirection: 'column',
+    },
+    informationBox: {
+      ...desktop.informationBox,
+      width: 'auto'
+    },
+    verticalSeparator: {
+      ...desktop.verticalSeparator,
+      marginVertical: 20,
+      marginLeft: 20,
+    },
   }),
   desktop: StyleSheet.create({
     ...cardStyle.desktop,
+    cardHeader: {
+      ...cardStyle.desktop.cardHeader,
+      paddingLeft: 30,
+    },
     cardContent: {
       ...cardStyle.desktop.cardContent,
-      minHeight: 250
+      minHeight: 280,
+      maxHeight: 500,
+      flexWrap: 'wrap'
     },
     ...desktop,
   }),

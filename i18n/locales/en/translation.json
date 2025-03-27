@@ -41,5 +41,9 @@
   "PRODUCTS": "Products",
   "SHIPPING": "Shipping",
   "DISCOUNT": "Discount",
-  "TOTAL": "Total"
+  "TOTAL": "Total",
+  "NUMBER": "Number",
+  "DATE": "Date",
+  "PRICE": "Price",
+  "STATUS": "Status"
 }
