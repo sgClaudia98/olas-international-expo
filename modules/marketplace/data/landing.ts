@@ -14,26 +14,44 @@ import { ImageSourcePropType } from "react-native";
 interface CategoryElement {
   name: string;
   icon?: React.ReactElement;
-  url?: RelativePathString;
+  url?: {
+    departmentId: number;
+    categoryId?: number;
+  };
 }
 
 export const categories: CategoryElement[] = [
   {
     name: "Alimentos y Combos",
     icon: React.createElement(FoodAndCombo),
-    url: "/services/market/products" as RelativePathString,
+    url: {
+      departmentId: 3,
+      categoryId: undefined,
+    },
   },
   {
     name: "Cuidado personal y Hogar",
     icon: React.createElement(PersonalCare),
+    url: {
+      departmentId: 4,
+      categoryId: undefined,
+    },
   },
   {
     name: "Ferretería",
     icon: React.createElement(Ferreteria),
+    url: {
+      departmentId: 6,
+      categoryId: undefined,
+    },
   },
   {
     name: "Electrodomésticos y Celulares",
     icon: React.createElement(ElectricalAppliances),
+    url: {
+      departmentId: 5,
+      categoryId: undefined,
+    },
   },
 ];
 

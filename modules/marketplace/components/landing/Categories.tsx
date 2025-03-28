@@ -4,10 +4,18 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 import { categories } from "../../data/landing";
 import { categoriesStyles } from "../../styles/landing";
+import { useSearchContext } from "../../context/SearchContext";
 
 const Categories = () => {
-  const router = useRouter();
+  const route = useRouter();
   const styles = useResponsiveStyles(categoriesStyles);
+
+  const { setSelection } = useSearchContext();
+
+  const handleNavigation = (departmentId: number) => {
+    setSelection({ departmentId: departmentId });
+    route.push("/(main)/services/market/products");
+  };
 
   return (
     <View style={styles.container}>
@@ -15,7 +23,7 @@ const Categories = () => {
         <Pressable
           key={category.name}
           style={styles.categoryContainer}
-          onPress={() => category.url && router.navigate(category.url)}
+          onPress={() => category.url && handleNavigation(category.url.departmentId)}
         >
           {category.icon && (
             <View style={styles.iconContainer}>{category.icon}</View>
