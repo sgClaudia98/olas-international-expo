@@ -52,9 +52,9 @@ const LandingWrapper: React.FC = () => {
           >
             <SearchProvider>
               <BannerSlider height={500} />
+              <Categories />
             </SearchProvider>
           </View>
-          <Categories />
           {/* <CategoriesSlider /> */}
           {/* <PopularBrands /> */}
           <GirlWithBagSection />
