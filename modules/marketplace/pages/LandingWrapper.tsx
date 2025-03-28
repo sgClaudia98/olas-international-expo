@@ -61,7 +61,7 @@ const LandingWrapper: React.FC = () => {
                 onPress={() => router.navigate("/promos")}
               />
             )}
-            <IconSvg size={24} name="User" color2={Colors.black.fourth}/>
+            <IconSvg size={24} name="User"/>
             <Btn
               title="go to auth"
               onPress={() => router.navigate("/(auth)/login")}

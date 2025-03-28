@@ -7,11 +7,12 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/authSlice";
 import { Icon } from "react-native-paper";
+import IconSvg, { IconNames } from "@/components/ui/IconSvg";
 export interface ProfileSideMenuItem {
   label: string;
   route: string;
   exact?: boolean;
-  icon: string;
+  icon: IconNames;
 }
 
 const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
@@ -38,9 +39,9 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
       <View style={styles.menu}>
         {items.map((i, index) => (
           <Link key={index} href={i.route as any} style={styles.menuItem}>
-            <Icon
-              source={i.icon ? i.icon : "[ico]"}
-              size={20}
+            <IconSvg
+              name={i.icon}
+              size={18}
               color={
                 (i.exact && pathname == i.route) ||
                 (!i.exact && pathname.startsWith(i.route))
@@ -69,7 +70,7 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
         style={[styles.menuItem, styles.logoutItem]}
         onPress={handleLogout}
       >
-        <Icon source={require("@/assets/icons/svg/Logout.svg")} size={20} />
+        <IconSvg name="Logout" size={18} />
         <ThemedText style={{ ...styles.menuText, color }}>
           {t("LOGOUT")}
         </ThemedText>

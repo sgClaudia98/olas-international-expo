@@ -6,15 +6,9 @@ import { paymentFormStyles, paymentFormStyles as styles } from "../../../styles/
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";
-import {
-  EmailIcon,
-  IdIcon,
-  MapPinIcon,
-  PhoneIcon,
-  ProfileIcon,
-} from "@/assets/icons/PaymentInfoIcons";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import IconSvg from "@/components/ui/IconSvg";
 
 const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
@@ -29,15 +23,15 @@ const Step3 = ({ preview }) => {
             title="Client"
             data={{
               fullName: {
-                icon: <ProfileIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
                 value: values.client.fullName || "N/A",
               },
               email: {
-                icon: <EmailIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="Email" size={17} />,
                 value: values.client.email || "N/A",
               },
               phoneNumber: {
-                icon: <PhoneIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
                 value:
                 parsePhoneNumber(values.client.phone.number, values.client.phone.code, 1) ||
                   "N/A",
@@ -52,21 +46,21 @@ const Step3 = ({ preview }) => {
             title="Beneficiary"
             data={{
               name: {
-                icon: <ProfileIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
                 value:
                   `${values.beneficiary.firstName} ${values.beneficiary.lastName}` ||
                   "N/A",
               },
               identification: {
-                icon: <IdIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="Id" size={17} />,
                 value: values.beneficiary.idDocument || "N/A",
               },
               phoneNumber: {
-                icon: <PhoneIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
                 value: parsePhoneNumber(values.beneficiary.phone.number, values.beneficiary.phone.code, 1) || "N/A",
               },
               address: {
-                icon: <MapPinIcon />,
+                icon: <IconSvg color={Colors.black.primary} name="Location" size={17} />,
                 value: [
                   values.beneficiary.address?.line1,
                   values.beneficiary.address?.line2,

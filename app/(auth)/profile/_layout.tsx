@@ -19,13 +19,13 @@ export default function ProfileLayout() {
     {
       label: "PAGE.PROFILE",
       route: "/profile",
-      icon: "account-circle-outline",
+      icon: "User",
       exact: true,
     },
     {
       label: "PAGE.ORDER_HISTORY",
       route: "/profile/order-history",
-      icon: "history",
+      icon: "History",
     },
   ];
 

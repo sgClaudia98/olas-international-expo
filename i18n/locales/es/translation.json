@@ -73,5 +73,6 @@
     "TOTAL_one": "{{count}} producto",
     "TOTAL_other": "{{count}} productos"
   },
-  "PRODUCTS_HEADING": "Productos"
+  "PRODUCTS_HEADING": "Productos",
+  "BACK": "Ir atrás"
 }

@@ -7,17 +7,11 @@ import { useTranslation } from "react-i18next";
 import { useSearchMarketBookingsMutation } from "../services/api/BookingService";
 import { ActivityIndicator, DataTable } from "react-native-paper";
 import ContentBox from "../components/payment/ContentBox";
-import {
-  EmailIcon,
-  IdIcon,
-  MapPinIcon,
-  PhoneIcon,
-  ProfileIcon,
-} from "@/assets/icons/PaymentInfoIcons";
 import { Colors } from "@/styles";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { orderStyles } from "../styles/orders";
 import { mapAgencyClientBookingsToUIBookings } from "../utils/bookingMapping";
+import IconSvg from "@/components/ui/IconSvg";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -52,10 +46,14 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
           <Link
-            style={{ color: Colors.blue.second }}
+            style={{ 
+              alignItems: "center",
+              display: "flex",
+              color: Colors.blue.second, }}
             href={"/profile/order-history"}
           >
-            {t("BACK")}
+            <IconSvg name="GoBack" size={14}/>
+            <ThemedText style={{fontSize:16, marginStart: 5}} lightColor={Colors.blue.second}>{t("BACK")}</ThemedText>
           </Link>
         </View>
         <View style={styles.cardRow}>
@@ -70,15 +68,15 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       title={t("RECEIVER_HEADING")}
                       data={{
                         fullName: {
-                          icon: <ProfileIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
                           value: beneficiary?.fullName || "N/A",
                         },
                         documentid: {
-                          icon: <IdIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="Id" size={17} />,
                           value: beneficiary?.idDocument || "N/A",
                         },
                         phoneNumber: {
-                          icon: <PhoneIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
                           value:
                             parsePhoneNumber(
                               beneficiary?.phone,
@@ -87,7 +85,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                             ) || "N/A",
                         },
                         address: {
-                          icon: <MapPinIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="Location" size={17} />,
                           value: [
                             beneficiary?.address?.line1,
                             beneficiary?.address?.line2,
@@ -113,12 +111,12 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       title={t("CUSTOMER_HEADING")}
                       data={{
                         fullName: {
-                          icon: <ProfileIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
                           value: booking.client.fullName || "N/A",
                         },
 
                         phoneNumber: {
-                          icon: <PhoneIcon />,
+                          icon:  <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
                           value:
                             parsePhoneNumber(
                               booking.client.phone,
@@ -127,7 +125,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                             ) || "N/A",
                         },
                         email: {
-                          icon: <EmailIcon />,
+                          icon: <IconSvg color={Colors.black.primary} name="Email" size={17} />,
                           value: booking.client.email || "N/A",
                         },
                       }}
