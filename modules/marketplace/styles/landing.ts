@@ -10,6 +10,7 @@ const categoriesDesktop = StyleSheet.create({
     gap: 50,
     maxWidth: 1280,
     marginHorizontal: "auto",
+    marginTop: 80,
     paddingHorizontal: 20,
   },
   categoryContainer: {
