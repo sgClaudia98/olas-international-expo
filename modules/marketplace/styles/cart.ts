@@ -1,3 +1,4 @@
+import { Colors } from "@/styles";
 import typography from "@/styles/typography";
 import { StyleSheet } from "react-native";
 
@@ -7,6 +8,7 @@ const desktop = StyleSheet.create({
     backgroundColor: "rgba(8, 51, 102, 0.5)",
     justifyContent: "center",
     alignItems: "center",
+    zIndex: 10,
   },
   cartContent: {
     position: "absolute",
@@ -21,16 +23,14 @@ const desktop = StyleSheet.create({
   },
   cartTitle: {
     ...typography.h3,
-    marginBottom: 20,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.black.fourth,
   },
   closeButton: {
     position: "absolute",
     right: 20,
-    top: 20,
-  },
-  closeText: {
-    fontSize: 24,
-    color: "#333",
+    top: 30,
   },
   scrollViewContent: {
     paddingBottom: 20,
@@ -65,8 +65,8 @@ const desktop = StyleSheet.create({
     fontWeight: "bold",
   },
   cartFooter: {
-    borderTopWidth: 1,
-    borderTopColor: "#ddd",
+    // borderTopWidth: 1,
+    // borderTopColor: "#ddd",
     paddingTop: 10,
     marginTop: 10,
     alignItems: "center",
@@ -92,9 +92,6 @@ const cartStyles = {
     },
     closeButton: {
       ...desktop.closeButton,
-    },
-    closeText: {
-      ...desktop.closeText,
     },
     scrollViewContent: {
       ...desktop.scrollViewContent,
@@ -129,7 +126,7 @@ const cartStyles = {
   }),
   tablet: StyleSheet.create({
     overlay: {
-      ...desktop.overlay
+      ...desktop.overlay,
     },
     cartContent: {
       ...desktop.cartContent,
@@ -140,9 +137,6 @@ const cartStyles = {
     },
     closeButton: {
       ...desktop.closeButton,
-    },
-    closeText: {
-      ...desktop.closeText,
     },
     scrollViewContent: {
       ...desktop.scrollViewContent,
@@ -175,7 +169,9 @@ const cartStyles = {
       ...desktop.totalText,
     },
   }),
-  ...desktop,
+  desktop: StyleSheet.create({
+    ...desktop,
+  }),
 };
 
 export { cartStyles };

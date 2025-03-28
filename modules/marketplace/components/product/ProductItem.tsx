@@ -1,5 +1,5 @@
 import { Text, View, Image, StyleProp, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Colors } from "@/styles";
 import NumberInput from "@/components/NumberInput";
 import Btn from "@/components/Btn";
@@ -19,6 +19,8 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import DropdownSelect from "@/components/DropdownSelect";
 import DropdownMenuSelect from "@/components/DropdownMenuSelect";
 import NumberSelect from "@/components/NumberSelect";
+import { Toast } from "toastify-react-native";
+import { useTranslation } from "react-i18next";
 
 interface ProductItemProps {
   item: MarketBookingOption; // Add the type for the item prop
@@ -42,6 +44,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
 
   const imageSize = `?width=200&height=200`;
   const currencySymbol = item.saleCurrency?.symbol || "USD";
+  
+  const { t } = useTranslation();
 
   const _addToCart = () => {
     addToCart(
@@ -52,6 +56,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
       amount,
       item.price
     );
+    Toast.success(t("CART_NOTIFICATION_ADD_TO_CART"))
   };
 
   return (

@@ -9,6 +9,8 @@ import NumberInput from '@/components/NumberInput';
 import TrashIcon from '@/assets/icons/TrashIcon';
 import DiscountBadge from '@/components/DiscountBadge';
 import { MarketBookingCartExtra } from '../../hooks/useMarketCartActions';
+import { Toast } from 'toastify-react-native';
+import { useTranslation } from 'react-i18next';
 
 interface ProductItemLittleProps {
   item: CartItem<MarketBookingCartItem>;
@@ -24,10 +26,18 @@ const ProductItemLittle: React.FC<ProductItemLittleProps> = ({item}) => {
 
   const [total, setTotal] = React.useState(currentTotal);
 
+  const { t } = useTranslation();
+
   const _handleQuantityChange = (quantity: number) => {
     updateQuantity(item.data.product.id, quantity);
     setTotal(item.data.price * quantity);
+    Toast.success(t("CART_NOTIFICATION_MOD_QTY"))
   };
+
+  const _handleRemoveFromCart = () => {
+    removeFromCart(item.data.product.id)
+    Toast.success(t("CART_NOTIFICATION_REMOVE_FROM_CART"))
+  }
   
   return (
     <View
@@ -57,7 +67,7 @@ const ProductItemLittle: React.FC<ProductItemLittleProps> = ({item}) => {
           </View>
         </View>
         <View style={styles.trashIcon}>
-          <TrashIcon onPress={() => removeFromCart(item.data.product.id)} />
+          <TrashIcon onPress={() => _handleRemoveFromCart()} />
         </View>
       </View>
 

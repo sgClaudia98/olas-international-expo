@@ -77,5 +77,8 @@
     "TOTAL_one": "{{count}} product",
     "TOTAL_other": "{{count}} products"
   },
-  "PRODUCTS_HEADING": "Products"
+  "PRODUCTS_HEADING": "Products",
+  "CART_NOTIFICATION_ADD_TO_CART": "Product added to cart successfully",
+  "CART_NOTIFICATION_MOD_QTY": "Product quantity modified successfully ",
+  "CART_NOTIFICATION_REMOVE_FROM_CART": "Product removed from cart successfully"
 }

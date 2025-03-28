@@ -74,5 +74,8 @@
     "TOTAL_other": "{{count}} productos"
   },
   "PRODUCTS_HEADING": "Productos",
-  "BACK": "Ir atrás"
+  "BACK": "Ir atrás",
+  "CART_NOTIFICATION_ADD_TO_CART": "Producto añadido al carrito",
+  "CART_NOTIFICATION_MOD_QTY": "Cantidad modificada",
+  "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito" 
 }
