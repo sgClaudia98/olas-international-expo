@@ -2,7 +2,7 @@ import {BaseQueryApi, FetchArgs, fetchBaseQuery} from '@reduxjs/toolkit/query/re
 import {decodeToken} from 'react-jwt';
 import {RootState} from '@/state';
 import { accountService } from '@/modules/auth/services/api/AccountService';
-import { logout, setCredentials, User } from '@/modules/auth/slices/authSlice';
+import { logout, setAuthState, User } from '@/modules/auth/slices/authSlice';
 import { BASE_URL } from '@/constants';
 import { fetchUserProfileThunk } from '@/modules/auth/slices/authThunks';
 
@@ -64,7 +64,7 @@ export const baseQueryWithReauth = async (
           const decoded: any = decodeToken(accessToken);
           // Update the state with new credentials
           api.dispatch(
-            setCredentials({
+            setAuthState({
               user: {
                 name: decoded?.sub,
                 username: decoded?.sub,
@@ -111,7 +111,7 @@ export const baseQueryWithReauth = async (
           const decoded: any = decodeToken(newToken);
 
           api.dispatch(
-            setCredentials({
+            setAuthState({
               user: {
                 name: decoded?.sub,
                 username: decoded?.sub,

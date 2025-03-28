@@ -12,9 +12,9 @@ import ProfileSideMenu, {
   ProfileSideMenuItem,
 } from "@/modules/auth/components/ProfileSideMenu";
 import { breadcrumbContainer } from "@/styles/page";
-
 export default function ProfileLayout() {
   const { t } = useTranslation();
+
   const items: ProfileSideMenuItem[] = [
     {
       label: "PAGE.PROFILE",

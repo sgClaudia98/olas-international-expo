@@ -22,7 +22,7 @@ const HeaderRight = ({ navigation }) => {
           <DestinationSelector />
           <LanguageSelector />
           <Pressable
-            onPress={() => router.navigate("/(auth)/profile")}
+            onPress={() => router.navigate("/(main)/profile")}
           >
             <IconSvg name="User" size={17} color={Colors.black.second} style={{marginLeft: 2}} />
           </Pressable>

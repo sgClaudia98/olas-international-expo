@@ -13,14 +13,14 @@ import { View, StyleSheet } from "react-native";
 export default function RegisterScreen() {
   const { t } = useTranslation();
   return (
-    <Page backgroundColor={Colors.black.fifth}>
+    <>
       <View style={styles.breadcrumbContainer}>
         <Breadcrumb
           items={[homeBreadcrumItem, { label: t("PAGE.REGISTER") }]}
         />
       </View>
       <Register />
-    </Page>
+    </>
   );
 }
 
