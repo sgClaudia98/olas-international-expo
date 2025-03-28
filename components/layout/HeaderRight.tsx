@@ -24,7 +24,7 @@ const HeaderRight = ({ navigation }) => {
           <Pressable
             onPress={() => router.navigate("/(auth)/profile")}
           >
-            <IconSvg name="User" size={17} color={Colors.black.second} />
+            <IconSvg name="User" size={17} color={Colors.black.second} style={{marginLeft: 2}} />
           </Pressable>
         </>
       )}
