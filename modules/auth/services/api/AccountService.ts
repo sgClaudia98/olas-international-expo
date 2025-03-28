@@ -21,7 +21,7 @@ import {
 import { BASE_URL } from "@/constants";
 import {
   logout,
-  setCredentials,
+  setAuthState,
   setUserDetails,
   User,
 } from "../../slices/authSlice";
@@ -49,7 +49,7 @@ export const accountService = createApi({
           const decoded: any = decodeToken(data.accessToken);
           console.debug("decoded", decoded);
           dispatch(
-            setCredentials({
+            setAuthState({
               user: {
                 name: decoded?.sub,
                 username: decoded?.sub,

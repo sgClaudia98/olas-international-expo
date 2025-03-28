@@ -17,7 +17,7 @@ export interface Client {
     id: number,
     email: string,
     fullName: string,
-    phone: string,
+    phone?: string,
     active: boolean,
     address: Address,
     idDocument: string,

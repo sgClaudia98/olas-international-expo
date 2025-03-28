@@ -51,7 +51,7 @@ const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
         ))}
         <Button
           key={`hb-profile`}
-          onPress={() => handleNavigate("/(auth)/profile")}
+          onPress={() => handleNavigate("/(main)/profile")}
           style={[
             styles.menuItem,
             // route.name === link.route ? styles.activeMenuItem : null,

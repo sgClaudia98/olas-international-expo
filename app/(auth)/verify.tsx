@@ -15,13 +15,12 @@ export default function VerifyScreen() {
   const { email, token } = useLocalSearchParams();
 
   return (
-    <Page backgroundColor={Colors.black.fifth}>
-      <Verify email={email as string} token={token as string}></Verify>
+    <>
       <View style={styles.breadcrumbContainer}>
         <Breadcrumb items={[homeBreadcrumItem, { label: t("PAGE.VERIFY") }]} />
       </View>
       <Verify email={email as string} token={token as string}></Verify>
-    </Page>
+    </>
   );
 }
 

@@ -28,7 +28,7 @@ const ProfileSideMenu: React.FC<{ items: ProfileSideMenuItem[] }> = ({
 
   const handleLogout = () => {
     dispatch(logout());
-    router.navigate("/");
+    router.replace("/");
   };
 
   return (

@@ -18,14 +18,14 @@ export default function ResetPasswordScreen() {
   }>();
 
   return (
-    <Page backgroundColor={Colors.black.fifth}>
+    <>
       <View style={styles.breadcrumbContainer}>
         <Breadcrumb
           items={[homeBreadcrumItem, { label: t("PAGE.RESET_PASSWORD") }]}
         />
       </View>
       <ForgotPassword email={email as string} token={token as string} />
-    </Page>
+    </>
   );
 }
 

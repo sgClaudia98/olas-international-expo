@@ -49,15 +49,6 @@ const authSlice = createSlice({
   name: AUTH_KEY_STORAGE,
   initialState,
   reducers: {
-    setCredentials: (
-      state,
-      { payload: { user, token, refreshToken } }: PayloadAction<{ user: User; token: string; refreshToken: string }>
-    ) => {
-      state.user = user;
-      state.token = token;
-      state.refreshToken = refreshToken;
-      saveAuthState(state); // Persist to AsyncStorage
-    },
     logout: (state) => {
       state.user = undefined;
       state.token = undefined;
@@ -68,10 +59,12 @@ const authSlice = createSlice({
       state.user = payload.user;
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
+      saveAuthState(state); // Persist to AsyncStorage
     },
     setUserDetails: (state, { payload }: PayloadAction<Client>) => {
       if (state.user) {
         state.user.details = payload;
+        saveAuthState(state); // Persist to AsyncStorage
       }
     },
   },
@@ -85,7 +78,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, logout, setAuthState, setUserDetails } = authSlice.actions;
+export const { setAuthState, logout, setUserDetails } = authSlice.actions;
 export default authSlice.reducer;
 
 // Async function to rehydrate state
