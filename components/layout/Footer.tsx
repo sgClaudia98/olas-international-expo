@@ -39,9 +39,9 @@ interface FooterProps {
 }
 
 const socialLinks: SocialLink[] = [
-  { component: <IconSvg name="WhatsApp" size={20} />, url: "https://whatsapp.com" },
-  { component: <IconSvg name="Facebook" size={20} />, url: "https://facebook.com" },
-  { component: <IconSvg name="Instagram" size={20} />, url: "https://instagram.com" },
+  { component: <IconSvg name="WhatsApp" size={15} />, url: "https://whatsapp.com" },
+  { component: <IconSvg name="Facebook" size={15} />, url: "https://facebook.com" },
+  { component: <IconSvg name="Instagram" size={15} />, url: "https://instagram.com" },
 ];
 
 const services: NavigationLink[] = [
