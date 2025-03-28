@@ -48,51 +48,6 @@ const LandingWrapper: React.FC = () => {
       <ScrollView showsHorizontalScrollIndicator={false}>
         <>
           <View
-            style={{
-              gap: 10,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            {Platform.OS != "web" && (
-              <Btn
-                title="go to promo"
-                onPress={() => router.navigate("/promos")}
-              />
-            )}
-            <IconSvg size={24} name="User"/>
-            <Btn
-              title="go to auth"
-              onPress={() => router.navigate("/(auth)/login")}
-            />
-
-            <Btn
-              title="View Profile"
-              onPress={() => router.navigate("/(auth)/profile")}
-            />
-
-            <Btn
-              title="Products view"
-              onPress={() =>
-                router.navigate("/(main)/services/market/products")
-              }
-            />
-            <Btn
-              title="Travel"
-              onPress={() => router.navigate("/(main)/services/travel")}
-            />
-
-            {/* Main Screen Content */}
-            <ThemedText>
-              {selectedCountry
-                ? `You selected: ${selectedCountry}`
-                : "No country selected yet"}
-            </ThemedText>
-
-            {/* <CountrySelectorModal selectedCountry={selectedCountry} countries={countries} onSelectCountry={selectCountry} visible={isModalVisible} /> */}
-          </View>
-          <View
             style={{ marginTop: 10, marginBottom: 60, paddingHorizontal: 20 }}
           >
             <SearchProvider>
