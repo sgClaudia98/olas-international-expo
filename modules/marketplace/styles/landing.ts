@@ -2,67 +2,62 @@ import { StyleSheet } from "react-native";
 import { Colors } from "@/styles";
 import typography from "@/styles/typography";
 
+const categoriesDesktop = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    gap: 50,
+    maxWidth: 1280,
+    marginHorizontal: "auto",
+    paddingHorizontal: 20,
+  },
+  categoryContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 240,
+    gap: 25,
+  },
+  iconContainer: {
+    backgroundColor: Colors.blue.fifth,
+    borderRadius: "50%",
+    width: 72,
+    height: 72,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  name: {
+    ...typography.body,
+    color: Colors.black.primary,
+  },
+});
+
 export const categoriesStyles = {
   mobile: StyleSheet.create({
+    ...categoriesDesktop,
     container: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      rowGap: 20,
-      paddingHorizontal: 20,
+      ...categoriesDesktop.container,
+      gap: 25,
     },
     categoryContainer: {
-      width: "45%",
-      flexDirection: "row",
-      gap: 25,
-      alignItems: "center",
-    },
-    iconContainer: {
-      backgroundColor: Colors.blue.fifth,
-      borderRadius: "50%",
-      width: 72,
-      height: 72,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    name: {
-      ...typography.body,
-      color: Colors.black.primary,
+      ...categoriesDesktop.categoryContainer,
+      width: "100%",
     },
   }),
   tablet: StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      justifyContent: "space-around",
-    },
-    categoryContainer: {
-      width: "15%",
-      flexDirection: "row",
-      gap: 25,
-      alignItems: "center",
-    },
-    iconContainer: {
-      backgroundColor: Colors.blue.fifth,
-      borderRadius: "50%",
-      width: 72,
-      height: 72,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    name: {
-      ...typography.body,
-      color: Colors.black.primary,
-    },
+    ...categoriesDesktop,
+  }),
+  desktop: StyleSheet.create({
+    ...categoriesDesktop,
   }),
 };
 
-export const categoriesSliderStyles = StyleSheet.create({
+const categoriesSliderDesktop = StyleSheet.create({
   container: {
     marginVertical: 150,
     flexDirection: "column",
-    justifyContent: 'center',
+    justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
   },
@@ -77,7 +72,7 @@ export const categoriesSliderStyles = StyleSheet.create({
   },
   reviewsWrapper: {
     marginTop: 50,
-    width: '100%',    
+    width: "100%",
   },
   reviewContainer: {
     padding: 30,
@@ -99,14 +94,43 @@ export const categoriesSliderStyles = StyleSheet.create({
     fontWeight: 700,
   },
   activeColor: {
-    backgroundColor: Colors.blue.second
+    backgroundColor: Colors.blue.second,
   },
   dotColor: {
-    backgroundColor: Colors.blue.third
-  }
+    backgroundColor: Colors.blue.third,
+  },
 });
 
-export const popularBrandsStyles = StyleSheet.create({
+export const categoriesSliderStyles = {
+  mobile: StyleSheet.create({
+    ...categoriesSliderDesktop,
+    container: {
+      ...categoriesSliderDesktop.container,
+      marginVertical: 60,
+    },
+    heading: {
+      ...categoriesSliderDesktop.heading,
+      fontSize: 24,
+      lineHeight: 32,
+    },
+    smallHeading: {
+      ...categoriesSliderDesktop.smallHeading,
+      fontSize: 12,
+      lineHeight: 18
+    }
+  }),
+  tablet: StyleSheet.create({
+    container: {
+      ...categoriesSliderDesktop.container,
+      marginVertical: 60,
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...categoriesSliderDesktop,
+  }),
+};
+
+const popularBrandsDesktop = StyleSheet.create({
   container: {
     marginBottom: 150,
     flexDirection: "column",
@@ -129,7 +153,19 @@ export const popularBrandsStyles = StyleSheet.create({
   },
 });
 
-export const shopExperienceStyles = StyleSheet.create({
+export const popularBrandsStyles = {
+  mobile: StyleSheet.create({
+    ...popularBrandsDesktop,
+  }),
+  tablet: StyleSheet.create({
+    ...popularBrandsDesktop,
+  }),
+  desktop: StyleSheet.create({
+    ...popularBrandsDesktop,
+  }),
+};
+
+const shopExperienceDesktop = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "center",
@@ -149,6 +185,7 @@ export const shopExperienceStyles = StyleSheet.create({
   },
   itemsContainer: {
     flexDirection: "row",
+    flexWrap: "wrap",
     gap: 20,
     marginBottom: 40,
   },
@@ -183,6 +220,78 @@ export const shopExperienceStyles = StyleSheet.create({
   },
 });
 
+export const shopExperienceStyles = {
+  mobile: StyleSheet.create({
+    ...shopExperienceDesktop,
+    container: {
+      ...shopExperienceDesktop.container,
+      marginTop: 60,
+      flexDirection: "column",
+      paddingHorizontal: 20,
+      width: "100%",
+    },
+    heading: {
+      ...shopExperienceDesktop.heading,
+      fontSize: 24,
+      lineHeight: 32,
+      marginBottom: 50,
+    },
+    textContent: {
+      ...shopExperienceDesktop.textContent,
+      width: "100%",
+    },
+    textContainer: {
+      ...shopExperienceDesktop.textContainer,
+      width: 260,
+    },
+    itemsContainer: {
+      ...shopExperienceDesktop.itemsContainer,
+      marginBottom: 20,
+    },
+    imageContainer: {
+      ...shopExperienceDesktop.imageContainer,
+      width: "100%",
+    },
+    image: {
+      ...shopExperienceDesktop.image,
+      width: 440,
+      height: 600,
+      objectFit: "cover",
+    },
+  }),
+  tablet: StyleSheet.create({
+    ...shopExperienceDesktop,
+    container: {
+      ...shopExperienceDesktop.container,
+      marginTop: 60,
+      flexDirection: "column",
+      paddingHorizontal: 20,
+      width: "100%",
+    },
+    textContent: {
+      ...shopExperienceDesktop.textContent,
+      width: "100%",
+    },
+    textContainer: {
+      ...shopExperienceDesktop.textContainer,
+      width: 420,
+    },
+    imageContainer: {
+      ...shopExperienceDesktop.imageContainer,
+      width: "100%",
+    },
+    image: {
+      ...shopExperienceDesktop.image,
+      width: 450,
+      height: 600,
+      objectFit: "contain",
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...shopExperienceDesktop,
+  }),
+};
+
 export const productSliderStyles = StyleSheet.create({
   container: {
     marginHorizontal: "auto",
@@ -196,9 +305,171 @@ export const productSliderStyles = StyleSheet.create({
   },
 });
 
-export const newsletterStyles = StyleSheet.create({
-  ...categoriesSliderStyles,
+const experienceForYourMobileDesktop = StyleSheet.create({
+  externalContainer: {
+    position: "relative",
+    marginVertical: 240,
+    maxWidth: 980,
+    paddingHorizontal: 20,
+    marginHorizontal: "auto",
+  },
+  container: {
+    borderRadius: 35,
+    backgroundColor: Colors.blue.fifth,
+    paddingVertical: 50,
+    paddingHorizontal: 60,
+    minHeight: 390,
+    flex: 1,
+    flexDirection: "row",
+  },
+  textContainer: {
+    width: "50%",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  heading: {
+    ...typography.h2,
+    color: Colors.black.primary,
+  },
+  bodyText: {
+    ...typography.body,
+    fontWeight: 400,
+  },
+  btnGroup: {
+    flexDirection: "row",
+    gap: 15,
+  },
+  btnStyle: {
+    backgroundColor: Colors.black.primary,
+    width: 125,
+    borderRadius: 7,
+  },
+  smallBtnText: {
+    fontSize: 8,
+    fontWeight: 400,
+    lineHeight: 8,
+  },
+  normalBtnText: {
+    fontSize: 12,
+    lineHeight: 12,
+    fontWeight: 600,
+  },
+  btnInner: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    textAlign: "left",
+    rowGap: 3,
+  },
+  imageContainer: {
+    width: "50%",
+  },
+  img: {
+    position: "absolute",
+    width: 550,
+    height: 650,
+    objectFit: "contain",
+    top: -200,
+    right: -100,
+  },
+});
+
+export const experienceForYourMobileStyles = {
+  mobile: StyleSheet.create({
+    ...experienceForYourMobileDesktop,
+    externalContainer: {
+      ...experienceForYourMobileDesktop.externalContainer,
+      width: "100%",
+      marginVertical: 60,
+    },
+    container: {
+      ...experienceForYourMobileDesktop.container,
+      paddingHorizontal: 35,
+      paddingVertical: 35,
+    },
+    heading: {
+      ...experienceForYourMobileDesktop.heading,
+      fontSize: 24,
+      lineHeight: 32,
+    },
+    textContainer: {
+      ...experienceForYourMobileDesktop.textContainer,
+      width: "100%",
+      gap: 20,
+    },
+    btnGroup: {
+      ...experienceForYourMobileDesktop.btnGroup,
+      flexDirection: "column",
+      gap: 10,
+    },
+    btnStyle: {
+      ...experienceForYourMobileDesktop.btnStyle,
+      width: "100%",
+    },
+    imageContainer: {
+      ...experienceForYourMobileDesktop.imageContainer,
+      width: 0,
+    },
+    img: {
+      ...experienceForYourMobileDesktop.img,
+      display: "none",
+    },
+  }),
+  tablet: StyleSheet.create({
+    ...experienceForYourMobileDesktop,
+    externalContainer: {
+      ...experienceForYourMobileDesktop.externalContainer,
+      marginVertical: 60,
+    },
+    textContainer: {
+      ...experienceForYourMobileDesktop.textContainer,
+      width: "100%",
+      gap: 20,
+    },
+    imageContainer: {
+      ...experienceForYourMobileDesktop.imageContainer,
+      width: 0,
+    },
+    img: {
+      ...experienceForYourMobileDesktop.img,
+      display: "none",
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...experienceForYourMobileDesktop,
+  }),
+};
+
+const newsletterDesktop = StyleSheet.create({
+  ...categoriesSliderStyles.desktop,
   inputContainer: {
     marginTop: 20,
-  }
-})
+  },
+});
+
+export const newsletterStyles = {
+  mobile: StyleSheet.create({
+    ...newsletterDesktop,
+    container: {
+      ...newsletterDesktop.container,
+      marginBottom: 20,
+    },
+    heading: {
+      ...newsletterDesktop.heading,
+      fontSize: 24,
+      lineHeight: 32,
+      textAlign: "center",
+    },
+    smallHeading: {
+      ...newsletterDesktop.smallHeading,
+      fontSize: 12,
+      lineHeight: 18,
+    },
+  }),
+  tablet: StyleSheet.create({
+    ...newsletterDesktop,
+  }),
+  desktop: StyleSheet.create({
+    ...newsletterDesktop,
+  }),
+};

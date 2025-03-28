@@ -293,7 +293,7 @@ const productInShoppingCartStyles = StyleSheet.create({
     width: "100%",
     paddingBottom: 10,
     paddingRight: 10,
-    marginTop: 10,
+    marginTop: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#EBEFF3",
   },

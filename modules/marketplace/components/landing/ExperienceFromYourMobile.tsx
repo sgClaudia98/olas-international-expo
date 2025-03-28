@@ -1,11 +1,14 @@
 import Btn from "@/components/Btn";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { Colors } from "@/styles";
 import typography from "@/styles/typography";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
+import { experienceForYourMobileStyles } from "../../styles/landing";
 
 const ExperienceFromYourMobile = () => {
+  const styles = useResponsiveStyles(experienceForYourMobileStyles)
   return (
     <View style={styles.externalContainer}>
       <View style={styles.container}>
@@ -56,73 +59,5 @@ const ExperienceFromYourMobile = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  externalContainer: {
-    position: "relative",
-    marginVertical: 240,
-    maxWidth: 980,
-    marginHorizontal: "auto",
-  },
-  container: {
-    borderRadius: 35,
-    backgroundColor: Colors.blue.fifth,
-    paddingVertical: 50,
-    paddingHorizontal: 60,
-    minHeight: 390,
-    flex: 1,
-    flexDirection: "row",
-  },
-  textContainer: {
-    width: "50%",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  heading: {
-    ...typography.h2,
-    color: Colors.black.primary,
-  },
-  bodyText: {
-    ...typography.body,
-    fontWeight: 400,
-  },
-  btnGroup: {
-    flexDirection: "row",
-    gap: 15,
-  },
-  btnStyle: {
-    backgroundColor: Colors.black.primary,
-    width: 125,
-    borderRadius: 7,
-  },
-  smallBtnText: {
-    fontSize: 8,
-    fontWeight: 400,
-    lineHeight: 8,
-  },
-  normalBtnText: {
-    fontSize: 12,
-    lineHeight: 12,
-    fontWeight: 600,
-  },
-  btnInner: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    textAlign: 'left',
-    rowGap: 3,
-  },
-  imageContainer: {
-    width: "50%",
-  },
-  img: {
-    position: "absolute",
-    width: 550,
-    height: 650,
-    objectFit: "contain",
-    top: -200,
-    right: -100,
-  },
-});
 
 export default ExperienceFromYourMobile;

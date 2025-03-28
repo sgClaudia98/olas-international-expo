@@ -1,9 +1,12 @@
 import React from "react";
 import { Linking, Text, View } from "react-native";
-import { newsletterStyles as styles } from "../../styles/landing";
+import { newsletterStyles } from "../../styles/landing";
 import Btn from "@/components/Btn";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const NewsletterSection = () => {
+  const styles = useResponsiveStyles(newsletterStyles)
+
   const email = "contact@olasservices.com"
 
   const handleContact = async (): Promise<void> => {

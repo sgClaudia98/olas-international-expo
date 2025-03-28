@@ -1,9 +1,12 @@
 import React, { useId } from "react";
 import { Text, View, Image } from "react-native";
 import { shopExperienceData } from "../../data/landing";
-import { shopExperienceStyles as styles } from "../../styles/landing";
+import { shopExperienceStyles, shopExperienceStyles as styles } from "../../styles/landing";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const GirlWithBagSection = () => {
+  const styles = useResponsiveStyles(shopExperienceStyles)
+
   return (
     <View style={styles.container}>
       <View style={styles.textContent}>

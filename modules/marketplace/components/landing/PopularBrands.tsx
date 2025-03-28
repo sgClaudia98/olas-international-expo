@@ -1,9 +1,11 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { brands } from "../../data/landing";
-import { popularBrandsStyles as styles } from "../../styles/landing";
+import { popularBrandsStyles } from "../../styles/landing";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const PopularBrands = () => {
+  const styles = useResponsiveStyles(popularBrandsStyles);
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Marcas populares</Text>
