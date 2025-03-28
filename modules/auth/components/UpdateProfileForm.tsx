@@ -38,15 +38,15 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
   const [updateProfile] = useProfileMutation();
 
   const initialValues: FormikValues = {
-    firstName: profile.client.firstName ?? "",
-    lastName: profile.client.lastName ?? "",
-    phone: profile.client.phone
+    firstName: profile?.client.firstName ?? "",
+    lastName: profile?.client.lastName ?? "",
+    phone: profile?.client.phone
       ? parseStringToPhoneNumber(profile.client.phone)
       : {
           number: "",
           code: "",
         },
-    email: profile.client.email ?? "",
+    email: profile?.client.email ?? "",
   };
 
   const onSave = (values: FormikValues) => {
