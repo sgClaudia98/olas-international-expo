@@ -5,6 +5,7 @@ export { default as Calendar } from "./Calendar";
 export { default as Close } from "./Close";
 export { default as CloseCircle } from "./CloseCircle";
 export { default as Docs } from "./Docs";
+export { default as Dot } from "./Dot";
 export { default as Download } from "./Download";
 export { default as EyeClose } from "./EyeClose";
 export { default as FaQs } from "./FaQs";

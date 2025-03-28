@@ -1,57 +1,36 @@
 import { StyleSheet } from "react-native";
+const desktopStyles = StyleSheet.create({
 
+  menuContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 23,
+    marginLeft: 40,
+  },
+  menuItem: {
+    marginHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 2,
+    borderBottomColor: "transparent",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  menuText: {
+    fontSize: 16,
+  },
+})
 const styles = {
   mobile: StyleSheet.create({
+    ...desktopStyles,
     menuContainer: {
       flexDirection: "column",
       alignItems: "flex-start",
-      backgroundColor: "#ffffff",
-      paddingHorizontal: 10,
       paddingVertical: 0,
-    },
-    menuItem: {
-      marginHorizontal: 10,
-      paddingVertical: 5,
-      borderBottomWidth: 2,
-      borderBottomColor: "transparent",
-    },
-    activeMenuItem: {
-      borderBottomColor: "#007BFF",
-    },
-    menuText: {
-      fontSize: 16,
-    },
-    activeMenuText: {
-      fontWeight: "bold",
-      color: "#007BFF",
+      marginLeft: 0,
     },
   }),
-  tablet: StyleSheet.create({
-    menuContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      backgroundColor: "#ffffff",
-      paddingHorizontal: 10,
-      paddingVertical: 23,
-      marginLeft: 40,
-    },
-    menuItem: {
-      marginHorizontal: 10,
-      paddingVertical: 5,
-      borderBottomWidth: 2,
-      borderBottomColor: "transparent",
-    },
-    activeMenuItem: {
-      borderBottomColor: "#007BFF",
-    },
-    menuText: {
-      fontSize: 16,
-    },
-    activeMenuText: {
-      fontWeight: "bold",
-      color: "#007BFF",
-    },
-  }),
+  tablet: desktopStyles,
 };
 
 export default styles;

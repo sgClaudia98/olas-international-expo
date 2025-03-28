@@ -8,9 +8,12 @@ import DestinationSelector from "../DestinationSelector";
 import { Button, Divider, Icon, IconButton } from "react-native-paper";
 import Logo from "../Logo";
 import { MainLayoutcontext } from "@/contexts/mainLayoutContext";
+import { ThemedText } from "../ThemedText";
+import { useTranslation } from "react-i18next";
 
 const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
   const route = useRouter();
+  const {t} = useTranslation();
   const {serviceMenu} = useContext(MainLayoutcontext);
 
   const handleNavigate = (to: string) => {
@@ -74,15 +77,15 @@ const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
               // route.name === link.route ? styles.activeMenuItem : null,
             ]}
           >
-            <Text
+            <ThemedText
               style={[
                 styles.menuText,
                 { color: Colors.black.primary },
                 // route.name === link.route ? styles.activeMenuText : null,
               ]}
             >
-              {link.label}
-            </Text>
+              {t(link.label)}
+            </ThemedText>
           </Button>
         ))}
       </View>

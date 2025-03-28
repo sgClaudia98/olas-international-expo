@@ -15,7 +15,7 @@ export const links: MenuLink[] = [
       },
     },
     */
-    {label: 'Market', route: '/services/market'},
-    {label: 'Travels', route: '/services/travel'},
+    {label: 'MODULE.MARKET', route: '/services/market'},
+    //{label: 'MODULE.TRAVEL', route: '/services/travel'},
   ];
 export const appLinks: MenuLink[] = [...links, {label: 'Configuraciones', route: 'Promos'}];
