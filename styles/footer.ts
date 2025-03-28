@@ -50,6 +50,7 @@ const desktop = StyleSheet.create({
     lineHeight: 22,
     letterSpacing: 0.2,
   },
+  footerItemIconCont: { flexDirection: "row", gap: 12 },
   bottomSection: {
     marginVertical: 20,
     width: "100%",

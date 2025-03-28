@@ -170,16 +170,19 @@ const Footer: React.FC<FooterProps> = ({
               {t("HEADER.CUSTOMER_SERVICE")}
             </ThemedText>
             <View style={styles.footerItemContainer}>
-              <Pressable onPress={handleAddressPress}>
+              <Pressable onPress={handleAddressPress} style={styles.footerItemIconCont}>
+              <IconSvg name="Location" size={17} height={21} color={Colors.blue.third}/>
                 <ThemedText style={styles.footerItemText}>
                   {address.street},{"\n"}
                   {address.city}, {address.state} {address.zip}
                 </ThemedText>
               </Pressable>
-              <Pressable onPress={handlePhonePress}>
-                <ThemedText style={styles.footerItemText}>{phone}</ThemedText>
+              <Pressable onPress={handlePhonePress}style={styles.footerItemIconCont}>
+              <IconSvg name="Phone" size={17} height={21} color={Colors.blue.third}/>
+                 <ThemedText style={styles.footerItemText}>{phone}</ThemedText>
               </Pressable>
-              <Pressable onPress={handleEmailPress}>
+              <Pressable onPress={handleEmailPress}style={styles.footerItemIconCont}>
+              <IconSvg name="Email" size={17} height={21} color={Colors.blue.third}/>
                 <ThemedText style={styles.footerItemText}>{email}</ThemedText>
               </Pressable>
             </View>
