@@ -201,15 +201,15 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                 <ThemedText>{shipment.status}</ThemedText>
                 <DataTable>
                   <DataTable.Header style={styles.tableProductHeader}>
-                    <DataTable.Title>
+                    <DataTable.Title style={styles.tableColBig}>
                       <ThemedText style={styles.tableLabel}>Product</ThemedText>
                     </DataTable.Title>
-                    <DataTable.Title numeric>
+                    <DataTable.Title style={styles.tableCol} numeric>
                       <ThemedText style={styles.tableLabel}>
                         Quantity
                       </ThemedText>
                     </DataTable.Title>
-                    <DataTable.Title numeric>
+                    <DataTable.Title style={styles.tableCol} numeric>
                       <ThemedText style={styles.tableLabel}>Price</ThemedText>
                     </DataTable.Title>
                   </DataTable.Header>
@@ -218,13 +218,13 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       key={`${booking.id}-${item.id}`}
                       style={styles.tableProductRow}
                     >
-                      <DataTable.Cell>
+                      <DataTable.Cell style={styles.tableColBig}>
                         <ThemedText>{item.name}</ThemedText>
                       </DataTable.Cell>
-                      <DataTable.Cell numeric>
+                      <DataTable.Cell style={styles.tableCol} numeric>
                         <ThemedText>{item.quantity}</ThemedText>
                       </DataTable.Cell>
-                      <DataTable.Cell numeric>
+                      <DataTable.Cell style={styles.tableCol} numeric>
                         <ThemedText>${item.price.toFixed(2)}</ThemedText>
                       </DataTable.Cell>
                     </DataTable.Row>

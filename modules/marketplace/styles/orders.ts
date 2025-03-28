@@ -24,6 +24,16 @@ const desktop = StyleSheet.create({
     paddingHorizontal: 0,
     paddingBottom: 10,
   },
+  tableColBig: {
+    flex: 2,
+  },
+  tableCol: {
+    flex:1,
+    justifyContent: "center"
+  },
+  tableColActions: {
+    flex: 0.3
+  },
   cardRow: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -81,6 +91,7 @@ const desktop = StyleSheet.create({
   tableProductHeader: {
     borderBottomWidth: 0,
     paddingHorizontal: 15,
+    marginRight: 15
   },
   tableProductRow: {
     backgroundColor: Colors.black.fifth,
