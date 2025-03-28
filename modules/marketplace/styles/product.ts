@@ -34,7 +34,7 @@ const commonProductStyles = StyleSheet.create({
     color: Colors.black.primary,
     fontWeight: 600,
     width: "100%",
-    marginBottom: 6,  
+    marginBottom: 6,
   },
   prices: {
     flexDirection: "row",
@@ -63,7 +63,7 @@ const commonProductStyles = StyleSheet.create({
 const productItemTablet = StyleSheet.create({
   ...commonProductStyles,
   image: {
-    ...commonProductStyles.image, 
+    ...commonProductStyles.image,
     minWidth: PROD_IMAGE_SIZE.tablet,
     minHeight: PROD_IMAGE_SIZE.tablet,
     height: "100%",
@@ -71,10 +71,10 @@ const productItemTablet = StyleSheet.create({
     aspectRatio: 1,
   },
   name: {
-    ...commonProductStyles.name, 
+    ...commonProductStyles.name,
     lineHeight: 26,
     fontSize: 18,
-    minHeight: 52
+    minHeight: 52,
   },
   prices: {
     ...commonProductStyles.prices,
@@ -86,7 +86,7 @@ const productItemTablet = StyleSheet.create({
   },
   container: {
     justifyContent: "space-between",
-    marginBottom: 16, 
+    marginBottom: 16,
   },
   badge: {
     position: "absolute",
@@ -110,10 +110,10 @@ const productItemTablet = StyleSheet.create({
     minHeight: PROD_IMAGE_SIZE.tablet,
     aspectRatio: 1,
     height: "100%",
-    width: "100%"
+    width: "100%",
   },
   productCard: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   actions: {
     paddingHorizontal: 0,
@@ -130,7 +130,7 @@ const productItemStyles = {
     ...productItemTablet,
     container: {
       ...productItemTablet.container,
-      minWidth: PROD_IMAGE_SIZE.mobile
+      minWidth: PROD_IMAGE_SIZE.mobile,
     },
     innerContainer: {
       ...productItemTablet.innerContainer,
@@ -155,16 +155,16 @@ const productItemStyles = {
       ...productItemTablet.nameContainer,
       padding: 0,
     },
-    name:{
+    name: {
       ...productItemTablet.name,
       fontSize: 14,
       lineHeight: 14,
-      minHeight: 28
+      minHeight: 28,
     },
-    oldPrice:{
+    oldPrice: {
       ...productItemTablet.oldPrice,
       fontSize: 10,
-      lineHeight: 16
+      lineHeight: 16,
     },
     addBtn: {
       marginLeft: 15,
@@ -182,8 +182,8 @@ const productInfoStyles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 20,
-        flexDirection: "row",
-        gap: 57
+    flexDirection: "row",
+    gap: 57,
   },
   badge: {
     paddingStart: 5,
@@ -195,7 +195,7 @@ const productInfoStyles = StyleSheet.create({
   imageOverlay: {
     ...commonProductStyles.imageOverlay,
     width: "100%",
-    aspectRatio: 600/470,
+    aspectRatio: 600 / 470,
     height: "auto",
   },
   detailsContainer: {
@@ -205,7 +205,7 @@ const productInfoStyles = StyleSheet.create({
   image: {
     ...commonProductStyles.image, // Reutilizamos la propiedad image
     width: "100%",
-    aspectRatio: 600/470,
+    aspectRatio: 600 / 470,
   },
   name: {
     ...commonProductStyles.name, // Reutilizamos la propiedad name
@@ -216,7 +216,7 @@ const productInfoStyles = StyleSheet.create({
   prices: {
     ...commonProductStyles.prices,
     alignItems: "center",
-    marginBottom: 25
+    marginBottom: 25,
   },
   price: {
     ...commonProductStyles.price, // Reutilizamos la propiedad price
@@ -240,11 +240,11 @@ const productInfoStyles = StyleSheet.create({
     marginTop: 44,
   },
   numberInput: {
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   addBtn: {
-    minWidth: 60
-  }
+    minWidth: 60,
+  },
 });
 
 const productInfoResponsiveStyles = {
@@ -253,24 +253,23 @@ const productInfoResponsiveStyles = {
     container: {
       ...productInfoStyles.container,
       flexDirection: "column",
-      width: "auto"
+      width: "auto",
     },
     imageContainer: {
       height: "auto",
-      marginBottom: 20
+      marginBottom: 20,
     },
     detailsContainer: {
       paddingHorizontal: 0,
     },
     image: {
       ...productInfoStyles.image,
-
-    aspectRatio: 1,
+      aspectRatio: 1,
     },
-    name:{
+    name: {
       ...productInfoStyles.name,
       fontSize: 22,
-      lineHeight: 24
+      lineHeight: 24,
     },
     price: {
       ...productInfoStyles.price,
@@ -281,11 +280,150 @@ const productInfoResponsiveStyles = {
       ...productInfoStyles.oldPrice,
       paddingStart: 10,
       fontSize: 10,
-      lineHeight: 16
-    }
+      lineHeight: 16,
+    },
   }),
-  desktop: productInfoStyles
-}
+  desktop: productInfoStyles,
+};
+
+const productInfoSkeletonDesktop = StyleSheet.create({
+  container: {
+    width: "100%",
+  },
+  skeletonBase: {
+    backgroundColor: "#E1E9EE",
+    borderRadius: 4,
+  },
+  breadcrumb: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  separator: {
+    width: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  infoContainer: {
+    flex: 1,
+    flexDirection: "row",
+    gap: 57,
+  },
+  imageContainer: {
+    width: "45%",
+  },
+  image: {
+    width: "100%",
+    minHeight: 300,
+    aspectRatio: 1,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  detailsContainer: {
+    width: "45%",
+    gap: 16,
+  },
+  title: {
+    height: 28,
+    width: "100%",
+    marginBottom: 8,
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+    gap: 12,
+  },
+  currentPrice: {
+    height: 24,
+    width: 120,
+  },
+  oldPrice: {
+    height: 18,
+    width: 100,
+  },
+  discount: {
+    height: 24,
+    width: 50,
+    borderRadius: 4,
+  },
+  descriptionContainer: {
+    gap: 8,
+    marginBottom: 8,
+  },
+  descLine: {
+    height: 16,
+    width: "100%",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#E1E9EE",
+    marginVertical: 16,
+  },
+  actionsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  quantityControl: {
+    height: 40,
+    width: 120,
+    borderRadius: 50,
+  },
+  addButton: {
+    height: 40,
+    width: 100,
+    borderRadius: 50,
+  },
+});
+
+export const productInfoSkeletonStyles = {
+  mobile: StyleSheet.create({
+    ...productInfoResponsiveStyles.mobile,
+    ...productInfoSkeletonDesktop,
+    infoContainer: {
+      ...productInfoSkeletonDesktop.infoContainer,
+      flexDirection: "column",
+      gap: 20,
+    },
+    imageContainer: {
+      ...productInfoSkeletonDesktop.imageContainer,
+      width: "100%",
+    },
+    image: {
+      ...productInfoSkeletonDesktop.image,
+      minHeight: 300,
+    },
+    detailsContainer: {
+      ...productInfoSkeletonDesktop.detailsContainer,
+      width: "100%",
+    },
+  }),
+  tablet: StyleSheet.create({
+    ...productInfoSkeletonDesktop,
+    infoContainer: {
+      ...productInfoSkeletonDesktop.infoContainer,
+      flexDirection: "column",
+      gap: 40,
+    },
+    imageContainer: {
+      ...productInfoSkeletonDesktop.imageContainer,
+      width: "100%",
+    },
+    image: {
+      ...productInfoSkeletonDesktop.image,
+      minHeight: 350,
+    },
+    detailsContainer: {
+      ...productInfoSkeletonDesktop.detailsContainer,
+      width: "100%",
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...productInfoResponsiveStyles.desktop,
+    ...productInfoSkeletonDesktop,
+  }),
+};
 
 const productInShoppingCartStyles = StyleSheet.create({
   ...commonProductStyles,
@@ -350,4 +488,8 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
 });
 
-export { productItemStyles, productInfoResponsiveStyles, productInShoppingCartStyles };
+export {
+  productItemStyles,
+  productInfoResponsiveStyles,
+  productInShoppingCartStyles,
+};

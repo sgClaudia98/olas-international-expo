@@ -10,6 +10,7 @@ import { Colors } from "@/styles";
 import Breadcrumb from "@/components/Breadcrumb";
 import { useTranslation } from "react-i18next";
 import { buildBreadcrumb } from "../utils/breadcrumbBuild";
+import ProductDetailSkeleton from "../components/skeletons/ProductDetailSkeleton";
 
 const ProductDetail: FC<{ id: string }> = ({ id }) => {
   const { t } = useTranslation();
@@ -35,9 +36,7 @@ const ProductDetail: FC<{ id: string }> = ({ id }) => {
 
   return (
     <Page>
-      {isLoading ? (
-        <ThemedText>Loading...</ThemedText>
-      ) : (
+      {isLoading ? <ProductDetailSkeleton/> : (
         <>
           <View style={styles.row}>
             <Breadcrumb items={breadcrumb} />
