@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Formik } from "formik";
 import { IAccountResponse } from "../services/interfaces/account";
-import { parsePhoneNumber, parseStringToPhoneNumber } from "@/utils/PhoneNumberHelper";
+import {
+  parsePhoneNumber,
+  parseStringToPhoneNumber,
+} from "@/utils/PhoneNumberHelper";
 import { ThemedText } from "@/components/ThemedText";
 import { TextInput } from "react-native-paper";
 import { StyleSheet, View } from "react-native";
@@ -14,7 +17,8 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { validationSchema } from "./UpdateProfileFormHelper";
 import Btn from "@/components/Btn";
 import { useProfileMutation } from "../services/api/AccountService";
-import _ from "lodash";
+import { isEqual } from "lodash";
+import { Client } from "../models/ClientModel";
 
 interface UpdateProfileFormProps {
   profile: IAccountResponse;
@@ -30,34 +34,47 @@ interface FormikValues {
   email: string;
 }
 
+
+function mapClient (client?: Client) {
+  return {
+    firstName: client?.firstName ?? "",
+    lastName: client?.lastName ?? "",
+    phone: client?.phone
+    ? parseStringToPhoneNumber(client.phone)
+    : {
+      number: "",
+      code: "",
+    },
+    email: client?.email ?? "",
+  }
+}
+
 export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
   profile,
 }) => {
   const { t, i18n } = useTranslation();
   const styles = useResponsiveStyles(profileStyles);
   const [updateProfile] = useProfileMutation();
-
-  const initialValues: FormikValues = {
-    firstName: profile?.client.firstName ?? "",
-    lastName: profile?.client.lastName ?? "",
-    phone: profile?.client.phone
-      ? parseStringToPhoneNumber(profile.client.phone)
-      : {
-          number: "",
-          code: "",
-        },
-    email: profile?.client.email ?? "",
-  };
-
-  const onSave = (values: FormikValues) => {
-    Toast.success("Editing profile info");
+  
+  const initialValues: FormikValues = mapClient(profile?.client);
+ 
+  const onSave = (values: FormikValues, {resetForm}) => {
     updateProfile({
       lastName: values.lastName,
       firstName: values.firstName,
       phone: parsePhoneNumber(values.phone.number, values.phone.code, 0) || "",
       preferredLanguage: i18n.language,
       receiveNewsLetter: false,
-    });
+    })
+      .unwrap()
+      .then((resp) => {
+        if (resp.success) {
+          Toast.success("Success editing profile info");
+          resetForm({values})
+        }else {
+          Toast.error("Error editing profile info")
+        }
+      });
   };
 
   return (
@@ -72,6 +89,7 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
         errors,
         values,
         isSubmitting,
+        touched,
         validateForm,
         submitForm,
       }) => (
@@ -94,7 +112,6 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.firstName}
-                    disabled
                   />
                   {errors.firstName && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -117,7 +134,6 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.lastName}
-                    disabled
                   />
                   {errors.lastName && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -138,8 +154,6 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     inputStyles={{ ...styles.formInput, marginBottom: 0 }}
                     name="phone"
                     defaultCountryCode="US"
-                    disableCountrySelection
-                    disabled
                     error={!!errors.phone?.number}
                   />
                   {errors.phone?.number && (
@@ -164,7 +178,6 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                     textColor={Colors.black.primary}
                     placeholderTextColor={Colors.black.primary}
                     error={!!errors.email}
-                    disabled
                   />
                   {errors.email && (
                     <ThemedText lightColor={Colors.red.primary}>
@@ -175,10 +188,10 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
               </View>
             </View>
           </View>
-          <View style={{...styles.cardFooter, display: "none"}}>
+          <View style={{ ...styles.cardFooter }}>
             <Btn
               title={t("ACTIONS.SAVE_CHANGES")}
-              disabled={_.isEqual(values, initialValues)}
+              disabled={isEqual(values, initialValues)}
               onPress={submitForm}
             />
           </View>

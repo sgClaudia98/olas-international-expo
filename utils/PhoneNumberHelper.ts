@@ -28,11 +28,15 @@ export const parsePhoneNumber = (phoneNumber: string, countryCode: string, forma
 }
 
 export const parseStringToPhoneNumber = (phoneNumber: string)  => {
+
+  console.debug(phoneNumber)
+
   const parsedNumber = phoneUtil.parse(phoneNumber)
   
-  const code = parsedNumber.getCountryCode()
+  const code = phoneUtil.getRegionCodeForNumber(parsedNumber); 
   const number =  parsedNumber.getNationalNumber()
 
+  console.debug(code, number)
   return { code, number } 
 }
 

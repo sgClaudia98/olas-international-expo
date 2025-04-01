@@ -1,58 +1,66 @@
-import { Client } from "../../models/ClientModel"
+import { IError } from "@/services/interfaces/error";
+import { Client } from "../../models/ClientModel";
 
 export interface IAuthRequest {
-    email: string,
-    password: string
+  email: string;
+  password: string;
 }
 
 export interface IAuthResponse {
-    accessToken: string,
-    refreshToken: string
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface IAccountResponse {
-    client: Client
+  client: Client;
+  success: boolean;
+  error?: IError;
 }
 
 // active and debitCardNumber shouldnt be a property sent by the backend
-export interface IAccountPutRequest extends
-    Partial<Omit<Client, | 'email' | 'id' | 'active' | 'country' | 'fullName' | 'debitCardNumber'>> {
-    receiveNewsLetter: boolean;
-    preferredLanguage: string;
+export interface IAccountPutRequest
+  extends Partial<
+    Omit<
+      Client,
+      "email" | "id" | "active" | "country" | "fullName" | "debitCardNumber"
+    >
+  > {
+  receiveNewsLetter: boolean;
+  preferredLanguage: string;
 }
 
 export interface IRefreshTokenRequest {
-    refreshToken: string
+  refreshToken: string;
 }
 
-export interface IAccountCreateRequest extends
-    Pick<Client, | 'email' | 'firstName' | 'lastName'> {
-    password: string
-    receiveNewsLetter: boolean;
-    activationLink: string;
+export interface IAccountCreateRequest
+  extends Pick<Client, "email" | "firstName" | "lastName"> {
+  password: string;
+  receiveNewsLetter: boolean;
+  activationLink: string;
 }
 
 export interface IAccountCreateResponse {
-    clientId: string
+  clientId: string;
 }
 
 export interface IForgetPasswordRequest {
-    email: string
-    resetPasswordLink: string
+  email: string;
+  resetPasswordLink: string;
 }
 
 export interface IResetPasswordRequest {
-    email: string,
-    token: string,
-    newPassword: string
+  email: string;
+  token: string;
+  newPassword: string;
 }
 
 export interface IVerifyRequest {
-    email: string,
-    token: string,
+  email: string;
+  token: string;
 }
 
 export interface ISendVerificationCodeRequest {
-    email: string,
-    verificationLink: string,
+  email: string;
+  verificationLink: string;
 }
