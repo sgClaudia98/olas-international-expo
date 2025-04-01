@@ -42,7 +42,6 @@ export const accountService = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["account"],
       onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
@@ -70,7 +69,6 @@ export const accountService = createApi({
         url: `/profile`,
         method: "GET",
       }),
-      providesTags: ["account"],
       onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
@@ -86,7 +84,6 @@ export const accountService = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["account"],
     }),
     refreshToken: builder.mutation<IAuthResponse, IRefreshTokenRequest>({
       query: (body) => ({
