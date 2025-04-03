@@ -95,6 +95,20 @@
           "F2": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
           "F3": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam."
         }
+      },
+      "MOBILE": {
+        "TITLE": "Enjoy a better experience from your mobile",
+        "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus eget mi.",
+        "BUTTONS": {
+          "DOWNLOAD_APP_STORE": {
+            "SMALL": "Download on the",
+            "NORMAL": "App Store"
+          },
+          "DOWNLOAD_GOOGLE_PLAY": {
+            "SMALL": "Download on the",
+            "NORMAL": "Google Play"
+          }
+        }
       }
     }
   }

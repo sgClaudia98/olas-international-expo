@@ -121,6 +121,7 @@ export const categoriesSliderStyles = {
     },
   }),
   tablet: StyleSheet.create({
+    ...categoriesSliderDesktop,
     container: {
       ...categoriesSliderDesktop.container,
       marginVertical: 60,
@@ -217,7 +218,7 @@ const shopExperienceDesktop = StyleSheet.create({
     position: "absolute",
     zIndex: -1,
     right: 0,
-    width: "100%"
+    width: "100%",
   },
   image: {
     aspectRatio: 0.87,
@@ -244,7 +245,6 @@ export const shopExperienceStyles = {
       width: "100%",
       paddingLeft: 40,
       paddingRight: 40,
-      
     },
     textContainer: {
       ...shopExperienceDesktop.textContainer,
@@ -399,11 +399,13 @@ export const experienceForYourMobileStyles = {
       ...experienceForYourMobileDesktop.externalContainer,
       width: "100%",
       marginVertical: 60,
+      paddingTop: 440,
     },
     container: {
       ...experienceForYourMobileDesktop.container,
       paddingHorizontal: 35,
       paddingVertical: 35,
+      flexDirection: "column-reverse",
     },
     heading: {
       ...experienceForYourMobileDesktop.heading,
@@ -426,11 +428,16 @@ export const experienceForYourMobileStyles = {
     },
     imageContainer: {
       ...experienceForYourMobileDesktop.imageContainer,
-      width: 0,
+      width: "100%",
+      marginHorizontal: -35,
     },
     img: {
-      ...experienceForYourMobileDesktop.img,
-      display: "none",
+      position: "absolute",
+      width: "auto",
+      height: 430,
+      aspectRatio: 0.85,
+      objectFit: "contain",
+      top: -445,
     },
   }),
   tablet: StyleSheet.create({
@@ -438,6 +445,12 @@ export const experienceForYourMobileStyles = {
     externalContainer: {
       ...experienceForYourMobileDesktop.externalContainer,
       marginVertical: 60,
+      paddingTop: 440,
+    },
+    container: {
+      ...experienceForYourMobileDesktop.container,
+
+      flexDirection: "column-reverse",
     },
     textContainer: {
       ...experienceForYourMobileDesktop.textContainer,
@@ -446,11 +459,16 @@ export const experienceForYourMobileStyles = {
     },
     imageContainer: {
       ...experienceForYourMobileDesktop.imageContainer,
-      width: 0,
+      width: "100%",
+      marginHorizontal: -35,
     },
     img: {
-      ...experienceForYourMobileDesktop.img,
-      display: "none",
+      position: "absolute",
+      width: "auto",
+      height: 430,
+      aspectRatio: 0.85,
+      objectFit: "contain",
+      top: -445,
     },
   }),
   desktop: StyleSheet.create({

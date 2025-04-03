@@ -14,6 +14,7 @@ interface ResponsiveSliderProps {
   activeDotStyle?: ViewStyle
   arrowStyle?: ViewStyle
   arrowColor?: string
+  itemsPerScreen?: {bigDesktop: number, desktop: number, tablet: number, mobile: number}
 }
 
 const ResponsiveSlider: React.FC<ResponsiveSliderProps> = ({
@@ -26,6 +27,12 @@ const ResponsiveSlider: React.FC<ResponsiveSliderProps> = ({
   activeDotStyle,
   arrowStyle,
   arrowColor = "#000",
+  itemsPerScreen = {
+    bigDesktop: 3,
+    desktop: 3,
+    tablet: 2, 
+    mobile: 1
+  }
 }) => {
   const scrollViewRef = useRef<ScrollView>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -33,20 +40,21 @@ const ResponsiveSlider: React.FC<ResponsiveSliderProps> = ({
   const { isBigDesktop, isDesktop, isTablet, isMobile } = useBreakpoints()
 
   const getItemsPerScreen = () => {
-    if (isDesktop || isBigDesktop) return 3
-    if (isTablet) return 2
-    return 1
+    if ( isBigDesktop) return itemsPerScreen.bigDesktop
+    if (isDesktop ) return itemsPerScreen.desktop
+    if (isTablet) return itemsPerScreen.tablet
+    return itemsPerScreen.mobile
   }
 
-  const itemsPerScreen = getItemsPerScreen()
+  const itemsAmount = getItemsPerScreen()
 
   // Calculate item width accounting for separation between items
-  const totalSeparationSpace = separation * (itemsPerScreen - 1)
-  const adjust = isMobile ? separation*1.8 : separation
-  const itemWidth = (screenWidth - totalSeparationSpace) / itemsPerScreen - adjust
+  const totalSeparationSpace = separation * (itemsAmount - 1)
+  const adjust = itemsAmount == 1 ? separation*1.8 : separation
+  const itemWidth = (screenWidth - totalSeparationSpace) / itemsAmount - adjust
 
   // Calculate the total number of pages
-  const totalPages = Math.max(1, Math.ceil(data.length - (itemsPerScreen - 1)))
+  const totalPages = Math.max(1, Math.ceil(data.length - (itemsAmount - 1)))
 
   // Recalculate current index when screen size changes
   useEffect(() => {
@@ -54,7 +62,7 @@ const ResponsiveSlider: React.FC<ResponsiveSliderProps> = ({
     if (scrollViewRef.current) {
       scrollViewRef.current.scrollTo({ x: 0, animated: false })
     }
-  }, [itemsPerScreen])
+  }, [itemsAmount])
 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x
