@@ -36,15 +36,14 @@ const LanguageSelector = () => {
       icon="Languaje"
       buttonTitle={(value) => value?.value}
       onSelect={changeLanguage}
-      menuItems={[
-        { label: t("LANGUAGE.EN"), value: "en" },
-        { label: t("LANGUAGE.ES"), value: "es" },
-        { label: t("LANGUAGE.PT"), value: "pt" },
-        { label: t("LANGUAGE.FR"), value: "fr" },
-      ]}
+      menuItems={i18n.languages.map((lang) => ({
+        label: t(`LANGUAGE.${lang.toUpperCase()}`),
+        value: lang,
+      }))}
       iconSize={17}
       textStyle={{
         color: Colors.black.second,
+        textTransform: "uppercase"
       }}
       value={i18n.language}
     />

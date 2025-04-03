@@ -40,10 +40,14 @@ const PhoneNumberSelector = <T,>({
     [setFieldValue, NUMBER]
   );
 
-  const handleCountryChange = (newCode) => setFieldValue(CODE, newCode);
+  const handleCountryChange = (newCode) => {
+    console.debug(newCode, "NCode")
+    setFieldValue(CODE, newCode)
+  };
 
   const handleBlur = useCallback(() => {
     setFieldTouched(NUMBER, true);
+    console.debug(parsePhoneNumber(phoneValue, countryValue), "parsePoneNuber def")
     setFieldValue(NUMBER, parsePhoneNumber(phoneValue, countryValue));
   }, [setFieldTouched, NUMBER, countryValue, phoneValue]);
 

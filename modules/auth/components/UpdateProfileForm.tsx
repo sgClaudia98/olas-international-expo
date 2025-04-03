@@ -11,7 +11,7 @@ import { StyleSheet, View } from "react-native";
 import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 import { Toast } from "toastify-react-native";
 import { Colors } from "@/styles";
-import { useTranslation } from "react-i18next";
+import { TransWithoutContext, useTranslation } from "react-i18next";
 import { profileStyles } from "../styles/profile";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { validationSchema } from "./UpdateProfileFormHelper";
@@ -34,12 +34,12 @@ interface FormikValues {
   email: string;
 }
 
-
+const x = true
 function mapClient (client?: Client) {
   return {
     firstName: client?.firstName ?? "",
     lastName: client?.lastName ?? "",
-    phone: client?.phone
+    phone: client?.phone && x
     ? parseStringToPhoneNumber(client.phone)
     : {
       number: "",
@@ -57,8 +57,9 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
   const [updateProfile] = useProfileMutation();
   
   const initialValues: FormikValues = mapClient(profile?.client);
- 
+  console.debug("init", initialValues)
   const onSave = (values: FormikValues, {resetForm}) => {
+    console.debug(values, "Vals")
     updateProfile({
       lastName: values.lastName,
       firstName: values.firstName,

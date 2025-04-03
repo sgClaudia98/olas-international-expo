@@ -16,6 +16,7 @@ import { BREAKPOINTS, useBreakpoints } from "@/hooks/useBreakpoints";
 import SidePanel from "@/components/layout/SidePanel";
 import { OpenSans_400Regular, OpenSans_600SemiBold, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { Toast } from "toastify-react-native";
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
