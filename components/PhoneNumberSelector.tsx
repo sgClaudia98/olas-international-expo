@@ -45,9 +45,12 @@ const PhoneNumberSelector = <T,>({
     setFieldValue(CODE, newCode)
   };
 
+  const handleFocus = useCallback(() => {
+    setFieldValue(NUMBER, parsePhoneNumber(phoneValue, countryValue));
+  }, [setFieldTouched, NUMBER, countryValue, phoneValue]);
+
   const handleBlur = useCallback(() => {
     setFieldTouched(NUMBER, true);
-    console.debug(parsePhoneNumber(phoneValue, countryValue), "parsePoneNuber def")
     setFieldValue(NUMBER, parsePhoneNumber(phoneValue, countryValue));
   }, [setFieldTouched, NUMBER, countryValue, phoneValue]);
 
@@ -65,6 +68,7 @@ const PhoneNumberSelector = <T,>({
         placeholder="Enter phone number"
         textColor={inputStyles?.color || Colors.black.primary}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         error={error}
         disabled={disabled}
       />

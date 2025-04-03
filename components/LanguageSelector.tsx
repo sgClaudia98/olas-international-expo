@@ -6,6 +6,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropdownSelect2, { MenuItem } from "./DropdownMenuSelect";
 import { Colors } from "@/styles";
 
+const languages = ["en", "es", "pt", "fr"]
+
 const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
   const [visible, setVisible] = React.useState(false);
@@ -31,12 +33,13 @@ const LanguageSelector = () => {
     getSavedLanguage().then((language) => i18n.changeLanguage(language));
   }, []);
 
+  
   return (
     <DropdownSelect2
       icon="Languaje"
       buttonTitle={(value) => value?.value}
       onSelect={changeLanguage}
-      menuItems={i18n.languages.map((lang) => ({
+      menuItems={languages.map((lang) => ({
         label: t(`LANGUAGE.${lang.toUpperCase()}`),
         value: lang,
       }))}

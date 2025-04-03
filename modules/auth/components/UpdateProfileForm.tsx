@@ -34,19 +34,18 @@ interface FormikValues {
   email: string;
 }
 
-const x = true
-function mapClient (client?: Client) {
+function mapClient(client?: Client) {
   return {
     firstName: client?.firstName ?? "",
     lastName: client?.lastName ?? "",
-    phone: client?.phone && x
-    ? parseStringToPhoneNumber(client.phone)
-    : {
-      number: "",
-      code: "",
-    },
+    phone: client?.phone
+      ? parseStringToPhoneNumber(client.phone)
+      : {
+          number: undefined,
+          code: undefined,
+        },
     email: client?.email ?? "",
-  }
+  };
 }
 
 export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
@@ -55,11 +54,11 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
   const { t, i18n } = useTranslation();
   const styles = useResponsiveStyles(profileStyles);
   const [updateProfile] = useProfileMutation();
-  
+
   const initialValues: FormikValues = mapClient(profile?.client);
-  console.debug("init", initialValues)
-  const onSave = (values: FormikValues, {resetForm}) => {
-    console.debug(values, "Vals")
+  console.debug("init", initialValues);
+  const onSave = (values: FormikValues, { resetForm }) => {
+    console.debug(values, "Vals");
     updateProfile({
       lastName: values.lastName,
       firstName: values.firstName,
@@ -71,9 +70,9 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
       .then((resp) => {
         if (resp.success) {
           Toast.success("Success editing profile info");
-          resetForm({values})
-        }else {
-          Toast.error("Error editing profile info")
+          resetForm({ values });
+        } else {
+          Toast.error("Error editing profile info");
         }
       });
   };
