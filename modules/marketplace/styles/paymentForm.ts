@@ -186,7 +186,7 @@ export const paymentFormStyles = {
     },
     contentBoxStyle: {
       ...desktop.contentBoxStyle,
-      minHeight: 'auto',
+      minHeight: "auto",
     },
     text: {
       ...desktop.text,
@@ -266,7 +266,7 @@ export const paymentFormStyles = {
       ...desktop.column,
     },
     contentBoxStyle: {
-      ...desktop.contentBoxStyle
+      ...desktop.contentBoxStyle,
     },
     text: {
       ...desktop.text,
@@ -323,7 +323,7 @@ const stepProgressDesktop = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: Colors.black.fifth,
+    backgroundColor: Colors.black.third,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -348,7 +348,7 @@ const stepProgressDesktop = StyleSheet.create({
     color: Colors.white.default,
   },
   stepText: {
-    color: Colors.black.fifth,
+    color: Colors.black.third,
     marginTop: 8,
     fontSize: 14,
     fontWeight: "600",
@@ -361,12 +361,12 @@ const stepProgressDesktop = StyleSheet.create({
   },
   line: {
     height: 2,
-    backgroundColor: Colors.black.fifth,
+    backgroundColor: Colors.black.third,
     flex: 1,
     marginHorizontal: 4,
     marginTop: -25,
     alignSelf: "center",
-    width: 100,
+    flexGrow: 1,
   },
   lineCompleted: {
     backgroundColor: Colors.black.primary,
@@ -375,97 +375,84 @@ const stepProgressDesktop = StyleSheet.create({
 
 export const stepProgressStyles = {
   mobile: StyleSheet.create({
+    ...stepProgressDesktop,
     container: {
       ...stepProgressDesktop.container,
       marginBottom: 25,
     },
-    stepWrapper: {
-      ...stepProgressDesktop.stepWrapper,
-    },
-    stepContainer: {
-      ...stepProgressDesktop.stepContainer,
-    },
-    step: {
-      ...stepProgressDesktop.step,
-    },
-    stepActive: {
-      ...stepProgressDesktop.stepActive,
-    },
-    stepCompleted: {
-      ...stepProgressDesktop.stepCompleted,
-    },
-    stepNumber: {
-      ...stepProgressDesktop.stepNumber,
-    },
-    stepNumberActive: {
-      ...stepProgressDesktop.stepNumberActive,
-    },
-    stepNumberCompleted: {
-      ...stepProgressDesktop.stepNumberCompleted,
-    },
-    stepText: {
-      ...stepProgressDesktop.stepText,
-    },
-    stepTextActive: {
-      ...stepProgressDesktop.stepTextActive,
-    },
-    stepTextCompleted: {
-      ...stepProgressDesktop.stepTextCompleted,
-    },
     line: {
       ...stepProgressDesktop.line,
-      width: 40,
-    },
-    lineCompleted: {
-      ...stepProgressDesktop.lineCompleted,
     },
   }),
   tablet: StyleSheet.create({
-    container: {
-      ...stepProgressDesktop.container,
-    },
-    stepWrapper: {
-      ...stepProgressDesktop.stepWrapper,
-    },
-    stepContainer: {
-      ...stepProgressDesktop.stepContainer,
-    },
-    step: {
-      ...stepProgressDesktop.step,
-    },
-    stepActive: {
-      ...stepProgressDesktop.stepActive,
-    },
-    stepCompleted: {
-      ...stepProgressDesktop.stepCompleted,
-    },
-    stepNumber: {
-      ...stepProgressDesktop.stepNumber,
-    },
-    stepNumberActive: {
-      ...stepProgressDesktop.stepNumberActive,
-    },
-    stepNumberCompleted: {
-      ...stepProgressDesktop.stepNumberCompleted,
-    },
-    stepText: {
-      ...stepProgressDesktop.stepText,
-    },
-    stepTextActive: {
-      ...stepProgressDesktop.stepTextActive,
-    },
-    stepTextCompleted: {
-      ...stepProgressDesktop.stepTextCompleted,
-    },
+    ...stepProgressDesktop,
     line: {
       ...stepProgressDesktop.line,
-      width: 65,
-    },
-    lineCompleted: {
-      ...stepProgressDesktop.lineCompleted,
     },
   }),
   desktop: StyleSheet.create({
     ...stepProgressDesktop,
+  }),
+};
+
+const stepProgressDesktopMinimal = StyleSheet.create({
+  ...stepProgressDesktop,
+  step: {
+    ...stepProgressDesktop.step,
+    width: 20,
+    height: 20,
+  },
+  stepText: {
+    ...stepProgressDesktop.stepText,
+    fontSize: 14,
+    fontWeight: "400",
+  },
+  stepActive: {
+    ...stepProgressDesktop.stepActive,
+    backgroundColor: Colors.white.default,
+    borderWidth: 2,
+    width: 24,
+    height: 24,
+    borderColor: Colors.black.primary,
+  },
+  stepNumber: {
+    ...stepProgressDesktop.stepNumber,
+    fontSize: 11,
+  },
+  stepNumberActive: {
+    color: Colors.black.primary,
+    fontSize: 14,
+  },
+  stepNumberCompleted: {
+    color: Colors.black.primary,
+  },
+
+  stepTextActive: {
+    color: Colors.black.primary,
+  },
+  stepTextCompleted: {
+    color: Colors.black.primary,
+  },
+});
+
+export const stepProgressStylesMinimal = {
+  mobile: StyleSheet.create({
+    ...stepProgressDesktopMinimal,
+    container: {
+      ...stepProgressDesktopMinimal.container,
+      marginBottom: 25,
+    },
+    line: {
+      ...stepProgressDesktopMinimal.line,
+    },
+  }),
+  tablet: StyleSheet.create({
+    ...stepProgressDesktopMinimal,
+    line: {
+      ...stepProgressDesktopMinimal.line,
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...stepProgressDesktopMinimal,
   }),
 };

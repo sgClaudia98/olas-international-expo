@@ -110,6 +110,23 @@
           }
         }
       }
+    },
+    "PAYMENT": {
+      "STEPS": {
+        "Client": "Client",
+        "Beneficiary": "Beneficiary",
+        "Book": "Book"
+      }
+    },
+    "ORDER_STATUS": {
+      "Requested": "Requested",
+      "Processing": "Processing",
+      "Denied": "Denied",
+      "Confirmed": "Confirmed",
+      "Modified": "Modified",
+      "Cancelled": "Cancelled",
+      "Penalties": "Penalties",
+      "Delivered": "Delivered"
     }
   }
 }

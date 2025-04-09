@@ -107,6 +107,13 @@
           }
         }
       }
+    },
+    "PAYMENT": {
+      "STEPS": {
+        "Client": "Comprador",
+        "Beneficiary": "Destinatario",
+        "Book": "Reservar"
+      }
     }
   }
 }
