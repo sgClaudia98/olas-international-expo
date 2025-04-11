@@ -7,7 +7,7 @@ import {
   PersonalCare,
   SafePaymentIcon,
   Support247Icon,
-} from "@/assets/icons/LandingIcons";
+} from "@/components/LandingIcons";
 import React from "react";
 import { ImageSourcePropType } from "react-native";
 
@@ -111,18 +111,18 @@ interface ShopExperienceData {
 
 export const shopExperienceData: ShopExperienceData[] = [
   {
-    heading: "Entregas rápidas",
-    text: "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+    heading: "MARKET.HOME.FEATURES.SUBTITLES.F1",
+    text: "MARKET.HOME.FEATURES.DESCRIPTIONS.F1",
     icon: React.createElement(FastDeliveryIcon),
   },
   {
-    heading: "Pagos seguros",
-    text: "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+    heading: "MARKET.HOME.FEATURES.SUBTITLES.F3",
+    text: "MARKET.HOME.FEATURES.DESCRIPTIONS.F3",
     icon: React.createElement(SafePaymentIcon),
   },
   {
-    heading: "Asistencia 24/7",
-    text: "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+    heading: "MARKET.HOME.FEATURES.SUBTITLES.F3",
+    text: "MARKET.HOME.FEATURES.DESCRIPTIONS.F3",
     icon: React.createElement(Support247Icon),
   },
 ];

@@ -32,7 +32,7 @@ const PhoneNumberSelector = <T,>({
 
   const countryValue = getNestedValue(values, CODE) || defaultCountryCode;
   const phoneValue = getNestedValue(values, NUMBER) || "";
-
+  
   const handlePhoneChange = useCallback(
     (newNumber: string) => {
       setFieldValue(NUMBER, newNumber);
@@ -40,7 +40,14 @@ const PhoneNumberSelector = <T,>({
     [setFieldValue, NUMBER]
   );
 
-  const handleCountryChange = (newCode) => setFieldValue(CODE, newCode);
+  const handleCountryChange = (newCode) => {
+    console.debug(newCode, "NCode")
+    setFieldValue(CODE, newCode)
+  };
+
+  const handleFocus = useCallback(() => {
+    setFieldValue(NUMBER, parsePhoneNumber(phoneValue, countryValue));
+  }, [setFieldTouched, NUMBER, countryValue, phoneValue]);
 
   const handleBlur = useCallback(() => {
     setFieldTouched(NUMBER, true);
@@ -61,6 +68,7 @@ const PhoneNumberSelector = <T,>({
         placeholder="Enter phone number"
         textColor={inputStyles?.color || Colors.black.primary}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         error={error}
         disabled={disabled}
       />

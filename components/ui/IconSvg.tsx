@@ -6,7 +6,7 @@ import { Colors } from "@/styles";
 
 export type IconNames = Exclude<keyof typeof icons, "Mastercard" | "Paypal" | "AmericanExpress" | "Visa">;
 
-interface IconProps extends SvgProps {
+export interface IconProps extends SvgProps {
   name: IconNames;
   size?: number;
   color?: string;

@@ -117,10 +117,11 @@ export const categoriesSliderStyles = {
     smallHeading: {
       ...categoriesSliderDesktop.smallHeading,
       fontSize: 12,
-      lineHeight: 18
-    }
+      lineHeight: 18,
+    },
   }),
   tablet: StyleSheet.create({
+    ...categoriesSliderDesktop,
     container: {
       ...categoriesSliderDesktop.container,
       marginVertical: 60,
@@ -169,18 +170,20 @@ export const popularBrandsStyles = {
 const shopExperienceDesktop = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
-    maxWidth: 1180,
     marginHorizontal: "auto",
-    marginTop: 150,
+    paddingTop: 150,
+    width: "100%",
   },
   textContent: {
     flexDirection: "column",
-    width: "45%",
+    width: 540,
+    paddingLeft: 160,
   },
   heading: {
     ...typography.h1,
+    width: 540,
     color: Colors.black.primary,
     marginBottom: 75,
   },
@@ -200,8 +203,7 @@ const shopExperienceDesktop = StyleSheet.create({
   },
   textContainer: {
     flexDirection: "column",
-    gap: 8,
-    width: 350,
+    width: 300,
   },
   text: {
     ...typography.title2B,
@@ -213,11 +215,13 @@ const shopExperienceDesktop = StyleSheet.create({
     color: Colors.black.primary,
   },
   imageContainer: {
-    width: "50%",
+    position: "absolute",
+    zIndex: -1,
+    right: 0,
+    width: "100%",
   },
   image: {
-    width: 695,
-    height: 895,
+    aspectRatio: 0.87,
   },
 });
 
@@ -228,7 +232,6 @@ export const shopExperienceStyles = {
       ...shopExperienceDesktop.container,
       marginTop: 60,
       flexDirection: "column",
-      paddingHorizontal: 20,
       width: "100%",
     },
     heading: {
@@ -240,10 +243,13 @@ export const shopExperienceStyles = {
     textContent: {
       ...shopExperienceDesktop.textContent,
       width: "100%",
+      paddingLeft: 40,
+      paddingRight: 40,
     },
     textContainer: {
       ...shopExperienceDesktop.textContainer,
       width: 260,
+      position: "relative",
     },
     itemsContainer: {
       ...shopExperienceDesktop.itemsContainer,
@@ -252,11 +258,13 @@ export const shopExperienceStyles = {
     imageContainer: {
       ...shopExperienceDesktop.imageContainer,
       width: "100%",
+      position: "relative",
     },
     image: {
       ...shopExperienceDesktop.image,
-      width: 440,
-      height: 600,
+      height: "auto",
+      width: "auto",
+      aspectRatio: 0.87,
       objectFit: "cover",
     },
   }),
@@ -266,12 +274,18 @@ export const shopExperienceStyles = {
       ...shopExperienceDesktop.container,
       marginTop: 60,
       flexDirection: "column",
-      paddingHorizontal: 20,
+      width: "100%",
+    },
+    heading: {
+      ...shopExperienceDesktop.heading,
+
       width: "100%",
     },
     textContent: {
       ...shopExperienceDesktop.textContent,
       width: "100%",
+      paddingLeft: 40,
+      paddingRight: 40,
     },
     textContainer: {
       ...shopExperienceDesktop.textContainer,
@@ -279,12 +293,15 @@ export const shopExperienceStyles = {
     },
     imageContainer: {
       ...shopExperienceDesktop.imageContainer,
+      height: "auto",
       width: "100%",
+      position: "relative",
     },
     image: {
       ...shopExperienceDesktop.image,
-      width: 450,
-      height: 600,
+      aspectRatio: 0.87,
+      height: "auto",
+      width: "auto",
       objectFit: "contain",
     },
   }),
@@ -382,11 +399,13 @@ export const experienceForYourMobileStyles = {
       ...experienceForYourMobileDesktop.externalContainer,
       width: "100%",
       marginVertical: 60,
+      paddingTop: 440,
     },
     container: {
       ...experienceForYourMobileDesktop.container,
       paddingHorizontal: 35,
       paddingVertical: 35,
+      flexDirection: "column-reverse",
     },
     heading: {
       ...experienceForYourMobileDesktop.heading,
@@ -409,11 +428,16 @@ export const experienceForYourMobileStyles = {
     },
     imageContainer: {
       ...experienceForYourMobileDesktop.imageContainer,
-      width: 0,
+      width: "100%",
+      marginHorizontal: -35,
     },
     img: {
-      ...experienceForYourMobileDesktop.img,
-      display: "none",
+      position: "absolute",
+      width: "auto",
+      height: 430,
+      aspectRatio: 0.85,
+      objectFit: "contain",
+      top: -445,
     },
   }),
   tablet: StyleSheet.create({
@@ -421,6 +445,12 @@ export const experienceForYourMobileStyles = {
     externalContainer: {
       ...experienceForYourMobileDesktop.externalContainer,
       marginVertical: 60,
+      paddingTop: 440,
+    },
+    container: {
+      ...experienceForYourMobileDesktop.container,
+
+      flexDirection: "column-reverse",
     },
     textContainer: {
       ...experienceForYourMobileDesktop.textContainer,
@@ -429,11 +459,16 @@ export const experienceForYourMobileStyles = {
     },
     imageContainer: {
       ...experienceForYourMobileDesktop.imageContainer,
-      width: 0,
+      width: "100%",
+      marginHorizontal: -35,
     },
     img: {
-      ...experienceForYourMobileDesktop.img,
-      display: "none",
+      position: "absolute",
+      width: "auto",
+      height: 430,
+      aspectRatio: 0.85,
+      objectFit: "contain",
+      top: -445,
     },
   }),
   desktop: StyleSheet.create({

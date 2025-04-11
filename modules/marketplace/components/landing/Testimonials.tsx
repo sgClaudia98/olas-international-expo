@@ -26,6 +26,7 @@ const Testimonials = () => {
     );
   };
 
+
   return (
     <View style={{ ...styles.container, marginBottom: 0 }}>
       <Text style={styles.smallHeading}>Testimonios</Text>
@@ -37,6 +38,12 @@ const Testimonials = () => {
         containerStyle={styles.reviewsWrapper}
         activeDotStyle={styles.activeColor}
         dotStyle={styles.dotColor}
+        itemsPerScreen={{
+          bigDesktop: 3,
+          desktop: 3,
+          tablet: 1,
+          mobile: 1
+        }}
       />
     </View>
   );

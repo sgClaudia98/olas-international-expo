@@ -80,5 +80,53 @@
   "PRODUCTS_HEADING": "Products",
   "CART_NOTIFICATION_ADD_TO_CART": "Product added to cart successfully",
   "CART_NOTIFICATION_MOD_QTY": "Product quantity modified successfully ",
-  "CART_NOTIFICATION_REMOVE_FROM_CART": "Product removed from cart successfully"
+  "CART_NOTIFICATION_REMOVE_FROM_CART": "Product removed from cart successfully",
+  "MARKET": {
+    "HOME": {
+      "FEATURES": {
+        "TITLE": "Your shopping experience has never been so easy and secure!",
+        "SUBTITLES": {
+          "F1": "Fast Deliveries",
+          "F2": "Secure Payments",
+          "F3": "24/7 Support"
+        },
+        "DESCRIPTIONS": {
+          "F1": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+          "F2": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+          "F3": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam."
+        }
+      },
+      "MOBILE": {
+        "TITLE": "Enjoy a better experience from your mobile",
+        "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus eget mi.",
+        "BUTTONS": {
+          "DOWNLOAD_APP_STORE": {
+            "SMALL": "Download on the",
+            "NORMAL": "App Store"
+          },
+          "DOWNLOAD_GOOGLE_PLAY": {
+            "SMALL": "Download on the",
+            "NORMAL": "Google Play"
+          }
+        }
+      }
+    },
+    "PAYMENT": {
+      "STEPS": {
+        "Client": "Client",
+        "Beneficiary": "Beneficiary",
+        "Book": "Book"
+      }
+    },
+    "ORDER_STATUS": {
+      "Requested": "Requested",
+      "Processing": "Processing",
+      "Denied": "Denied",
+      "Confirmed": "Confirmed",
+      "Modified": "Modified",
+      "Cancelled": "Cancelled",
+      "Penalties": "Penalties",
+      "Delivered": "Delivered"
+    }
+  }
 }

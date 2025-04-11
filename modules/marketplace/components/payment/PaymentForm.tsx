@@ -138,7 +138,7 @@ const PaymentForm = ({
         <Portal.Host>
           <View style={styles.formContainer}>
             <Text style={styles.title}>Booking steps</Text>
-            <StepProgress step={step - 1} />
+            <StepProgress step={step - 1} steps={['Client', 'Beneficiary', 'Book']} i18nPrefix="MARKET.PAYMENT.STEPS"/>
 
             {step === 1 && <Step1 />}
 

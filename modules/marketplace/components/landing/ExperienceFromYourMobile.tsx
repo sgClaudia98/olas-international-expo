@@ -6,43 +6,51 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import { experienceForYourMobileStyles } from "../../styles/landing";
+import { useTranslation } from "react-i18next"; // Import the useTranslation hook
 
 const ExperienceFromYourMobile = () => {
-  const styles = useResponsiveStyles(experienceForYourMobileStyles)
+  const { t } = useTranslation(); // Use the t function
+  const styles = useResponsiveStyles(experienceForYourMobileStyles);
+
   return (
     <View style={styles.externalContainer}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.heading}>
-            Disfruta de una mejor experiencia desde tu móvil
+            {t("MARKET.HOME.MOBILE.TITLE")}
           </Text>
           <Text style={styles.bodyText}>
-            Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices
-            egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar
-            cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus
-            eget mi.
+            {t("MARKET.HOME.MOBILE.DESCRIPTION")}
           </Text>
           <View style={styles.btnGroup}>
             <Button
               icon="apple"
-              onPress={() => alert("Redirección a App Store para descargar la app.")}
+              onPress={() => alert(t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_APP_STORE.SMALL") + " " + t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_APP_STORE.NORMAL"))}
               style={styles.btnStyle}
               textColor={Colors.blue.fourth}
             >
               <View style={styles.btnInner}>
-                <Text style={styles.smallBtnText}>Download on the</Text>
-                <Text style={styles.normalBtnText}>App Store</Text>
+                <Text style={styles.smallBtnText}>
+                  {t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_APP_STORE.SMALL")}
+                </Text>
+                <Text style={styles.normalBtnText}>
+                  {t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_APP_STORE.NORMAL")}
+                </Text>
               </View>
             </Button>
             <Button
               icon="google-play"
-              onPress={() => alert("Redirección a Google Play para descargar la app.")}
+              onPress={() => alert(t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_GOOGLE_PLAY.SMALL") + " " + t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_GOOGLE_PLAY.NORMAL"))}
               style={styles.btnStyle}
               textColor={Colors.blue.fourth}
             >
               <View style={styles.btnInner}>
-                <Text style={styles.smallBtnText}>Download on the</Text>
-                <Text style={styles.normalBtnText}>Google Play</Text>
+                <Text style={styles.smallBtnText}>
+                  {t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_GOOGLE_PLAY.SMALL")}
+                </Text>
+                <Text style={styles.normalBtnText}>
+                  {t("MARKET.HOME.MOBILE.BUTTONS.DOWNLOAD_GOOGLE_PLAY.NORMAL")}
+                </Text>
               </View>
             </Button>
           </View>

@@ -77,5 +77,43 @@
   "BACK": "Ir atrás",
   "CART_NOTIFICATION_ADD_TO_CART": "Producto añadido al carrito",
   "CART_NOTIFICATION_MOD_QTY": "Cantidad modificada",
-  "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito" 
+  "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito",
+  "MARKET": {
+    "HOME": {
+      "FEATURES": {
+        "TITLE": "¡Tu experiencia de compra nunca fue tan fácil y segura!",
+        "SUBTITLES": {
+          "F1": "Entregas rápidas",
+          "F2": "Pagos seguros",
+          "F3": "Asistencia 24/7"
+        },
+        "DESCRIPTIONS": {
+          "F1": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+          "F2": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
+          "F3": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam."
+        }
+      },
+      "MOBILE": {
+        "TITLE": "Disfruta de una mejor experiencia desde tu móvil",
+        "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus eget mi.",
+        "BUTTONS": {
+          "DOWNLOAD_APP_STORE": {
+            "SMALL": "Descargar en",
+            "NORMAL": "App Store"
+          },
+          "DOWNLOAD_GOOGLE_PLAY": {
+            "SMALL": "Descargar en",
+            "NORMAL": "Google Play"
+          }
+        }
+      }
+    },
+    "PAYMENT": {
+      "STEPS": {
+        "Client": "Comprador",
+        "Beneficiary": "Destinatario",
+        "Book": "Reservar"
+      }
+    }
+  }
 }

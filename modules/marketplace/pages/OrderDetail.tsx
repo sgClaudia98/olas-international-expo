@@ -12,6 +12,7 @@ import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { orderStyles } from "../styles/orders";
 import { mapAgencyClientBookingsToUIBookings } from "../utils/bookingMapping";
 import IconSvg from "@/components/ui/IconSvg";
+import { OrdersStatus } from "../components/orders/OrdersStatus";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
@@ -46,14 +47,20 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
           </ThemedText>
           {/**AQUI FALTA EL BACK Link */}
           <Link
-            style={{ 
+            style={{
               alignItems: "center",
               display: "flex",
-              color: Colors.blue.second, }}
+              color: Colors.blue.second,
+            }}
             href={"/profile/order-history"}
           >
-            <IconSvg name="GoBack" size={14}/>
-            <ThemedText style={{fontSize:16, marginStart: 5}} lightColor={Colors.blue.second}>{t("BACK")}</ThemedText>
+            <IconSvg name="GoBack" size={14} />
+            <ThemedText
+              style={{ fontSize: 16, marginStart: 5 }}
+              lightColor={Colors.blue.second}
+            >
+              {t("BACK")}
+            </ThemedText>
           </Link>
         </View>
         <View style={styles.cardRow}>
@@ -68,15 +75,33 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       title={t("RECEIVER_HEADING")}
                       data={{
                         fullName: {
-                          icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="User2"
+                              size={17}
+                            />
+                          ),
                           value: beneficiary?.fullName || "N/A",
                         },
                         documentid: {
-                          icon: <IconSvg color={Colors.black.primary} name="Id" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="Id"
+                              size={17}
+                            />
+                          ),
                           value: beneficiary?.idDocument || "N/A",
                         },
                         phoneNumber: {
-                          icon: <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="Phone"
+                              size={17}
+                            />
+                          ),
                           value:
                             parsePhoneNumber(
                               beneficiary?.phone,
@@ -85,7 +110,13 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                             ) || "N/A",
                         },
                         address: {
-                          icon: <IconSvg color={Colors.black.primary} name="Location" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="Location"
+                              size={17}
+                            />
+                          ),
                           value: [
                             beneficiary?.address?.line1,
                             beneficiary?.address?.line2,
@@ -111,12 +142,24 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       title={t("CUSTOMER_HEADING")}
                       data={{
                         fullName: {
-                          icon: <IconSvg color={Colors.black.primary} name="User2" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="User2"
+                              size={17}
+                            />
+                          ),
                           value: booking.client.fullName || "N/A",
                         },
 
                         phoneNumber: {
-                          icon:  <IconSvg color={Colors.black.primary} name="Phone" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="Phone"
+                              size={17}
+                            />
+                          ),
                           value:
                             parsePhoneNumber(
                               booking.client.phone,
@@ -125,7 +168,13 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                             ) || "N/A",
                         },
                         email: {
-                          icon: <IconSvg color={Colors.black.primary} name="Email" size={17} />,
+                          icon: (
+                            <IconSvg
+                              color={Colors.black.primary}
+                              name="Email"
+                              size={17}
+                            />
+                          ),
                           value: booking.client.email || "N/A",
                         },
                       }}
@@ -198,7 +247,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                   </ThemedText>
                 </View>
 
-                <ThemedText>{shipment.status}</ThemedText>
+                <OrdersStatus status={booking.status} />
                 <DataTable>
                   <DataTable.Header style={styles.tableProductHeader}>
                     <DataTable.Title style={styles.tableColBig}>
