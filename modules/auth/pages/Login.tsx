@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
 import Btn from "@/components/Btn";
-import { testStyles } from "@/styles";
+import { Colors, testStyles } from "@/styles";
 import { useAuthMutation } from "../services/api/AccountService";
 import { Card } from "react-native-paper";
 import { useDispatch } from "react-redux";
@@ -13,11 +13,15 @@ import { decodeToken } from "react-jwt";
 import { Link, useRouter } from "expo-router";
 import { fetchUserProfileThunk } from "../slices/authThunks";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { cardStyle } from "@/styles/card";
+import { authPagesStyles } from "../styles/authPages";
+import { ThemedText } from "@/components/ThemedText";
+import CheckboxInput from "@/components/ui/CheckboxInput";
+import { set } from "lodash";
 
 interface FormValues {
   email: string;
   password: string;
+  remember: boolean;
 }
 
 const validationSchema = Yup.object({
@@ -33,7 +37,7 @@ interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const router = useRouter();
-  const style = useResponsiveStyles(cardStyle)
+  const style = useResponsiveStyles(authPagesStyles);
   const [auth, { isLoading, isError, isSuccess, error, data }] =
     useAuthMutation(); // Destructure to get mutation states
 
@@ -48,6 +52,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   const initialValues: FormValues = {
     email: "",
     password: "",
+    remember: false,
   };
   const onSubmit = (values: FormValues) => {
     auth(values);
@@ -57,8 +62,6 @@ const Login: FunctionComponent<LoginProps> = () => {
     if (isError) {
       console.error("Error");
     } else if (isSuccess && data) {
-      
-
       goToMain();
     }
   }, [isLoading]);
@@ -68,7 +71,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   };
 
   return (
-    <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
+    <View style={{ ...style.card, maxWidth: 476, marginHorizontal: "auto" }}>
       <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
@@ -79,17 +82,23 @@ const Login: FunctionComponent<LoginProps> = () => {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldValue,
             values,
             errors,
             touched,
           }) => (
-            <View style={testStyles.defaultContainer}>
+            <View style={style.container}>
               {/* Title */}
-              <Text>Welcome back!</Text>
-              <Text>Enter your details to continue</Text>
-
+              <View style={style.headerContainer}>
+                <ThemedText type="defaultBold" style={style.headerText}>
+                  Welcome!
+                </ThemedText>
+                <ThemedText style={style.subheaderText}>
+                  Enter your details to continue
+                </ThemedText>
+              </View>
               {/* Input fields */}
-              <View style={{ gap: 10 }}>
+              <View style={style.formContainer}>
                 {/* Email Input */}
                 <InputField
                   onChangeText={handleChange("email")}
@@ -112,35 +121,53 @@ const Login: FunctionComponent<LoginProps> = () => {
                   touched={touched.password}
                   secureTextEntry
                 />
-              </View>
 
-              {/* Remember me and forgot password */}
-              <View>
-                <Link
-                  href={{
-                    pathname: "/(auth)/reset-password",
-                    params: { email: values.email },
+                {/* Remember me and forgot password */}
+                <View
+                  style={{
+                    ...style.formRow,
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingHorizontal: 20,
                   }}
                 >
-                  Forgot password?
-                </Link>
+                  <CheckboxInput
+                    label="Remember me"
+                    isChecked={values.remember}
+                    onChange={(value) => setFieldValue("remember", value)}
+                    labelStyle={{ fontSize: 14, color: Colors.black.primary }}
+                  />
+                  <Link
+                    href={{
+                      pathname: "/(auth)/reset-password",
+                      params: { email: values.email },
+                    }}
+                    style={{ color: Colors.blue.primary }}
+                  >
+                    Forgot password?
+                  </Link>
+                </View>
               </View>
 
-              {/* Login Button */}
-              <Btn
-                title="Log in"
-                onPress={() => handleSubmit()}
-                disabled={isLoading}
-              />
+              <View style={style.actionsContainer}>
+                {/* Login Button */}
+                <Btn
+                  title="Log in"
+                  onPress={() => handleSubmit()}
+                  disabled={isLoading}
+                />
 
-              {/* Sign up navigation */}
-              <Text>
-                Don’t have an account?
-                <Link href="/(auth)/register">Sign Up</Link>
-              </Text>
+                {/* Sign up navigation */}
 
-              {/* Remember me and forgot password */}
-              <View>
+                <ThemedText>
+                  {"Don’t have an account? "}
+                  <Link
+                    href="/(auth)/register"
+                    style={{ color: Colors.blue.primary }}
+                  >
+                    Sign Up
+                  </Link>
+                </ThemedText>
                 <Btn
                   title="Omit"
                   size="small"

@@ -1,15 +1,17 @@
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, TextStyle } from 'react-native';
 import { CheckBox } from 'react-native-web';  // Import Checkbox from react-native-web
 import * as Colors from '@/styles/colors';
+import { ThemedText } from '../ThemedText';
 
 interface CheckboxInputProps {
     label: string;
     isChecked: boolean;
     onChange: (checked: boolean) => void;
+    labelStyle?: TextStyle; // Optional style for the label text
 }
 
-const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChange }) => {
+const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChange, labelStyle }) => {
 
     const handleCheck = () => {
         onChange(!isChecked);
@@ -25,9 +27,9 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
                 color={isChecked ? Colors.blue.primary: Colors.black.third}
             />
             {/* Label as Pressable */}
-                <Text style={styles.text}>
+                <ThemedText style={StyleSheet.flatten([styles.text, labelStyle])}>
                     {label}
-                </Text>
+                </ThemedText>
             </Pressable>
     );
 };
@@ -35,9 +37,9 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        alignItems: 'center',
     },
     checkbox: {
-        marginTop: 4,
         marginRight: 10,
         width: 15,
         height: 15,

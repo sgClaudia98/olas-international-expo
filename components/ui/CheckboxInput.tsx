@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet, TextStyle } from 'react-native';
 import CheckBox from 'expo-checkbox';
 import * as Colors from '@/styles/colors'
+import { ThemedText } from '../ThemedText';
 
 interface CheckboxInputProps {
     label: string; // The label text for the checkbox
     isChecked: boolean; // Determines whether the checkbox is checked or not
     onChange: (checked: boolean) => void; // Function to handle state change when checkbox is clicked
+    labelStyle?: TextStyle; // Optional style for the label text
 }
 
-const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChange }) => {
+const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChange, labelStyle }) => {
 
     const handleCheck = () => {
         onChange(!isChecked)
@@ -24,9 +26,9 @@ const CheckboxInput: React.FC<CheckboxInputProps> = ({ label, isChecked, onChang
                 color={Colors.blue.primary}
             />
             <Pressable onPress={handleCheck}>
-                <Text style={styles.text} >
+                <ThemedText style={StyleSheet.flatten([styles.text, labelStyle])} >
                     {label}
-                </Text>
+                </ThemedText>
             </Pressable>
 
         </View>

@@ -17,6 +17,7 @@ import { Card } from "react-native-paper";
 import { Link, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { cardStyle } from "@/styles/card";
+import { ThemedText } from "@/components/ThemedText";
 
 interface FormValues extends IAccountCreateRequest {}
 
@@ -94,8 +95,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
           }) => (
             <View style={testStyles.defaultContainer}>
               {/* Title */}
-              <Text>Nice to meet you!</Text>
-              <Text>Provide your info to proceed</Text>
+              <ThemedText>Nice to meet you!</ThemedText>
+              <ThemedText>Provide your info to proceed</ThemedText>
 
               {/* Input fields */}
               <View style={{ gap: 10 }}>
@@ -161,10 +162,10 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 }}
                 disabled={isLoading}
               />
-              <Text>
+              <ThemedText>
                 Already a member?
                 <Link href="/(auth)/login">Log In</Link>
-              </Text>
+              </ThemedText>
             </View>
           )}
         </Formik>

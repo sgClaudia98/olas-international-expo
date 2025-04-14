@@ -23,6 +23,7 @@ import { Card } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { cardStyle } from "@/styles/card";
+import { ThemedText } from "@/components/ThemedText";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -114,12 +115,12 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
           }) => (
             <View style={testStyles.defaultContainer}>
               {/* Title */}
-              <Text>Reset password</Text>
-              <Text>
+              <ThemedText>Reset password</ThemedText>
+              <ThemedText>
                 {hasEmail
                   ? `Introduce the code sent to your email (${values.email}) then provide your new password.`
                   : "Please provide your email and request code."}
-              </Text>
+              </ThemedText>
 
               {!hasEmail ? (
                 <InputField
@@ -142,9 +143,9 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
 
                   {/* Error for OTP */}
                   {touched.token && errors.token && (
-                    <Text style={{ color: Colors.red.primary, fontSize: 12 }}>
+                    <ThemedText style={{ color: Colors.red.primary, fontSize: 12 }}>
                       {errors.token}
-                    </Text>
+                    </ThemedText>
                   )}
 
                   {/* Password Input */}
@@ -171,7 +172,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
 
               {/* Resend code */}
               {hasEmail && (
-                <Text
+                <ThemedText
                   style={{
                     color: Colors.blue.primary,
                     marginTop: 20,
@@ -180,7 +181,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                   onPress={() => sendRequest(values)}
                 >
                   Resend Code
-                </Text>
+                </ThemedText>
               )}
               <View>
                 <Btn

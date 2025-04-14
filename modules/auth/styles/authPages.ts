@@ -1,11 +1,36 @@
 import { StyleSheet } from "react-native";
 import { cardStyle } from "@/styles/card";
+import { Colors } from "@/styles";
 
 const desktop = StyleSheet.create({
+    container: {
+        paddingHorizontal: 30,
+    },
+    actionsContainer: {
+        gap: 12,
+        alignItems: "center" 
+    },
+    headerContainer: {
+        marginTop: 36,
+        marginBottom: 36,
+        alignItems: "center",
+    },
+    headerText: {
+        fontSize: 22,
+        lineHeight: 26,
+        letterSpacing: 0.2,
+        color: Colors.black.primary,
+        marginBottom: 6
+    },
+    subheaderText: {
+        fontSize: 16,
+        lineHeight: 24,
+        color: Colors.black.second, 
+    },
   formContainer: {
-    paddingHorizontal: 10,
     width: "100%",
-    gap: 18,
+    gap: 16,
+    marginBottom: 43,
   },
   formRow: {
     gap: 25,
@@ -26,7 +51,7 @@ const desktop = StyleSheet.create({
   },
 });
 
-export const profileStyles = {
+export const authPagesStyles = {
   mobile: StyleSheet.create({
     ...cardStyle.mobile,
     card: {

@@ -2,6 +2,7 @@ import { StyleSheet, ViewStyle, TextStyle, PressableStateCallbackType, View } fr
 
 import * as Colors from "./colors"
 import { borderWidth } from "./outlines";
+import Fonts from "./fonts";
 
 export type ButtonVariant = "primary" | "secondary"
 export type ButtonSize = "large" | "medium" | "small"
@@ -38,12 +39,13 @@ export const baseTextStyle: TextStyle = {
   fontSize: 16,
   alignSelf: "flex-start",
   marginVertical: 0,
+  fontFamily: Fonts.regular
 };
   
 // Base styles for text
 const baseTextStyleBold: TextStyle = {
  ...baseTextStyle,
-  fontWeight: "bold",
+  fontFamily: Fonts.bold
 };
 
 export const selectTextStyle: TextStyle = {

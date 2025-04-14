@@ -10,6 +10,7 @@ import {Button, useTheme} from 'react-native-paper';
 import {Colors} from '@/styles';
 import {StyleSheet, TextStyle, View, ViewStyle} from 'react-native';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
+import theme from '@/styles/paperTheme';
 
 interface ButtonProps {
   title: string;
@@ -50,7 +51,7 @@ const Btn: React.FC<ButtonProps> = ({
         marginVertical: 'auto',
       }}>
       <Button
-        theme={{colors}}
+        theme={{...theme, colors: {...theme.colors,...colors}}}
         onPress={onPress}
         icon={icon}
         mode={mode}
