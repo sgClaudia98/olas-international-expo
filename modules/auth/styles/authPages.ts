@@ -27,6 +27,9 @@ const desktop = StyleSheet.create({
         lineHeight: 24,
         color: Colors.black.second, 
     },
+    secondaryActionText: {
+      fontSize: 13,
+    },
   formContainer: {
     width: "100%",
     gap: 16,

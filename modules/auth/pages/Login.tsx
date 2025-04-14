@@ -126,17 +126,19 @@ const Login: FunctionComponent<LoginProps> = () => {
                 <View
                   style={{
                     ...style.formRow,
-                    justifyContent: "space-between",
+                    justifyContent: 'flex-end', // "space-between",
                     alignItems: "center",
                     paddingHorizontal: 20,
                   }}
                 >
+                  {/* Remember me checkbox 
                   <CheckboxInput
                     label="Remember me"
                     isChecked={values.remember}
                     onChange={(value) => setFieldValue("remember", value)}
                     labelStyle={{ fontSize: 14, color: Colors.black.primary }}
                   />
+                  */}
                   <Link
                     href={{
                       pathname: "/(auth)/reset-password",
@@ -159,7 +161,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
                 {/* Sign up navigation */}
 
-                <ThemedText>
+                <ThemedText style={style.secondaryActionText}>
                   {"Don’t have an account? "}
                   <Link
                     href="/(auth)/register"
