@@ -17,7 +17,7 @@ const desktop = StyleSheet.create({
   },
   pageContainer: {
     display: "flex",
-    paddingBottom: 20,
+    paddingBottom: 40,
   },
 });
 
