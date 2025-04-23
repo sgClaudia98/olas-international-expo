@@ -1,12 +1,10 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import MarkdownScreen from "@/static_pages/MarkdownScreen";
 import React from "react";
 
 export default function NewScreen() {
   return (
-    <ThemedView>
-      <ThemedText type="title">Travel</ThemedText>
-      <ThemedText>This is a new screen</ThemedText>
-    </ThemedView>
+      <MarkdownScreen page="AboutUs" />
   );
 }

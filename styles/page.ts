@@ -8,6 +8,7 @@ const desktop = StyleSheet.create({
   innerContainer: {
     flexGrow: 1,
     width: "100%",
+    minHeight: "100%",
   },
   scrollContent: {
     flexGrow: 1,
@@ -16,7 +17,7 @@ const desktop = StyleSheet.create({
   },
   pageContainer: {
     display: "flex",
-    minHeight: "100%",
+    paddingBottom: 20,
   },
 });
 

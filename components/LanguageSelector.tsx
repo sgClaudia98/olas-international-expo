@@ -5,8 +5,9 @@ import * as Localization from "expo-localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropdownSelect2, { MenuItem } from "./DropdownMenuSelect";
 import { Colors } from "@/styles";
+import { languages } from "@/i18n";
 
-const languages = ["en", "es", "pt", "fr"]
+
 
 const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
