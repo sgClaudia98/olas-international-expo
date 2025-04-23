@@ -41,7 +41,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email(
+      .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         t("FORM.ERRORS.INVALID", { field: t("AUTH.REGISTER.FORM.EMAIL.LABEL") })
       )
       .required(
@@ -91,12 +92,12 @@ const Register: FunctionComponent<RegisterProps> = () => {
           const errorCode = errorData[0]?.Code;
           if (errorCode) {
             const errorMessage = t(`ERROR_CODE.${errorCode}`, {
-              defaultValue: t("ERROR_CODE.UNKNOWN_ERROR"),
+              defaultValue: t("ERROR_CODE.UNKNOWN"),
             });
             Toast.error(errorMessage);
           }
         } else {
-          Toast.error(t("ERROR_CODE.UNKNOWN_ERROR"));
+          Toast.error(t("ERROR_CODE.UNKNOWN"));
         }
       }
       console.error("Error");

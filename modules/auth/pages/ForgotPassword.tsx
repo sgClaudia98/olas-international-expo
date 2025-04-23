@@ -22,9 +22,11 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
 import { authPagesStyles } from "../styles/authPages";
 import { useTranslation } from "react-i18next";
+import { Toast } from "toastify-react-native";
 // Define the validation schema for params
 const paramsValidationSchema = Yup.object({
-  email: Yup.string().email().optional(),
+  email: Yup.string().matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/).optional(),
   token: Yup.string().length(6).matches(/^\d+$/).optional(),
 });
 interface ForgotPasswordProps {
@@ -37,17 +39,18 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   const router = useRouter();
   const style = useResponsiveStyles(authPagesStyles);
 
-  const [forgetPass, _] = useForgetPasswordMutation();
+  const [forgetPass, request] = useForgetPasswordMutation();
   const [resetPass, responseResetPass] = useResetPasswordMutation();
 
-  const [hasEmail, setHasEmail] = useState(!!params?.email);
   const validatedParams = (() => {
     try {
       return paramsValidationSchema.validateSync(params, { abortEarly: false });
     } catch {
-      return {}; 
+      return {};
     }
   })();
+  console.debug("Validated Params: ", validatedParams);
+  const [hasEmail, setHasEmail] = useState(!!validatedParams?.email);
 
   const initialValues: IResetPasswordRequest = {
     email: "",
@@ -58,7 +61,8 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email(
+      .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         t("FORM.ERRORS.INVALID", {
           field: t("AUTH.FORGOT_PASSWORD.FORM.EMAIL.LABEL"),
         })
@@ -117,7 +121,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
     })
       .unwrap()
       .then(() => setHasEmail(true))
-      .catch(() => console.error("Error asking for code"));
+      .catch(() => Toast.error(t("AUTH.FORGOT_PASSWORD.ERRORS.EMAIL_NOT_FOUND")));
   };
 
   useEffect(() => {
@@ -167,6 +171,19 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                       })
                     : t("AUTH.FORGOT_PASSWORD.SUBTITLE.REQUEST_CODE")}
                 </ThemedText>
+                {hasEmail && (
+                  <ThemedText
+                    style={{
+                      ...style.subheaderText,
+                      color: Colors.blue.primary,
+                      fontSize: 11,
+                      width: "100%",
+                    }}
+                    onPress={() => setHasEmail(false)}
+                  >
+                    {""} {t("AUTH.FORGOT_PASSWORD.SUBTITLE.MODIFY_EMAIL")}
+                  </ThemedText>
+                )}
               </View>
 
               <View style={style.formContainer}>
@@ -181,6 +198,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                     error={errors.email}
                     touched={touched.email}
                     keyboardType="email-address"
+                    autoComplete="off"
                     autoCapitalize="none"
                   />
                 ) : (
@@ -225,7 +243,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                       ? t("AUTH.FORGOT_PASSWORD.BUTTONS.RESET")
                       : t("AUTH.FORGOT_PASSWORD.BUTTONS.REQUEST_CODE")
                   }
-                  disabled={responseResetPass.isLoading}
+                  disabled={responseResetPass.isLoading || request.isLoading}
                   onPress={() =>
                     hasEmail ? handleSubmit() : sendRequest(values)
                   }

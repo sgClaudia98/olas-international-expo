@@ -45,7 +45,8 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email(
+      .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         t("FORM.ERRORS.INVALID", { field: t("AUTH.LOGIN.FORM.EMAIL.LABEL") })
       )
       .required(

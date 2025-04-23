@@ -14,7 +14,8 @@ const validationSchema = Yup.object().shape({
 
   email: Yup.string()
     .trim()
-    .email("Invalid email format")
+    .matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,"Invalid email format")
     .required("Email is required"),
 });
 

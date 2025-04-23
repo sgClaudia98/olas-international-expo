@@ -184,7 +184,8 @@
       "TITLE": "Reset password",
       "SUBTITLE": {
         "REQUEST_CODE": "Please provide your email and request a code.",
-        "RESET_PASSWORD": "Introduce the code sent to your email ({{email}}) then provide your new password."
+        "RESET_PASSWORD": "Introduce the code sent to your email ({{email}}) then provide your new password.",
+        "MODIFY_EMAIL": "modify email"
       },
       "BUTTONS": {
         "REQUEST_CODE": "Request Code",
@@ -205,31 +206,34 @@
           "LABEL": "New Password",
           "PLACEHOLDER": "Enter your new password"
         }
+      },
+      "ERRORS": {
+        "EMAIL_NOT_FOUND": "Error requesting code, please check your email."
       }
     },
     "VERIFY": {
-  "TITLE": "Verify your account",
-  "SUBTITLE": {
-    "DEFAULT": "Enter the 6-digit code we sent to your email ({{email}}).",
-    "TOKEN_EXPIRED": "Your verification code has expired. Please request a new one."
-  },
-  "BUTTONS": {
-    "VERIFY": "Verify",
-    "RESEND_CODE": "Resend code",
-    "BACK_TO_LOGIN": "Back to Login"
-  },
-  "FORM": {
-    "TOKEN": {
-      "LABEL": "Verification Code",
-      "PLACEHOLDER": "Enter the 6-digit code"
+      "TITLE": "Verify your account",
+      "SUBTITLE": {
+        "DEFAULT": "Enter the 6-digit code we sent to your email ({{email}}).",
+        "TOKEN_EXPIRED": "Your verification code has expired. Please request a new one."
+      },
+      "BUTTONS": {
+        "VERIFY": "Verify",
+        "RESEND_CODE": "Resend code",
+        "BACK_TO_LOGIN": "Back to Login"
+      },
+      "FORM": {
+        "TOKEN": {
+          "LABEL": "Verification Code",
+          "PLACEHOLDER": "Enter the 6-digit code"
+        }
+      },
+      "MESSAGES": {
+        "CODE_SENT": "A new verification code has been sent to your email.",
+        "SUCCESS": "Your account has been successfully verified!",
+        "ERROR": "An error occurred during verification. Please try again."
+      }
     }
-  },
-  "MESSAGES": {
-    "CODE_SENT": "A new verification code has been sent to your email.",
-    "SUCCESS": "Your account has been successfully verified!",
-    "ERROR": "An error occurred during verification. Please try again."
-  }
-}
   },
   "FORM": {
     "ERRORS": {
