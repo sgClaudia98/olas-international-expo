@@ -5,7 +5,7 @@ export const BREAKPOINTS = {
   mobile: 480, 
   tablet: 768, 
   mid: 1024,
-  desktop: 1440, 
+  desktop: 1600, 
   // > 1280px = Big Desktop
 };
 

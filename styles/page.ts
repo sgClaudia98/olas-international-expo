@@ -5,9 +5,12 @@ const desktop = StyleSheet.create({
   container: {
     flex: 1,
   },
+  innerContainer: {
+    flexGrow: 1,
+    width: "100%",
+  },
   scrollContent: {
     flexGrow: 1,
-    minHeight: "100%",
     paddingHorizontal: 20,
     marginHorizontal: 85,
   },
@@ -37,9 +40,9 @@ const styles = {
   desktop,
   bigDesktop: StyleSheet.create({
     ...desktop,
-    scrollContent: {
-      ...desktop.scrollContent,
-      alignSelf: "center",
+    innerContainer: {
+      flex: 1,
+      marginHorizontal: "auto",
       maxWidth: BREAKPOINTS.desktop,
     },
   }),

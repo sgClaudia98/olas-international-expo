@@ -16,13 +16,17 @@ const Page: React.FC<PageProps> = ({ children, backgroundColor = Colors.white.de
   const styles = useResponsiveStyles(responsiveStyle);
   return (
     <SafeAreaView style={{...styles.container, ...style, backgroundColor}}>
+      
       <ScrollView
         style={{...styles.scrollContent, backgroundColor}}
         showsHorizontalScrollIndicator={false}
       >
+        <View style={styles.innerContainer}>
+
         <View style={{...styles.pageContainer, backgroundColor}}>{children}</View>
       
         <Footer />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
