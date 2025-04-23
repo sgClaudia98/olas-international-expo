@@ -1,22 +1,18 @@
 import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
 import Btn from "@/components/Btn";
-import { Colors, testStyles } from "@/styles";
+import { Colors } from "@/styles";
 import { useAuthMutation } from "../services/api/AccountService";
-import { Card } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { decodeToken } from "react-jwt";
-import { Link, useRouter } from "expo-router";
-import { fetchUserProfileThunk } from "../slices/authThunks";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { authPagesStyles } from "../styles/authPages";
 import { ThemedText } from "@/components/ThemedText";
-import CheckboxInput from "@/components/ui/CheckboxInput";
-import { set } from "lodash";
+import { useTranslation } from "react-i18next";
+import { Link, useRouter } from "expo-router";
 
 interface FormValues {
   email: string;
@@ -24,18 +20,10 @@ interface FormValues {
   remember: boolean;
 }
 
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-});
-
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const style = useResponsiveStyles(authPagesStyles);
   const [auth, { isLoading, isError, isSuccess, error, data }] =
@@ -54,6 +42,30 @@ const Login: FunctionComponent<LoginProps> = () => {
     password: "",
     remember: false,
   };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(
+        t("FORM.ERRORS.INVALID", { field: t("AUTH.LOGIN.FORM.EMAIL.LABEL") })
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", { field: t("AUTH.LOGIN.FORM.EMAIL.LABEL") })
+      ),
+    password: Yup.string()
+      .min(
+        8,
+        t("FORM.ERRORS.MIN_LENGTH", {
+          field: t("AUTH.LOGIN.FORM.PASSWORD.LABEL"),
+          length: 8,
+        })
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.LOGIN.FORM.PASSWORD.LABEL"),
+        })
+      ),
+  });
+
   const onSubmit = (values: FormValues) => {
     auth(values);
   };
@@ -91,10 +103,10 @@ const Login: FunctionComponent<LoginProps> = () => {
               {/* Title */}
               <View style={style.headerContainer}>
                 <ThemedText type="defaultBold" style={style.headerText}>
-                  Welcome!
+                  {t("AUTH.LOGIN.TITLE")}
                 </ThemedText>
                 <ThemedText style={style.subheaderText}>
-                  Enter your details to continue
+                  {t("AUTH.LOGIN.SUBTITLE")}
                 </ThemedText>
               </View>
               {/* Input fields */}
@@ -104,7 +116,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                   onChangeText={handleChange("email")}
                   onBlur={handleBlur("email")}
                   value={values.email}
-                  placeholder="Email"
+                  placeholder={t("AUTH.LOGIN.FORM.EMAIL.PLACEHOLDER")}
                   error={errors.email}
                   touched={touched.email}
                   keyboardType="email-address"
@@ -116,7 +128,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
-                  placeholder="Password"
+                  placeholder={t("AUTH.LOGIN.FORM.PASSWORD.PLACEHOLDER")}
                   error={errors.password}
                   touched={touched.password}
                   secureTextEntry
@@ -126,7 +138,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                 <View
                   style={{
                     ...style.formRow,
-                    justifyContent: 'flex-end', // "space-between",
+                    justifyContent: "flex-end",
                     alignItems: "center",
                     paddingHorizontal: 20,
                   }}
@@ -136,7 +148,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                     label="Remember me"
                     isChecked={values.remember}
                     onChange={(value) => setFieldValue("remember", value)}
-                    labelStyle={{ fontSize: 14, color: Colors.black.primary }}
+                    labelStyle={{ fontSize: 14, lineHeight:20,  color: Colors.black.primary }}
                   />
                   */}
                   <Link
@@ -146,7 +158,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                     }}
                     style={{ color: Colors.blue.primary }}
                   >
-                    Forgot password?
+                    {t("AUTH.LOGIN.BUTTONS.FORGOT_PASSWORD")}
                   </Link>
                 </View>
               </View>
@@ -154,24 +166,23 @@ const Login: FunctionComponent<LoginProps> = () => {
               <View style={style.actionsContainer}>
                 {/* Login Button */}
                 <Btn
-                  title="Log in"
+                  title={t("AUTH.LOGIN.BUTTONS.LOGIN")}
                   onPress={() => handleSubmit()}
                   disabled={isLoading}
                 />
 
                 {/* Sign up navigation */}
-
                 <ThemedText style={style.secondaryActionText}>
-                  {"Don’t have an account? "}
+                  {t("AUTH.LOGIN.BUTTONS.NO_ACCOUNT")}{" "}
                   <Link
                     href="/(auth)/register"
                     style={{ color: Colors.blue.primary }}
                   >
-                    Sign Up
+                    {t("AUTH.LOGIN.BUTTONS.SIGN_UP")}
                   </Link>
                 </ThemedText>
                 <Btn
-                  title="Omit"
+                  title={t("AUTH.LOGIN.BUTTONS.OMIT_BUTTON")}
                   size="small"
                   variant="secondary"
                   onPress={goToMain}

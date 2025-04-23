@@ -45,7 +45,7 @@ const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
                 // route.name === link.route ? styles.activeMenuText : null,
               ]}
             >
-              {link.label}
+              {t(link.label)}
             </Text>
           </Button>
         ))}

@@ -18,74 +18,72 @@
   "ROUTE": {
     "HOME": "Inicio"
   },
-  "MODULE": {
-    "TRAVEL": "Viajes",
-    "MARKET": "Mercado"
-  },
   "PAGE": {
     "ORDERS": "Pedidos",
-    "ABOUT_US": "Nosotros",
-    "FAQ": "Preguntas Frecuentes",
+    "ABOUT_US": "Sobre nosotros",
+    "FAQ": "Preguntas frecuentes",
     "TERMS_AND_CONDITIONS": "Términos y condiciones",
-    "RETURN_POLICY": "Política de devolución",
+    "RETURN_POLICY": "Política de devoluciones",
     "PRIVACY_POLICY": "Política de privacidad",
     "PROFILE": "Perfil",
-    "ORDER_HISTORY": "Historial de órdenes",
+    "ORDER_HISTORY": "Historial de pedidos",
     "PROFILE.HEADER": "Información del perfil",
     "LOGIN": "Iniciar sesión",
     "REGISTER": "Registrarse",
     "RESET_PASSWORD": "Restablecer contraseña",
-    "VERIFY": "Verificar cuenta"
+    "VERIFY": "Verificar cuenta",
+    "ORDER_DETAIL": "Detalles del pedido"
   },
   "FILTERS": {
-    "ALL_CATEGORIES": "Todas las Categorías",
-    "CATEGORIES": "Categorías"
+    "ALL_CATEGORIES": "Todas las categorías",
+    "CATEGORIES": "Categorías",
+    "LABEL": "Filtros"
   },
   "HEADER": {
     "SERVICES": "Servicios",
     "INFORMATION": "Información",
-    "CUSTOMER_SERVICE": "Atención al Cliente"
+    "CUSTOMER_SERVICE": "Atención al cliente"
   },
   "LOGOUT": "Cerrar sesión",
-  "PROFILE_SETTINGS": "Ajustes de Perfil",
-  "PAGE.PROFILE.HEADER": "Información del perfil",
+  "PROFILE_SETTINGS": "Configuración del perfil",
   "ACTIONS.SAVE_CHANGES": "Guardar cambios",
   "FORMLABEL.FIRST_NAME": "Nombre",
   "FORMLABEL.LAST_NAME": "Apellidos",
   "FORMLABEL.PHONE_NUMBER": "Teléfono",
   "FORMLABEL.EMAIL": "Correo electrónico",
-  "PAGE.ORDER_DETAIL": "Detalles de la orden",
-  "PAGE.LOGIN": "Iniciar sesión",
-  "PAGE.REGISTER": "Registrarse",
-  "PAGE.RESET_PASSWORD": "Restablecer contraseña",
-  "PAGE.VERIFY": "Verificar cuenta",
   "RECEIVER_HEADING": "Destinatario",
   "CUSTOMER_HEADING": "Comprador",
   "SUMMARY_HEADING": "Resumen",
   "SHIPPING": "Envío",
   "DISCOUNT": "Descuento",
+  "TOTAL": "Total",
   "NUMBER": "Número",
   "DATE": "Fecha",
   "PRICE": "Precio",
   "STATUS": "Estado",
+  "BACK": "Volver",
+  "SHOW_FILTERS": "Mostrar filtros",
   "PRODUCTS": {
     "TOTAL_zero": "{{count}} productos",
     "TOTAL_one": "{{count}} producto",
     "TOTAL_other": "{{count}} productos"
   },
   "PRODUCTS_HEADING": "Productos",
-  "BACK": "Ir atrás",
-  "CART_NOTIFICATION_ADD_TO_CART": "Producto añadido al carrito",
-  "CART_NOTIFICATION_MOD_QTY": "Cantidad modificada",
-  "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito",
+  "CART_NOTIFICATION_ADD_TO_CART": "Producto añadido al carrito con éxito",
+  "CART_NOTIFICATION_MOD_QTY": "Cantidad del producto modificada con éxito",
+  "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito con éxito",
+  "MODULE": {
+    "TRAVEL": "Viajes",
+    "MARKET": "Mercado"
+  },
   "MARKET": {
     "HOME": {
       "FEATURES": {
-        "TITLE": "¡Tu experiencia de compra nunca fue tan fácil y segura!",
+        "TITLE": "¡Tu experiencia de compra nunca ha sido tan fácil y segura!",
         "SUBTITLES": {
           "F1": "Entregas rápidas",
           "F2": "Pagos seguros",
-          "F3": "Asistencia 24/7"
+          "F3": "Soporte 24/7"
         },
         "DESCRIPTIONS": {
           "F1": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
@@ -114,6 +112,116 @@
         "Beneficiary": "Destinatario",
         "Book": "Reservar"
       }
+    },
+    "ORDER_STATUS": {
+      "Requested": "Solicitado",
+      "Processing": "Procesando",
+      "Denied": "Denegado",
+      "Confirmed": "Confirmado",
+      "Modified": "Modificado",
+      "Cancelled": "Cancelado",
+      "Penalties": "Penalizaciones",
+      "Delivered": "Entregado"
     }
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "¡Bienvenido!",
+      "SUBTITLE": "Introduce tus datos para continuar",
+      "PROMPT": "Debes iniciar sesión para continuar.",
+      "BUTTONS": {
+        "LOGIN": "Iniciar sesión",
+        "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
+        "NO_ACCOUNT": "¿No tienes una cuenta?",
+        "SIGN_UP": "Regístrate",
+        "OMIT_BUTTON": "Omitir"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Correo electrónico",
+          "PLACEHOLDER": "Introduce tu correo electrónico"
+        },
+        "PASSWORD": {
+          "LABEL": "Contraseña",
+          "PLACEHOLDER": "Introduce tu contraseña"
+        },
+        "REMEMBER_ME": {
+          "LABEL": "Recuérdame"
+        }
+      }
+    },
+    "REGISTER": {
+      "TITLE": "¡Encantado de conocerte!",
+      "SUBTITLE": "Proporciona tu información para continuar",
+      "BUTTONS": {
+        "SIGN_UP": "Regístrate",
+        "ALREADY_MEMBER": "¿Ya tienes una cuenta?",
+        "LOG_IN": "Inicia sesión"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Correo electrónico",
+          "PLACEHOLDER": "Introduce tu correo electrónico"
+        },
+        "FIRST_NAME": {
+          "LABEL": "Nombre",
+          "PLACEHOLDER": "Introduce tu nombre"
+        },
+        "LAST_NAME": {
+          "LABEL": "Apellido",
+          "PLACEHOLDER": "Introduce tu apellido"
+        },
+        "PASSWORD": {
+          "LABEL": "Contraseña",
+          "PLACEHOLDER": "Introduce tu contraseña"
+        },
+        "NEWSLETTER": {
+          "LABEL": "Acepto ser contactado con ofertas e información relevante."
+        }
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "Restablecer contraseña",
+      "SUBTITLE": {
+        "REQUEST_CODE": "Por favor, proporciona tu correo electrónico y solicita un código.",
+        "RESET_PASSWORD": "Introduce el código enviado a tu correo electrónico ({{email}}) y luego proporciona tu nueva contraseña."
+      },
+      "BUTTONS": {
+        "REQUEST_CODE": "Solicitar código",
+        "RESET": "Restablecer",
+        "RESEND_CODE": "Reenviar código",
+        "LOGIN": "Iniciar sesión"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Correo electrónico",
+          "PLACEHOLDER": "Introduce tu correo electrónico"
+        },
+        "TOKEN": {
+          "LABEL": "Código",
+          "PLACEHOLDER": "Introduce el código"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "Nueva contraseña",
+          "PLACEHOLDER": "Introduce tu nueva contraseña"
+        }
+      }
+    }
+  },
+  "FORM": {
+    "ERRORS": {
+      "REQUIRED": "{{field}} es obligatorio",
+      "INVALID": "{{field}} no es válido",
+      "MIN_LENGTH": "{{field}} debe tener al menos {{length}} caracteres",
+      "MAX_LENGTH": "{{field}} debe tener como máximo {{length}} caracteres",
+      "PASSWORD_UPPERCASE": "La contraseña debe contener al menos una letra mayúscula.",
+      "PASSWORD_LOWERCASE": "La contraseña debe contener al menos una letra minúscula.",
+      "PASSWORD_DIGIT": "La contraseña debe contener al menos un dígito.",
+      "PASSWORD_SPECIAL": "La contraseña debe contener al menos un carácter especial (#?!@$%^&*-)."
+    }
+  },
+  "ERROR_CODE": {
+    "GPB0157": "Ya existe otra cuenta registrada con la misma dirección de correo electrónico.",
+    "UNKNOWN": "Ha ocurrido un error desconocido. Intente nuevamente más tarde."
   }
 }

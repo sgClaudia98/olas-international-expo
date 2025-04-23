@@ -1,12 +1,10 @@
-import { RouteProp, StackActions, useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
-import { Text, View, TextInput } from "react-native";
+import { View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import OtpInput from "../components/OtpInput";
 import Btn from "@/components/Btn";
-import { testStyles } from "@/styles";
 import * as Colors from "@/styles/colors";
 import InputField from "@/components/ui/InputField";
 import {
@@ -19,51 +17,94 @@ import {
   IResetPasswordRequest,
 } from "../services/interfaces/account";
 import { DOMAIN } from "@/constants";
-import { Card } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { cardStyle } from "@/styles/card";
 import { ThemedText } from "@/components/ThemedText";
-
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  token: Yup.string()
-    .length(6, "Code must be exactly 6 digits")
-    .matches(/^\d+$/, "Code must only contain numbers")
-    .required("Code is required"),
-  newPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/\d/, "Password must contain at least one digit")
-    .matches(
-      /[@$!%*?&]/,
-      "Password must contain at least one special character"
-    )
-    .required("Password is required"),
+import { authPagesStyles } from "../styles/authPages";
+import { useTranslation } from "react-i18next";
+// Define the validation schema for params
+const paramsValidationSchema = Yup.object({
+  email: Yup.string().email().optional(),
+  token: Yup.string().length(6).matches(/^\d+$/).optional(),
 });
-
 interface ForgotPasswordProps {
   email?: string;
   token?: string;
 }
 
 const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
+  const { t } = useTranslation();
   const router = useRouter();
-  const style = useResponsiveStyles(cardStyle);
+  const style = useResponsiveStyles(authPagesStyles);
 
-  const [forgetPass, _] = useForgetPasswordMutation(); // Destructure to get mutation states
+  const [forgetPass, _] = useForgetPasswordMutation();
   const [resetPass, responseResetPass] = useResetPasswordMutation();
 
   const [hasEmail, setHasEmail] = useState(!!params?.email);
+  const validatedParams = (() => {
+    try {
+      return paramsValidationSchema.validateSync(params, { abortEarly: false });
+    } catch {
+      return {}; 
+    }
+  })();
 
   const initialValues: IResetPasswordRequest = {
-    email: params?.email ?? "",
-    token: params?.token ?? "", // Para el código OTP
-    newPassword: "", // Para la nueva contraseña
+    email: "",
+    token: "",
+    ...validatedParams,
+    newPassword: "",
   };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(
+        t("FORM.ERRORS.INVALID", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.EMAIL.LABEL"),
+        })
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.EMAIL.LABEL"),
+        })
+      ),
+    token: Yup.string()
+      .length(
+        6,
+        t("FORM.ERRORS.MIN_LENGTH", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.TOKEN.LABEL"),
+          length: 6,
+        })
+      )
+      .matches(
+        /^\d+$/,
+        t("FORM.ERRORS.INVALID", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.TOKEN.LABEL"),
+        })
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.TOKEN.LABEL"),
+        })
+      ),
+    newPassword: Yup.string()
+      .min(
+        8,
+        t("FORM.ERRORS.MIN_LENGTH", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.NEW_PASSWORD.LABEL"),
+          length: 8,
+        })
+      )
+      .matches(/[A-Z]/, t("FORM.ERRORS.PASSWORD_UPPERCASE"))
+      .matches(/[a-z]/, t("FORM.ERRORS.PASSWORD_LOWERCASE"))
+      .matches(/\d/, t("FORM.ERRORS.PASSWORD_DIGIT"))
+      .matches(/[@$!%*?&]/, t("FORM.ERRORS.PASSWORD_SPECIAL"))
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.NEW_PASSWORD.LABEL"),
+        })
+      ),
+  });
 
   const onSubmit = (values: IResetPasswordRequest) => {
     resetPass(values);
@@ -98,8 +139,8 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   };
 
   return (
-   <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
-          <View style={style.cardContent}>
+    <View style={{ ...style.card, maxWidth: 476, marginHorizontal: "auto" }}>
+      <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -113,83 +154,103 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
             errors,
             touched,
           }) => (
-            <View style={testStyles.defaultContainer}>
+            <View style={style.container}>
               {/* Title */}
-              <ThemedText>Reset password</ThemedText>
-              <ThemedText>
-                {hasEmail
-                  ? `Introduce the code sent to your email (${values.email}) then provide your new password.`
-                  : "Please provide your email and request code."}
-              </ThemedText>
-
-              {!hasEmail ? (
-                <InputField
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  placeholder="Email"
-                  error={errors.email}
-                  touched={touched.email}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              ) : (
-                <>
-                  {/* OTP Input */}
-                  <OtpInput
-                    value={values.token}
-                    onChange={(value) => handleChange("token")(value)} // Actualiza el campo OTP de Formik
-                  />
-
-                  {/* Error for OTP */}
-                  {touched.token && errors.token && (
-                    <ThemedText style={{ color: Colors.red.primary, fontSize: 12 }}>
-                      {errors.token}
-                    </ThemedText>
-                  )}
-
-                  {/* Password Input */}
-                  <InputField
-                    onChangeText={handleChange("newPassword")}
-                    onBlur={handleBlur("newPassword")}
-                    value={values.newPassword}
-                    placeholder="New Password"
-                    error={errors.newPassword}
-                    touched={touched.newPassword}
-                    secureTextEntry
-                  />
-                </>
-              )}
-
-              {/* Submit Button */}
-              <Btn
-                title={hasEmail ? "Reset" : "Request Code"}
-                disabled={responseResetPass.isLoading}
-                onPress={() =>
-                  hasEmail ? handleSubmit() : sendRequest(values)
-                }
-              />
-
-              {/* Resend code */}
-              {hasEmail && (
-                <ThemedText
-                  style={{
-                    color: Colors.blue.primary,
-                    marginTop: 20,
-                    textAlign: "center",
-                  }}
-                  onPress={() => sendRequest(values)}
-                >
-                  Resend Code
+              <View style={style.headerContainer}>
+                <ThemedText type="defaultBold" style={style.headerText}>
+                  {t("AUTH.FORGOT_PASSWORD.TITLE")}
                 </ThemedText>
-              )}
-              <View>
+                <ThemedText style={style.subheaderText}>
+                  {hasEmail
+                    ? t("AUTH.FORGOT_PASSWORD.SUBTITLE.RESET_PASSWORD", {
+                        email: values.email,
+                      })
+                    : t("AUTH.FORGOT_PASSWORD.SUBTITLE.REQUEST_CODE")}
+                </ThemedText>
+              </View>
+
+              <View style={style.formContainer}>
+                {!hasEmail ? (
+                  <InputField
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+                    value={values.email}
+                    placeholder={t(
+                      "AUTH.FORGOT_PASSWORD.FORM.EMAIL.PLACEHOLDER"
+                    )}
+                    error={errors.email}
+                    touched={touched.email}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                  />
+                ) : (
+                  <>
+                    {/* OTP Input */}
+                    <OtpInput
+                      value={values.token}
+                      onChange={(value) => handleChange("token")(value)}
+                    />
+
+                    {/* Error for OTP */}
+                    {touched.token && errors.token && (
+                      <ThemedText
+                        style={{ color: Colors.red.primary, fontSize: 12 }}
+                      >
+                        {errors.token}
+                      </ThemedText>
+                    )}
+
+                    {/* Password Input */}
+                    <InputField
+                      onChangeText={handleChange("newPassword")}
+                      onBlur={handleBlur("newPassword")}
+                      value={values.newPassword}
+                      autoComplete="new-password"
+                      textContentType="newPassword"
+                      placeholder={t(
+                        "AUTH.FORGOT_PASSWORD.FORM.NEW_PASSWORD.PLACEHOLDER"
+                      )}
+                      error={errors.newPassword}
+                      touched={touched.newPassword}
+                      secureTextEntry
+                    />
+                  </>
+                )}
+              </View>
+              <View style={style.actionsContainer}>
+                {/* Submit Button */}
                 <Btn
-                  title="Login"
-                  size="small"
-                  variant="secondary"
-                  onPress={goToLogin}
+                  title={
+                    hasEmail
+                      ? t("AUTH.FORGOT_PASSWORD.BUTTONS.RESET")
+                      : t("AUTH.FORGOT_PASSWORD.BUTTONS.REQUEST_CODE")
+                  }
+                  disabled={responseResetPass.isLoading}
+                  onPress={() =>
+                    hasEmail ? handleSubmit() : sendRequest(values)
+                  }
                 />
+
+                {/* Resend code */}
+                {hasEmail && (
+                  <ThemedText
+                    style={{
+                      ...style.secondaryActionText,
+                      color: Colors.blue.primary,
+                    }}
+                    onPress={() => sendRequest(values)}
+                  >
+                    {t("AUTH.FORGOT_PASSWORD.BUTTONS.RESEND_CODE")}
+                  </ThemedText>
+                )}
+                <View>
+                  <Btn
+                    title={t("AUTH.FORGOT_PASSWORD.BUTTONS.LOGIN")}
+                    size="small"
+                    variant="secondary"
+                    onPress={goToLogin}
+                  />
+                </View>
               </View>
             </View>
           )}

@@ -18,10 +18,6 @@
   "ROUTE": {
     "HOME": "Home"
   },
-  "MODULE": {
-    "TRAVEL": "Travel",
-    "MARKET": "Market"
-  },
   "PAGE": {
     "ORDERS": "Orders",
     "ABOUT_US": "About us",
@@ -35,7 +31,8 @@
     "LOGIN": "Login",
     "REGISTER": "Register",
     "RESET_PASSWORD": "Reset password",
-    "VERIFY": "Verify account"
+    "VERIFY": "Verify account",
+    "ORDER_DETAIL": "Order details"
   },
   "FILTERS": {
     "ALL_CATEGORIES": "All Categories",
@@ -49,17 +46,11 @@
   },
   "LOGOUT": "Log out",
   "PROFILE_SETTINGS": "Profile Settings",
-  "PAGE.PROFILE.HEADER": "Profile information",
   "ACTIONS.SAVE_CHANGES": "Save changes",
   "FORMLABEL.FIRST_NAME": "First Name",
   "FORMLABEL.LAST_NAME": "Last Name",
   "FORMLABEL.PHONE_NUMBER": "Phone Number",
   "FORMLABEL.EMAIL": "Email",
-  "PAGE.ORDER_DETAIL": "Order details",
-  "PAGE.LOGIN": "Login",
-  "PAGE.REGISTER": "Register",
-  "PAGE.RESET_PASSWORD": "Reset password",
-  "PAGE.VERIFY": "Verify account",
   "RECEIVER_HEADING": "Beneficiary",
   "CUSTOMER_HEADING": "Client",
   "SUMMARY_HEADING": "Summary",
@@ -81,6 +72,10 @@
   "CART_NOTIFICATION_ADD_TO_CART": "Product added to cart successfully",
   "CART_NOTIFICATION_MOD_QTY": "Product quantity modified successfully ",
   "CART_NOTIFICATION_REMOVE_FROM_CART": "Product removed from cart successfully",
+  "MODULE": {
+    "TRAVEL": "Travel",
+    "MARKET": "Market"
+  },
   "MARKET": {
     "HOME": {
       "FEATURES": {
@@ -128,5 +123,128 @@
       "Penalties": "Penalties",
       "Delivered": "Delivered"
     }
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome!",
+      "SUBTITLE": "Enter your details to continue",
+      "PROMPT": "You have to log in to continue.",
+      "BUTTONS": {
+        "LOGIN": "Log in",
+        "FORGOT_PASSWORD": "Forgot password?",
+        "NO_ACCOUNT": "Don’t have an account?",
+        "SIGN_UP": "Sign Up",
+        "OMIT_BUTTON": "Omit"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Enter your email"
+        },
+        "PASSWORD": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "Enter your password"
+        },
+        "REMEMBER_ME": {
+          "LABEL": "Remember me"
+        }
+      }
+    },
+    "REGISTER": {
+      "TITLE": "Nice to meet you!",
+      "SUBTITLE": "Provide your info to proceed",
+      "BUTTONS": {
+        "SIGN_UP": "Sign Up",
+        "ALREADY_MEMBER": "Already a member?",
+        "LOG_IN": "Log In"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Enter your email"
+        },
+        "FIRST_NAME": {
+          "LABEL": "First Name",
+          "PLACEHOLDER": "Enter your first name"
+        },
+        "LAST_NAME": {
+          "LABEL": "Last Name",
+          "PLACEHOLDER": "Enter your last name"
+        },
+        "PASSWORD": {
+          "LABEL": "Password",
+          "PLACEHOLDER": "Enter your password"
+        },
+        "NEWSLETTER": {
+          "LABEL": "I accept to be contacted with offers and relevant information."
+        }
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TITLE": "Reset password",
+      "SUBTITLE": {
+        "REQUEST_CODE": "Please provide your email and request a code.",
+        "RESET_PASSWORD": "Introduce the code sent to your email ({{email}}) then provide your new password."
+      },
+      "BUTTONS": {
+        "REQUEST_CODE": "Request Code",
+        "RESET": "Reset",
+        "RESEND_CODE": "Resend Code",
+        "LOGIN": "Login"
+      },
+      "FORM": {
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "Enter your email"
+        },
+        "TOKEN": {
+          "LABEL": "Code",
+          "PLACEHOLDER": "Enter the code"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "New Password",
+          "PLACEHOLDER": "Enter your new password"
+        }
+      }
+    },
+    "VERIFY": {
+  "TITLE": "Verify your account",
+  "SUBTITLE": {
+    "DEFAULT": "Enter the 6-digit code we sent to your email ({{email}}).",
+    "TOKEN_EXPIRED": "Your verification code has expired. Please request a new one."
+  },
+  "BUTTONS": {
+    "VERIFY": "Verify",
+    "RESEND_CODE": "Resend code",
+    "BACK_TO_LOGIN": "Back to Login"
+  },
+  "FORM": {
+    "TOKEN": {
+      "LABEL": "Verification Code",
+      "PLACEHOLDER": "Enter the 6-digit code"
+    }
+  },
+  "MESSAGES": {
+    "CODE_SENT": "A new verification code has been sent to your email.",
+    "SUCCESS": "Your account has been successfully verified!",
+    "ERROR": "An error occurred during verification. Please try again."
+  }
+}
+  },
+  "FORM": {
+    "ERRORS": {
+      "REQUIRED": "{{field}} is required",
+      "INVALID": "{{field}} is invalid",
+      "MIN_LENGTH": "{{field}} must be at least {{length}} characters",
+      "MAX_LENGTH": "{{field}} must be at most {{length}} characters",
+      "PASSWORD_UPPERCASE": "The password must contain at least one uppercase letter.",
+      "PASSWORD_LOWERCASE": "The password must contain at least one lowercase letter.",
+      "PASSWORD_DIGIT": "The password must contain at least one digit.",
+      "PASSWORD_SPECIAL": "The password must contain at least one special character (#?!@$%^&*-)."
+    }
+  },
+  "ERROR_CODE": {
+    "GPB0157": "There is another account registered with the same email address.",
+    "UNKNOWN": "An unknown error occurred. Please try again later."
   }
 }

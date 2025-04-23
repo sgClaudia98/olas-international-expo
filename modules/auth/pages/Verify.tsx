@@ -1,7 +1,7 @@
 import { RouteProp, StackActions, useNavigation } from "@react-navigation/core";
 import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import OtpInput from "../components/OtpInput"; // Usa el componente OTP que construimos
@@ -17,6 +17,9 @@ import { DOMAIN } from "@/constants";
 import { Card } from "react-native-paper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { cardStyle } from "@/styles/card";
+import { ThemedText } from "@/components/ThemedText";
+import { authPagesStyles } from "../styles/authPages";
+import { useTranslation } from "react-i18next";
 
 const validationSchema = Yup.object({
   token: Yup.string()
@@ -31,7 +34,7 @@ interface VerifyProps {
 
 const Verify: FunctionComponent<VerifyProps> = (params) => {
   const navigation = useNavigation();
-  const style = useResponsiveStyles(cardStyle);
+  const style = useResponsiveStyles(authPagesStyles);
   const { token, email } = params;
   const [verify, { isLoading, isError, isSuccess, error, data }] =
     useVerifyMutation(); // Destructure to get mutation states
@@ -40,6 +43,8 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
     token: token ?? "",
     email,
   };
+
+  const { t } = useTranslation();
 
   const onSubmit = (values: IVerifyRequest) => {
     verify(values);
@@ -73,8 +78,8 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
   //TODO: countdown for resend code
 
   return (
-     <View style={{...style.card, maxWidth: 476, marginHorizontal: "auto"}}>
-         <View style={style.cardContent}>
+    <View style={{ ...style.card, maxWidth: 476, marginHorizontal: "auto" }}>
+      <View style={style.cardContent}>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -88,35 +93,50 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
             errors,
             touched,
           }) => (
-            <View style={testStyles.defaultContainer}>
+            <View style={style.container}>
               {/* Title */}
-              <Text>Verify your account</Text>
-              <Text>
-                Enter the 6-digit code we sent to your email ({values.email}).
-              </Text>
+              <View style={style.headerContainer}>
+                <ThemedText type="defaultBold" style={style.headerText}>
+                  {t("AUTH.VERIFY.TITLE")}
+                </ThemedText>
+                <ThemedText style={style.subheaderText}>
+                  {t("AUTH.VERIFY.SUBTITLE.DEFAULT", { email: values.email })}
+                </ThemedText>
+              </View>
+              <View style={style.formContainer}>
+                {/* OTP Input */}
+                <OtpInput
+                  value={values.token}
+                  onChange={(value) => handleChange("token")(value)}
+                //  placeholder={t("AUTH.VERIFY.FORM.TOKEN.PLACEHOLDER")}
+                />
 
-              {/* OTP Input */}
-              <OtpInput
-                value={values.token}
-                onChange={(value) => handleChange("token")(value)} // Actualiza el campo token de Formik
-              />
+                {/* Error Message */}
+                {touched.token && errors.token && (
+                  <ThemedText
+                    style={{ color: Colors.red.primary, fontSize: 12 }}
+                  >
+                    {errors.token}
+                  </ThemedText>
+                )}
+              </View>
 
-              {/* Error Message */}
-              {touched.token && errors.token && (
-                <Text style={{ color: Colors.red.primary, fontSize: 12 }}>
-                  {errors.token}
-                </Text>
-              )}
+              <View style={style.actionsContainer}>
 
-              {/* Submit Button */}
-              <Btn
-                title="Verify"
-                onPress={() => handleSubmit()}
-                disabled={isLoading}
-              />
+                {/* Submit Button */}
+                <Btn
+                  title={t("AUTH.VERIFY.BUTTONS.VERIFY")}
+                  onPress={() => handleSubmit()}
+                  disabled={isLoading}
+                />
 
-              {/* Resend code */}
-              <Text onPress={() => resendCode(values)}>Resend code</Text>
+                {/* Resend code */}
+                <ThemedText  style={style.secondaryActionText} onPress={() => resendCode(values)}>
+                  {t("AUTH.VERIFY.BUTTONS.RESEND_CODE")}
+                </ThemedText>
+
+
+              </View>
             </View>
           )}
         </Formik>

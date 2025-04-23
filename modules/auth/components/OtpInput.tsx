@@ -61,6 +61,9 @@ const OtpInput: React.FC<OtpInputProps> = ({ value, onChange, size = 6 }) => {
          style={styles.box}
          maxLength={1}
          keyboardType="number-pad"
+         autoComplete='one-time-code'
+         importantForAutofill='no'
+         textContentType='oneTimeCode'
          value={digit}
          onChangeText={(value) => handleOtpChange(value, index)}
          onKeyPress={({ nativeEvent }) => {
