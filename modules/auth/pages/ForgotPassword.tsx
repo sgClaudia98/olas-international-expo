@@ -23,10 +23,12 @@ import { ThemedText } from "@/components/ThemedText";
 import { authPagesStyles } from "../styles/authPages";
 import { useTranslation } from "react-i18next";
 import { Toast } from "toastify-react-native";
+import Countdown from "../components/Countdown";
 // Define the validation schema for params
 const paramsValidationSchema = Yup.object({
-  email: Yup.string().matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/).optional(),
+  email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+    .optional(),
   token: Yup.string().length(6).matches(/^\d+$/).optional(),
 });
 interface ForgotPasswordProps {
@@ -41,6 +43,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
 
   const [forgetPass, request] = useForgetPasswordMutation();
   const [resetPass, responseResetPass] = useResetPasswordMutation();
+  const [countdown, setCountdown] = useState(0);
 
   const validatedParams = (() => {
     try {
@@ -62,7 +65,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         t("FORM.ERRORS.INVALID", {
           field: t("AUTH.FORGOT_PASSWORD.FORM.EMAIL.LABEL"),
         })
@@ -120,8 +123,13 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
       resetPasswordLink: `${DOMAIN}/reset-password`,
     })
       .unwrap()
-      .then(() => setHasEmail(true))
-      .catch(() => Toast.error(t("AUTH.FORGOT_PASSWORD.ERRORS.EMAIL_NOT_FOUND")));
+      .then(() => {
+        setCountdown(60);
+        setHasEmail(true);
+      })
+      .catch(() =>
+        Toast.error(t("AUTH.FORGOT_PASSWORD.ERRORS.EMAIL_NOT_FOUND"))
+      );
   };
 
   useEffect(() => {
@@ -250,17 +258,29 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                 />
 
                 {/* Resend code */}
-                {hasEmail && (
-                  <ThemedText
-                    style={{
-                      ...style.secondaryActionText,
-                      color: Colors.blue.primary,
-                    }}
-                    onPress={() => sendRequest(values)}
-                  >
-                    {t("AUTH.FORGOT_PASSWORD.BUTTONS.RESEND_CODE")}
-                  </ThemedText>
-                )}
+                {hasEmail &&
+                  (countdown ? (
+                    <Countdown
+                      duration={countdown}
+                      style={{
+                        ...style.secondaryActionText,
+                        color: Colors.black.second,
+                      }}
+                      storageKey="resendCodeTimeout"
+                      onComplete={() => setCountdown(0)}
+                    />
+                  ) : (
+                    <ThemedText
+                      style={{
+                        ...style.secondaryActionText,
+                        color: Colors.blue.primary,
+                      }}
+                      onPress={() => sendRequest(values)}
+                      disabled={request.isLoading}
+                    >
+                      {t("AUTH.FORGOT_PASSWORD.BUTTONS.RESEND_CODE")}
+                    </ThemedText>
+                  ))}
                 <View>
                   <Btn
                     title={t("AUTH.FORGOT_PASSWORD.BUTTONS.LOGIN")}

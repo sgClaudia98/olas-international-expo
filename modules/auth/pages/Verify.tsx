@@ -1,5 +1,5 @@
 import { RouteProp, StackActions, useNavigation } from "@react-navigation/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import { View } from "react-native";
 import { Formik } from "formik";
@@ -20,6 +20,7 @@ import { cardStyle } from "@/styles/card";
 import { ThemedText } from "@/components/ThemedText";
 import { authPagesStyles } from "../styles/authPages";
 import { useTranslation } from "react-i18next";
+import Countdown from "../components/Countdown";
 
 const validationSchema = Yup.object({
   token: Yup.string()
@@ -39,6 +40,7 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
   const [verify, { isLoading, isError, isSuccess, error, data }] =
     useVerifyMutation(); // Destructure to get mutation states
   const [sendVerification, _] = useSendVerificationCodeMutation();
+  const [countdown, setCountdown] = useState(0);
   const initialValues: IVerifyRequest = {
     token: token ?? "",
     email,
@@ -65,7 +67,9 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
       verificationLink: `${DOMAIN}/verify`,
     })
       .unwrap()
-      .then(() => console.log("Sent code to email"))
+      .then(() => {
+        setCountdown(60);
+      })
       .catch(() => console.error("Error sendind code again"));
   };
 
@@ -108,7 +112,7 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
                 <OtpInput
                   value={values.token}
                   onChange={(value) => handleChange("token")(value)}
-                //  placeholder={t("AUTH.VERIFY.FORM.TOKEN.PLACEHOLDER")}
+                  //  placeholder={t("AUTH.VERIFY.FORM.TOKEN.PLACEHOLDER")}
                 />
 
                 {/* Error Message */}
@@ -122,7 +126,6 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
               </View>
 
               <View style={style.actionsContainer}>
-
                 {/* Submit Button */}
                 <Btn
                   title={t("AUTH.VERIFY.BUTTONS.VERIFY")}
@@ -131,11 +134,21 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
                 />
 
                 {/* Resend code */}
-                <ThemedText  style={style.secondaryActionText} onPress={() => resendCode(values)}>
-                  {t("AUTH.VERIFY.BUTTONS.RESEND_CODE")}
-                </ThemedText>
-
-
+                {countdown ? (
+                  <Countdown
+                    duration={countdown}
+                    style={style.secondaryActionText}
+                    storageKey="resendCodeTimeout"
+                    onComplete={() => setCountdown(0)}
+                  />
+                ) : (
+                  <ThemedText
+                    style={style.secondaryActionText}
+                    onPress={() => resendCode(values)}
+                  >
+                    {t("AUTH.VERIFY.BUTTONS.RESEND_CODE")}
+                  </ThemedText>
+                )}
               </View>
             </View>
           )}

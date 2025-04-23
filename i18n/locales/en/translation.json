@@ -203,7 +203,7 @@
           "PLACEHOLDER": "Enter the code"
         },
         "NEW_PASSWORD": {
-          "LABEL": "New Password",
+          "LABEL": "New password",
           "PLACEHOLDER": "Enter your new password"
         }
       },
