@@ -10,7 +10,6 @@ import Page from "@/components/layout/Page";
 // Esto tiene que corresponderse con los nombres de los archivos .md en la carpeta "static_pages/{idioma}"
 
 export type StaticPages = 
-    "AboutUs" |
     "FAQ" |
     "PrivacyPolicy" |
     "TermsAndConditions"

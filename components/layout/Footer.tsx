@@ -45,15 +45,15 @@ const socialLinks: SocialLink[] = [
 ];
 
 const services: NavigationLink[] = [
-  { label: "MODULE.TRAVEL", url: "/services/travel" },
+ // { label: "MODULE.TRAVEL", url: "/services/travel" },
   { label: "MODULE.MARKET", url: "/services/market" },
 ];
 
 const information: NavigationLink[] = [
-  { label: "PAGE.ABOUT_US", url: "/" },
-  { label: "PAGE.FAQ", url: "/" },
-  { label: "PAGE.TERMS_AND_CONDITIONS", url: "/" },
-  { label: "PAGE.RETURN_POLICY", url: "/" },
+  // { label: "PAGE.ABOUT_US", url: "/" },
+  { label: "PAGE.FAQ", url: "/faq" },
+  { label: "PAGE.TERMS_AND_CONDITIONS", url: "/terms-and-conditions" },
+  { label: "PAGE.PRIVACY_POLICY", url: "/privacy-policy" },
 ];
 const privacyPolicy: NavigationLink = {
   label: "PAGE.PRIVACY_POLICY",
