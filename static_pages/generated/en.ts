@@ -17,9 +17,9 @@ Our shipping service is simple:
 
 ---
 
-## 3. Which countries are available for shipping?
+## 3. What payment methods do you accept?
 
-We currently offer shipping to a wide variety of countries. You can check the full list of available destinations on our website [olas-international.com](https://olas-international.com).
+We accept credit cards, debit cards, and online payment platforms. All payments are securely processed through our payment service providers.
 
 ---
 
@@ -37,7 +37,7 @@ Delivery times vary depending on the destination and the type of shipping select
 
 ## 6. How can I track my shipment?
 
-Once your order is processed, you will receive a tracking number via email. You can use this number to track your shipment directly on our website or on the carrier's platform.
+Once your order is processed, you will receive a tracking number via email. You can use this number to track your shipment directly on our website and if available on the carrier's platform.
 
 ---
 
@@ -53,13 +53,7 @@ You can cancel an order before it is processed. Once the order has been processe
 
 ---
 
-## 9. What payment methods do you accept?
-
-We accept major payment methods, including credit cards, debit cards, and online payment platforms. All payments are securely processed through our payment service providers.
-
----
-
-## 10. How can I contact the support team?
+## 9. How can I contact the support team?
 
 If you have questions or need assistance, you can contact us through:
 - **Email:** [support@olas-international.com](mailto:support@olas-international.com)

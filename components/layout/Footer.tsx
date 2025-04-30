@@ -17,6 +17,7 @@ import { Colors } from "@/styles";
 import { AmericanExpress, Mastercard, Paypal, Visa } from "../icons";
 
 interface SocialLink {
+  id: string;
   component: React.ReactElement;
   url: string;
 }
@@ -39,9 +40,9 @@ interface FooterProps {
 }
 
 const socialLinks: SocialLink[] = [
-  { component: <IconSvg name="WhatsApp" size={15} />, url: "https://whatsapp.com" },
-  { component: <IconSvg name="Facebook" size={15} />, url: "https://facebook.com" },
-  { component: <IconSvg name="Instagram" size={15} />, url: "https://instagram.com" },
+  {id: "ws", component: <IconSvg name="WhatsApp" size={15} />, url: "https://whatsapp.com" },
+  {id: "fb", component: <IconSvg name="Facebook" size={15} />, url: "https://facebook.com" },
+  {id: "ig", component: <IconSvg name="Instagram" size={15} />, url: "https://instagram.com" },
 ];
 
 const services: NavigationLink[] = [
@@ -125,7 +126,7 @@ const Footer: React.FC<FooterProps> = ({
           <View style={styles.socialContainer}>
             {socialLinks.map((social, index) => (
               <Pressable
-                key={index}
+                key={social.id}
                 onPress={() => handleSocialPress(social.url)}
               >
                 {social.component}
@@ -141,7 +142,7 @@ const Footer: React.FC<FooterProps> = ({
             </ThemedText>
             <View style={styles.footerItemContainer}>
               {services.map((service, index) => (
-                <Link href={service.url as any}>
+                <Link href={service.url as any} key={service.label}>
                   <ThemedText key={index} style={styles.footerItemText}>
                     {t(service.label)}
                   </ThemedText>
@@ -156,8 +157,8 @@ const Footer: React.FC<FooterProps> = ({
             </ThemedText>
             <View style={styles.footerItemContainer}>
               {information.map((info, index) => (
-                <Link href={info.url as any}>
-                  <ThemedText key={index} style={styles.footerItemText}>
+                <Link href={info.url as any}  key={info.label}>
+                  <ThemedText style={styles.footerItemText}>
                     {t(info.label)}
                   </ThemedText>
                 </Link>

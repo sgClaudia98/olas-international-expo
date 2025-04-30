@@ -17,9 +17,9 @@ Nuestro servicio de envíos es simple:
 
 ---
 
-## 3. ¿Qué países están disponibles para los envíos?
+## 3. ¿Qué métodos de pago aceptan?
 
-Actualmente, ofrecemos envíos a una amplia variedad de países. Puedes consultar la lista completa de destinos disponibles en nuestro sitio web [olas-international.com](https://olas-international.com).
+Aceptamos tarjetas de crédito, débito y plataformas de pago en línea. Todos los pagos se procesan de manera segura a través de nuestros proveedores de servicios de pago.
 
 ---
 
@@ -37,7 +37,7 @@ El tiempo de entrega varía según el destino y el tipo de envío seleccionado. 
 
 ## 6. ¿Cómo puedo rastrear mi envío?
 
-Una vez que tu pedido sea procesado, recibirás un número de seguimiento por correo electrónico. Puedes usar este número para rastrear tu envío directamente en nuestro sitio web o en la plataforma del transportista.
+Una vez que tu pedido sea procesado, recibirás un número de seguimiento por correo electrónico. Puedes usar este número para rastrear tu envío directamente en nuestro sitio web y si está disponible en la plataforma del transportista.
 
 ---
 
@@ -53,13 +53,7 @@ Puedes cancelar un pedido antes de que sea procesado. Una vez que el pedido haya
 
 ---
 
-## 9. ¿Qué métodos de pago aceptan?
-
-Aceptamos los principales métodos de pago, incluyendo tarjetas de crédito, débito y plataformas de pago en línea. Todos los pagos se procesan de manera segura a través de nuestros proveedores de servicios de pago.
-
----
-
-## 10. ¿Cómo puedo contactar al equipo de soporte?
+## 9. ¿Cómo puedo contactar al equipo de soporte?
 
 Si tienes preguntas o necesitas ayuda, puedes contactarnos a través de:
 - **Correo electrónico:** [support@olas-international.com](mailto:support@olas-international.com)

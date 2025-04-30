@@ -6,13 +6,11 @@
     "reset-project": "node ./scripts/reset-project.js",
     "convert-md-to-ts": "node ./scripts/convert-md-to-ts.js",
     "generate-svg-components": "npx @svgr/cli --ignore-existing -- assets/icons/svg",
-
     "prestart": "npm run convert-md-to-ts",
     "preandroid": "npm run convert-md-to-ts",
     "preios": "npm run convert-md-to-ts",
     "preweb": "npm run convert-md-to-ts",
     "prebuild:web": "npm run convert-md-to-ts",
-    
     "start": "expo start --port 3000",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -27,6 +25,7 @@
   "dependencies": {
     "@expo-google-fonts/open-sans": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
+    "@paypal/react-paypal-js": "^8.8.3",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/drawer": "^7.1.2",
