@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Modal } from "react-native";
+import { View, Modal, ScrollView } from "react-native";
 import { paymentFormStyles } from "../../styles/paymentForm";
 import { Button } from "react-native-paper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
@@ -26,18 +26,20 @@ const PaymentOverlay = <T extends { id: number }>({
       transparent={true}
       onRequestClose={() => setPaymentFormVisible(false)}
     >
+      <ScrollView style={styles.modalScrollContainer} contentContainerStyle={styles.modalScrollContent}>
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <Button
             mode="contained"
             onPress={() => setPaymentFormVisible(false)}
             style={styles.closeModalButton}
-          >
+            >
             <IconSvg name="Close" color={Colors.black.primary} />
           </Button>
           {renderForm(() => setPaymentFormVisible(false))}
         </View>
       </View>
+      </ScrollView>
     </Modal>
   );
 };

@@ -4,15 +4,26 @@ import typography from "@/styles/typography";
 import theme from "@/styles/paperTheme";
 
 const desktop = StyleSheet.create({
-  modalOverlay: {
+  modalScrollContainer: {
     flex: 1,
     backgroundColor: "rgba(8, 51, 102, 0.25)",
-    justifyContent: "center",
+  },
+  modalScrollContent: {
+    flexGrow: 1,
+  },
+  paymentButtonsContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  modalOverlay: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   modalContent: {
     maxWidth: 800,
     backgroundColor: "white",
+    marginVertical: 10,
     paddingVertical: 20,
     paddingHorizontal: 40,
     borderRadius: 10,
@@ -134,38 +145,15 @@ const desktop = StyleSheet.create({
 
 export const paymentFormStyles = {
   mobile: StyleSheet.create({
-    modalOverlay: {
-      ...desktop.modalOverlay,
-    },
+    ...desktop,
     modalContent: {
       ...desktop.modalContent,
       maxWidth: 360,
-    },
-    closeModalButton: {
-      ...desktop.closeModalButton,
     },
     formContainer: {
       ...desktop.formContainer,
       minWidth: 320,
       paddingBottom: 20,
-    },
-    title: {
-      ...desktop.title,
-    },
-    error: {
-      ...desktop.error,
-    },
-    buttonContainer: {
-      ...desktop.buttonContainer,
-    },
-    button: {
-      ...desktop.button,
-    },
-    input: {
-      ...desktop.input,
-    },
-    label: {
-      ...desktop.label,
     },
     twoColumnContainer: {
       ...desktop.twoColumnContainer,
@@ -188,115 +176,17 @@ export const paymentFormStyles = {
       ...desktop.contentBoxStyle,
       minHeight: "auto",
     },
-    text: {
-      ...desktop.text,
-    },
-    productTableContainer: {
-      ...desktop.productTableContainer,
-    },
-    orderText: {
-      ...desktop.orderText,
-    },
-    tableHeader: {
-      ...desktop.tableHeader,
-    },
-    tableRow: {
-      ...desktop.tableRow,
-    },
-    separator: {
-      ...desktop.separator,
-    },
-    commentsContainer: {
-      ...desktop.commentsContainer,
-    },
-    commentsButton: {
-      ...desktop.commentsButton,
-    },
-    commentsTextArea: {
-      ...desktop.commentsTextArea,
-    },
-    totalPrice: {
-      ...desktop.totalPrice,
-    },
   }),
   tablet: StyleSheet.create({
-    modalOverlay: {
-      ...desktop.modalOverlay,
-    },
+    ...desktop,
     modalContent: {
       ...desktop.modalContent,
       maxWidth: 600,
-    },
-    closeModalButton: {
-      ...desktop.closeModalButton,
     },
     formContainer: {
       ...desktop.formContainer,
       maxWidth: 600,
       minWidth: 400,
-    },
-    title: {
-      ...desktop.title,
-    },
-    error: {
-      ...desktop.error,
-    },
-    buttonContainer: {
-      ...desktop.buttonContainer,
-    },
-    button: {
-      ...desktop.button,
-    },
-    input: {
-      ...desktop.input,
-    },
-    label: {
-      ...desktop.label,
-    },
-    twoColumnContainer: {
-      ...desktop.twoColumnContainer,
-    },
-    columnLeft: {
-      ...desktop.columnLeft,
-    },
-    columnRight: {
-      ...desktop.columnRight,
-    },
-    column: {
-      ...desktop.column,
-    },
-    contentBoxStyle: {
-      ...desktop.contentBoxStyle,
-    },
-    text: {
-      ...desktop.text,
-    },
-    productTableContainer: {
-      ...desktop.productTableContainer,
-    },
-    orderText: {
-      ...desktop.orderText,
-    },
-    tableHeader: {
-      ...desktop.tableHeader,
-    },
-    tableRow: {
-      ...desktop.tableRow,
-    },
-    separator: {
-      ...desktop.separator,
-    },
-    commentsContainer: {
-      ...desktop.commentsContainer,
-    },
-    commentsButton: {
-      ...desktop.commentsButton,
-    },
-    commentsTextArea: {
-      ...desktop.commentsTextArea,
-    },
-    totalPrice: {
-      ...desktop.totalPrice,
     },
   }),
   desktop: StyleSheet.create({
