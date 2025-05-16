@@ -11,7 +11,7 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import PaymentButtons from "@/modules/payment/components/PaymentButtons";
 import { UIBooking } from "@/modules/marketplace/utils/bookingMapping";
 
-const Step4: FC<{preview: UIBooking}> = ({ preview }) => {
+const Step4: FC<{getBookingId: () => Promise<number>, preview: UIBooking}> = ({ getBookingId, preview }) => {
   const { handleSubmit } = useFormikContext<PaymentFormValues>();
 
   const styles = useResponsiveStyles(paymentFormStyles);
@@ -19,7 +19,7 @@ const Step4: FC<{preview: UIBooking}> = ({ preview }) => {
   return (
     <>
       <View style={styles.paymentButtonsContainer}>
-      <PaymentButtons amount={preview.totalPrice} orderId={preview.id?.toString()} onSuccess={() => handleSubmit()}/>
+      <PaymentButtons amount={preview.totalPrice} getOrderId={() => getBookingId().then((v) => v.toString())} onSuccess={() => handleSubmit()}/>
       </View>
     </>
   );

@@ -118,6 +118,7 @@ const PaymentForm = ({
       } else {
         console.error("Error en la reserva:", response.error);
       }
+      return response.booking.id;
     } catch (error) {
       console.error("Error al crear la reserva:", error);
     }
@@ -151,7 +152,7 @@ const PaymentForm = ({
             {step === 2 && <Step2 destinationCountry={destinationCountry} />}
 
             {step === 3 && <Step3 preview={preview} />}
-            {step === 4 && <Step4 preview={preview} />}
+            {step === 4 && <Step4 preview={preview} getBookingId={() => createMarketBooking(values, false)} />}
 
             <View style={styles.buttonContainer}>
               {step > 1 && (

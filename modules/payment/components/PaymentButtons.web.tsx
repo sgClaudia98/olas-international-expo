@@ -10,11 +10,11 @@ import {
 
 type PaymentButtonsProps = {
   amount: number;
-  orderId?: string;
+  getOrderId: () => Promise<string>;
   onSuccess: (details: any) => void;
 };
 
-const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, orderId, onSuccess }) => {
+const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, getOrderId, onSuccess }) => {
   const [{ isPending }] = usePayPalScriptReducer();
 
   const roundedAmount = (Math.round(amount * 100) / 100).toString();
@@ -34,6 +34,7 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, orderId, onSuccess })
     data: CreateOrderData,
     actions: CreateOrderActions
   ): Promise<string> => {
+    const orderId = await getOrderId();
     console.log("Amount:", roundedAmount, amount);
     const transactionId = await actions.order.create({
       intent: "CAPTURE",

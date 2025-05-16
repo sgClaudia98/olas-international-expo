@@ -5,11 +5,11 @@ import PayPalCardButton from "./buttons/PayPalCardButton";
 
 type PaymentButtonsProps = {
   amount: number;
-  orderId?: string;
+  getOrderId: () => Promise<string>;
   onSuccess: (details: any) => void;
 };
 
-const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, orderId, onSuccess }) => {
+const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, getOrderId, onSuccess }) => {
   const [paypalUrl, setPaypalUrl] = useState(null);
   const [cardUrl, setCardUrl] = useState(null);
 
