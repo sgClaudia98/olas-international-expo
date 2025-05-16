@@ -19,7 +19,7 @@ const Step4: FC<{preview: UIBooking}> = ({ preview }) => {
   return (
     <>
       <View style={styles.paymentButtonsContainer}>
-      <PaymentButtons amount={preview.totalPrice} orderId={preview.reference?.toString()} onSuccess={() => handleSubmit()}/>
+      <PaymentButtons amount={preview.totalPrice} orderId={preview.id?.toString()} onSuccess={() => handleSubmit()}/>
       </View>
     </>
   );
