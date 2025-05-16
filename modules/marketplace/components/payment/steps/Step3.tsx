@@ -136,8 +136,6 @@ const Step3 = ({ preview }) => {
             onChangeNote={(value) => handleChange(`notes.${booking.id}`)(value)}
           />
         ))}
-
-      <PaymentButtons amount={preview.total} />
     </>
   );
 };

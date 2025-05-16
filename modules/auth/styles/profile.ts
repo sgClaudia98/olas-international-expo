@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { cardStyle } from "@/styles/card";
+import { header } from "@/modules/marketplace/layout/header";
 
 const desktop = StyleSheet.create({
   formContainer: {

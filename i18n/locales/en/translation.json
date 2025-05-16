@@ -107,10 +107,12 @@
       }
     },
     "PAYMENT": {
+      "TITLE": "Booking Steps",
       "STEPS": {
         "Client": "Client",
         "Beneficiary": "Beneficiary",
-        "Book": "Book"
+        "Book": "Book",
+        "Payment": "Payment"
       }
     },
     "ORDER_STATUS": {

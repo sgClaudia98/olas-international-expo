@@ -26,14 +26,13 @@ interface CartActions<T extends { id: number }, K extends T> {
     modalities?: any
   ) => Promise<any>;
   renderItem: (item: CartItem<T>, index: number) => React.JSX.Element;
+  refreshCart: () => Promise<any>;
   data: CartItem<T>[];
-  price: number;
 }
 
 // Definir el tipo de contexto
 interface ShoppingCartContextProps<T extends { id: number }, K extends T> {
   state: ShoppingCartState<T>;
-  dispatch: Dispatch<ShoppingCartAction<T>>;
   cartVisible: boolean;
   setCartVisible: React.Dispatch<React.SetStateAction<boolean>>;
   addToCart: (product: K, quantity: number, price: number) => void;
@@ -43,6 +42,7 @@ interface ShoppingCartContextProps<T extends { id: number }, K extends T> {
     quantity: number,
     modalities?: any
   ) => void;
+  refreshCart: () => void;
 }
 
 // Crear el contexto
@@ -104,21 +104,28 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
       .catch((error) => console.error("Error al eliminar del carrito:", error));
   };
 
+  const refreshCart = async () => {
+    actions
+      .refreshCart()
+  }
+
   const totalPrice = state.items.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
 
+
+
   return (
     <ShoppingCartContext.Provider
       value={{
-        state,
-        dispatch,
         cartVisible,
+        state,
         setCartVisible,
         addToCart,
         removeFromCart,
         updateQuantity,
+        refreshCart,
       }}
     >
       {children}

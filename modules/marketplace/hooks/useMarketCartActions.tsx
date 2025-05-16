@@ -29,8 +29,8 @@ interface CartActions {
   updateQuantity: (productId: number, quantity: number, modalities?: Modalities) => Promise<any>;
   removeFromCart: (productId: number) => Promise<any>;
   renderItem: (item: CartItem<MarketBookingCartItem>, index: number) => React.JSX.Element;
+  refreshCart: () => Promise<any>;
   data: CartItem<MarketBookingCartItem>[];
-  price: number;
 }
 
 const mapItem = (i: MarketBookingCartItem) => {
@@ -52,12 +52,7 @@ export const useMarketCartActions = (): CartActions => {
 
   const {data: cartData, refetch: fetchCart} = useGetCartQuery();
   const [data, setData] = useState(mapItems(cartData?.bookingCart.items));
-  const [price, setPrice] = useState(cartData?.bookingCart.price || 0);
 
-  const _handleActionResponse = (data: MarketBookingCartResponse) => {
-    setData(mapItems(data.bookingCart.items));
-    setPrice(data.bookingCart.price);
-  };
 
   // Agregar al carrito
   const addToCart = async (option: MarketBookingOption, quantity: number) => {
@@ -73,7 +68,7 @@ export const useMarketCartActions = (): CartActions => {
     }
     return addToCartAPI({searchId: option.searchId, optionId: option.id, quantity})
       .unwrap()
-      .then(_handleActionResponse);
+      .then(fetchCart);
   };
 
   // Actualizar la cantidad del producto en el carrito
@@ -83,12 +78,12 @@ export const useMarketCartActions = (): CartActions => {
       destinationId: activeDestination?.id || DEFAULT_DESTINATION,
     })
       .unwrap()
-      .then(_handleActionResponse);
+      .then(fetchCart);
   };
 
   // Eliminar del carrito
   const removeFromCart = async (productId: number) => {
-    return removeFromCartAPI({productId}).unwrap().then(_handleActionResponse);
+    return removeFromCartAPI({productId}).unwrap().then(fetchCart);
   };
 
   const renderItem = (item: CartItem<MarketBookingCartItem>) => (
@@ -114,7 +109,7 @@ export const useMarketCartActions = (): CartActions => {
     updateQuantity,
     removeFromCart,
     data,
-    price,
     renderItem,
+    refreshCart: fetchCart,
   };
 };

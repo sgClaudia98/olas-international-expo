@@ -19,14 +19,18 @@ import {
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
+import Step4 from "./steps/Step4";
 import { useAppSelector } from "@/hooks/useAppDispatch";
 import { mapValuesToPayload } from "./PaymentFormHelper";
 import { parseStringToPhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "expo-router";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
 };
+const steps = ["Client", "Beneficiary", "Book", "Payment"];
 
 const PaymentForm = ({
   province,
@@ -37,10 +41,12 @@ const PaymentForm = ({
   destinationCountry: string;
   onClose: Function;
 }) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
+  const route = useRouter();
   const { user } = useAppSelector((state) => state.auth);
 
-  const styles = useResponsiveStyles(paymentFormStyles)
+  const styles = useResponsiveStyles(paymentFormStyles);
 
   const initialValues = {
     client: {
@@ -84,6 +90,7 @@ const PaymentForm = ({
     console.log("errors", errors);
     if (Object.keys(errors).length === 0) {
       if (step === 2) createMarketBooking(values, true);
+      if (step === 3) createMarketBooking(values, false);
       else setStep(step + 1);
     }
   };
@@ -107,7 +114,7 @@ const PaymentForm = ({
       setPreview(mapAgencyClientBookingsToUIBookings(response.booking));
       if (response.success) {
         if (preview) setStep(3);
-        else alert("Success");
+        else setStep(4);
       } else {
         console.error("Error en la reserva:", response.error);
       }
@@ -123,28 +130,28 @@ const PaymentForm = ({
       }}
       enableReinitialize={true}
       validationSchema={validationSchema}
-      onSubmit={(values: PaymentFormValues) => createMarketBooking(values)}
+      onSubmit={() => onClose()}
     >
       {({
-        handleChange,
-        handleBlur,
-        handleSubmit,
         validateForm,
         values,
-        errors,
-        touched,
         isSubmitting,
       }) => (
         <Portal.Host>
           <View style={styles.formContainer}>
-            <Text style={styles.title}>Booking steps</Text>
-            <StepProgress step={step - 1} steps={['Client', 'Beneficiary', 'Book']} i18nPrefix="MARKET.PAYMENT.STEPS"/>
+            <Text style={styles.title}>{t("MARKET.PAYMENT.TITLE")}</Text>
+            <StepProgress
+              step={step - 1}
+              steps={steps}
+              i18nPrefix="MARKET.PAYMENT.STEPS"
+            />
 
             {step === 1 && <Step1 />}
 
             {step === 2 && <Step2 destinationCountry={destinationCountry} />}
 
             {step === 3 && <Step3 preview={preview} />}
+            {step === 4 && <Step4 preview={preview} />}
 
             <View style={styles.buttonContainer}>
               {step > 1 && (
@@ -157,7 +164,7 @@ const PaymentForm = ({
                   Back
                 </Button>
               )}
-              {step < 4 ? (
+              {step < steps.length && (
                 <Button
                   mode="contained"
                   onPress={() =>
@@ -168,16 +175,7 @@ const PaymentForm = ({
                   disabled={isSubmitting || loadingBooking}
                   style={styles.button}
                 >
-                  Next
-                </Button>
-              ) : (
-                <Button
-                  mode="contained"
-                  onPress={() => handleSubmit()}
-                  disabled={isSubmitting}
-                  style={styles.button}
-                >
-                  Submit
+                  {step == steps.length - 1 ? "Pay" : "Next"}
                 </Button>
               )}
             </View>

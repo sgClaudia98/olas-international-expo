@@ -107,10 +107,12 @@
       }
     },
     "PAYMENT": {
+      "TITLE": "Pasos de compra",
       "STEPS": {
         "Client": "Comprador",
         "Beneficiary": "Destinatario",
-        "Book": "Reservar"
+        "Book": "Reservar",
+        "Payment": "Pago"
       }
     },
     "ORDER_STATUS": {

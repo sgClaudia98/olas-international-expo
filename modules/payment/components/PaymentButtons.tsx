@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { View } from "react-native";
 import PayPalButton from "./buttons/PayPalButton";
 import PayPalCardButton from "./buttons/PayPalCardButton";
 
-const PaymentButtons = ({ amount }) => {
+type PaymentButtonsProps = {
+  amount: number;
+  orderId?: string;
+  onSuccess: (details: any) => void;
+};
+
+const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, orderId, onSuccess }) => {
   const [paypalUrl, setPaypalUrl] = useState(null);
   const [cardUrl, setCardUrl] = useState(null);
 

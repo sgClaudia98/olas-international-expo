@@ -46,7 +46,6 @@ export const parsePhoneNumber = (
 
     return phoneUtil.format(parsedNumber, formatType);
   } catch (error) {
-    Toast.error("Error formating phoneNumber");
     return "";
   }
 };
@@ -65,7 +64,6 @@ export const parseStringToPhoneNumber = (
     console.debug(code, number);
     return { code, number };
   } catch (e) {
-    Toast.error("Error fetching phoneNumber");
     return {
       code: undefined,
       number: undefined,
