@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import footerStyles from "@/styles/footer";
+import {socialLinks as links} from "@/constants/socialLinks";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "../ThemedText";
 import { useTranslation } from "react-i18next";
@@ -19,7 +20,7 @@ import { AmericanExpress, Mastercard, Paypal, Visa } from "../icons";
 interface SocialLink {
   id: string;
   component: React.ReactElement;
-  url: string;
+  url?: string;
 }
 
 interface NavigationLink {
@@ -39,11 +40,10 @@ interface FooterProps {
   };
 }
 
-const socialLinks: SocialLink[] = [
-  {id: "ws", component: <IconSvg name="WhatsApp" size={15} />, url: "https://whatsapp.com" },
-  {id: "fb", component: <IconSvg name="Facebook" size={15} />, url: "https://facebook.com" },
-  {id: "ig", component: <IconSvg name="Instagram" size={15} />, url: "https://instagram.com" },
-];
+const socialLinks: SocialLink[] = []
+if (links.whatsapp) socialLinks.push({id: "ws", component: <IconSvg name="WhatsApp" size={15} />, url: links.whatsapp });
+if (links.facebook) socialLinks.push({id: "fb", component: <IconSvg name="Facebook" size={15} />, url: links.facebook });
+if (links.instagram) socialLinks.push({id: "ig", component: <IconSvg name="Instagram" size={15} />, url: links.instagram });
 
 const services: NavigationLink[] = [
  // { label: "MODULE.TRAVEL", url: "/services/travel" },
@@ -62,8 +62,8 @@ const privacyPolicy: NavigationLink = {
 };
 
 const Footer: React.FC<FooterProps> = ({
-  email = "contact@olasservices.com",
-  phone = "(780) 358-9595",
+  email = process.env.EXPO_PUBLIC_EMAIL,
+  phone = process.env.EXPO_PUBLIC_PHONE,
   address = {
     addressLink:
       "https://www.google.com/maps/search/?api=1&query=9507+SW+40th+St+Miami+FL+33165",
