@@ -78,7 +78,7 @@ Depending on your location, you may have certain rights regarding your personal 
 - **Restriction:** Restrict the processing of your information in certain circumstances.
 - **Portability:** Request a copy of your information in a structured, machine-readable format.
 
-To exercise these rights, contact us at [support@olas-international.com](mailto:support@olas-international.com).
+To exercise these rights, contact us at [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com).
 
 ---
 
@@ -114,7 +114,7 @@ We may update this Privacy Policy from time to time to reflect changes in our pr
 ## 11. Contact Us
 
 If you have questions or concerns about this Privacy Policy, you can contact us through:
-- **Email:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Phone:** +1-786-358-9595
 - **Mailing Address:**  
   Olas International  

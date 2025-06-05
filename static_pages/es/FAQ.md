@@ -41,7 +41,7 @@ Una vez que tu pedido sea procesado, recibirás un número de seguimiento por co
 
 ## 7. ¿Qué sucede si mi paquete se pierde o se daña durante el envío?
 
-Recomendamos adquirir un seguro de envío para proteger tus productos. En caso de pérdida o daño, contáctanos a través de [support@olas-international.com](mailto:support@olas-international.com) para que podamos ayudarte a resolver el problema.
+Recomendamos adquirir un seguro de envío para proteger tus productos. En caso de pérdida o daño, contáctanos a través de [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com) para que podamos ayudarte a resolver el problema.
 
 ---
 
@@ -54,7 +54,7 @@ Puedes cancelar un pedido antes de que sea procesado. Una vez que el pedido haya
 ## 9. ¿Cómo puedo contactar al equipo de soporte?
 
 Si tienes preguntas o necesitas ayuda, puedes contactarnos a través de:
-- **Correo electrónico:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Teléfono:** +1-786-358-9595
 - **Sitio web:** [olas-international.com](https://olas-international.com)
 

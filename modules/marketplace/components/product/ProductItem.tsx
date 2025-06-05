@@ -54,7 +54,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ style, item, onClick }) => {
         quantity: amount,
       },
       amount,
-      item.price
+      item.price,
+      item.product.id
     );
     Toast.success(t("CART_NOTIFICATION_ADD_TO_CART"))
   };

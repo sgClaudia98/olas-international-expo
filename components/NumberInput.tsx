@@ -29,7 +29,7 @@ const NumberInput: React.FC<NumberInputProps> = ({ onChange, initialValue = 1, s
         icon="minus"
         style={[styles.icons, isSmall && styles.iconsSmall]}
         iconColor={Colors.black.second}
-        size={isSmall ? 15 : 20}
+        size={isSmall ? 10 : 20}
         onPress={() => handleChange(-1)}
       />
       <Text style={[styles.text, isSmall && styles.textSmall]}>{amount}</Text>
@@ -37,7 +37,7 @@ const NumberInput: React.FC<NumberInputProps> = ({ onChange, initialValue = 1, s
         icon="plus"
         style={[styles.icons, isSmall && styles.iconsSmall]}
         iconColor={Colors.black.second}
-        size={isSmall ? 15 : 20}
+        size={isSmall ? 10 : 20}
         onPress={() => handleChange(1)}
       />
     </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   containerSmall: {
-    minWidth: 80,
+    minWidth: 66,
     justifyContent: 'center',
   },
   icons: {

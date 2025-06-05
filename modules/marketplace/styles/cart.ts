@@ -18,12 +18,14 @@ const desktop = StyleSheet.create({
     width: 350,
     backgroundColor: "white",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    borderRadius: 15,
+    borderRadius: 10,
     padding: 20,
+    paddingBottom: 40,
   },
   cartTitle: {
-    ...typography.h3,
-    paddingBottom: 20,
+    fontSize: 22,
+    lineHeight: 26,
+    paddingBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: Colors.black.fourth,
   },
@@ -72,102 +74,46 @@ const desktop = StyleSheet.create({
     alignItems: "center",
   },
   totalText: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
+    lineHeight: 24,
+    marginBottom: 17,
+  },
+  totalPrice: {
+    fontSize: 20,
+    lineHeight: 24,
     marginBottom: 10,
   },
+  productsText: {
+    fontSize: 14,
+    color: Colors.black.second,
+    marginBottom: 2,
+    lineHeight: 24,
+  },
+  emptyCart: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: 20,
+  }
 });
 
 const cartStyles = {
   mobile: StyleSheet.create({
-    overlay: {
-      ...desktop.overlay,
-    },
+      ...desktop,
     cartContent: {
       ...desktop.cartContent,
       width: "80%",
     },
-    cartTitle: {
-      ...desktop.cartTitle,
-    },
-    closeButton: {
-      ...desktop.closeButton,
-    },
-    scrollViewContent: {
-      ...desktop.scrollViewContent,
-    },
-    cartItems: {
-      ...desktop.cartItems,
-    },
-    cartItem: {
-      ...desktop.cartItem,
-    },
-    itemImage: {
-      ...desktop.itemImage,
-    },
-    itemDetails: {
-      ...desktop.itemDetails,
-    },
-    itemName: {
-      ...desktop.itemName,
-    },
-    itemPrice: {
-      ...desktop.itemPrice,
-    },
-    itemQuantity: {
-      ...desktop.itemQuantity,
-    },
-    cartFooter: {
-      ...desktop.cartFooter,
-    },
-    totalText: {
-      ...desktop.totalText,
-    },
+    
   }),
   tablet: StyleSheet.create({
-    overlay: {
-      ...desktop.overlay,
-    },
-    cartContent: {
-      ...desktop.cartContent,
-    },
+    
+      ...desktop,
     cartTitle: {
       ...typography.h3,
       marginBottom: 20,
     },
-    closeButton: {
-      ...desktop.closeButton,
-    },
-    scrollViewContent: {
-      ...desktop.scrollViewContent,
-    },
-    cartItems: {
-      ...desktop.cartItems,
-    },
-    cartItem: {
-      ...desktop.cartItem,
-    },
-    itemImage: {
-      ...desktop.itemImage,
-    },
-    itemDetails: {
-      ...desktop.itemDetails,
-    },
-    itemName: {
-      ...desktop.itemName,
-    },
-    itemPrice: {
-      ...desktop.itemPrice,
-    },
-    itemQuantity: {
-      ...desktop.itemQuantity,
-    },
-    cartFooter: {
-      ...desktop.cartFooter,
-    },
-    totalText: {
-      ...desktop.totalText,
-    },
+    
   }),
   desktop: StyleSheet.create({
     ...desktop,

@@ -25,7 +25,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
   const booking = useMemo(
     () =>
       data?.value.bookings.length
-        ? mapAgencyClientBookingsToUIBookings(data.value.bookings[0])
+        ? mapAgencyClientBookingsToUIBookings(data?.value.bookings[0])
         : null,
     [data]
   );

@@ -31,10 +31,11 @@ interface CartActions {
   renderItem: (item: CartItem<MarketBookingCartItem>, index: number) => React.JSX.Element;
   refreshCart: () => Promise<any>;
   data: CartItem<MarketBookingCartItem>[];
+  loadingCart: boolean;
 }
 
 const mapItem = (i: MarketBookingCartItem) => {
-  return {data: i, quantity: i.quantity, price: i.price};
+  return {data: i, quantity: i.quantity, price: i.price, id: i.product.id};
 };
 const mapItems = (items?: MarketBookingCartItem[]): CartItem<MarketBookingCartItem>[] => {
   return items ? items.map(mapItem) : [];
@@ -50,7 +51,7 @@ export const useMarketCartActions = (): CartActions => {
   const [updateCartItemAPI] = useUpdateCartItemMutation();
   const [removeFromCartAPI] = useRemoveFromCartMutation();
 
-  const {data: cartData, refetch: fetchCart} = useGetCartQuery();
+  const {data: cartData, refetch: fetchCart, isLoading: loadingCart} = useGetCartQuery();
   const [data, setData] = useState(mapItems(cartData?.bookingCart.items));
 
 
@@ -83,17 +84,19 @@ export const useMarketCartActions = (): CartActions => {
 
   // Eliminar del carrito
   const removeFromCart = async (productId: number) => {
+    console.log('Removing from cart:', productId);
     return removeFromCartAPI({productId}).unwrap().then(fetchCart);
   };
 
   const renderItem = (item: CartItem<MarketBookingCartItem>) => (
     <ProductItemLittle
-      key={`${item.data.id}-${item.data.product.id}`}
+      key={`${item.id}-${item.data.product.id}`}
       item={item}
     />
   );
 
   useEffect(() => {
+    console.debug('Cart data updated:', cartData?.bookingCart.items);
     setData(mapItems(cartData?.bookingCart.items));
   }, [cartData]);
 
@@ -111,5 +114,6 @@ export const useMarketCartActions = (): CartActions => {
     data,
     renderItem,
     refreshCart: fetchCart,
+    loadingCart,  
   };
 };

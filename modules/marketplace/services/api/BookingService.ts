@@ -6,7 +6,6 @@ import {
   GetSearchMarketBookingOptionsRequest,
   MarketBookingCartItemRequest,
   MarketBookingCartResponse,
-  MarketBookingOption,
   MarketProductBookingCartItemRequest,
   ProductCategoriesResponse,
   ProductResponse,
@@ -18,7 +17,7 @@ import {
   UpdateMarketBookingCartRequest,
 } from '../interfaces/booking';
 import {DEFAULT_DESTINATION, BASE_URL} from '@/constants';
-import { AgencyClientBookingResponse, CreateMarketBookingRequest } from '../../services/interfaces/bookingDetail';
+import { AgencyClientBookingPreviewResponse, AgencyClientBookingResponse, CreateMarketBookingRequest } from '../../services/interfaces/bookingDetail';
 
 // Define the necessary TypeScript interfaces
 export const bookingService = createApi({
@@ -121,18 +120,18 @@ export const bookingService = createApi({
       }),
     }),
 
-    previewMarketBooking: builder.mutation<AgencyClientBookingResponse, CreateMarketBookingRequest>({
+    previewMarketBooking: builder.mutation<AgencyClientBookingPreviewResponse, CreateMarketBookingRequest>({
       query: (body) => ({
-        url: `/market/booking`,
+        url: `/market/pre-booking`,
         method: 'POST',
-        body: { ...body, preview: true },
+        body,
       }),
-    }),
+    }), 
     createMarketBooking: builder.mutation<AgencyClientBookingResponse, CreateMarketBookingRequest>({
       query: (body) => ({
         url: `/market/booking`,
         method: 'POST',
-        body: { ...body, preview: false },
+        body,
       }),
     }),
     

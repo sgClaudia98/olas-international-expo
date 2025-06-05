@@ -67,10 +67,10 @@ const Footer: React.FC<FooterProps> = ({
   address = {
     addressLink:
       "https://www.google.com/maps/search/?api=1&query=9507+SW+40th+St+Miami+FL+33165",
-    street: "9611 Fontainebleau Blvd",
+    street: "9507 Sw 40th St",
     city: "Miami",
     state: "FL",
-    zip: "33172",
+    zip: "33165",
   },
 }) => {
   const { t } = useTranslation();

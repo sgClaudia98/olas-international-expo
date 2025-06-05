@@ -28,6 +28,7 @@ interface CartActions<T extends { id: number }, K extends T> {
   renderItem: (item: CartItem<T>, index: number) => React.JSX.Element;
   refreshCart: () => Promise<any>;
   data: CartItem<T>[];
+  loadingCart: boolean;
 }
 
 // Definir el tipo de contexto
@@ -35,7 +36,7 @@ interface ShoppingCartContextProps<T extends { id: number }, K extends T> {
   state: ShoppingCartState<T>;
   cartVisible: boolean;
   setCartVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  addToCart: (product: K, quantity: number, price: number) => void;
+  addToCart: (product: K, quantity: number, price: number, id:number) => void;
   removeFromCart: (productId: number, modalities?: any) => void;
   updateQuantity: (
     productId: number,
@@ -58,7 +59,7 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
 }: {
   children: ReactNode;
   actions: CartActions<T, K>;
-  renderPaymentForm: (onClose:  () => void) => React.JSX.Element;
+  renderPaymentForm: (onClose: () => void) => React.JSX.Element;
 }) => {
   const [state, dispatch] = useReducer(shoppingCartReducer, { items: [] });
   const [cartVisible, setCartVisible] = useState(false);
@@ -72,15 +73,16 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
     }
   }, [actions.data]);
 
-  const addToCart = async (product: K, quantity: number, price: number) => {
+  const addToCart = async (product: K, quantity: number, price: number, id:number) => {
+    console.debug("Adding to cart:", product, quantity, price);
     dispatch({
       type: "ADD_TO_CART",
-      payload: { data: product, quantity, price },
+      payload: { data: product, quantity, price, id},
     });
     actions.addToCart(product, quantity, price).catch((error) => {
       dispatch({
         type: "REMOVE_FROM_CART",
-        payload: { productId: product.id },
+        payload: { productId: id },
       });
       console.error("Error al agregar al carrito:", error);
     });
@@ -98,6 +100,7 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
   };
 
   const removeFromCart = async (productId: number) => {
+    console.debug("Removing from cart:", productId);
     dispatch({ type: "REMOVE_FROM_CART", payload: { productId } });
     actions
       .removeFromCart(productId)
@@ -105,16 +108,18 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
   };
 
   const refreshCart = async () => {
-    actions
-      .refreshCart()
-  }
+    actions.refreshCart();
+  };
 
-  const totalPrice = state.items.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
+  console.debug("ShoppingCartProvider: state", state);
+  const { totalPrice, totalAmount } = state.items.reduce(
+    (acc, item) => {
+      acc.totalPrice += item.quantity * item.price;
+      acc.totalAmount += item.quantity;
+      return acc;
+    },
+    { totalPrice: 0, totalAmount: 0 }
   );
-
-
 
   return (
     <ShoppingCartContext.Provider
@@ -131,9 +136,11 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
       {children}
       <CartOverlay
         visible={cartVisible}
+        loadingCart={actions.loadingCart}
         closeCart={() => setCartVisible(false)}
         cartItems={actions.data}
-        totalAmount={totalPrice}
+        totalPrice={totalPrice}
+        totalAmount={totalAmount}
         renderItem={actions.renderItem}
         openPaymentForm={() => setShowPaymentModal(true)}
       />

@@ -28,12 +28,13 @@ export interface PaymentFormValues {
       };
   };
   notes: {};
+  paymentMethod: string;
 }
 
 export const mapValuesToPayload = (
   values: PaymentFormValues
 ): CreateMarketBookingRequest => {
-  const { client, beneficiary, notes } = values;
+  const { client, beneficiary, notes, paymentMethod } = values;
   return {
     client: {
       fullName: client.fullName || "",
@@ -53,6 +54,7 @@ export const mapValuesToPayload = (
         zipCode: beneficiary.address?.zipCode || "",
       },
     },
+    paymentMethod: paymentMethod || "",
     notes,
   };
 };

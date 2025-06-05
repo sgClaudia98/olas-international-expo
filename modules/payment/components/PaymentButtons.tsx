@@ -1,51 +1,81 @@
-import React, { FC, useEffect, useState } from "react";
-import { View } from "react-native";
-import PayPalButton from "./buttons/PayPalButton";
-import PayPalCardButton from "./buttons/PayPalCardButton";
+import { Colors } from "@/styles";
+import React, { FC, useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  Switch,
+} from "react-native";
+import { paymentIcons } from "../utils/mapPaymentIcon";
 
-type PaymentButtonsProps = {
-  amount: number;
-  getOrderId: () => Promise<string>;
-  onSuccess: (details: any) => void;
+type PaymentMethod = {
+  id: string;
+  name: string;
+  fee: number;
 };
 
-const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, getOrderId, onSuccess }) => {
-  const [paypalUrl, setPaypalUrl] = useState(null);
-  const [cardUrl, setCardUrl] = useState(null);
+interface PaymentButtonsProps {
+  paymentMethods: PaymentMethod[];
+  amount: number;
+  selectedMethod?: string;
+  setSelectedMethod: (id: string) => void;
+}
 
-  useEffect(() => {
-    const fetchUrls = async () => {
-      //const res = await fetch("https://tu-backend.com/create-paypal-order", {
-      //  method: "POST",
-      //  headers: { "Content-Type": "application/json" },
-      //  body: JSON.stringify({ amount }),
-      //});
-      //const data = await res.json();
-      //const baseUrl = `https://www.sandbox.paypal.com/checkoutnow?token=${data.orderId}`;
-      const baseUrl = `https://www.sandbox.paypal.com/checkoutnow?token=123`;
-
-      setPaypalUrl(baseUrl);
-      setCardUrl(`${baseUrl}&fundingSource=card`);
-    };
-
-    fetchUrls();
-  }, [amount]);
-
+const PaymentButtons: FC<PaymentButtonsProps> = ({
+  paymentMethods,
+  amount,
+  selectedMethod,
+  setSelectedMethod,
+}) => {
   return (
-    <View>
-      <PayPalButton
-        checkoutUrl={paypalUrl}
-        onSuccess={() => console.log("Pago PayPal exitoso")}
-        onCancel={() => console.log("Pago PayPal cancelado")}
-      />
-      <View style={{ height: 16 }} />
-      <PayPalCardButton
-        checkoutUrl={cardUrl}
-        onSuccess={() => console.log("Pago con tarjeta exitoso")}
-        onCancel={() => console.log("Pago con tarjeta cancelado")}
+    <View style={styles.container}>
+      <FlatList
+        data={paymentMethods}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={[
+              styles.method,
+              selectedMethod === item.id && styles.methodSelected,
+            ]}
+            onPress={() => setSelectedMethod(item.id)}
+          >
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+              <View>
+                <Text style={styles.methodText}>{item.name}</Text>
+                <Text style={styles.feeText}>${item.fee} fee</Text>
+              </View>
+              {paymentIcons[item.id] && (
+                <View>
+                  {paymentIcons[item.id]}
+                </View>
+              )}
+            </View>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
 };
 
 export default PaymentButtons;
+
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
+  method: {
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 10,
+    marginVertical: 5,
+  },
+  methodSelected: {
+    borderColor: Colors.blue.primary,
+    backgroundColor: "#e6f0ff",
+  },
+  methodText: { fontSize: 16 },
+  feeText: { fontSize: 12, color: "gray", marginTop: 4 },
+});

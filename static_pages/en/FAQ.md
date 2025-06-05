@@ -41,7 +41,7 @@ Once your order is processed, you will receive a tracking number via email. You 
 
 ## 7. What happens if my package is lost or damaged during shipping?
 
-We recommend purchasing shipping insurance to protect your products. In case of loss or damage, please contact us at [support@olas-international.com](mailto:support@olas-international.com) so we can assist you in resolving the issue.
+We recommend purchasing shipping insurance to protect your products. In case of loss or damage, please contact us at [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com) so we can assist you in resolving the issue.
 
 ---
 
@@ -54,7 +54,7 @@ You can cancel an order before it is processed. Once the order has been processe
 ## 9. How can I contact the support team?
 
 If you have questions or need assistance, you can contact us through:
-- **Email:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Phone:** +1-786-358-9595
 - **Website:** [olas-international.com](https://olas-international.com)
 

@@ -43,7 +43,7 @@ Once your order is processed, you will receive a tracking number via email. You 
 
 ## 7. What happens if my package is lost or damaged during shipping?
 
-We recommend purchasing shipping insurance to protect your products. In case of loss or damage, please contact us at [support@olas-international.com](mailto:support@olas-international.com) so we can assist you in resolving the issue.
+We recommend purchasing shipping insurance to protect your products. In case of loss or damage, please contact us at [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com) so we can assist you in resolving the issue.
 
 ---
 
@@ -56,7 +56,7 @@ You can cancel an order before it is processed. Once the order has been processe
 ## 9. How can I contact the support team?
 
 If you have questions or need assistance, you can contact us through:
-- **Email:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Phone:** +1-786-358-9595
 - **Website:** [olas-international.com](https://olas-international.com)
 
@@ -144,7 +144,7 @@ Depending on your location, you may have certain rights regarding your personal 
 - **Restriction:** Restrict the processing of your information in certain circumstances.
 - **Portability:** Request a copy of your information in a structured, machine-readable format.
 
-To exercise these rights, contact us at [support@olas-international.com](mailto:support@olas-international.com).
+To exercise these rights, contact us at [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com).
 
 ---
 
@@ -180,7 +180,7 @@ We may update this Privacy Policy from time to time to reflect changes in our pr
 ## 11. Contact Us
 
 If you have questions or concerns about this Privacy Policy, you can contact us through:
-- **Email:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Phone:** +1-786-358-9595
 - **Mailing Address:**  
   Olas International  
@@ -322,7 +322,7 @@ Both parties irrevocably waive the right to a jury trial in any dispute related 
 
 If you have questions or need assistance, you can contact us through:
 - Phone: +1-786-358-9595
-- Email: support@olas-international.com
+- Email: olasinternationalservices@gmail.com
 
 ---
 

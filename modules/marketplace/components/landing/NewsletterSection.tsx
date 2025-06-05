@@ -7,8 +7,8 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 const NewsletterSection = () => {
   const styles = useResponsiveStyles(newsletterStyles)
 
-  const email = "contact@olasservices.com"
-
+  const email = process.env.EXPO_PUBLIC_EMAIL
+  
   const handleContact = async (): Promise<void> => {
       try {
         await Linking.openURL(`mailto:${email}`);

@@ -128,7 +128,7 @@ Ambas partes renuncian irrevocablemente al derecho a un juicio por jurado en cua
 
 Si tiene preguntas o necesita asistencia, puede contactarnos a través de:
 - Teléfono: +1-786-358-9595
-- Correo electrónico: support@olas-international.com
+- Correo electrónico: olasinternationalservices@gmail.com
 
 ---
 

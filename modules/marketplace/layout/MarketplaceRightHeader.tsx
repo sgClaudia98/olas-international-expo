@@ -27,6 +27,7 @@ import { links } from "./header";
 import { useTranslation } from "react-i18next";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import IconSvg from "@/components/ui/IconSvg";
+import { AuthState } from "@/modules/auth/slices/authSlice";
 
 export default function MarketplaceRightHeader() {
   const styles = useResponsiveStyles(responsiveStyle);
@@ -36,7 +37,7 @@ export default function MarketplaceRightHeader() {
     MarketBookingCartItem,
     MarketBookingCartExtra
   >();
-  const { token } = useAppSelector((state) => state.auth);
+  const { token } = useAppSelector((state) => state.auth as AuthState);
   const openCart = () => {
     if (!token) {
       MainLayoutStateService.setIsModalVisible(true);

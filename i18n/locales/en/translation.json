@@ -77,6 +77,7 @@
     "MARKET": "Market"
   },
   "MARKET": {
+    
     "HOME": {
       "FEATURES": {
         "TITLE": "Your shopping experience has never been so easy and secure!",
@@ -104,6 +105,13 @@
             "NORMAL": "Google Play"
           }
         }
+      }
+    },
+    "CART": {
+      "TITLE": "Shopping cart",
+      "EMPTY": "Your cart is empty",
+      "BUTTONS": {
+        "PAY": "Proceed to Pay"
       }
     },
     "PAYMENT": {

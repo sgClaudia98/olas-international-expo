@@ -109,6 +109,16 @@ export interface AgencyClientBookingResponse {
   error?: IError;
 }
 
+export interface AgencyClientBookingPaymentMethod {
+  code: string;
+  name: string;
+  fee: number;
+}
+
+export interface AgencyClientBookingPreviewResponse extends AgencyClientBookingResponse {
+  paymentMethods : AgencyClientBookingPaymentMethod[];
+}
+
 export interface Company {
   id: number;
   code?: string | null;
@@ -149,6 +159,7 @@ export interface CreateMarketBookingRequest {
   client: Client;
   beneficiary: Client;
   notes?: Record<string, string | null>;
+  paymentMethod: string;
   //preview: boolean;
 }
 

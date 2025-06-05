@@ -35,7 +35,7 @@ interface SearchMarketOptionsResult {
   stats?: SearchMarketBookingOptionStats;
   loading: boolean;
   updateFilter: (allFilters?: IAllFilters, pagination?: PaginationRequest) => void;
-  fetchPage: (limit: number, offset: number) => void;
+  fetchPage: (req: PaginationRequest) => void;
 }
 
 const initFilter: IAllFilters = {
@@ -154,8 +154,8 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
     return result;
   };
 
-  const fetchPage = async (limit: number, offset: number) => {
-    return updateFilter({}, {limit, offset});
+  const fetchPage = async (req: PaginationRequest) => {
+    return updateFilter({}, req);
   };
 
   return {

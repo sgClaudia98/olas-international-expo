@@ -1,10 +1,10 @@
-import { PaginationResponse } from "@/services/interfaces/pagination";
+import { PaginationRequest, PaginationResponse } from "@/services/interfaces/pagination";
 import React, { useState, useEffect } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
 interface PaginatedListProps {
   data?: PaginationResponse;
-  fetchItems: (limit: number, offset: number) => void;
+  fetchItems: (req: PaginationRequest) => void;
   children: React.ReactNode;
   loading?: boolean;
   pageSize?: number;
@@ -27,7 +27,7 @@ const PaginatedContent: React.FC<PaginatedListProps> = ({
     setIsLoading(true);
     const offset = (page - 1) * pageSize;
     try {
-      await fetchItems(pageSize, offset);
+      await fetchItems({ limit: pageSize, offset });
     } catch (error) {
       console.error("Error fetching items:", error);
     } finally {

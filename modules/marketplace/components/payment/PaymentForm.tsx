@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Button, Portal } from "react-native-paper";
 import { Formik, FormikErrors, FormikValues } from "formik";
@@ -26,6 +26,14 @@ import { parseStringToPhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "expo-router";
+import {
+  AgencyClientBookingPaymentMethod,
+  AgencyClientBookingPreviewResponse,
+} from "../../services/interfaces/bookingDetail";
+import { set } from "lodash";
+import { usePayment } from "@/modules/payment/providers/PaymentProvider";
+import { Toast } from "toastify-react-native";
+import { getCallbackUrl } from "@/utils/callback";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
@@ -60,22 +68,23 @@ const PaymentForm = ({
       email: user?.details?.email ?? "",
     },
     beneficiary: {
-      firstName: "",
-      lastName: "",
+      firstName: "asdasd",
+      lastName: "asdasd",
       phone: {
-        number: "",
+        number: "57367777",
         code: destinationCountry,
       },
-      idDocument: "",
+      idDocument: "asdasd",
       address: {
         state: province,
-        city: "",
-        line1: "",
-        line2: "",
+        city: "asdasd",
+        line1: "asdas",
+        line2: "asdasd",
         zipCode: destinationCountry !== "CU" ? "" : "CU",
       },
     },
     notes: {},
+    paymentMethod: "PayPal",
   };
 
   const validationSchema = useMemo(
@@ -83,17 +92,20 @@ const PaymentForm = ({
     [step]
   );
 
-  const handleNextStep = (
+  const handleNextStep = async (
     values: PaymentFormValues,
     errors: FormikErrors<any>
   ) => {
     console.log("errors", errors);
     if (Object.keys(errors).length === 0) {
-      if (step === 2) createMarketBooking(values, true);
-      if (step === 3) createMarketBooking(values, false);
-      else setStep(step + 1);
+      if (step === 2) await createMarketBooking(values, true);
+      if (step === 3) await createMarketBooking(values, true);
+      if (step < 4) {
+        setStep(step + 1);
+      }
     }
   };
+  const { setAvailableMethods, processPayment } = usePayment();
 
   const [previewMarketBookingAPI, { isLoading: loadingBooking }] =
     usePreviewMarketBookingMutation();
@@ -101,6 +113,27 @@ const PaymentForm = ({
   const [createMarketBookingAPI] = useCreateMarketBookingMutation();
 
   const [preview, setPreview] = useState<UIBooking>();
+
+  const handleSubmit = async (values: PaymentFormValues) => {
+    console.log("values", values,  !!processPayment);
+    const orderId = await createMarketBooking(values);
+    const response = await processPayment(
+      {
+        orderId: orderId,
+        email: values.client.email,
+        callbackUrl: getCallbackUrl("profile/order-history/" + orderId),
+      },
+      ({ reference }) => {
+        console.log("Payment reference", reference);
+        //TODO: Send reference to the backend
+      }
+    );
+    if (response.success) {
+      onClose();
+    } else {
+      Toast.error("Payment failed");
+    }
+  };
 
   const createMarketBooking = async (
     values: PaymentFormValues,
@@ -112,10 +145,18 @@ const PaymentForm = ({
         ? await previewMarketBookingAPI(payload).unwrap()
         : await createMarketBookingAPI(payload).unwrap();
       setPreview(mapAgencyClientBookingsToUIBookings(response.booking));
-      if (response.success) {
-        if (preview) setStep(3);
-        else setStep(4);
-      } else {
+      if (step === 3) {
+        setAvailableMethods(
+          (response as AgencyClientBookingPreviewResponse).paymentMethods.map(
+            (m) => ({
+              id: m.code,
+              name: m.name,
+              fee: m.fee,
+            })
+          )
+        );
+      }
+      if (!response.success) {
         console.error("Error en la reserva:", response.error);
       }
       return response.booking.id;
@@ -131,13 +172,9 @@ const PaymentForm = ({
       }}
       enableReinitialize={true}
       validationSchema={validationSchema}
-      onSubmit={() => onClose()}
+      onSubmit={handleSubmit}
     >
-      {({
-        validateForm,
-        values,
-        isSubmitting,
-      }) => (
+      {({ validateForm, values, isSubmitting, submitForm }) => (
         <Portal.Host>
           <View style={styles.formContainer}>
             <Text style={styles.title}>{t("MARKET.PAYMENT.TITLE")}</Text>
@@ -152,7 +189,12 @@ const PaymentForm = ({
             {step === 2 && <Step2 destinationCountry={destinationCountry} />}
 
             {step === 3 && <Step3 preview={preview} />}
-            {step === 4 && <Step4 preview={preview} getBookingId={() => createMarketBooking(values, false)} />}
+            {step === 4 && (
+              <Step4
+                preview={preview}
+               // refetchBooking={(val) => createMarketBooking(val, true)}
+              />
+            )}
 
             <View style={styles.buttonContainer}>
               {step > 1 && (
@@ -165,18 +207,20 @@ const PaymentForm = ({
                   Back
                 </Button>
               )}
-              {step < steps.length && (
+              {step <= steps.length && (
                 <Button
                   mode="contained"
                   onPress={() =>
                     validateForm(values).then((_errors) => {
-                      handleNextStep(values, _errors);
+                      if (step !== steps.length)
+                        handleNextStep(values, _errors);
+                      else submitForm();
                     })
                   }
                   disabled={isSubmitting || loadingBooking}
                   style={styles.button}
                 >
-                  {step == steps.length - 1 ? "Pay" : "Next"}
+                  {step == steps.length ? "Pay" : "Next"}
                 </Button>
               )}
             </View>

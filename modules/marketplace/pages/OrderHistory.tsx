@@ -8,6 +8,7 @@ import { useSearchMarketBookingsMutation } from "../services/api/BookingService"
 import { ActivityIndicator } from "react-native-paper";
 import { OrdersTable } from "../components/orders/OrdersTable";
 import { orderStyles } from "../styles/orders";
+import PaginatedContent from "@/components/Pagination";
 
 const MAX_PER_PAGE = 5;
 
@@ -35,11 +36,15 @@ export const OrderHistory: FC<ViewProps> = () => {
           </ThemedText>
         </View>
         <View style={styles.cardContent}>
-          {isLoading ? (
-            <ActivityIndicator />
-          ) : (
+          <PaginatedContent
+            data={data?.value}
+            fetchItems={searchMarketOptions}
+            pageSize={MAX_PER_PAGE}
+            loading={isLoading}
+            fallback={<ActivityIndicator />}
+          >
             <OrdersTable bookings={data?.value.bookings} />
-          )}
+          </PaginatedContent>
         </View>
       </View>
     </>

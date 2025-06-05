@@ -37,7 +37,7 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({ amount, getOrderId, onSuccess
     const orderId = await getOrderId();
     console.log("Amount:", roundedAmount, amount);
     const transactionId = await actions.order.create({
-      intent: "CAPTURE",
+      intent: "AUTHORIZE",
       purchase_units: [
         {
           invoice_id: orderId,

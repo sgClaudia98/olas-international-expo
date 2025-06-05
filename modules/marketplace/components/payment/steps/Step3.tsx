@@ -12,9 +12,8 @@ import { PaymentFormValues } from "../PaymentFormHelper";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import IconSvg from "@/components/ui/IconSvg";
-import PaymentButtons from "@/modules/payment/components/PaymentButtons";
 
-const Step3 = ({ preview }) => {
+const Step3 = ({ preview}) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
 
   const styles = useResponsiveStyles(paymentFormStyles);

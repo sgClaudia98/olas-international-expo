@@ -429,8 +429,7 @@ const productInShoppingCartStyles = StyleSheet.create({
   ...commonProductStyles,
   container: {
     width: "100%",
-    paddingBottom: 10,
-    paddingRight: 10,
+    paddingBottom: 15,
     marginTop: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#EBEFF3",
@@ -440,29 +439,37 @@ const productInShoppingCartStyles = StyleSheet.create({
     flexDirection: "row",
   },
   image: {
+    ...commonProductStyles.image,
     borderRadius: 5,
     width: 80,
     height: 80,
-    objectFit: "contain",
+  },
+  imageOverlay: {
+    ...commonProductStyles.imageOverlay,
+    borderRadius: 5,
+    width: 80,
+    height: 80,
+  }, 
+  imageContainer: {
+    ...commonProductStyles.imageContainer,
     marginRight: 15,
+    maxWidth: 80,
   },
   textContainer: {
     flex: 1,
   },
   titleContainer: {
-    marginBottom: 10,
+    marginBottom: 2,
   },
   title: {
     fontSize: 14,
     lineHeight: 20,
-    fontWeight: 600,
     color: Colors.black.primary,
   },
   discountBadge: {
     marginLeft: 10,
   },
   trashIcon: {
-    marginTop: 5,
     cursor: "pointer",
   },
   quantityAndTotalContainer: {
@@ -471,7 +478,7 @@ const productInShoppingCartStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center",
-    columnGap: 40,
+    columnGap: 20,
   },
   amountContainer: {
     width: 60,
@@ -484,8 +491,13 @@ const productInShoppingCartStyles = StyleSheet.create({
   },
   priceText: {
     color: Colors.black.primary,
-    fontWeight: 700,
+    fontSize: 14,
+    lineHeight: 27,
   },
+  priceText2: {
+    color: Colors.black.primary,
+    marginLeft: 5,
+  }
 });
 
 export {

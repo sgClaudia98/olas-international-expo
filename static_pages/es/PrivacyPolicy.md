@@ -78,7 +78,7 @@ Dependiendo de su ubicación, usted puede tener ciertos derechos sobre su inform
 - **Restricción:** Restringir el procesamiento de su información en ciertas circunstancias.
 - **Portabilidad:** Solicitar una copia de su información en un formato estructurado y legible por máquina.
 
-Para ejercer estos derechos, contáctenos en [support@olas-international.com](mailto:support@olas-international.com).
+Para ejercer estos derechos, contáctenos en [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com).
 
 ---
 
@@ -114,7 +114,7 @@ Podemos actualizar esta Política de Privacidad ocasionalmente para reflejar cam
 ## 11. Contacto
 
 Si tiene preguntas o inquietudes sobre esta Política de Privacidad, puede contactarnos a través de:
-- **Correo electrónico:** [support@olas-international.com](mailto:support@olas-international.com)
+- **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
 - **Teléfono:** +1-786-358-9595
 - **Dirección postal:**  
   Olas International  

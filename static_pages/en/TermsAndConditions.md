@@ -128,7 +128,7 @@ Both parties irrevocably waive the right to a jury trial in any dispute related 
 
 If you have questions or need assistance, you can contact us through:
 - Phone: +1-786-358-9595
-- Email: support@olas-international.com
+- Email: olasinternationalservices@gmail.com
 
 ---
 
