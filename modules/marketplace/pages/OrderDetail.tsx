@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { Link, useRouter } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
@@ -13,9 +13,11 @@ import { orderStyles } from "../styles/orders";
 import { mapAgencyClientBookingsToUIBookings } from "../utils/bookingMapping";
 import IconSvg from "@/components/ui/IconSvg";
 import { OrdersStatus } from "../components/orders/OrdersStatus";
+import { Toast } from "toastify-react-native";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
-  const router = useRouter();
+  
+  const params = useLocalSearchParams();
   const { t } = useTranslation();
   const styles = useResponsiveStyles(orderStyles);
 
@@ -34,6 +36,11 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
     searchMarketOptions({
       id: +id,
     });
+    if (params.paymentSuccess === "true") {
+      Toast.success(t("MARKET.PAYMENT.NOTIFICATIONS.PAYMENT_SUCCESS"));
+    } else if (params.paymentSuccess === "false") {
+      Toast.error(t("MARKET.PAYMENT.NOTIFICATIONS.PAYMENT_ERROR"));
+    }
   }, []);
 
   const beneficiary = booking?.details[0].beneficiary;
