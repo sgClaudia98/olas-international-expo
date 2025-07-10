@@ -27,6 +27,7 @@ export { default as Password } from "./Password";
 export { default as Paypal } from "./Paypal";
 export { default as Phone } from "./Phone";
 export { default as PhoneCalling } from "./PhoneCalling";
+export { default as Search } from "./Search";
 export { default as Settings } from "./Settings";
 export { default as ShieldCheck } from "./ShieldCheck";
 export { default as ShoppingCart } from "./ShoppingCart";

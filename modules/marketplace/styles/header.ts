@@ -16,9 +16,6 @@ const leftDesktopStyles = StyleSheet.create({
   searchBar: {
     alignItems: "flex-start",
     marginHorizontal: 10,
-    paddingHorizontal: 10,
-    backgroundColor: "#f4f4f4",
-    borderRadius: 8,
   },
 });
 

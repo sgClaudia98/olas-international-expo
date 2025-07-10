@@ -111,7 +111,6 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
     actions.refreshCart();
   };
 
-  console.debug("ShoppingCartProvider: state", state);
   const { totalPrice, totalAmount } = state.items.reduce(
     (acc, item) => {
       acc.totalPrice += item.quantity * item.price;
@@ -138,7 +137,7 @@ export const ShoppingCartProvider = <T extends { id: number }, K extends T>({
         visible={cartVisible}
         loadingCart={actions.loadingCart}
         closeCart={() => setCartVisible(false)}
-        cartItems={actions.data}
+        cartItems={state.items}
         totalPrice={totalPrice}
         totalAmount={totalAmount}
         renderItem={actions.renderItem}

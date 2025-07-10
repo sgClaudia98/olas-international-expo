@@ -121,6 +121,11 @@
         "Beneficiary": "Beneficiary",
         "Book": "Book",
         "Payment": "Payment"
+      },
+      "NOTIFICATIONS": {
+        "PAYMENT_SUCCESS": "Payment successful",
+        "PAYMENT_FAILED": "Payment failed",
+        "PAYMENT_ERROR": "An error occurred during payment. Please try again."
       }
     },
     "ORDER_STATUS": {
