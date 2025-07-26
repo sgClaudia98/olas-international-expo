@@ -134,6 +134,14 @@ export const bookingService = createApi({
         body,
       }),
     }),
+    payBooking: builder.mutation<any, any>({
+      query: (body) => ({
+        url: `/pay-booking`,
+        method: 'POST',
+        body,
+      }),
+    }),
+    
     
     getBookingById: builder.query<AgencyClientBookingResponse, number>({
       query: (id) => ({
@@ -170,6 +178,7 @@ export const {
   usePreviewMarketBookingMutation,
   useGetBookingByIdQuery,
   useSearchMarketBookingsMutation,
+  usePayBookingMutation
 } = bookingService;
 
 export const bookingEndpoints = bookingService.endpoints;

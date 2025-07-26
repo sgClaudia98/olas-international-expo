@@ -31,14 +31,57 @@ import {
   AgencyClientBookingPreviewResponse,
 } from "../../services/interfaces/bookingDetail";
 import { set } from "lodash";
-import { usePayment } from "@/modules/payment/providers/PaymentProvider";
 import { Toast } from "toastify-react-native";
 import { getCallbackUrl } from "@/utils/callback";
+import { paymentFormInitials } from "../mock/paymentFormInitials";
+import { usePaymentContext } from "@/modules/payment/providers/PaymentProvider";
+import { usePayment } from "@/modules/payment/hooks/usePayment";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
 };
 const steps = ["Client", "Beneficiary", "Book", "Payment"];
+
+type PaymentFormInitials = {
+  destinationCountry: string;
+  province: string;
+  fullName?: string;
+  phone?: string;
+  email?: string;
+};  
+
+const getInitials = (v: PaymentFormInitials) => {
+  return process.env.NODE_ENV === "development" ? paymentFormInitials(v) : {
+    client: {
+      fullName: v.fullName ?? "",
+      phone: v.phone
+        ? parseStringToPhoneNumber(v.phone)
+        : {
+            number: "",
+            code: "",
+          },
+      email: v.email ?? "",
+    },
+    beneficiary: {
+      firstName: "",
+      lastName: "",
+      phone: {
+        number: "",
+        code: v.destinationCountry,
+      },
+      idDocument: "",
+      address: {
+        state: v.province,
+        city: "",
+        line1: "",
+        line2: "",
+        zipCode: v.destinationCountry !== "CU" ? "" : "CU",
+      },
+    },
+    notes: {},
+    paymentMethod: "PayPal",
+  };
+};
 
 const PaymentForm = ({
   province,
@@ -56,36 +99,13 @@ const PaymentForm = ({
 
   const styles = useResponsiveStyles(paymentFormStyles);
 
-  const initialValues = {
-    client: {
-      fullName: user?.details?.fullName ?? "",
-      phone: user?.details?.phone
-        ? parseStringToPhoneNumber(user?.details?.phone)
-        : {
-            number: "",
-            code: "",
-          },
-      email: user?.details?.email ?? "",
-    },
-    beneficiary: {
-      firstName: "asdasd",
-      lastName: "asdasd",
-      phone: {
-        number: "57367777",
-        code: destinationCountry,
-      },
-      idDocument: "asdasd",
-      address: {
-        state: province,
-        city: "asdasd",
-        line1: "asdas",
-        line2: "asdasd",
-        zipCode: destinationCountry !== "CU" ? "" : "CU",
-      },
-    },
-    notes: {},
-    paymentMethod: "PayPal",
-  };
+  const initialValues = getInitials({
+    destinationCountry,
+    province,
+    fullName: user?.details?.fullName,
+    phone: user?.details?.phone,
+    email: user?.details?.email,
+  });
 
   const validationSchema = useMemo(
     () => (validationSchemas as ValidationSchemas)[step] || Yup.object(),
@@ -105,7 +125,8 @@ const PaymentForm = ({
       }
     }
   };
-  const { setAvailableMethods, processPayment } = usePayment();
+  const { setAvailableMethods } = usePaymentContext();
+  const { processPayment } = usePayment();
 
   const [previewMarketBookingAPI, { isLoading: loadingBooking }] =
     usePreviewMarketBookingMutation();
@@ -115,17 +136,13 @@ const PaymentForm = ({
   const [preview, setPreview] = useState<UIBooking>();
 
   const handleSubmit = async (values: PaymentFormValues) => {
-    console.log("values", values,  !!processPayment);
-    const orderId = await createMarketBooking(values);
+    console.log("values", values, !!processPayment);
+    const bookingId = await createMarketBooking(values);
     const response = await processPayment(
+      values.paymentMethod,
       {
-        orderId: orderId,
+        bookingId: bookingId,
         email: values.client.email,
-        callbackUrl: getCallbackUrl("profile/order-history/" + orderId),
-      },
-      ({ reference }) => {
-        console.log("Payment reference", reference);
-        //TODO: Send reference to the backend
       }
     );
     if (response.success) {
@@ -192,7 +209,7 @@ const PaymentForm = ({
             {step === 4 && (
               <Step4
                 preview={preview}
-               // refetchBooking={(val) => createMarketBooking(val, true)}
+                // refetchBooking={(val) => createMarketBooking(val, true)}
               />
             )}
 

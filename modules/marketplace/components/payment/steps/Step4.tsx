@@ -7,7 +7,7 @@ import {
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import PaymentButtons from "@/modules/payment/components/PaymentButtons";
 import { UIBooking } from "@/modules/marketplace/utils/bookingMapping";
-import { usePayment } from "@/modules/payment/providers/PaymentProvider";
+import { usePaymentContext } from "@/modules/payment/providers/PaymentProvider";
 import { ThemedText } from "@/components/ThemedText";
 import { PaymentFormValues } from "../PaymentFormHelper";
 import { useFormikContext } from "formik";
@@ -17,7 +17,7 @@ const Step4: FC<{
   refetchBooking?: (values: PaymentFormValues) => void;
 }> = ({ preview, refetchBooking }) => {
   const { values, setFieldValue } = useFormikContext<PaymentFormValues>();
-  const { methods, selectedMethod, setMethodById } = usePayment();
+  const { methods, selectedMethod, setMethodById } = usePaymentContext();
 
   const styles = useResponsiveStyles(paymentFormStyles);
   // const refetchTimeout = useRef<NodeJS.Timeout | null>(null);

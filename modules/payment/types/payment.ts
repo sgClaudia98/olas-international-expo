@@ -17,10 +17,10 @@ export interface PaymentResponseData {
 export interface PaymentResponse {
   success: boolean;
   data?: PaymentResponseData;
+  error?: string;
 }
 
 export interface PaymentData {
   email: string;
-  orderId: string;
-  callbackUrl?: string;
+  bookingId: number;
 }
