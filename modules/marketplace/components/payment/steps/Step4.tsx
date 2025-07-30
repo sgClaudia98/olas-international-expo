@@ -3,7 +3,7 @@ import { View } from "react-native";
 import {
   paymentFormStyles,
   paymentFormStyles as styles,
-} from "../../../styles/paymentForm";
+} from "@/styles/reused/paymentForm";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import PaymentButtons from "@/modules/payment/components/PaymentButtons";
 import { UIBooking } from "@/modules/marketplace/utils/bookingMapping";

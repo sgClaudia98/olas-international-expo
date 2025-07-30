@@ -79,8 +79,6 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
     }
   }, []);
 
-  //TODO: countdown for resend code
-
   return (
     <View style={{ ...style.card, maxWidth: 476, marginHorizontal: "auto" }}>
       <View style={style.cardContent}>

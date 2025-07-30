@@ -60,7 +60,7 @@ export const useMarketCartActions = (): CartActions => {
     if (!token) {
       console.error('No hay sesión activa');
       MainLayoutStateService.setIsModalVisible(true);
-      
+      // TODO: save the product to add later
       return Promise.reject();
     }
     if (!option.searchId || !option.id) {

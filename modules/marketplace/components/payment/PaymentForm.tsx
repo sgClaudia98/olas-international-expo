@@ -4,7 +4,7 @@ import { Button, Portal } from "react-native-paper";
 import { Formik, FormikErrors, FormikValues } from "formik";
 import * as Yup from "yup";
 
-import { paymentFormStyles } from "../../styles/paymentForm";
+import { paymentFormStyles } from "../../../../styles/reused/paymentForm";
 import StepProgress from "./StepProgress";
 
 import validationSchemas, { PaymentFormValues } from "./PaymentFormHelper";

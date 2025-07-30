@@ -4,8 +4,7 @@ import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
 import {
   paymentFormStyles,
-  paymentFormStyles as styles,
-} from "../../../styles/paymentForm";
+} from "@/styles/reused/paymentForm";
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";

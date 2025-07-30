@@ -25,7 +25,7 @@ export default function MarketplaceLeftHeader() {
     selection?.departmentId?.toString() || ""
   );
   const all_cat = {
-    label: t("FILTERS.CATEGORIES"),
+    label: t("FILTERS.ALL_CATEGORIES"),
     value: "",
   };
 

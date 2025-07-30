@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
 import { cardStyle } from "@/styles/card";
 import { Colors } from "@/styles";
+import { resumeStyles } from "@/styles/resume";
 
 const desktop = StyleSheet.create({
+  ...resumeStyles,
   cardHeader: {
     ...cardStyle.desktop.cardHeader,
     flexDirection: "row",
@@ -60,23 +62,7 @@ const desktop = StyleSheet.create({
     borderColor: Colors.black.third,
     marginHorizontal: 30,
   },
-  resumeItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    fontSize: 14,
-    lineHeight: 25,
-  },
-  resumeTotal: {
-    marginTop: 29,
-    width: "100%",
-    backgroundColor: Colors.black.fifth,
-    borderRadius: 5,
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    flexDirection: "row",
-    justifyContent: "center",
-    gap:10,
-  },
+  
   shipmentHeader: {
     flexDirection: "row",
     gap:14 

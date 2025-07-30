@@ -56,6 +56,7 @@
   "SUMMARY_HEADING": "Summary",
   "SHIPPING": "Shipping",
   "DISCOUNT": "Discount",
+  "PAYMENT_FEE": "Payment Fee",
   "TOTAL": "Total",
   "NUMBER": "Number",
   "DATE": "Date",
@@ -126,6 +127,10 @@
         "PAYMENT_SUCCESS": "Payment successful",
         "PAYMENT_FAILED": "Payment failed",
         "PAYMENT_ERROR": "An error occurred during payment. Please try again."
+      },
+      "STATUS": {
+        "PAID": "Accepted",
+        "PAY": "Pending"
       }
     },
     "ORDER_STATUS": {

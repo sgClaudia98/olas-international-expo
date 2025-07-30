@@ -1,22 +1,22 @@
 import React from "react";
 import { View, Modal, ScrollView } from "react-native";
-import { paymentFormStyles } from "../../styles/paymentForm";
+import { paymentFormStyles } from "../../../../styles/reused/paymentForm";
 import { Button } from "react-native-paper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import IconSvg from "@/components/ui/IconSvg";
 import { Colors } from "@/styles";
 
-interface PaymentOverlayProps<T extends { id: number }> {
+interface PaymentOverlayProps{
   visible: boolean;
   renderForm: (onClose: () => void) => React.JSX.Element;
   setPaymentFormVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PaymentOverlay = <T extends { id: number }>({
+const PaymentOverlay = ({
   visible,
   renderForm,
   setPaymentFormVisible,
-}: PaymentOverlayProps<T>) => {
+}: PaymentOverlayProps) => {
   const styles = useResponsiveStyles(paymentFormStyles);
 
   return (

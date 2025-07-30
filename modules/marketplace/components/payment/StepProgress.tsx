@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { stepProgressStyles, stepProgressStylesMinimal } from "../../styles/paymentForm";
+import { stepProgressStyles, stepProgressStylesMinimal } from "../../../../styles/reused/paymentForm";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { useTranslation } from "react-i18next";
 import { ThemedText } from "@/components/ThemedText";

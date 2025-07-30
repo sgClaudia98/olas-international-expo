@@ -24,6 +24,8 @@ export const OrderHistory: FC<ViewProps> = () => {
     searchMarketOptions({
       offset: 0,
       limit: MAX_PER_PAGE,
+      //sortBy: "BookingDate",
+      //sortMode: "Desc",
     });
   }, []);
 

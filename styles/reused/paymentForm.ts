@@ -2,8 +2,10 @@ import { StyleSheet } from "react-native";
 import { Colors } from "@/styles";
 import typography from "@/styles/typography";
 import theme from "@/styles/paperTheme";
+import { resumeStyles } from "../resume";
 
 const desktop = StyleSheet.create({
+  ...resumeStyles,
   modalScrollContainer: {
     flex: 1,
     backgroundColor: "rgba(8, 51, 102, 0.25)",

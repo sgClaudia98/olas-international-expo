@@ -5,7 +5,7 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { useSearchMarketBookingsMutation } from "../services/api/BookingService";
-import { ActivityIndicator, DataTable } from "react-native-paper";
+import { ActivityIndicator, Button, DataTable } from "react-native-paper";
 import ContentBox from "../components/payment/ContentBox";
 import { Colors } from "@/styles";
 import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
@@ -14,9 +14,10 @@ import { mapAgencyClientBookingsToUIBookings } from "../utils/bookingMapping";
 import IconSvg from "@/components/ui/IconSvg";
 import { OrdersStatus } from "../components/orders/OrdersStatus";
 import { Toast } from "toastify-react-native";
+import OrderPayOverlay from "../components/orders/OrderPayOverlay";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
-  
+  const [paymentFormVisible, setPaymentFormVisible] = useState(false);
   const params = useLocalSearchParams();
   const { t } = useTranslation();
   const styles = useResponsiveStyles(orderStyles);
@@ -52,7 +53,6 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
           <ThemedText type="defaultBold" style={styles.cardHeaderText}>
             {t("PAGE.ORDER_DETAIL")}
           </ThemedText>
-          {/**AQUI FALTA EL BACK Link */}
           <Link
             style={{
               alignItems: "center",
@@ -217,6 +217,12 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       </ThemedText>
                     </View>
                     <View style={styles.resumeItem}>
+                      <ThemedText>{t("PAYMENT_FEE")}</ThemedText>
+                      <ThemedText>
+                        $ {booking?.paymentFee.toFixed(2)}
+                      </ThemedText>
+                    </View>
+                    <View style={styles.resumeItem}>
                       <ThemedText>{t("DISCOUNT")}</ThemedText>
                       <ThemedText>
                         -$ {booking?.details[0].discount.toFixed(2)}
@@ -248,11 +254,19 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                     {t("SHIPPING")} {shipment.index + 1}
                   </ThemedText>
                   <ThemedText style={styles.badge}>
-                    {t("PRODUCTS.TOTAL", {
+                    {t("TOTAL", {
                       count: shipment.total,
                     }).toLowerCase()}
                   </ThemedText>
                 </View>
+                {booking.paidStatus !== "AcceptedPaid" && (
+                  <Button
+                    mode="contained"
+                    onPress={() => setPaymentFormVisible(true)}
+                  >
+                    {t("MARKET.PAYMENT.STATUS.PAY").toUpperCase()}
+                  </Button>
+                )}
 
                 <OrdersStatus status={booking.status} />
                 <DataTable>
@@ -290,6 +304,11 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
             ))
           )}
         </View>
+        <OrderPayOverlay
+          visible={paymentFormVisible}
+          setPaymentFormVisible={setPaymentFormVisible}
+          preview={booking}
+        />
       </View>
     </>
   );

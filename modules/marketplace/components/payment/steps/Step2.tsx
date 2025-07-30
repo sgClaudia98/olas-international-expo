@@ -6,7 +6,7 @@ import { Colors } from "@/styles";
 import {
   paymentFormStyles,
   paymentFormStyles as styles,
-} from "../../../styles/paymentForm";
+} from "../../../../../styles/reused/paymentForm";
 import { PaymentFormValues } from "../PaymentFormHelper";
 import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";

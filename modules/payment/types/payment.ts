@@ -22,5 +22,5 @@ export interface PaymentResponse {
 
 export interface PaymentData {
   email: string;
-  bookingId: number;
+  bookingId: number | string;
 }

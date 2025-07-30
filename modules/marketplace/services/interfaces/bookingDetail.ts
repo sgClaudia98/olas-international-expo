@@ -99,6 +99,8 @@ export interface AgencyClientBooking {
   discount: number;
   bookingFee: number;
   paymentFee?: number | null;
+  paymentMethod?: string | null;
+  paidStatus?: "AcceptedPaid" | null;
   details?: BookingDetail[] | null; // This can be CarBookingDetail or MarketBookingDetail
 }
 
