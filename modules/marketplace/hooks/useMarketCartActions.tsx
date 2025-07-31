@@ -1,25 +1,23 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   useAddToCartMutation,
   useGetCartQuery,
-  useLazyGetCartQuery,
   useRemoveFromCartMutation,
   useUpdateCartItemMutation,
 } from '../services/api/BookingService';
 import {
   MarketBookingCartItem,
-  MarketBookingCartResponse,
   MarketBookingOption,
   Modalities,
 } from '../services/interfaces/booking';
 import {useLocationContext} from '@/contexts/locationContext';
-import {useAppSelector} from '@/hooks/useAppDispatch';
+import {useAppSelector, useAppDispatch} from '@/hooks/useAppDispatch';
 import {CartItem} from '../reducers/ShoppingCartReducer';
 import ProductItemLittle from '../components/product/ProductItemLittle';
 import React from 'react';
-import {useNavigation} from '@react-navigation/core';
 import { MainLayoutStateService } from '@/reducers/mainLayoutReducer';
 import { DEFAULT_DESTINATION } from '@/constants';
+import { setPendingCartItem, clearPendingCartItem } from '../slices/pendingCartSlice';
 
 // T as MarketBookingCartItem
 export interface MarketBookingCartExtra extends MarketBookingCartItem, MarketBookingOption {}
@@ -43,7 +41,8 @@ const mapItems = (items?: MarketBookingCartItem[]): CartItem<MarketBookingCartIt
 
 export const useMarketCartActions = (): CartActions => {
   const token = useAppSelector(state => state.auth.token);
-  const navigation = useNavigation();
+  const pendingItem = useAppSelector(state => state.pendingCart.pendingItem);
+  const dispatch = useAppDispatch();
   const {activeDestination} = useLocationContext();
 
   // Mutations para interactuar con la API (por ejemplo, usando Redux Toolkit Query o React Query)
@@ -59,8 +58,9 @@ export const useMarketCartActions = (): CartActions => {
   const addToCart = async (option: MarketBookingOption, quantity: number) => {
     if (!token) {
       console.error('No hay sesión activa');
+      // Save the product to add after login
+      dispatch(setPendingCartItem({ option, quantity }));
       MainLayoutStateService.setIsModalVisible(true);
-      // TODO: save the product to add later
       return Promise.reject();
     }
     if (!option.searchId || !option.id) {
@@ -105,6 +105,23 @@ export const useMarketCartActions = (): CartActions => {
       fetchCart();
     }
   }, []);
+
+  // Process pending cart item when user logs in
+  useEffect(() => {
+    if (token && pendingItem) {
+      console.log('Processing pending cart item:', pendingItem);
+      addToCart(pendingItem.option, pendingItem.quantity)
+        .then(() => {
+          console.log('Pending cart item added successfully');
+          dispatch(clearPendingCartItem());
+        })
+        .catch(error => {
+          console.error('Error adding pending cart item:', error);
+          // Clear it anyway to avoid infinite retries
+          dispatch(clearPendingCartItem());
+        });
+    }
+  }, [token, pendingItem]);
 
   // Retornar las acciones que usarás en el contexto
   return {
