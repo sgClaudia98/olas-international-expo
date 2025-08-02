@@ -57,7 +57,7 @@ export const useMarketCartActions = (): CartActions => {
   // Agregar al carrito
   const addToCart = async (option: MarketBookingOption, quantity: number) => {
     if (!token) {
-      console.error('No hay sesión activa');
+      console.error('No hay sesión activa', quantity, option);
       // Save the product to add after login
       dispatch(setPendingCartItem({ option, quantity }));
       MainLayoutStateService.setIsModalVisible(true);
@@ -110,18 +110,16 @@ export const useMarketCartActions = (): CartActions => {
   useEffect(() => {
     if (token && pendingItem) {
       console.log('Processing pending cart item:', pendingItem);
+      dispatch(clearPendingCartItem());
       addToCart(pendingItem.option, pendingItem.quantity)
         .then(() => {
           console.log('Pending cart item added successfully');
-          dispatch(clearPendingCartItem());
         })
         .catch(error => {
           console.error('Error adding pending cart item:', error);
-          // Clear it anyway to avoid infinite retries
-          dispatch(clearPendingCartItem());
         });
     }
-  }, [token, pendingItem]);
+  }, []);
 
   // Retornar las acciones que usarás en el contexto
   return {
