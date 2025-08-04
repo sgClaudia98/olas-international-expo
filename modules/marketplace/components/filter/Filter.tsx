@@ -30,7 +30,7 @@ interface FiltersProps {
     searchId: number | null;
   };
   isDrawerOpen?: boolean;
-  onCloseDrawer?: () => void;
+  onCloseDrawer: () => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({
@@ -55,7 +55,7 @@ const Filters: React.FC<FiltersProps> = ({
     setPriceRange(
       stats ? mapPriceRanges(stats.data.minPrice, stats.data.maxPrice) : []
     );
-  }, [stats?.searchId]);
+  }, [stats?.data.minPrice, stats?.data.maxPrice]);
 
   const [highlights, setHighlights] = useState<DropdownCheckItem[]>([
     {

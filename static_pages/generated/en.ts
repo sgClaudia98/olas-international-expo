@@ -57,7 +57,7 @@ You can cancel an order before it is processed. Once the order has been processe
 
 If you have questions or need assistance, you can contact us through:
 - **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Phone:** +1-786-358-9595
+- **Phone:** +1 (786) 258-4319
 - **Website:** [olas-international.com](https://olas-international.com)
 
 ---
@@ -181,7 +181,7 @@ We may update this Privacy Policy from time to time to reflect changes in our pr
 
 If you have questions or concerns about this Privacy Policy, you can contact us through:
 - **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Phone:** +1-786-358-9595
+- **Phone:** +1 (786) 258-4319
 - **Mailing Address:**  
   Olas International  
   9611 Fontainebleau Blvd,
@@ -321,7 +321,7 @@ Both parties irrevocably waive the right to a jury trial in any dispute related 
 ## 15. Contact Information
 
 If you have questions or need assistance, you can contact us through:
-- Phone: +1-786-358-9595
+- Phone: +1 (786) 258-4319
 - Email: olasinternationalservices@gmail.com
 
 ---

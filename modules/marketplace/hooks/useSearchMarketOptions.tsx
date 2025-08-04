@@ -60,7 +60,9 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
   const updateFilter = useCallback(
     (allFilters?: IAllFilters, newPagination?: PaginationRequest) => {
       setFilter(prevFilter => {
-        if (!forcePOST) setForcePOST(prevFilter.mutation != allFilters?.mutation);
+        // Use JSON.stringify to properly compare objects
+        const mutationChanged = JSON.stringify(prevFilter.mutation) !== JSON.stringify(allFilters?.mutation);
+        if (!forcePOST && mutationChanged) setForcePOST(true);
 
         return {
           mutation: {
@@ -75,7 +77,7 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
         };
       });
     },
-    [activeDestination],
+    [activeDestination, forcePOST],
   );
 
   const handleResponse = (response: SearchMarketBookingOptionsResponse) => {
@@ -129,11 +131,11 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [filter, updateFilter]);
+  }, [filter, activeDestination, forcePOST]);
 
   const fetch = async (request: SearchMarketBookingOptionsRequest, forceSearch?: boolean) => {
     setLoading(true);
-    let response;
+    let response: Promise<SearchMarketBookingOptionsResponse>;
     if (searchId && !forceSearch) {
       // If common filters are modified and searchId exists, use the query
       const queryRequest: GetSearchMarketBookingOptionsRequest = {

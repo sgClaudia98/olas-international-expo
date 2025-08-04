@@ -115,7 +115,7 @@ We may update this Privacy Policy from time to time to reflect changes in our pr
 
 If you have questions or concerns about this Privacy Policy, you can contact us through:
 - **Email:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Phone:** +1-786-358-9595
+- **Phone:** +1 (786) 258-4319
 - **Mailing Address:**  
   Olas International  
   9611 Fontainebleau Blvd,
