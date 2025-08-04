@@ -37,7 +37,9 @@
   "FILTERS": {
     "ALL_CATEGORIES": "Todas las categorías",
     "CATEGORIES": "Categorías",
-    "LABEL": "Filtros"
+    "LABEL": "Filtros",
+    "CLEAR_ALL": "Limpiar Todo",
+    "SEARCH": "Búsqueda"
   },
   "HEADER": {
     "SERVICES": "Servicios",

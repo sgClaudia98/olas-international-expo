@@ -156,17 +156,38 @@ Payment form container sliding over cart.
 ### Filter Components
 
 #### Filter (`components/filter/Filter.tsx`)
-Main filtering interface.
+Main filtering interface with applied filters display.
 
 **Features:**
-- Category selection
-- Price range slider
-- Sort options
-- Brand filters
+- Multilevel category selection
+- Dynamic price range options based on products
+- Applied filters visualization
+- Individual filter removal
 - Clear all filters
+- Responsive drawer for mobile
+
+**Integration:**
+- Uses SearchContext for state management
+- Displays AppliedFilters component
+- Supports URL state persistence
+
+#### AppliedFilters (`components/filter/AppliedFilters.tsx`)
+Visual display of active filters with removal capability.
+
+**Features:**
+- Displays active filters as chips
+- Click to remove individual filters
+- Animated appearance/disappearance
+- Horizontal scrolling for multiple filters
+- Clear all button
+
+**Filter Types Displayed:**
+- Product search query
+- Category/department selection
+- Price range
 
 #### FilterDrawer (`components/filter/FilterDrawer.tsx`)
-Mobile-friendly filter drawer.
+Mobile-friendly filter drawer with overlay.
 
 ### Landing Page Components
 
@@ -253,13 +274,23 @@ Manages banner data and rotation.
 ```
 
 ### useSearchMarketOptions (`hooks/useSearchMarketOptions.tsx`)
-Provides search suggestions and autocomplete.
+Manages product search and filtering with backend synchronization.
 
 **Features:**
-- Debounced search
-- Category suggestions
-- Recent searches
-- Popular searches
+- Integrates with SearchContext for filter state
+- Handles both POST (initial search) and GET (filter updates) requests
+- Debounced search to reduce API calls
+- Price range integration from SearchContext
+- Automatic filter updates based on selection changes
+
+**Filter State Management:**
+```typescript
+interface IAllFilters {
+  query?: SearchMarketBookingOptions;    // Price range, etc.
+  mutation?: IFilter;                    // Category, search term
+  pagination?: PaginationRequest;
+}
+```
 
 ### useSort (`hooks/useSort.ts`)
 Product sorting logic.
@@ -274,13 +305,36 @@ Product sorting logic.
 ## Context Providers
 
 ### SearchContext (`context/SearchContext.tsx`)
-Global search state management.
+Global search state management with URL synchronization.
+
+**Key Features:**
+- Centralized filter state management
+- URL parameter synchronization without page reload
+- Product name search
+- Category and department selection
+- Price range filtering
+- Clear individual or all filters
 
 **Provides:**
-- Search query
-- Active filters
-- Search results
-- Search history
+```typescript
+interface SearchContextType {
+  data?: Department[];                    // Available departments/categories
+  selection: Selection;                   // Active category/department filters
+  productName: string;                    // Search query
+  priceRange: PriceRange;                // Active price filter
+  setProductName?: (value: string) => void;
+  setSelection: (args: Partial<Selection>) => void;
+  setPriceRange: (range: PriceRange) => void;
+  clearProductName: () => void;
+  clearAllFilters: () => void;
+}
+```
+
+**URL State Management:**
+- Uses browser History API for web platform
+- Updates URL parameters without navigation/reload
+- Preserves filter state across page refreshes
+- Parameters: `search`, `categoryId`, `departmentId`, `minPrice`, `maxPrice`
 
 ## Services
 
@@ -410,9 +464,26 @@ Single order view.
 Functions for transforming API data to UI format.
 
 **Functions:**
+- `mapDepartmentsToDropdownItems` - Convert departments to dropdown format
 - `mapProductToCartItem` - Convert product to cart item
 - `mapOrderToDisplay` - Format order for display
-- `calculateCartTotals` - Compute cart summary
+- Other utility transformations
+
+### Price Range Utils (`utils/priceRangeUtils.ts`)
+Utilities for handling price range filtering.
+
+**Functions:**
+- `generatePriceRangeOptions` - Create price range options based on min/max
+- `priceRangeOptionsToDropdownItems` - Convert to dropdown format
+- `parsePriceRangeValue` - Parse string value back to PriceRange object
+
+**PriceRange Interface:**
+```typescript
+interface PriceRange {
+  minPrice?: number;
+  maxPrice?: number;
+}
+```
 
 ### Breadcrumb Builder (`utils/breadcrumbBuild.ts`)
 Generate breadcrumb navigation.
@@ -538,6 +609,25 @@ const { data } = useGetProductsQuery(filters);
 - Complete checkout
 - View order history
 
+## Recent Updates
+
+### URL State Management
+- Implemented filter persistence in URL parameters
+- Uses browser History API to avoid page reloads
+- Synchronizes filters across browser navigation
+
+### Applied Filters UI
+- Added visual representation of active filters
+- Implemented individual filter removal
+- Responsive design with proper chip sizing
+- Click-to-remove interaction pattern
+
+### State Management Improvements
+- Fixed circular dependencies in useEffect hooks
+- Improved object comparison for filter updates
+- Proper dependency management in custom hooks
+- Cross-platform storage solution for AsyncStorage
+
 ## Future Enhancements
 
 1. **Advanced Features**
@@ -545,21 +635,25 @@ const { data } = useGetProductsQuery(filters);
    - Wishlist functionality
    - Product comparisons
    - Recently viewed items
+   - Advanced filter options (brand, size, color)
 
 2. **Search Improvements**
    - Elasticsearch integration
    - Visual search
    - Voice search
-   - Search filters
+   - Search suggestions/autocomplete
+   - Search history
 
 3. **Personalization**
    - Recommended products
    - Personalized categories
    - Dynamic pricing
    - Abandoned cart recovery
+   - Saved filter presets
 
 4. **Social Features**
    - Share products
    - Social login for reviews
    - Referral system
    - Gift cards
+   - User-generated content

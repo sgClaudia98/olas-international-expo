@@ -9,7 +9,16 @@ import React, {
 import { useGetDepartmentsQuery } from "../services/api/BookingService";
 import { Department } from "../services/interfaces/booking";
 import { capitalizeWords } from "@/utils/string";
-import { useGlobalSearchParams, useLocalSearchParams } from "expo-router";
+import { useGlobalSearchParams } from "expo-router";
+import { Platform } from "react-native";
+import { 
+  FilterState, 
+  FilterUpdates, 
+  updateUrlParams as updateUrlParamsUtil,
+  buildUrlParamsFromFilters,
+  applyFilterUpdates,
+  hasActiveFilters 
+} from "../utils/searchContextUtils";
 
 export interface Selection {
   departmentId?: number;
@@ -18,13 +27,26 @@ export interface Selection {
   category?: string;
 }
 
+export interface PriceRange {
+  minPrice?: number;
+  maxPrice?: number;
+}
+
 interface SearchContextType {
-  data?: Department[] | undefined;
+  departments?: Department[] | undefined;
+  // Current filter state
+  filters: FilterState;
+  // Individual setters (kept for backward compatibility)
   selection: Selection;
   productName: string;
+  priceRange: PriceRange;
   setProductName?: (value: string) => void;
-  setSelection: (args: Partial<Selection>) => void;
+  setSelection: (args: Selection) => void;
+  setPriceRange: (range: PriceRange) => void;
   clearProductName: () => void;
+  clearAllFilters: () => void;
+  // New batch update method
+  batchUpdateFilters: (updates: FilterUpdates) => void;
 }
 
 // Crear el contexto con un valor inicial opcional
@@ -34,6 +56,9 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 type SearchParams = {
   categoryId?: string;
   departmentId?: string;
+  search?: string;
+  minPrice?: string;
+  maxPrice?: string;
 };
 
 // Props del proveedor
@@ -44,41 +69,86 @@ interface SearchProviderProps {
 // Proveedor del contexto
 export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
   // Obtener la data desde el hook
-  const { data } = useGetDepartmentsQuery();
-  const { departmentId, categoryId } = useGlobalSearchParams<SearchParams>();
+  const { data: departmentsData } = useGetDepartmentsQuery();
+  const searchParams = useGlobalSearchParams<SearchParams>();
 
-  // Estado para guardar la selección
-  const [selection, setSelectionState] = useState<Selection>({});
-  const [productName, setProductName] = useState<string>("");
+  // Single filter state object
+  const [filters, setFilters] = useState<FilterState>({
+    selection: {},
+    productName: "",
+    priceRange: {},
+  });
+
+  // Initialize from URL params
+  useEffect(() => {
+    const initialFilters: FilterUpdates = {};
+    
+    if (searchParams.search) {
+      initialFilters.productName = searchParams.search;
+    }
+    
+    if (searchParams.minPrice || searchParams.maxPrice) {
+      initialFilters.priceRange = {
+        minPrice: searchParams.minPrice ? Number(searchParams.minPrice) : undefined,
+        maxPrice: searchParams.maxPrice ? Number(searchParams.maxPrice) : undefined,
+      };
+    }
+    
+    if (Object.keys(initialFilters).length > 0) {
+      setFilters(prev => applyFilterUpdates(prev, initialFilters));
+    }
+  }, []);
+
+  // Batch update filters
+  const batchUpdateFilters = useCallback((updates: FilterUpdates) => {
+    setFilters(prev => {
+      const newFilters = applyFilterUpdates(prev, updates);
+      // Update URL with new filter state
+      const urlParams = buildUrlParamsFromFilters(newFilters);
+      updateUrlParamsUtil(urlParams);
+      
+      return newFilters;
+    });
+  }, []);
 
   const clearProductName = () => {
-    setProductName("");
+    batchUpdateFilters({ productName: "" });
   };
 
   // Función para actualizar la selección
-  const setSelection = (args: Partial<Selection>) => {
-    setSelectionState((prev) => ({
-      ...prev,
-      ...args,
-    }));
+  const setSelection = (args: Selection) => {
+    batchUpdateFilters({ selection: args, priceRange: {} });
+  };
+
+  const setPriceRange = (range: PriceRange) => {
+    batchUpdateFilters({ priceRange: range });
+  };
+  
+  const setProductName = (value: string) => {
+    batchUpdateFilters({ productName: value });
+  };
+
+
+  const clearAllFilters = () => {
+    batchUpdateFilters({ clearAll: true });
   };
 
   useEffect(() => {
-    if (data && (departmentId || categoryId))
+    if (departmentsData && (searchParams.departmentId || searchParams.categoryId))
       setSelectionIds({
-        departmentId: +departmentId || undefined,
-        categoryId: +categoryId || undefined,
+        departmentId: searchParams.departmentId ? +searchParams.departmentId : undefined,
+        categoryId: searchParams.categoryId ? +searchParams.categoryId : undefined,
       });
-  }, [data, departmentId, categoryId]);
+  }, [departmentsData, searchParams.departmentId, searchParams.categoryId]);
 
   // Expnsive calculation using useCallback
   const setSelectionIds = (
     args: Partial<Omit<Selection, "department" | "category">>
   ) => {
-    const department = args.departmentId
-      ? data?.departments.find((dep) => dep.id === args.departmentId)
-      : args.categoryId
-      ? data?.departments.find((dep) =>
+    const department = args.departmentId && departmentsData?.departments
+      ? departmentsData.departments.find((dep) => dep.id === args.departmentId)
+      : args.categoryId && departmentsData?.departments
+      ? departmentsData.departments.find((dep) =>
           dep.categories.some((cat) => cat.id === args.categoryId)
         )
       : undefined;
@@ -90,20 +160,26 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
 
     const sel: Selection = {
       ...args,
-      department: capitalizeWords(department?.name), // Almacena el departamento completo
-      category: capitalizeWords(category),
+      department: department?.name ? capitalizeWords(department.name) : undefined,
+      category: category ? capitalizeWords(category) : undefined,
     };
     setSelection(sel);
   };
 
   // Valores que el contexto expone
   const value: SearchContextType = {
-    data: data?.departments,
-    selection,
-    productName,
+    departments: departmentsData?.departments,
+    filters,
+    // Individual values for backward compatibility
+    selection: filters.selection,
+    productName: filters.productName,
+    priceRange: filters.priceRange,
     setSelection,
     setProductName,
+    setPriceRange,
     clearProductName,
+    clearAllFilters,
+    batchUpdateFilters,
   };
 
   return (

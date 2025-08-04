@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import ProductItem from "../components/product/ProductItem";
-import useSearchMarketOptions, {
-  IAllFilters,
-} from "../hooks/useSearchMarketOptions";
+import useSearchMarketOptions from "../hooks/useSearchMarketOptions";
 import Filters from "../components/filter/Filter";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../styles/productWrapper";
 import PaginatedContent from "@/components/Pagination";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import ProductsWrapperHeader from "../layout/ProductsWrapperHeader";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import NoSearchResults from "@/components/NoSearchResults";
@@ -16,7 +14,6 @@ import BannerSlider from "../components/banners/BannerSlider";
 import ProductWrapperSkeleton from "../components/skeletons/ProductWrapperSkeleton";
 import { BreadcrumbItem } from "@/components/Breadcrumb";
 import { buildBreadcrumb } from "../utils/breadcrumbBuild";
-import { useTranslation } from "react-i18next";
 import { useSearchContext } from "../context/SearchContext";
 import { SortOption, useSort } from "../hooks/useSort";
 
@@ -25,7 +22,7 @@ const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
   const { lessThan } = useBreakpoints();
 
-  const { data, items, stats, searchId, loading, fetchPage, updateFilter } =
+  const { data, items, stats, loading, fetchPage } =
     useSearchMarketOptions();
   const { selection } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
@@ -33,7 +30,7 @@ const ProductsWrapper: React.FC = () => {
 
   const [sortBy, setSortBy] = useState<SortOption>(null);
 
-  const sortedItems = useSort(items, sortBy);
+  const sortedItems = useSort(items || [], sortBy);
 
   const [breadcrumb, setBreadcrumb] = useState<BreadcrumbItem[]>(
     buildBreadcrumb()
@@ -59,7 +56,7 @@ const ProductsWrapper: React.FC = () => {
         items.pop()
         console.debug("1Sel", selection)
         items.push({
-          label: selection.department,
+          label: selection.department || '',
           route: `${ROUTE}?departmentId=${selection.departmentId}`,
         });
         if (selection.category)
@@ -99,29 +96,14 @@ const ProductsWrapper: React.FC = () => {
       <View style={styles.wrapper}>
         {!lessThan.tablet && showDesktopFilters && (
           <Filters
-            setFilter={updateFilter}
-            stats={
-              stats && searchId
-                ? {
-                    data: stats,
-                    searchId: searchId,
-                  }
-                : undefined
-            }
+            stats={stats}
+            onCloseDrawer={() => {}}
           />
         )}
 
         {lessThan.tablet && (
           <Filters
-            setFilter={updateFilter}
-            stats={
-              stats && searchId
-                ? {
-                    data: stats,
-                    searchId: searchId,
-                  }
-                : undefined
-            }
+            stats={stats}
             isDrawerOpen={showMobileDrawer}
             onCloseDrawer={closeMobileDrawer}
           />

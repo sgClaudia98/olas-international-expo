@@ -51,13 +51,8 @@ export default function MarketplaceLeftHeader() {
     if (setProductName) setProductName(value);
     if (pathname !== "/services/market/products") {
       navigateToProducts(value);
-    } else {
-      // Optionally, update the query param if already on the page
-      route.replace({
-        pathname: "/(main)/services/market/products",
-        params: value ? { search: value } : undefined,
-      });
     }
+    // URL update is now handled by SearchContext
   };
 
   // Accepts an optional search string and adds it as a query param

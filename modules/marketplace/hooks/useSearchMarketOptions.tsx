@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   useSearchMarketOptionsMutation,
   useLazyGetSearchMarketOptionsQuery,
@@ -10,11 +10,12 @@ import {
   SearchMarketBookingOptions,
   SearchMarketBookingOptionStats,
   MarketBookingOption,
+  Department,
 } from '../services/interfaces/booking';
-import {useLocationContext} from '@/contexts/locationContext';
-import {Selection, useSearchContext} from '../context/SearchContext';
-import {DEFAULT_DESTINATION} from '@/constants';
-import {PaginationRequest} from '@/services/interfaces/pagination';
+import { useLocationContext } from '@/contexts/locationContext';
+import { Selection, PriceRange, useSearchContext } from '../context/SearchContext';
+import { DEFAULT_DESTINATION } from '@/constants';
+import { PaginationRequest } from '@/services/interfaces/pagination';
 
 export interface IFilter extends Selection {
   destinationId?: number;
@@ -27,14 +28,14 @@ export interface IAllFilters {
   pagination?: PaginationRequest;
 }
 
-interface SearchMarketOptionsResult {
+export interface SearchMarketOptionsResult {
   data?: SearchMarketBookingOptionsResponse;
   totalItems?: number;
   items?: MarketBookingOption[];
   searchId?: number | null;
   stats?: SearchMarketBookingOptionStats;
   loading: boolean;
-  updateFilter: (allFilters?: IAllFilters, pagination?: PaginationRequest) => void;
+  changePage: (pagination: PaginationRequest) => void;
   fetchPage: (req: PaginationRequest) => void;
 }
 
@@ -42,42 +43,32 @@ const initFilter: IAllFilters = {
   mutation: {
     destinationId: DEFAULT_DESTINATION,
   },
+  pagination: {
+    limit: 20,
+    offset: 0,
+  },
 };
 
 const useSearchMarketOptions = (): SearchMarketOptionsResult => {
-  const {activeDestination} = useLocationContext();
-  const {selection, productName} = useSearchContext();
+  const { activeDestination } = useLocationContext();
+  const {
+    filters,
+  } = useSearchContext();
 
   const [searchId, setSearchId] = useState<number | null>(null);
   const [data, setData] = useState<SearchMarketBookingOptionsResponse>();
-  const [filter, setFilter] = useState<IAllFilters>(initFilter);
-  const [loading, setLoading] = useState(false);
-  const [forcePOST, setForcePOST] = useState(false);  
+  const [pagination, setPagination] = useState<PaginationRequest>(initFilter.pagination!);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [hasInitialized, setHasInitialized] = useState(false);
 
-  const [searchMarketOptions] = useSearchMarketOptionsMutation();
-  const [triggerQuery, {data: queryData, isFetching}] = useLazyGetSearchMarketOptionsQuery();
+  const [searchMarketOptions, { isLoading: isMutationLoading }] = useSearchMarketOptionsMutation();
+  const [triggerQuery, { data: queryData, isFetching: isQueryLoading }] = useLazyGetSearchMarketOptionsQuery();
 
-  const updateFilter = useCallback(
-    (allFilters?: IAllFilters, newPagination?: PaginationRequest) => {
-      setFilter(prevFilter => {
-        // Use JSON.stringify to properly compare objects
-        const mutationChanged = JSON.stringify(prevFilter.mutation) !== JSON.stringify(allFilters?.mutation);
-        if (!forcePOST && mutationChanged) setForcePOST(true);
-
-        return {
-          mutation: {
-            ...prevFilter?.mutation,
-            ...allFilters?.mutation,
-          },
-          query: {
-            ...prevFilter?.query,
-            ...allFilters?.query,
-          },
-          pagination: newPagination || prevFilter?.pagination,
-        };
-      });
+  const changePage = useCallback(
+    (newPagination: PaginationRequest) => {
+      setPagination(newPagination);
     },
-    [activeDestination, forcePOST],
+    [],
   );
 
   const handleResponse = (response: SearchMarketBookingOptionsResponse) => {
@@ -85,80 +76,127 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
     setData(response);
   };
 
+  // Build filter from context
+  const buildFilterFromContext = useCallback((): IAllFilters => {
+    return {
+      mutation: {
+        destinationId: activeDestination?.id || DEFAULT_DESTINATION,
+        productName: filters.productName || undefined,
+        departmentId: filters.selection.departmentId,
+        categoryId: filters.selection.categoryId,
+        department: filters.selection.department,
+        category: filters.selection.category,
+      },
+      query: {
+        minPrice: filters.priceRange.minPrice,
+        maxPrice: filters.priceRange.maxPrice,
+      },
+      pagination,
+    };
+  }, [filters, activeDestination, pagination]);
+
   useEffect(() => {
     if (queryData) {
       handleResponse(queryData);
     }
   }, [queryData]);
 
-  useEffect(() => {
-    if (
-      isFetching ||
-      (Object.keys(selection).length === 0 && (!productName || productName === ''))
-    ) {
-      return;
-    }
-    updateFilter({
-      mutation: {
-        productName: productName != '' ? productName : undefined,
-        ...selection,
-      },
-    });
-  }, [selection, productName]);
+  // This effect is no longer needed since we're using filters directly from context
+  // The main effect below will handle all updates
 
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
+  // Track previous mutation values to detect changes
+  const [prevMutation, setPrevMutation] = useState<IFilter>(initFilter.mutation || {});
+
   useEffect(() => {
-    if (filter.pagination) {
+    if (!isMutationLoading && !isQueryLoading) {
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
 
-      const fetchData = async () => {
+      const newTimeoutId = setTimeout(async () => {
+        const currentFilter = buildFilterFromContext();
         const request: SearchMarketBookingOptionsRequest = {
           destinationId: activeDestination?.id || DEFAULT_DESTINATION,
-          ...filter.mutation,
+          ...currentFilter.mutation,
           optionsQuery: {
-            ...filter.query,
-            ...filter.pagination,
+            ...currentFilter.query,
+            ...currentFilter.pagination,
           },
         };
-        await fetch(request, forcePOST);
-      };
-      setTimeoutId(setTimeout(fetchData, 300));
+
+        // Determine if we should use mutation (POST)
+        const mutationChanged =
+          prevMutation.destinationId !== currentFilter.mutation?.destinationId ||
+          prevMutation.productName !== currentFilter.mutation?.productName ||
+          prevMutation.categoryId !== currentFilter.mutation?.categoryId ||
+          prevMutation.departmentId !== currentFilter.mutation?.departmentId;
+
+        const shouldUseMutation = isInitialLoad || mutationChanged || !searchId;
+        
+        // Update previous mutation for next comparison
+        if (mutationChanged) {
+          setPrevMutation(currentFilter.mutation || {});
+        }
+
+        await fetch(request, shouldUseMutation);
+
+        // Mark as initialized after first successful fetch
+        if (isInitialLoad) {
+          setHasInitialized(true);
+        }
+      }, isInitialLoad ? 0 : 300); // No delay for initial load
+
+      setTimeoutId(newTimeoutId);
     }
 
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [filter, activeDestination, forcePOST]);
+  }, [filters, activeDestination, pagination, isInitialLoad, buildFilterFromContext]);
 
-  const fetch = async (request: SearchMarketBookingOptionsRequest, forceSearch?: boolean) => {
-    setLoading(true);
-    let response: Promise<SearchMarketBookingOptionsResponse>;
-    if (searchId && !forceSearch) {
-      // If common filters are modified and searchId exists, use the query
-      const queryRequest: GetSearchMarketBookingOptionsRequest = {
-        ...request.optionsQuery,
-        searchId,
-      };
-      response = triggerQuery(queryRequest).unwrap();
-    } else {
-      // If complex filters or no searchId, use the mutation
-      response = searchMarketOptions(request).unwrap();
+  const fetch = async (request: SearchMarketBookingOptionsRequest, shouldUseMutation: boolean) => {
+    // Don't start a new request if one is already in progress
+    if (isMutationLoading || isQueryLoading) {
+      return;
     }
 
-    const result = await response;
-    handleResponse(result);
-    setLoading(false);
-    setForcePOST(false);
+    try {
+      let response: Promise<SearchMarketBookingOptionsResponse>;
 
-    return result;
+      // Use mutation (POST) for:
+      // 1. Initial load
+      // 2. When mutation filters change (destinationId, productName, categoryId, departmentId)
+      // 3. When no searchId exists yet
+      if (shouldUseMutation || !searchId) {
+        response = searchMarketOptions(request).unwrap();
+        if (isInitialLoad) setIsInitialLoad(false);
+      } else {
+        // Use query (GET) for filter changes (price)
+        const queryRequest: GetSearchMarketBookingOptionsRequest = {
+          ...request.optionsQuery,
+          searchId,
+        };
+        response = triggerQuery(queryRequest).unwrap();
+      }
+
+      const result = await response;
+      handleResponse(result);
+      return result;
+    } catch (error) {
+      console.error('Error fetching market options:', error);
+      // Re-throw to let the caller handle if needed
+      throw error;
+    }
   };
 
   const fetchPage = async (req: PaginationRequest) => {
-    return updateFilter({}, req);
+    return changePage(req);
   };
+
+  // Note: Filter state mutations should be done through SearchContext directly
+  // This hook only handles API calls based on filter changes
 
   return {
     data,
@@ -166,9 +204,9 @@ const useSearchMarketOptions = (): SearchMarketOptionsResult => {
     stats: data?.stats,
     totalItems: data?.totals,
     searchId,
-    loading: loading || isFetching,
+    loading: isQueryLoading || isMutationLoading,
     fetchPage,
-    updateFilter,
+    changePage,
   };
 };
 
