@@ -60,7 +60,9 @@ const LandingWrapper: React.FC = () => {
           <GirlWithBagSection />
           {/* <ProductSlider /> */}
           <Testimonials />
+          {/* Apps moviles
           <ExperienceFromYourMobile />
+           */}
           <NewsletterSection />
           <View style={{ width: "100%" }}>
             <BottomImage />

@@ -219,7 +219,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                     <View style={styles.resumeItem}>
                       <ThemedText>{t("PAYMENT_FEE")}</ThemedText>
                       <ThemedText>
-                        $ {booking?.paymentFee.toFixed(2)}
+                        $ {booking?.paymentFee?.toFixed(2)}
                       </ThemedText>
                     </View>
                     <View style={styles.resumeItem}>

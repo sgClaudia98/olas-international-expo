@@ -1,9 +1,7 @@
 import React from "react";
 import Page from "@/components/layout/Page";
-import { Profile } from "@/modules/auth/pages/Profile";
 import { View, StyleSheet } from "react-native";
 import { Slot } from "expo-router";
-import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/styles";
 import Breadcrumb from "@/components/Breadcrumb";
 import { homeBreadcrumItem } from "@/modules/marketplace/utils/breadcrumbBuild";
@@ -28,7 +26,7 @@ export default function ProfileLayout() {
       icon: "History",
     },
   ];
-
+// TODO: protect this layout routes
   return (
     <Page backgroundColor={Colors.black.fifth}>
       <View style={styles.breadcrumbContainer}>

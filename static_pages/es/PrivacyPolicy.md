@@ -22,14 +22,16 @@ Esto puede incluir:
 - Dirección de correo electrónico.
 - Número de teléfono.
 - Dirección de envío y facturación.
-- Información de pago (procesada de forma segura por terceros).
+- Información de pago (procesada de forma segura por terceros).  
+
 
 ### 1.2. Información Recopilada Automáticamente
 Cuando utiliza nuestro Sitio, recopilamos automáticamente cierta información, como:
 - Dirección IP.
 - Tipo de navegador y sistema operativo.
 - Páginas visitadas y tiempo de navegación.
-- Identificadores de dispositivos.
+- Identificadores de dispositivos.  
+
 
 ### 1.3. Información de Terceros
 Podemos recibir información sobre usted de terceros, como proveedores de servicios de pago, socios comerciales o redes sociales, cuando interactúa con nosotros a través de estas plataformas.
