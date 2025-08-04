@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import platformStorage from '@/utils/platformStorage';
 import { Client } from '../models/ClientModel';
 import { fetchUserProfileThunk } from './authThunks';
 
@@ -25,19 +25,19 @@ const initialState: AuthState = {
   refreshToken: undefined,
 };
 
-// Function to save auth state in AsyncStorage
+// Function to save auth state in storage
 const saveAuthState = async (state: AuthState) => {
   try {
-    await AsyncStorage.setItem(AUTH_KEY_STORAGE, JSON.stringify(state));
+    await platformStorage.setItem(AUTH_KEY_STORAGE, JSON.stringify(state));
   } catch (error) {
     console.error('Error saving auth state:', error);
   }
 };
 
-// Function to load auth state from AsyncStorage
+// Function to load auth state from storage
 const loadAuthState = async (): Promise<AuthState> => {
   try {
-    const jsonValue = await AsyncStorage.getItem(AUTH_KEY_STORAGE);
+    const jsonValue = await platformStorage.getItem(AUTH_KEY_STORAGE);
     return jsonValue != null ? JSON.parse(jsonValue) : initialState;
   } catch (error) {
     console.error('Error loading auth state:', error);
@@ -53,7 +53,7 @@ const authSlice = createSlice({
       state.user = undefined;
       state.token = undefined;
       state.refreshToken = undefined;
-      AsyncStorage.removeItem(AUTH_KEY_STORAGE); // Clear storage on logout
+      platformStorage.removeItem(AUTH_KEY_STORAGE); // Clear storage on logout
     },
     setAuthState: (state, { payload }: PayloadAction<AuthState>) => {
       state.user = payload.user;

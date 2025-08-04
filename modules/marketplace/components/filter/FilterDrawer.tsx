@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "ios" ? 0 : 20,
     ...Platform.select({
       ios: {
-        shadowColor: Colors.black.default,
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
+        boxShadow: `0px -3px 3px rgba(0, 0, 0, 0.1)`,
       },
       android: {
         elevation: 5,
+      },
+      web: {
+        boxShadow: `0px -3px 3px rgba(0, 0, 0, 0.1)`,
       },
     }),
   },

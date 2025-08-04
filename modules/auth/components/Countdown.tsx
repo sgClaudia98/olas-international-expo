@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ThemedText } from "@/components/ThemedText";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { TextStyle } from "react-native";
+import platformStorage from "@/utils/platformStorage";
 
 interface CountdownProps {
   duration: number; // Duration in seconds
@@ -20,7 +21,7 @@ const Countdown: React.FC<CountdownProps> = ({
 
   useEffect(() => {
     const restoreCountdown = async () => {
-      let expireAt = await AsyncStorage.getItem(storageKey);
+      let expireAt = await platformStorage.getItem(storageKey);
       if (!expireAt) {
         expireAt = (Date.now() + duration * 1000).toString();
       }
@@ -48,13 +49,13 @@ const Countdown: React.FC<CountdownProps> = ({
   const startCountdown = async (initialTime: number) => {
     const now = Date.now();
     const expireAt = now + initialTime * 1000;
-    await AsyncStorage.setItem(storageKey, expireAt.toString());
+    await platformStorage.setItem(storageKey, expireAt.toString());
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          AsyncStorage.removeItem(storageKey);
+          platformStorage.removeItem(storageKey);
           if (onComplete) onComplete();
           return 0;
         }

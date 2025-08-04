@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { Menu, Appbar, IconButton, Button } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import * as Localization from "expo-localization";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import DropdownSelect2, { MenuItem } from "./DropdownMenuSelect";
 import { Colors } from "@/styles";
 import { languages } from "@/i18n";
+import platformStorage from "@/utils/platformStorage";
 
 
 
@@ -17,13 +16,13 @@ const LanguageSelector = () => {
   const closeMenu = () => setVisible(false);
 
   const changeLanguage = (lng: string) => {
-    AsyncStorage.setItem("language", lng);
+    platformStorage.setItem("language", lng);
     i18n.changeLanguage(lng);
     closeMenu();
   };
 
   const getSavedLanguage = async () => {
-    let savedLanguage = await AsyncStorage.getItem("language");
+    let savedLanguage = await platformStorage.getItem("language");
     if (!savedLanguage) {
       savedLanguage = Localization.getLocales()[0].languageCode;
     }
@@ -31,7 +30,7 @@ const LanguageSelector = () => {
   };
 
   useEffect(() => {
-    getSavedLanguage().then((language) => i18n.changeLanguage(language));
+    getSavedLanguage().then((language) => i18n.changeLanguage(language ?? undefined));
   }, []);
 
   

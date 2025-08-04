@@ -1,7 +1,6 @@
 import {BaseQueryApi, FetchArgs, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {decodeToken} from 'react-jwt';
 import {RootState} from '@/state';
-import { accountService } from '@/modules/auth/services/api/AccountService';
 import { logout, setAuthState, User } from '@/modules/auth/slices/authSlice';
 import { BASE_URL } from '@/constants';
 import { fetchUserProfileThunk } from '@/modules/auth/slices/authThunks';
@@ -148,5 +147,3 @@ export const baseQuery = async (
   const baseQuery = constructBaseQuery(baseUrl);
   return baseQuery(args, api, extraOptions);
 };
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
