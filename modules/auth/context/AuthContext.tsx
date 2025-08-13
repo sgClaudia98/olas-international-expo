@@ -17,6 +17,7 @@ import { IAuthRequest } from "../services/interfaces/account";
 import { useRouter, useSegments } from "expo-router";
 import { red } from "@/styles/colors";
 import { set } from "lodash";
+import { ThemedText } from "@/components/ThemedText";
 
 // Definir el tipo del contexto
 interface AuthContextType {
@@ -45,7 +46,7 @@ interface AuthProviderProps {
 // Provider component
 export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
-  fallback = <div>Inicializando...</div>,
+  fallback = <ThemedText>Inicializando...</ThemedText>,
 }) => {
   const dispatch = useAppDispatch();
   const authState = useAppSelector((state) => state.auth);

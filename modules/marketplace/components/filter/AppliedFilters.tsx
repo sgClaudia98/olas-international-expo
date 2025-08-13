@@ -5,6 +5,7 @@ import { Selection, PriceRange } from '../../context/SearchContext';
 import { useResponsiveStyles } from '@/hooks/useResponsiveStyles';
 import responsiveStyles from '../../styles/appliedFilters';
 import { useTranslation } from 'react-i18next';
+import { shouldUseNativeDriver } from '@/utils/animationHelper';
 
 interface AppliedFiltersProps {
   selection: Selection;
@@ -40,7 +41,7 @@ const AppliedFilters: React.FC<AppliedFiltersProps> = ({
     Animated.timing(fadeAnim, {
       toValue: hasFilters ? 1 : 0,
       duration: 200,
-      useNativeDriver: true,
+      useNativeDriver: shouldUseNativeDriver(),
     }).start();
   }, [hasFilters]);
 

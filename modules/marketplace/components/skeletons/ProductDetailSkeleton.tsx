@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useRef } from "react";
 import { View, Animated } from "react-native";
 import { productInfoSkeletonStyles } from "../../styles/product";
+import { shouldUseNativeDriver } from "@/utils/animationHelper";
 
 const ProductDetailSkeleton = () => {
   const styles = useResponsiveStyles(productInfoSkeletonStyles);
@@ -14,12 +15,12 @@ const ProductDetailSkeleton = () => {
       Animated.timing(pulseAnimation, {
         toValue: 1,
         duration: 1000,
-        useNativeDriver: true,
+        useNativeDriver: shouldUseNativeDriver(),
       }),
       Animated.timing(pulseAnimation, {
         toValue: 0.3,
         duration: 1000,
-        useNativeDriver: true,
+        useNativeDriver: shouldUseNativeDriver(),
       }),
     ]);
 
