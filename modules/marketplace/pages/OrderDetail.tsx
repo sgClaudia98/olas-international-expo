@@ -211,7 +211,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       <ThemedText>$ {booking.price.toFixed(2)}</ThemedText>
                     </View>
                     <View style={styles.resumeItem}>
-                      <ThemedText>{t("SHIPPING")}</ThemedText>
+                      <ThemedText>{t("BOOKING_FEE")}</ThemedText>
                       <ThemedText>
                         $ {booking?.details[0].bookingFee.toFixed(2)}
                       </ThemedText>

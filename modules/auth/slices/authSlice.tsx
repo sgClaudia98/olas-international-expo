@@ -1,7 +1,7 @@
+// authSlice.tsx - Sin thunk, solo reducers puros
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import platformStorage from '@/utils/platformStorage';
 import { Client } from '../models/ClientModel';
-import { fetchUserProfileThunk } from './authThunks';
 
 const AUTH_KEY_STORAGE = 'auth';
 
@@ -53,39 +53,26 @@ const authSlice = createSlice({
       state.user = undefined;
       state.token = undefined;
       state.refreshToken = undefined;
-      platformStorage.removeItem(AUTH_KEY_STORAGE); // Clear storage on logout
+      platformStorage.removeItem(AUTH_KEY_STORAGE);
     },
     setAuthState: (state, { payload }: PayloadAction<AuthState>) => {
       state.user = payload.user;
       state.token = payload.token;
       state.refreshToken = payload.refreshToken;
-      saveAuthState(state); // Persist to AsyncStorage
+      saveAuthState(state);
     },
     setUserDetails: (state, { payload }: PayloadAction<Client>) => {
       if (state.user) {
         state.user.details = payload;
-        saveAuthState(state); // Persist to AsyncStorage
+        saveAuthState(state);
       }
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchUserProfileThunk.fulfilled, (state, { payload }) => {
-      if (state.user) {
-        console.debug('User details:', payload);
-        state.user.details = payload;
-      }
-    });
+    // Nuevo reducer para manejar el estado de carga del perfil
+    setProfileLoading: (state, { payload }: PayloadAction<boolean>) => {
+      // Podrías agregar un campo loading si lo necesitas
+    },
   },
 });
 
-export const { setAuthState, logout, setUserDetails } = authSlice.actions;
+export const { setAuthState, logout, setUserDetails, setProfileLoading } = authSlice.actions;
 export default authSlice.reducer;
-
-// Async function to rehydrate state
-export const loadAuthStateFromStorage = () => async (dispatch: any) => {
-  const storedAuth = await loadAuthState();
-  dispatch(setAuthState(storedAuth));
-  if (storedAuth.token) {
-    dispatch(fetchUserProfileThunk());
-  }
-};

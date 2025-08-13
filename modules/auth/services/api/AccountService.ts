@@ -1,9 +1,9 @@
+// accountService.tsx - Sin imports de authSlice
 import {
   BaseQueryApi,
   createApi,
   FetchArgs,
 } from "@reduxjs/toolkit/query/react";
-
 import { baseQueryWithReauth } from "@/services/api/apiService";
 import {
   IAccountCreateRequest,
@@ -19,12 +19,6 @@ import {
   IVerifyRequest,
 } from "../interfaces/account";
 import { BASE_URL } from "@/constants";
-import {
-  logout,
-  setAuthState,
-  setUserDetails,
-  User,
-} from "../../slices/authSlice";
 import { decodeToken } from "react-jwt";
 
 export const accountService = createApi({
@@ -42,41 +36,14 @@ export const accountService = createApi({
         method: "POST",
         body,
       }),
-      onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled;
-          const decoded: any = decodeToken(data.accessToken);
-          console.debug("decoded", decoded);
-          dispatch(
-            setAuthState({
-              user: {
-                name: decoded?.sub,
-                username: decoded?.sub,
-                userId: decoded?.sub,
-                imageUrl: `https://storageaccountsocial.blob.core.windows.net/avatars/${decoded?.sub}.png`,
-              } as User,
-              token: data.accessToken,
-              refreshToken: data.refreshToken,
-            })
-          );
-        } catch (error) {
-          dispatch(logout());
-        }
-      },
+      // Removemos onQueryStarted - se manejará en el componente
     }),
     getProfile: builder.query<IAccountResponse, void>({
       query: () => ({
         url: `/profile`,
         method: "GET",
       }),
-      onQueryStarted: async (credentials, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setUserDetails(data.client));
-        } catch (error) {
-          dispatch(logout());
-        }
-      },
+      // Removemos onQueryStarted - se manejará en el thunk
     }),
     profile: builder.mutation<IAccountResponse, IAccountPutRequest>({
       query: (body) => ({
@@ -136,6 +103,7 @@ export const accountService = createApi({
     }),
   }),
 });
+
 export const {
   useAuthMutation,
   useChangePasswordMutation,

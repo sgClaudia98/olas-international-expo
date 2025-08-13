@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Page from "@/components/layout/Page";
 import { View, StyleSheet } from "react-native";
 import { Slot } from "expo-router";
@@ -10,9 +10,11 @@ import ProfileSideMenu, {
   ProfileSideMenuItem,
 } from "@/modules/auth/components/ProfileSideMenu";
 import { breadcrumbContainer } from "@/styles/page";
+import { useAuth } from "@/modules/auth/context/AuthContext";
+import ProtectedRoute from "@/modules/auth/components/ProtectedRoute";
+
 export default function ProfileLayout() {
   const { t } = useTranslation();
-
   const items: ProfileSideMenuItem[] = [
     {
       label: "PAGE.PROFILE",
@@ -26,21 +28,26 @@ export default function ProfileLayout() {
       icon: "History",
     },
   ];
-// TODO: protect this layout routes
+
+  // TODO: protect this layout routes
   return (
-    <Page backgroundColor={Colors.black.fifth}>
-      <View style={styles.breadcrumbContainer}>
-        <Breadcrumb items={[homeBreadcrumItem, { label: t("PAGE.PROFILE") }]} />
-      </View>
-      <View style={styles.container}>
-        <View style={styles.sideMenu}>
-          <ProfileSideMenu items={items} />
+    <ProtectedRoute>
+      <Page backgroundColor={Colors.black.fifth}>
+        <View style={styles.breadcrumbContainer}>
+          <Breadcrumb
+            items={[homeBreadcrumItem, { label: t("PAGE.PROFILE") }]}
+          />
         </View>
-        <View style={styles.pageContent}>
-          <Slot />
+        <View style={styles.container}>
+          <View style={styles.sideMenu}>
+            <ProfileSideMenu items={items} />
+          </View>
+          <View style={styles.pageContent}>
+            <Slot />
+          </View>
         </View>
-      </View>
-    </Page>
+      </Page>
+    </ProtectedRoute>
   );
 }
 
@@ -49,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     flexDirection: "row",
-    flexWrap: 'wrap',
+    flexWrap: "wrap",
     justifyContent: "space-between",
   },
   sideMenu: {},
