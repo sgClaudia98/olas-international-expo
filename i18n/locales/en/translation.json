@@ -272,5 +272,48 @@
   "ERROR_CODE": {
     "GPB0157": "There is another account registered with the same email address.",
     "UNKNOWN": "An unknown error occurred. Please try again later."
+  },
+  "NOT_FOUND": {
+    "TITLE": "Oops!",
+    "MESSAGE": "This screen doesn't exist.",
+    "GO_HOME": "Go to home screen!"
+  },
+  "COMMON": {
+    "BACK": "Back",
+    "NEXT": "Next",
+    "PAY": "Pay",
+    "LOADING": "Loading",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "FAILED": "Failed",
+    "TRY_AGAIN": "Try again",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "SUBMIT": "Submit",
+    "PREVIOUS": "Previous",
+    "VIEW_LESS": "View less",
+    "VIEW_MORE": "View more"
+  },
+  "MESSAGES": {
+    "SUCCESS_PROFILE_UPDATE": "Success editing profile info",
+    "ERROR_PROFILE_UPDATE": "Error editing profile info",
+    "PAYMENT_FAILED": "Payment failed",
+    "ERROR_FETCHING_ITEMS": "Error fetching items",
+    "ERROR_OPENING_URL": "Don't know how to open this URL",
+    "ERROR_OCCURRED": "An error occurred",
+    "ERROR_LOADING_FILE": "Error loading markdown file",
+    "ERROR_SENDING_CODE": "Error sending code again",
+    "LOGIN_SUCCESSFUL": "Login successful",
+    "LOGIN_FAILED": "Login failed",
+    "PAYMENT_SUCCESSFUL": "Payment successful!",
+    "REDIRECTING_TO_LOGIN": "Redirecting to login",
+    "ERROR_AUTH_CHECK": "Error during auth check",
+    "ERROR_INITIALIZING_AUTH": "Error initializing auth",
+    "ERROR_SENDING_REQUEST": "Error sending forget-password request",
+    "ERROR_CREATING_BOOKING": "Error al crear la reserva",
+    "ERROR_IN_BOOKING": "Error en la reserva"
   }
 }

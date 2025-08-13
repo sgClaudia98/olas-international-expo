@@ -109,6 +109,13 @@
         }
       }
     },
+    "CART": {
+      "TITLE": "Carrito de compras",
+      "EMPTY": "Tu carrito está vacío",
+      "BUTTONS": {
+        "PAY": "Proceder al pago"
+      }
+    },
     "PAYMENT": {
       "TITLE": "Pasos de compra",
       "STEPS": {
@@ -116,6 +123,15 @@
         "Beneficiary": "Destinatario",
         "Book": "Reservar",
         "Payment": "Pago"
+      },
+      "NOTIFICATIONS": {
+        "PAYMENT_SUCCESS": "Pago exitoso",
+        "PAYMENT_FAILED": "Pago fallido",
+        "PAYMENT_ERROR": "Ocurrió un error durante el pago. Por favor, intente nuevamente."
+      },
+      "STATUS": {
+        "PAID": "Aceptado",
+        "PAY": "Pendiente"
       }
     },
     "ORDER_STATUS": {
@@ -130,6 +146,29 @@
     }
   },
   "AUTH": {
+    "VERIFY": {
+      "TITLE": "Verifica tu cuenta",
+      "SUBTITLE": {
+        "DEFAULT": "Ingresa el código de 6 dígitos que enviamos a tu correo electrónico ({{email}}).",
+        "TOKEN_EXPIRED": "Tu código de verificación ha expirado. Por favor, solicita uno nuevo."
+      },
+      "BUTTONS": {
+        "VERIFY": "Verificar",
+        "RESEND_CODE": "Reenviar código",
+        "BACK_TO_LOGIN": "Volver al inicio de sesión"
+      },
+      "FORM": {
+        "TOKEN": {
+          "LABEL": "Código de verificación",
+          "PLACEHOLDER": "Ingresa el código de 6 dígitos"
+        }
+      },
+      "MESSAGES": {
+        "CODE_SENT": "Se ha enviado un nuevo código de verificación a tu correo electrónico.",
+        "SUCCESS": "¡Tu cuenta ha sido verificada exitosamente!",
+        "ERROR": "Ocurrió un error durante la verificación. Por favor, intente nuevamente."
+      }
+    },
     "LOGIN": {
       "TITLE": "¡Bienvenido!",
       "SUBTITLE": "Introduce tus datos para continuar",
@@ -210,6 +249,9 @@
           "LABEL": "Nueva contraseña",
           "PLACEHOLDER": "Introduce tu nueva contraseña"
         }
+      },
+      "ERRORS": {
+        "EMAIL_NOT_FOUND": "Error al solicitar el código, por favor verifica tu correo electrónico."
       }
     }
   },
@@ -228,5 +270,48 @@
   "ERROR_CODE": {
     "GPB0157": "Ya existe otra cuenta registrada con la misma dirección de correo electrónico.",
     "UNKNOWN": "Ha ocurrido un error desconocido. Intente nuevamente más tarde."
+  },
+  "NOT_FOUND": {
+    "TITLE": "¡Ups!",
+    "MESSAGE": "Esta pantalla no existe.",
+    "GO_HOME": "¡Ir a la pantalla de inicio!"
+  },
+  "COMMON": {
+    "BACK": "Atrás",
+    "NEXT": "Siguiente",
+    "PAY": "Pagar",
+    "LOADING": "Cargando",
+    "ERROR": "Error",
+    "SUCCESS": "Éxito",
+    "FAILED": "Fallido",
+    "TRY_AGAIN": "Intentar de nuevo",
+    "CANCEL": "Cancelar",
+    "CONFIRM": "Confirmar",
+    "DELETE": "Eliminar",
+    "EDIT": "Editar",
+    "SAVE": "Guardar",
+    "SUBMIT": "Enviar",
+    "PREVIOUS": "Anterior",
+    "VIEW_LESS": "Ver menos",
+    "VIEW_MORE": "Ver más"
+  },
+  "MESSAGES": {
+    "SUCCESS_PROFILE_UPDATE": "Información del perfil editada con éxito",
+    "ERROR_PROFILE_UPDATE": "Error al editar la información del perfil",
+    "PAYMENT_FAILED": "Pago fallido",
+    "ERROR_FETCHING_ITEMS": "Error al obtener los elementos",
+    "ERROR_OPENING_URL": "No sé cómo abrir esta URL",
+    "ERROR_OCCURRED": "Ocurrió un error",
+    "ERROR_LOADING_FILE": "Error al cargar el archivo markdown",
+    "ERROR_SENDING_CODE": "Error al enviar el código nuevamente",
+    "LOGIN_SUCCESSFUL": "Inicio de sesión exitoso",
+    "LOGIN_FAILED": "Inicio de sesión fallido",
+    "PAYMENT_SUCCESSFUL": "¡Pago exitoso!",
+    "REDIRECTING_TO_LOGIN": "Redirigiendo al inicio de sesión",
+    "ERROR_AUTH_CHECK": "Error durante la verificación de autenticación",
+    "ERROR_INITIALIZING_AUTH": "Error al inicializar la autenticación",
+    "ERROR_SENDING_REQUEST": "Error al enviar la solicitud de restablecimiento de contraseña",
+    "ERROR_CREATING_BOOKING": "Error al crear la reserva",
+    "ERROR_IN_BOOKING": "Error en la reserva"
   }
 }
