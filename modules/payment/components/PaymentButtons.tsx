@@ -64,18 +64,24 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({
 export default PaymentButtons;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
+  container: { flex: 1 },
   method: {
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    padding: 18,
+    borderRadius: 8,
     marginVertical: 5,
+    backgroundColor: Colors.black.fifth,
   },
   methodSelected: {
-    borderColor: Colors.blue.primary,
-    backgroundColor: "#e6f0ff",
+    backgroundColor: Colors.blue.fifth,
   },
-  methodText: { fontSize: 16 },
-  feeText: { fontSize: 12, color: "gray", marginTop: 4 },
+  methodText: { 
+    fontSize: 16,
+    color: Colors.black.primary,
+    fontWeight: "600",
+  },
+  feeText: { 
+    fontSize: 14, 
+    color: Colors.black.second, 
+    marginTop: 4 
+  },
 });
