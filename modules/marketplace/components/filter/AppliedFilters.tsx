@@ -75,7 +75,7 @@ const AppliedFilters: React.FC<AppliedFiltersProps> = ({
             onClose={onRemoveProductName}
             ellipsizeMode="tail"
           >
-            {t('FILTERS.SEARCH')}: {productName.length > 15 ? productName.substring(0, 15) + '...' : productName}
+            {`${t('FILTERS.SEARCH')}: ${productName.length > 15 ? productName.substring(0, 15) + '...' : productName}`}
           </Chip>
         )}
 

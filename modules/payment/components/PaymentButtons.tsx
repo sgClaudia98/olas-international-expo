@@ -1,5 +1,5 @@
 import { Colors } from "@/styles";
-import React, { FC, useState } from "react";
+import React, { FC, useState, Fragment } from "react";
 import {
   View,
   Text,
@@ -49,8 +49,10 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({
                 <Text style={styles.feeText}>${item.fee} fee</Text>
               </View>
               {paymentIcons[item.id] && (
-                <View>
-                  {paymentIcons[item.id]}
+                <View style={{ flexDirection: "row", gap: 5 }}>
+                  {paymentIcons[item.id].map((icon, index) => (
+                    <React.Fragment key={index}>{icon}</React.Fragment>
+                  ))}
                 </View>
               )}
             </View>

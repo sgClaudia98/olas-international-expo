@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { Colors } from "@/styles";
-import { paymentFormStyles as styles } from "../../../../styles/reused/paymentForm";
+import { paymentFormStyles } from "../../../../styles/reused/paymentForm";
 import { DataTable, Button } from "react-native-paper";
 import { UIBookingDetail } from "../../utils/bookingMapping";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 interface OrderSectionProps {
   booking: UIBookingDetail;
@@ -17,60 +18,62 @@ const OrderSection: React.FC<OrderSectionProps> = ({
   onChangeNote,
 }) => {
   const [notesEnabled, setNotesEnabled] = useState(false);
+  const styles = useResponsiveStyles(paymentFormStyles);
 
   const { index, total } = booking;
 
   return (
-    <View style={styles.tablet.productTableContainer}>
-      <Text style={styles.tablet.orderText}>Order {index+1} / {total} </Text>
+    <View style={styles.productTableContainer}>
+      <Text style={styles.orderText}>Order {index+1} / {total}</Text>
       <DataTable>
-        <DataTable.Header style={styles.tablet.tableHeader}>
+        <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>
-            <Text style={styles.tablet.label}>Product</Text>
+            <Text style={styles.label}>Product</Text>
           </DataTable.Title>
           <DataTable.Title numeric>
-            <Text style={styles.tablet.label}>Quantity</Text>
+            <Text style={styles.label}>Quantity</Text>
           </DataTable.Title>
           <DataTable.Title numeric>
-            <Text style={styles.tablet.label}>Price</Text>
+            <Text style={styles.label}>Price</Text>
           </DataTable.Title>
         </DataTable.Header>
       </DataTable>
       {booking.items.map((item) => (
         <DataTable.Row
           key={`${booking.id}-${item.id}`}
-          style={styles.tablet.tableRow}
+          style={styles.tableRow}
         >
           <DataTable.Cell>
-            <Text style={styles.tablet.text}>{item.name}</Text>
+            <Text style={styles.text}>{item.name}</Text>
           </DataTable.Cell>
           <DataTable.Cell numeric>
-            <Text style={styles.tablet.text}>{item.quantity}</Text>
+            <Text style={styles.text}>{item.quantity}</Text>
           </DataTable.Cell>
           <DataTable.Cell numeric>
-            <Text style={styles.tablet.text}>${item.price}</Text>
+            <Text style={styles.text}>${item.price}</Text>
           </DataTable.Cell>
         </DataTable.Row>
       ))}
-      <View style={styles.tablet.separator}></View>
-      <View style={styles.tablet.commentsContainer}>
+      <View style={styles.separator} />
+      <View style={styles.commentsContainer}>
         <Button
-          style={styles.tablet.commentsButton}
+          style={styles.commentsButton}
           onPress={() => setNotesEnabled(!notesEnabled)}
         >
           {notesEnabled ? "Close note" : "Open note"}
         </Button>
         {notesEnabled && (
-          <textarea
-            style={styles.tablet.commentsTextArea}
-            rows={3}
+          <TextInput
+            style={[styles.commentsTextArea, { minHeight: 60 }]}
+            multiline
+            numberOfLines={3}
             placeholder="Leave your comments here..."
-            color={Colors.black.primary}
-            onChange={(e) => onChangeNote(e.target.value)}
+            placeholderTextColor={Colors.black.third}
+            onChangeText={onChangeNote}
             value={note}
-          ></textarea>
+          />
         )}
-        <Text style={styles.tablet.totalPrice}>
+        <Text style={styles.totalPrice}>
           Total $
           {booking.items.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
         </Text>
