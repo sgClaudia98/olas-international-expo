@@ -45,10 +45,10 @@ const Filters: React.FC<FiltersProps> = ({
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    if (lessThan.tablet ) {
+    if (lessThan.tablet) {
       setDrawerVisible(isDrawerOpen);
     }
-  }, [isDrawerOpen, lessThan.tablet ]);
+  }, [isDrawerOpen, lessThan.tablet]);
 
   // Get filter state and mutations from context
   const { 
@@ -81,6 +81,51 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [stats?.minPrice, stats?.maxPrice]);
 
+  // Sync activeCategoryTrace with selection from context
+  useEffect(() => {
+    if (selection && mappedData.length > 0) {
+      const trace: DropdownItem[] = [];
+      
+      // Find department if selected
+      if (selection.departmentId) {
+        const dept = mappedData.find(d => d.value === selection.departmentId.toString());
+        if (dept) {
+          trace.push(dept);
+          
+          // Find category if selected
+          if (selection.categoryId && dept.items) {
+            const cat = dept.items.find(c => c.value === selection.categoryId.toString());
+            if (cat) {
+              trace.push(cat);
+            }
+          }
+        }
+      }
+      
+      setActiveCategoryTrace(trace);
+    } else {
+      setActiveCategoryTrace([]);
+    }
+  }, [selection.departmentId, selection.categoryId, mappedData]);
+
+  // Sync activePriceTrace with priceRange from context
+  useEffect(() => {
+    if (priceRange && (priceRange.minPrice !== undefined || priceRange.maxPrice !== undefined) && priceRangeOptions.length > 0) {
+      const priceDropdownItems = priceRangeOptionsToDropdownItems(priceRangeOptions);
+      
+      // Find matching price range option
+      for (const item of priceDropdownItems) {
+        const parsedRange = parsePriceRangeValue(item.value);
+        if (parsedRange.minPrice === priceRange.minPrice && parsedRange.maxPrice === priceRange.maxPrice) {
+          setActivePriceTrace([item]);
+          break;
+        }
+      }
+    } else {
+      setActivePriceTrace([]);
+    }
+  }, [priceRange, priceRangeOptions]);
+
 
   const _onItemClick = (item: DropdownItem[]) => {
     setActiveCategoryTrace(item)
@@ -92,7 +137,7 @@ const Filters: React.FC<FiltersProps> = ({
       category: item[1]? capitalizeWords(item[1].title) : undefined
     });
 
-    if (lessThan.tablet  && onCloseDrawer) {
+    if (lessThan.tablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -105,7 +150,7 @@ const Filters: React.FC<FiltersProps> = ({
     
     setPriceFilter(parsedRange);
 
-    if (lessThan.tablet  && onCloseDrawer) {
+    if (lessThan.tablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -148,7 +193,6 @@ const Filters: React.FC<FiltersProps> = ({
           activeTrace={activePriceTrace}
         />
       )}
-      
       <AppliedFilters
         selection={selection}
         priceRange={priceRange}
@@ -158,15 +202,14 @@ const Filters: React.FC<FiltersProps> = ({
         onRemoveProductName={clearProductName}
         onClearAll={handleClearAll}
       />
-      
     </>
   );
 
   return (
     <>
-      {!lessThan.tablet  && <View style={styles.filters}>{filterContent}</View>}
+      {!lessThan.tablet && <View style={styles.filters}>{filterContent}</View>}
 
-      {lessThan.tablet  && (
+      {lessThan.tablet && (
         <FilterDrawer
           visible={isDrawerOpen && drawerVisible}
           onClose={onCloseDrawer}

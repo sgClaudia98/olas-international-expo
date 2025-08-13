@@ -16,7 +16,7 @@ import { capitalizeWords } from "@/utils/string";
 export default function MarketplaceLeftHeader() {
   const { t } = useTranslation();
   const styles = useResponsiveStyles(responsiveStyle);
-  const { data, selection, setSelection, setProductName, productName } =
+  const { departments, selection, setSelection, setProductName, productName } =
     useSearchContext();
   const route = useRouter();
   const pathname = usePathname();
@@ -30,11 +30,11 @@ export default function MarketplaceLeftHeader() {
   };
 
   const menuItems = useMemo(() => {
-    const dep = data?.map((v) => {
+    const dep = departments?.map((v) => {
       return { label: v.name, value: v.id.toString() };
     });
     return dep ? [all_cat, ...dep] : [all_cat];
-  }, [data]);
+  }, [departments]);
 
   const onDepartmentSelected = (value: string, label: string) => {
     setDepartment(value);
