@@ -68,7 +68,7 @@ const SidePanel: FC<DrawerContentComponentProps> = ({}) => {
           </Text>
         </Button>
         <Divider style={{width: "100%"}} bold />
-        {serviceMenu.map((link, index) => (
+        {serviceMenu?.map((link, index) => (
           <Button
             key={`hb-${index}`}
             onPress={() => handleNavigate(link.route)}
