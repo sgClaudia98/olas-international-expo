@@ -14,7 +14,6 @@ const desktop = StyleSheet.create({
   cardContent: {
     ...cardStyle.desktop.cardContent,
     minHeight: 280,
-    maxHeight: 500,
     flexWrap: 'wrap'
   },
   tableHeader: {

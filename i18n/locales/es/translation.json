@@ -5,7 +5,8 @@
     "FR": "Francés",
     "PT": "Portugués"
   },
-  "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
+  "DESCRIPTION_LONG": "Tu mercado online y servicio de envíos a Cuba: alimentos frescos, electrodomésticos, celulares, paquetería aérea y marítima. ¡Todo lo que necesitas para tu familia en Cuba! Precios económicos y entrega garantizada.",
+  "DESCRIPTION": "Tu mercado online y servicio de envíos a Cuba: alimentos, electrodomésticos, celulares, paquetería aérea y marítima. ¡Todo lo que necesitas para tu familia!",
   "ACTIONS": {
     "ADD": "Añadir",
     "SAVE_CHANGES": "Guardar cambios"
@@ -57,6 +58,8 @@
   "CUSTOMER_HEADING": "Comprador",
   "SUMMARY_HEADING": "Resumen",
   "BOOKING_FEE": "Cargo por reserva",
+  "PRODUCT": "Producto",
+  "QUANTITY": "Cantidad",
   "DISCOUNT": "Descuento",
   "PAYMENT_FEE": "Cargo por pago",
   "TOTAL": "Total",
@@ -82,33 +85,34 @@
   "MARKET": {
     "HOME": {
       "FEATURES": {
-        "TITLE": "¡Tu experiencia de compra nunca ha sido tan fácil y segura!",
+        "TITLE": "¡Tu Mercado Online en Cuba!",
         "SUBTITLES": {
-          "F1": "Entregas rápidas",
-          "F2": "Pagos seguros",
-          "F3": "Soporte 24/7"
+          "F1": "Entrega Rápida y Segura",
+          "F2": "Llegamos a Todas las provincias",
+          "F3": "¡Envíos de Paquetería a Cuba!"
         },
         "DESCRIPTIONS": {
-          "F1": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
-          "F2": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
-          "F3": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam."
+          "F1": "Recibe tus combos en 48h a 72h horas en La Habana y en 7 días hábiles en el resto del país.",
+          "F2": "Alimentos, electrodomésticos, celulares y más. ¡Todo lo que necesita tu familia al alcance de un clic!",
+          "F3": "Ofrecemos los mejores precios del mercado para envíos aéreos y marítimos a Cuba. ¡Calcula tu envío online!"
         }
       },
       "MOBILE": {
-        "TITLE": "Disfruta de una mejor experiencia desde tu móvil",
-        "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus eget mi.",
+        "TITLE": "¡Disfruta de una mejor experiencia desde tu móvil!",
+        "DESCRIPTION": "Compra alimentos, electrodomésticos y envía paquetería a Cuba más fácil y rápido con nuestra app. ¡Todo al alcance de tu mano!",
         "BUTTONS": {
           "DOWNLOAD_APP_STORE": {
-            "SMALL": "Descargar en",
+            "SMALL": "Descárgala ahora",
             "NORMAL": "App Store"
           },
           "DOWNLOAD_GOOGLE_PLAY": {
-            "SMALL": "Descargar en",
+            "SMALL": "Descárgala ahora",
             "NORMAL": "Google Play"
           }
         }
       }
     },
+    "SHIPPING": "Envíos",
     "CART": {
       "TITLE": "Carrito de compras",
       "EMPTY": "Tu carrito está vacío",

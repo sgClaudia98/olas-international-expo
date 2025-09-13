@@ -243,65 +243,71 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
         <View style={styles.cardContent}>
           {isLoading || !booking ? (
             <>
-              <ThemedText type="defaultBold">{t("SHIPPING")}</ThemedText>
+              <ThemedText type="defaultBold">{t("MARKET.SHIPPING")}</ThemedText>
               <ActivityIndicator />
             </>
           ) : (
-            booking.details.map((shipment) => (
-              <>
-                <View style={styles.shipmentHeader}>
-                  <ThemedText type="defaultBold">
-                    {t("SHIPPING")} {shipment.index + 1}
-                  </ThemedText>
-                  <ThemedText style={styles.badge}>
-                    {t("TOTAL", {
-                      count: shipment.total,
-                    }).toLowerCase()}
-                  </ThemedText>
-                </View>
-                {booking.paidStatus !== "AcceptedPaid" && (
-                  <Button
-                    mode="contained"
-                    onPress={() => setPaymentFormVisible(true)}
-                  >
-                    {t("MARKET.PAYMENT.STATUS.PAY").toUpperCase()}
-                  </Button>
-                )}
+            <>
+              {booking.paidStatus !== "AcceptedPaid" && (
+                <Button
+                  mode="contained"
+                  onPress={() => setPaymentFormVisible(true)}
+                >
+                  {t("MARKET.PAYMENT.STATUS.PAY").toUpperCase()}
+                </Button>
+              )}
+              {booking.details.map((shipment) => (
+                <>
+                  <View style={styles.shipmentHeader}>
+                    <ThemedText type="defaultBold">
+                      {t("MARKET.SHIPPING")} {shipment.index + 1}
+                    </ThemedText>
+                    <ThemedText style={styles.badge}>
+                      {t("TOTAL", {
+                        count: shipment.total,
+                      }).toLowerCase()}
+                    </ThemedText>
+                  </View>
 
-                <OrdersStatus status={booking.status} />
-                <DataTable>
-                  <DataTable.Header style={styles.tableProductHeader}>
-                    <DataTable.Title style={styles.tableColBig}>
-                      <ThemedText style={styles.tableLabel}>Product</ThemedText>
-                    </DataTable.Title>
-                    <DataTable.Title style={styles.tableCol} numeric>
-                      <ThemedText style={styles.tableLabel}>
-                        Quantity
-                      </ThemedText>
-                    </DataTable.Title>
-                    <DataTable.Title style={styles.tableCol} numeric>
-                      <ThemedText style={styles.tableLabel}>Price</ThemedText>
-                    </DataTable.Title>
-                  </DataTable.Header>
-                  {shipment.items.map((item) => (
-                    <DataTable.Row
-                      key={`${booking.id}-${item.id}`}
-                      style={styles.tableProductRow}
-                    >
-                      <DataTable.Cell style={styles.tableColBig}>
-                        <ThemedText>{item.name}</ThemedText>
-                      </DataTable.Cell>
-                      <DataTable.Cell style={styles.tableCol} numeric>
-                        <ThemedText>{item.quantity}</ThemedText>
-                      </DataTable.Cell>
-                      <DataTable.Cell style={styles.tableCol} numeric>
-                        <ThemedText>${item.price.toFixed(2)}</ThemedText>
-                      </DataTable.Cell>
-                    </DataTable.Row>
-                  ))}
-                </DataTable>
-              </>
-            ))
+                  <OrdersStatus status={booking.status} />
+                  <DataTable>
+                    <DataTable.Header style={styles.tableProductHeader}>
+                      <DataTable.Title style={styles.tableColBig}>
+                        <ThemedText style={styles.tableLabel}>
+                          {t("PRODUCT")}
+                        </ThemedText>
+                      </DataTable.Title>
+                      <DataTable.Title style={styles.tableCol} numeric>
+                        <ThemedText style={styles.tableLabel}>
+                          {t("QUANTITY")}
+                        </ThemedText>
+                      </DataTable.Title>
+                      <DataTable.Title style={styles.tableCol} numeric>
+                        <ThemedText style={styles.tableLabel}>
+                          {t("PRICE")}
+                        </ThemedText>
+                      </DataTable.Title>
+                    </DataTable.Header>
+                    {shipment.items.map((item) => (
+                      <DataTable.Row
+                        key={`${booking.id}-${item.id}`}
+                        style={styles.tableProductRow}
+                      >
+                        <DataTable.Cell style={styles.tableColBig}>
+                          <ThemedText>{item.name}</ThemedText>
+                        </DataTable.Cell>
+                        <DataTable.Cell style={styles.tableCol} numeric>
+                          <ThemedText>{item.quantity}</ThemedText>
+                        </DataTable.Cell>
+                        <DataTable.Cell style={styles.tableCol} numeric>
+                          <ThemedText>${item.price.toFixed(2)}</ThemedText>
+                        </DataTable.Cell>
+                      </DataTable.Row>
+                    ))}
+                  </DataTable>
+                </>
+              ))}
+            </>
           )}
         </View>
         <OrderPayOverlay

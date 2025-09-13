@@ -81,7 +81,8 @@ const styles = {
     ...desktop,
     container: {
       ...desktop.container,
-      paddingHorizontal: 50,
+      paddingHorizontal: 25,
+      paddingVertical: 40,
       flexDirection: "column",
       width: "auto",
     },
