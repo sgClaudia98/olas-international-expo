@@ -26,7 +26,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   shadow,
 }) => {
   return (
-    <View style={[contentBoxStyle, shadow ? styles.shadowStyles : '', { backgroundColor }]}>
+    <View style={[contentBoxStyle, shadow && styles.shadowStyles, { backgroundColor }]}>
       {title && <ThemedText type="defaultBold" style={styles.title}>{title}</ThemedText>}
       {Object.entries(data).map(([key, item]) => {
         const { icon, value } =
@@ -34,12 +34,13 @@ const ContentBox: React.FC<ContentBoxProps> = ({
             ? item
             : { icon: null, value: item };
 
+        // Debug: Check what value contains
+        const displayValue = typeof value === "string" ? value : "";
+        
         return (
           <View key={key} style={styles.row}>
             {icon && <View style={styles.icon}>{icon}</View>}
-            <ThemedText style={styles.text}>
-              {typeof value === "string" ? value : ""}
-            </ThemedText>
+            <ThemedText style={styles.text}>{displayValue}</ThemedText>
           </View>
         );
       })}
@@ -55,10 +56,7 @@ const styles = StyleSheet.create({
   },
   shadowStyles: {
     elevation: 3, // shadow in Android
-    shadowColor: "#000", // Shadow in iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Shadow for web
   },
   row: {
     flexDirection: "row",

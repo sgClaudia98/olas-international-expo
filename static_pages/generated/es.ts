@@ -57,7 +57,7 @@ Puedes cancelar un pedido antes de que sea procesado. Una vez que el pedido haya
 
 Si tienes preguntas o necesitas ayuda, puedes contactarnos a través de:
 - **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Teléfono:** +1-786-358-9595
+- **Teléfono:** +1 (786) 258-4319
 - **Sitio web:** [olas-international.com](https://olas-international.com)
 
 ---
@@ -88,14 +88,16 @@ Esto puede incluir:
 - Dirección de correo electrónico.
 - Número de teléfono.
 - Dirección de envío y facturación.
-- Información de pago (procesada de forma segura por terceros).
+- Información de pago (procesada de forma segura por terceros).  
+
 
 ### 1.2. Información Recopilada Automáticamente
 Cuando utiliza nuestro Sitio, recopilamos automáticamente cierta información, como:
 - Dirección IP.
 - Tipo de navegador y sistema operativo.
 - Páginas visitadas y tiempo de navegación.
-- Identificadores de dispositivos.
+- Identificadores de dispositivos.  
+
 
 ### 1.3. Información de Terceros
 Podemos recibir información sobre usted de terceros, como proveedores de servicios de pago, socios comerciales o redes sociales, cuando interactúa con nosotros a través de estas plataformas.
@@ -181,7 +183,7 @@ Podemos actualizar esta Política de Privacidad ocasionalmente para reflejar cam
 
 Si tiene preguntas o inquietudes sobre esta Política de Privacidad, puede contactarnos a través de:
 - **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Teléfono:** +1-786-358-9595
+- **Teléfono:** +1 (786) 258-4319
 - **Dirección postal:**  
   Olas International  
   9611 Fontainebleau Blvd,
@@ -321,7 +323,7 @@ Ambas partes renuncian irrevocablemente al derecho a un juicio por jurado en cua
 ## 15. Información de Contacto
 
 Si tiene preguntas o necesita asistencia, puede contactarnos a través de:
-- Teléfono: +1-786-358-9595
+- Teléfono: +1 (786) 258-4319
 - Correo electrónico: olasinternationalservices@gmail.com
 
 ---

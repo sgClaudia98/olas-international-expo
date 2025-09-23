@@ -12,31 +12,18 @@ import ProfileSkeleton from "../components/skeletons/ProfileSkeleton";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { UpdateProfileForm } from "../components/UpdateProfileForm";
-import { useAppSelector } from "@/hooks/useAppDispatch";
+import { useAuth } from "../context/AuthContext";
 
 export const Profile: FC<ViewProps> = () => {
   const router = useRouter();
   const { t } = useTranslation();
-  const { token } = useAppSelector((state) => state.auth);
-  console.debug("TOKEN", token);
   const { data: profile, isLoading, isError } = useGetProfileQuery();
 
   const styles = useResponsiveStyles(profileStyles);
 
   return (
     <>
-      {!token ? (
-        <View>
-          <ThemedText style={{ marginBottom: 10 }}>
-            You have to log in to see your profile.
-          </ThemedText>
-          <Btn
-            title="Login"
-            onPress={() => router.navigate("/(auth)/login")}
-            size="small"
-          />
-        </View>
-      ) : isLoading ? (
+      {isLoading ? (
         <ProfileSkeleton />
       ) : (
         <View style={styles.card}>

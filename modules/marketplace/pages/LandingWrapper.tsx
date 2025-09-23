@@ -58,8 +58,8 @@ const LandingWrapper: React.FC = () => {
           {/* <CategoriesSlider /> */}
           {/* <PopularBrands /> */}
           <GirlWithBagSection />
-          {/* <ProductSlider /> */}
-          <Testimonials />
+          {/* <ProductSlider /> 
+          <Testimonials />*/}
           {/* Apps moviles
           <ExperienceFromYourMobile />
            */}

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 import { View, StyleSheet, Animated, Dimensions } from "react-native";
+import { shouldUseNativeDriver } from "@/utils/animationHelper";
 
 interface SkeletonBannerProps {
   height?: number;
@@ -19,7 +20,7 @@ export const BannerSliderSkeleton: React.FC<SkeletonBannerProps> = ({
         Animated.timing(shimmerAnim, {
           toValue: 1,
           duration: 1500,
-          useNativeDriver: true,
+          useNativeDriver: shouldUseNativeDriver(),
         })
       ).start();
     };

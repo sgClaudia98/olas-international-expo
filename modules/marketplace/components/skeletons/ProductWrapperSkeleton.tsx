@@ -3,6 +3,7 @@ import { View, StyleSheet, Animated } from "react-native";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyles from "../../styles/productWrapper";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
+import { shouldUseNativeDriver } from "@/utils/animationHelper";
 
 const ProductWrapperSkeleton = () => {
   const fadeAnim = useRef(new Animated.Value(0.3)).current;
@@ -16,12 +17,12 @@ const ProductWrapperSkeleton = () => {
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 800,
-          useNativeDriver: true,
+          useNativeDriver: shouldUseNativeDriver(),
         }),
         Animated.timing(fadeAnim, {
           toValue: 0.3,
           duration: 800,
-          useNativeDriver: true,
+          useNativeDriver: shouldUseNativeDriver(),
         }),
       ])
     ).start();

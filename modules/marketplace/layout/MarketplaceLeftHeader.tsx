@@ -16,7 +16,7 @@ import { capitalizeWords } from "@/utils/string";
 export default function MarketplaceLeftHeader() {
   const { t } = useTranslation();
   const styles = useResponsiveStyles(responsiveStyle);
-  const { data, selection, setSelection, setProductName, productName } =
+  const { departments, selection, setSelection, setProductName, productName } =
     useSearchContext();
   const route = useRouter();
   const pathname = usePathname();
@@ -30,11 +30,11 @@ export default function MarketplaceLeftHeader() {
   };
 
   const menuItems = useMemo(() => {
-    const dep = data?.map((v) => {
+    const dep = departments?.map((v) => {
       return { label: v.name, value: v.id.toString() };
     });
     return dep ? [all_cat, ...dep] : [all_cat];
-  }, [data]);
+  }, [departments]);
 
   const onDepartmentSelected = (value: string, label: string) => {
     setDepartment(value);
@@ -51,13 +51,8 @@ export default function MarketplaceLeftHeader() {
     if (setProductName) setProductName(value);
     if (pathname !== "/services/market/products") {
       navigateToProducts(value);
-    } else {
-      // Optionally, update the query param if already on the page
-      route.replace({
-        pathname: "/(main)/services/market/products",
-        params: value ? { search: value } : undefined,
-      });
     }
+    // URL update is now handled by SearchContext
   };
 
   // Accepts an optional search string and adds it as a query param

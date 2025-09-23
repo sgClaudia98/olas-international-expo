@@ -55,7 +55,7 @@ Puedes cancelar un pedido antes de que sea procesado. Una vez que el pedido haya
 
 Si tienes preguntas o necesitas ayuda, puedes contactarnos a través de:
 - **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Teléfono:** +1-786-358-9595
+- **Teléfono:** +1 (786) 258-4319
 - **Sitio web:** [olas-international.com](https://olas-international.com)
 
 ---

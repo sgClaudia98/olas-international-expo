@@ -1,4 +1,3 @@
-import { DropdownCheckItem } from "@/components/MultilevelCheckDropdown";
 import MultilevelDropdown, {
   DropdownItem,
 } from "@/components/MultilevelDropdown";
@@ -10,83 +9,135 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useSearchContext } from "../../context/SearchContext";
-import { IAllFilters } from "../../hooks/useSearchMarketOptions";
-import { SearchMarketBookingOptionStats } from "../../services/interfaces/booking";
+import { SearchMarketBookingOptionStats, Department } from "../../services/interfaces/booking";
 import {
   mapDepartmentsToDropdownItems,
-  mapPriceRanges,
 } from "../../utils/dataMapping";
+import {
+  generatePriceRangeOptions,
+  priceRangeOptionsToDropdownItems,
+  parsePriceRangeValue,
+  PriceRangeOption,
+} from "../../utils/priceRangeUtils";
 import React from "react";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import responsiveStyle from "../../styles/filter";
 import FilterDrawer from "./FilterDrawer";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import { capitalizeWords } from "@/utils/string";
+import AppliedFilters from "./AppliedFilters";
 
 interface FiltersProps {
-  setFilter: (value: IAllFilters) => void;
-  stats?: {
-    data: SearchMarketBookingOptionStats;
-    searchId: number | null;
-  };
+  stats?: SearchMarketBookingOptionStats;
   isDrawerOpen?: boolean;
-  onCloseDrawer?: () => void;
+  onCloseDrawer: () => void;
 }
 
 const Filters: React.FC<FiltersProps> = ({
-  setFilter,
   stats,
   isDrawerOpen = false,
   onCloseDrawer,
 }) => {
   const styles = useResponsiveStyles(responsiveStyle);
-  const { data, setSelection } = useSearchContext();
+
+  const {lessThan} = useBreakpoints();
+
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  useEffect(() => {
+    if (lessThan.tablet) {
+      setDrawerVisible(isDrawerOpen);
+    }
+  }, [isDrawerOpen, lessThan.tablet]);
+
+  // Get filter state and mutations from context
+  const { 
+    departments: data,
+    selection,
+    productName,
+    priceRange,
+    setSelection: setCategory,
+    setPriceRange: setPriceFilter,
+    clearProductName,
+    clearAllFilters: clearFilters
+  } = useSearchContext();
   const mappedData = useMemo(
     () => (data ? mapDepartmentsToDropdownItems(data) : []),
     [data]
   );
 
-  const [priceRange, setPriceRange] = useState<DropdownItem[]>([]);
+  const [priceRangeOptions, setPriceRangeOptions] = useState<PriceRangeOption[]>([]);
   
   const [activeCategoryTrace, setActiveCategoryTrace] = useState<DropdownItem[]>([])
   const [activePriceTrace, setActivePriceTrace] = useState<DropdownItem[]>([])
 
+
   useEffect(() => {
-    setPriceRange(
-      stats ? mapPriceRanges(stats.data.minPrice, stats.data.maxPrice) : []
-    );
-  }, [stats?.searchId]);
+    if (stats) {
+      const options = generatePriceRangeOptions(stats.minPrice, stats.maxPrice);
+      setPriceRangeOptions(options);
+    } else {
+      setPriceRangeOptions([]);
+    }
+  }, [stats?.minPrice, stats?.maxPrice]);
 
-  const [highlights, setHighlights] = useState<DropdownCheckItem[]>([
-    {
-      title: "New Arrivals",
-      value: false,
-      key: "isNewArrival",
-    },
-    {
-      title: "Is in offer",
-      value: false,
-      key: "isInOffer",
-    },
-  ]);
+  // Sync activeCategoryTrace with selection from context
+  useEffect(() => {
+    if (selection && mappedData.length > 0) {
+      const trace: DropdownItem[] = [];
+      
+      // Find department if selected
+      if (selection.departmentId) {
+        const dept = mappedData.find(d => d.value === selection.departmentId.toString());
+        if (dept) {
+          trace.push(dept);
+          
+          // Find category if selected
+          if (selection.categoryId && dept.items) {
+            const cat = dept.items.find(c => c.value === selection.categoryId.toString());
+            if (cat) {
+              trace.push(cat);
+            }
+          }
+        }
+      }
+      
+      setActiveCategoryTrace(trace);
+    } else {
+      setActiveCategoryTrace([]);
+    }
+  }, [selection.departmentId, selection.categoryId, mappedData]);
 
-  const onSelectedHighlights = (value: boolean, index: number) => {
-    let _temp = [...highlights];
-    _temp[index].value = value;
-    setHighlights(_temp);
-  };
+  // Sync activePriceTrace with priceRange from context
+  useEffect(() => {
+    if (priceRange && (priceRange.minPrice !== undefined || priceRange.maxPrice !== undefined) && priceRangeOptions.length > 0) {
+      const priceDropdownItems = priceRangeOptionsToDropdownItems(priceRangeOptions);
+      
+      // Find matching price range option
+      for (const item of priceDropdownItems) {
+        const parsedRange = parsePriceRangeValue(item.value);
+        if (parsedRange.minPrice === priceRange.minPrice && parsedRange.maxPrice === priceRange.maxPrice) {
+          setActivePriceTrace([item]);
+          break;
+        }
+      }
+    } else {
+      setActivePriceTrace([]);
+    }
+  }, [priceRange, priceRangeOptions]);
+
 
   const _onItemClick = (item: DropdownItem[]) => {
     setActiveCategoryTrace(item)
 
-    setSelection({
-      departmentId: +item[0]?.value,
+    setCategory({
+      departmentId: +item[0]?.value || undefined,
       department: item[0]? capitalizeWords(item[0].title) : undefined,
-      categoryId: +item[1]?.value,
+      categoryId: +item[1]?.value || undefined,
       category: item[1]? capitalizeWords(item[1].title) : undefined
     });
 
-    if (lessThan.tablet  && onCloseDrawer) {
+    if (lessThan.tablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
@@ -95,28 +146,36 @@ const Filters: React.FC<FiltersProps> = ({
     setActivePriceTrace(trace)
 
     const lastItem = trace[trace.length - 1];
-    const [minPrice, maxPrice] = lastItem.value.split("-");
-    setFilter({
-      query: {
-        minPrice: minPrice != "minPrice" ? +minPrice : undefined,
-        maxPrice: maxPrice != "maxPrice" ? +maxPrice : undefined,
-      },
-    });
+    const parsedRange = parsePriceRangeValue(lastItem.value);
+    
+    setPriceFilter(parsedRange);
 
-    if (lessThan.tablet  && onCloseDrawer) {
+    if (lessThan.tablet && onCloseDrawer) {
       onCloseDrawer();
     }
   };
 
-  const {lessThan} = useBreakpoints();
+  // Handler functions for removing filters
+  const handleRemoveCategory = () => {
+    setActiveCategoryTrace([]);
+    setCategory({
+      departmentId: undefined,
+      department: undefined,
+      categoryId: undefined,
+      category: undefined,
+    });
+  };
 
-  const [drawerVisible, setDrawerVisible] = useState(false);
+  const handleRemovePrice = () => {
+    setActivePriceTrace([]);
+    setPriceFilter({});
+  };
 
-  useEffect(() => {
-    if (lessThan.tablet ) {
-      setDrawerVisible(isDrawerOpen);
-    }
-  }, [isDrawerOpen, lessThan.tablet ]);
+  const handleClearAll = () => {
+    setActiveCategoryTrace([]);
+    setActivePriceTrace([]);
+    clearFilters();
+  };
 
   const filterContent = (
     <>
@@ -126,22 +185,31 @@ const Filters: React.FC<FiltersProps> = ({
         onItemClick={_onItemClick}
         activeTrace={activeCategoryTrace}
       />
-      {priceRange.length > 0 && (
+      {priceRangeOptions.length > 0 && (
         <MultilevelDropdown
           title="Price"
-          items={priceRange}
+          items={priceRangeOptionsToDropdownItems(priceRangeOptions)}
           onItemClick={_onSelectPrice}
           activeTrace={activePriceTrace}
         />
       )}
+      <AppliedFilters
+        selection={selection}
+        priceRange={priceRange}
+        productName={productName}
+        onRemoveCategory={handleRemoveCategory}
+        onRemovePrice={handleRemovePrice}
+        onRemoveProductName={clearProductName}
+        onClearAll={handleClearAll}
+      />
     </>
   );
 
   return (
     <>
-      {!lessThan.tablet  && <View style={styles.filters}>{filterContent}</View>}
+      {!lessThan.tablet && <View style={styles.filters}>{filterContent}</View>}
 
-      {lessThan.tablet  && (
+      {lessThan.tablet && (
         <FilterDrawer
           visible={isDrawerOpen && drawerVisible}
           onClose={onCloseDrawer}

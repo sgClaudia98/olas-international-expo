@@ -6,13 +6,12 @@ import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
 import Btn from "@/components/Btn";
 import { Colors } from "@/styles";
-import { useAuthMutation } from "../services/api/AccountService";
-import { useDispatch } from "react-redux";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { authPagesStyles } from "../styles/authPages";
 import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { Link, useRouter } from "expo-router";
+import { useAuth } from "../context/AuthContext";
 
 interface FormValues {
   email: string;
@@ -26,17 +25,9 @@ const Login: FunctionComponent<LoginProps> = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const style = useResponsiveStyles(authPagesStyles);
-  const [auth, { isLoading, isError, isSuccess, error, data }] =
-    useAuthMutation(); // Destructure to get mutation states
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { login } = useAuth();
 
-  if (!auth) {
-    console.error("auth is undefined");
-  }
-  const dispatch = useDispatch();
-
-  if (!dispatch) {
-    console.error("dispatch function is undefined");
-  }
   const initialValues: FormValues = {
     email: "",
     password: "",
@@ -46,7 +37,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         t("FORM.ERRORS.INVALID", { field: t("AUTH.LOGIN.FORM.EMAIL.LABEL") })
       )
       .required(
@@ -67,17 +58,22 @@ const Login: FunctionComponent<LoginProps> = () => {
       ),
   });
 
-  const onSubmit = (values: FormValues) => {
-    auth(values);
-  };
-
-  useEffect(() => {
-    if (isError) {
-      console.error("Error");
-    } else if (isSuccess && data) {
-      goToMain();
+  const onSubmit = async (values: FormValues) => {
+    setIsLoading(true);
+    try {
+      await login(values);
+      // ✅ Login exitoso
+      console.log("Login successful");
+      // Redirigir o mostrar mensaje de éxito
+      router.replace("/(main)");
+    } catch (error) {
+      // ❌ Login falló
+      console.error("Login failed:", error);
+      //TODO: Mostrar mensaje de error al usuario
+    } finally {
+      setIsLoading(false);
     }
-  }, [isLoading]);
+  };
 
   const goToMain = () => {
     router.push("/(main)");

@@ -2,11 +2,11 @@ import { useSearchContext } from "../context/SearchContext";
 import { Banner } from "../services/interfaces/booking";
 
 export const useBanner = (): { banners: Banner[]; loading: boolean } => {
-  const { data, selection } = useSearchContext();
+  const { departments, selection } = useSearchContext();
 
-  if (!data) return { banners: [], loading: true };
+  if (!departments) return { banners: [], loading: true };
 
-  const filteredDepartments = data.filter((dept) => {
+  const filteredDepartments = departments.filter((dept) => {
     const matchesDept = selection.departmentId
       ? dept.id === selection.departmentId
       : true;

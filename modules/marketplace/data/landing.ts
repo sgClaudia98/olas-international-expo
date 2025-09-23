@@ -14,6 +14,7 @@ import { ImageSourcePropType } from "react-native";
 interface CategoryElement {
   name: string;
   icon?: React.ReactElement;
+  code: string;
   url?: {
     departmentId: number;
     categoryId?: number;
@@ -24,34 +25,22 @@ export const categories: CategoryElement[] = [
   {
     name: "Alimentos y Combos",
     icon: React.createElement(FoodAndCombo),
-    url: {
-      departmentId: 3,
-      categoryId: undefined,
-    },
+    code: "FOOD",
   },
   {
     name: "Cuidado personal y Hogar",
     icon: React.createElement(PersonalCare),
-    url: {
-      departmentId: 4,
-      categoryId: undefined,
-    },
+    code: "PERSONALCARE",
   },
   {
     name: "Ferretería",
     icon: React.createElement(Ferreteria),
-    url: {
-      departmentId: 6,
-      categoryId: undefined,
-    },
+    code: "HARDWAREANDTOOLS",
   },
   {
     name: "Electrodomésticos y Celulares",
     icon: React.createElement(ElectricalAppliances),
-    url: {
-      departmentId: 5,
-      categoryId: undefined,
-    },
+    code: "HOMEAPPLIANCES",
   },
 ];
 
@@ -116,8 +105,8 @@ export const shopExperienceData: ShopExperienceData[] = [
     icon: React.createElement(FastDeliveryIcon),
   },
   {
-    heading: "MARKET.HOME.FEATURES.SUBTITLES.F3",
-    text: "MARKET.HOME.FEATURES.DESCRIPTIONS.F3",
+    heading: "MARKET.HOME.FEATURES.SUBTITLES.F2",
+    text: "MARKET.HOME.FEATURES.DESCRIPTIONS.F2",
     icon: React.createElement(SafePaymentIcon),
   },
   {

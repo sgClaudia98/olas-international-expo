@@ -5,7 +5,8 @@
     "FR": "French",
     "PT": "Portuguese"
   },
-  "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum...",
+  "DESCRIPTION_LONG": "Your online market and shipping service to Cuba: fresh food, appliances, cell phones, air and sea packages. Everything your family in Cuba needs! Affordable prices and guaranteed delivery.",
+  "DESCRIPTION": "Your online market and shipping service to Cuba: food, appliances, cell phones, air and sea packages. Everything your family needs!",
   "ACTIONS": {
     "ADD": "Add",
     "SAVE_CHANGES": "Save changes"
@@ -37,7 +38,9 @@
   "FILTERS": {
     "ALL_CATEGORIES": "All Categories",
     "CATEGORIES": "Categories",
-    "LABEL": "Filters"
+    "LABEL": "Filters",
+    "CLEAR_ALL": "Clear All",
+    "SEARCH": "Search"
   },
   "HEADER": {
     "SERVICES": "Services",
@@ -54,7 +57,7 @@
   "RECEIVER_HEADING": "Beneficiary",
   "CUSTOMER_HEADING": "Client",
   "SUMMARY_HEADING": "Summary",
-  "SHIPPING": "Shipping",
+  "BOOKING_FEE": "Booking Fee",
   "DISCOUNT": "Discount",
   "PAYMENT_FEE": "Payment Fee",
   "TOTAL": "Total",
@@ -64,6 +67,8 @@
   "STATUS": "Status",
   "BACK": "Go back",
   "SHOW_FILTERS": "Show Filters",
+  "PRODUCT": "Product",
+  "QUANTITY": "Quantity",
   "PRODUCTS": {
     "TOTAL_zero": "{{count}} products",
     "TOTAL_one": "{{count}} product",
@@ -78,31 +83,30 @@
     "MARKET": "Market"
   },
   "MARKET": {
-    
     "HOME": {
       "FEATURES": {
         "TITLE": "Your shopping experience has never been so easy and secure!",
         "SUBTITLES": {
-          "F1": "Fast Deliveries",
-          "F2": "Secure Payments",
-          "F3": "24/7 Support"
+          "F1": "Fast & Secure Delivery",
+          "F2": "We Reach All Provinces",
+          "F3": "Package Shipping to Cuba!"
         },
         "DESCRIPTIONS": {
-          "F1": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
-          "F2": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam.",
-          "F3": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam."
+          "F1": "Receive your combos within 48 to 72 hours in Havana and within 7 business days in the rest of the country",
+          "F2": "Food, appliances, cell phones, and more. Everything your family needs, just a click away!",
+          "F3": "We offer the best prices on the market for air and sea shipments to Cuba. Calculate your shipping online!"
         }
       },
       "MOBILE": {
-        "TITLE": "Enjoy a better experience from your mobile",
-        "DESCRIPTION": "Lorem ipsum dolor sit amet consectetur. Sit in sed rutrum ultrices egestas. Neque leo praesent odio diam. Vel amet vitae pulvinar cursus enim sagittis enim. Cum arcu vitae non scelerisque cursus eget mi.",
+        "TITLE": "Enjoy a better experience from your mobile!",
+        "DESCRIPTION": "Buy food, appliances, and send packages to Cuba more easily and quickly with our app. Everything at your fingertips!",
         "BUTTONS": {
           "DOWNLOAD_APP_STORE": {
-            "SMALL": "Download on the",
+            "SMALL": "Download it now",
             "NORMAL": "App Store"
           },
           "DOWNLOAD_GOOGLE_PLAY": {
-            "SMALL": "Download on the",
+            "SMALL": "Download it now",
             "NORMAL": "Google Play"
           }
         }
@@ -115,6 +119,8 @@
         "PAY": "Proceed to Pay"
       }
     },
+    "SHIPPING": "Shipping",
+    "BOOKING": "Booking",
     "PAYMENT": {
       "TITLE": "Booking Steps",
       "STEPS": {
@@ -270,5 +276,48 @@
   "ERROR_CODE": {
     "GPB0157": "There is another account registered with the same email address.",
     "UNKNOWN": "An unknown error occurred. Please try again later."
+  },
+  "NOT_FOUND": {
+    "TITLE": "Oops!",
+    "MESSAGE": "This screen doesn't exist.",
+    "GO_HOME": "Go to home screen!"
+  },
+  "COMMON": {
+    "BACK": "Back",
+    "NEXT": "Next",
+    "PAY": "Pay",
+    "LOADING": "Loading",
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "FAILED": "Failed",
+    "TRY_AGAIN": "Try again",
+    "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
+    "DELETE": "Delete",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "SUBMIT": "Submit",
+    "PREVIOUS": "Previous",
+    "VIEW_LESS": "View less",
+    "VIEW_MORE": "View more"
+  },
+  "MESSAGES": {
+    "SUCCESS_PROFILE_UPDATE": "Success editing profile info",
+    "ERROR_PROFILE_UPDATE": "Error editing profile info",
+    "PAYMENT_FAILED": "Payment failed",
+    "ERROR_FETCHING_ITEMS": "Error fetching items",
+    "ERROR_OPENING_URL": "Don't know how to open this URL",
+    "ERROR_OCCURRED": "An error occurred",
+    "ERROR_LOADING_FILE": "Error loading markdown file",
+    "ERROR_SENDING_CODE": "Error sending code again",
+    "LOGIN_SUCCESSFUL": "Login successful",
+    "LOGIN_FAILED": "Login failed",
+    "PAYMENT_SUCCESSFUL": "Payment successful!",
+    "REDIRECTING_TO_LOGIN": "Redirecting to login",
+    "ERROR_AUTH_CHECK": "Error during auth check",
+    "ERROR_INITIALIZING_AUTH": "Error initializing auth",
+    "ERROR_SENDING_REQUEST": "Error sending forget-password request",
+    "ERROR_CREATING_BOOKING": "Error al crear la reserva",
+    "ERROR_IN_BOOKING": "Error en la reserva"
   }
 }

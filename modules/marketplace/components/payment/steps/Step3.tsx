@@ -117,7 +117,7 @@ const Step3 = ({ preview}) => {
                   values.beneficiary.address?.zipCode,
                 ]
                   .filter((value) => value?.trim())
-                  .join(", "),
+                  .join(", ") || "N/A",
               },
             }}
             backgroundColor={Colors.blue.fifth}

@@ -8,7 +8,7 @@ import { ThemedView } from '@/components/ThemedView';
 import React from 'react';
 import Fonts from '@/styles/fonts';
 import IconSvg from '@/components/ui/IconSvg';
-
+ /*TODO: Check if we can delete this*/
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView

@@ -55,7 +55,7 @@ const OrderPayForm = ({
     if (response.success) {
       onClose();
     } else {
-      Toast.error("Payment failed");
+      Toast.error(t("MESSAGES.PAYMENT_FAILED"));
     }
   };
 
@@ -83,7 +83,7 @@ const OrderPayForm = ({
                 style={styles.button}
                 disabled={isSubmitting}
               >
-                Back
+                {t("COMMON.BACK")}
               </Button>
             )}
 
@@ -93,7 +93,7 @@ const OrderPayForm = ({
               disabled={isSubmitting}
               style={styles.button}
             >
-              {"Pay"}
+              {t("COMMON.PAY")}
             </Button>
           </View>
         </View>

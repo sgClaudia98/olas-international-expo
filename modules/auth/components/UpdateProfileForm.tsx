@@ -69,10 +69,10 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
       .unwrap()
       .then((resp) => {
         if (resp.success) {
-          Toast.success("Success editing profile info");
+          Toast.success(t("MESSAGES.SUCCESS_PROFILE_UPDATE"));
           resetForm({ values });
         } else {
-          Toast.error("Error editing profile info");
+          Toast.error(t("MESSAGES.ERROR_PROFILE_UPDATE"));
         }
       });
   };

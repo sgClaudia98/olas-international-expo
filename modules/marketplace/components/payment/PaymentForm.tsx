@@ -148,7 +148,7 @@ const PaymentForm = ({
     if (response.success) {
       onClose();
     } else {
-      Toast.error("Payment failed");
+      Toast.error(t("MESSAGES.PAYMENT_FAILED"));
     }
   };
 
@@ -221,7 +221,7 @@ const PaymentForm = ({
                   style={styles.button}
                   disabled={isSubmitting || loadingBooking}
                 >
-                  Back
+                  {t("COMMON.BACK")}
                 </Button>
               )}
               {step <= steps.length && (
@@ -237,7 +237,7 @@ const PaymentForm = ({
                   disabled={isSubmitting || loadingBooking}
                   style={styles.button}
                 >
-                  {step == steps.length ? "Pay" : "Next"}
+                  {step == steps.length ? t("COMMON.PAY") : t("COMMON.NEXT")}
                 </Button>
               )}
             </View>

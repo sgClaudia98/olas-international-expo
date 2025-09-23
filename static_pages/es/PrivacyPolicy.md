@@ -117,7 +117,7 @@ Podemos actualizar esta Política de Privacidad ocasionalmente para reflejar cam
 
 Si tiene preguntas o inquietudes sobre esta Política de Privacidad, puede contactarnos a través de:
 - **Correo electrónico:** [olasinternationalservices@gmail.com](mailto:olasinternationalservices@gmail.com)
-- **Teléfono:** +1-786-358-9595
+- **Teléfono:** +1 (786) 258-4319
 - **Dirección postal:**  
   Olas International  
   9611 Fontainebleau Blvd,

@@ -1,10 +1,8 @@
 import {BaseQueryApi, FetchArgs, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {decodeToken} from 'react-jwt';
 import {RootState} from '@/state';
-import { accountService } from '@/modules/auth/services/api/AccountService';
 import { logout, setAuthState, User } from '@/modules/auth/slices/authSlice';
 import { BASE_URL } from '@/constants';
-import { fetchUserProfileThunk } from '@/modules/auth/slices/authThunks';
 
 const constructBaseQuery = (baseUrl: string) =>
   fetchBaseQuery({
@@ -75,9 +73,6 @@ export const baseQueryWithReauth = async (
               refreshToken: refreshToken, // Keep the refreshToken the same
             }),
           );
-          api.dispatch(
-            fetchUserProfileThunk(),
-          );
 
           // Retry the original query with the new token
           result = await baseQuery(args, api, extraOptions);
@@ -122,9 +117,6 @@ export const baseQueryWithReauth = async (
               refreshToken: refreshToken,
             }),
           );
-          api.dispatch(
-            fetchUserProfileThunk(),
-          );
           result = await baseQuery(args, api, extraOptions);
         } else {
           throw new Error('Failed to refresh token');
@@ -148,5 +140,3 @@ export const baseQuery = async (
   const baseQuery = constructBaseQuery(baseUrl);
   return baseQuery(args, api, extraOptions);
 };
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

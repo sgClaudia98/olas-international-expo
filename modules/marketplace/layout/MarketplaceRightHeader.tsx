@@ -23,7 +23,7 @@ import HeaderBar, { MenuLink } from "@/components/layout/HeaderBar";
 import { useAppSelector } from "@/hooks/useAppDispatch";
 import { rightStyles as responsiveStyle } from "../styles/header";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
-import { links } from "./header";
+import { marketplaceLinks } from "./marketplaceLinks";
 import { useTranslation } from "react-i18next";
 import { useBreakpoints } from "@/hooks/useBreakpoints";
 import IconSvg from "@/components/ui/IconSvg";
@@ -52,7 +52,7 @@ export default function MarketplaceRightHeader() {
     <View style={{...styles.containerRight, marginRight: 14}}>
       {!lessThan.mid && (
         <HeaderBar
-          links={links.map((v) => ({ ...v, label: t(v.label) }))}
+          links={marketplaceLinks.map((v) => ({ ...v, label: t(v.label) }))}
           textColor={Colors.black.second}
         />
       )}

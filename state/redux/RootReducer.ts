@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer, { loadAuthStateFromStorage } from '@/modules/auth/slices/authSlice';
+import authReducer from '@/modules/auth/slices/authSlice';
 import pendingCartReducer, { loadPendingCartItem } from '@/modules/marketplace/slices/pendingCartSlice';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { accountService } from '@/modules/auth/services/api/AccountService';
@@ -23,7 +23,6 @@ export const store = configureStore({
 
 
 setupListeners(store.dispatch);
-store.dispatch(loadAuthStateFromStorage());
 store.dispatch(loadPendingCartItem());
 
 export type RootState = ReturnType<typeof store.getState>;

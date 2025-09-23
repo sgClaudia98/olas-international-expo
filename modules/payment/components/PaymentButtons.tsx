@@ -1,5 +1,5 @@
 import { Colors } from "@/styles";
-import React, { FC, useState } from "react";
+import React, { FC, useState, Fragment } from "react";
 import {
   View,
   Text,
@@ -49,8 +49,10 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({
                 <Text style={styles.feeText}>${item.fee} fee</Text>
               </View>
               {paymentIcons[item.id] && (
-                <View>
-                  {paymentIcons[item.id]}
+                <View style={{ flexDirection: "row", gap: 5 }}>
+                  {paymentIcons[item.id].map((icon, index) => (
+                    <React.Fragment key={index}>{icon}</React.Fragment>
+                  ))}
                 </View>
               )}
             </View>
@@ -64,18 +66,24 @@ const PaymentButtons: FC<PaymentButtonsProps> = ({
 export default PaymentButtons;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
+  container: { flex: 1 },
   method: {
-    padding: 12,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
+    padding: 18,
+    borderRadius: 8,
     marginVertical: 5,
+    backgroundColor: Colors.black.fifth,
   },
   methodSelected: {
-    borderColor: Colors.blue.primary,
-    backgroundColor: "#e6f0ff",
+    backgroundColor: Colors.blue.fifth,
   },
-  methodText: { fontSize: 16 },
-  feeText: { fontSize: 12, color: "gray", marginTop: 4 },
+  methodText: { 
+    fontSize: 16,
+    color: Colors.black.primary,
+    fontWeight: "600",
+  },
+  feeText: { 
+    fontSize: 14, 
+    color: Colors.black.second, 
+    marginTop: 4 
+  },
 });
