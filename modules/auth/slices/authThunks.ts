@@ -5,7 +5,7 @@ import { RootState } from '@/state';
 import { setAuthState, logout, setUserDetails, User } from './authSlice';
 import { decodeToken } from "react-jwt";
 import platformStorage from '@/utils/platformStorage';
-import { IAuthRequest } from '../services/interfaces/account';
+import { IAuthRequest, IVerifyRequest } from '../services/interfaces/account';
 
 const AUTH_KEY_STORAGE = 'auth';
 
@@ -118,5 +118,44 @@ export const initializeAuthThunk = createAsyncThunk(
     }
     
     return null;
+  }
+);
+
+// Thunk para verificar cuenta
+export const verifyAccountThunk = createAsyncThunk(
+  'auth/verifyAccount',
+  async (verifyData: IVerifyRequest, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await dispatch(accountService.endpoints.verify.initiate(verifyData));
+
+      if (response.data) {
+        const decoded: any = decodeToken(response.data.accessToken);
+        console.debug("decoded after verification", decoded);
+
+        const authState = {
+          user: {
+            name: decoded?.sub,
+            username: decoded?.sub,
+            userId: decoded?.sub,
+            imageUrl: `https://storageaccountsocial.blob.core.windows.net/avatars/${decoded?.sub}.png`,
+          } as User,
+          token: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        };
+
+        dispatch(setAuthState(authState));
+        // Guardar en storage después de setear el estado
+        await saveAuthState(authState);
+
+        // Después de la verificación, obtener el perfil
+        dispatch(fetchUserProfileThunk());
+
+        return authState;
+      } else {
+        return rejectWithValue('Verification failed');
+      }
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );

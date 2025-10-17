@@ -1,12 +1,13 @@
-import { useNavigation } from "@react-navigation/core";
 import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
 import { View } from "react-native";
-import { ErrorMessage, Formik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
+import PasswordInput from "@/components/ui/PasswordInput";
 import Btn from "@/components/Btn";
 import CheckboxInput from "@/components/ui/CheckboxInput";
+import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 import { Link, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { ThemedText } from "@/components/ThemedText";
@@ -17,8 +18,13 @@ import { useSignupMutation } from "../services/api/AccountService";
 import { IAccountCreateRequest } from "../services/interfaces/account";
 import { Colors } from "@/styles";
 import { Toast } from "toastify-react-native";
+import { phoneStringValidation } from "@/utils/PhoneNumberHelper";
+import { use } from "i18next";
+import { inputStyles } from "@/styles/input";
 
-interface FormValues extends IAccountCreateRequest {}
+interface FormValues extends IAccountCreateRequest {
+  confirmPassword: string;
+}
 
 interface RegisterProps {}
 
@@ -26,6 +32,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const style = useResponsiveStyles(authPagesStyles);
+  const input = useResponsiveStyles(inputStyles);
   const [signup, { isLoading, isError, isSuccess, error, data }] =
     useSignupMutation();
   const [email, setEmail] = React.useState("");
@@ -34,7 +41,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
     email: "",
     firstName: "",
     lastName: "",
+    phone: "",
     password: "",
+    confirmPassword: "",
     activationLink: `${DOMAIN}/verify`,
     receiveNewsLetter: false,
   };
@@ -60,6 +69,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
         field: t("AUTH.REGISTER.FORM.LAST_NAME.LABEL"),
       })
     ),
+    phone: phoneStringValidation,
     password: Yup.string()
       .min(
         8,
@@ -75,6 +85,16 @@ const Register: FunctionComponent<RegisterProps> = () => {
       .required(
         t("FORM.ERRORS.REQUIRED", {
           field: t("AUTH.REGISTER.FORM.PASSWORD.LABEL"),
+        })
+      ),
+    confirmPassword: Yup.string()
+      .oneOf(
+        [Yup.ref("password"), null],
+        t("FORM.ERRORS.PASSWORDS_MUST_MATCH")
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.REGISTER.FORM.CONFIRM_PASSWORD.LABEL"),
         })
       ),
   });
@@ -172,18 +192,44 @@ const Register: FunctionComponent<RegisterProps> = () => {
                   error={errors.email}
                   touched={touched.email}
                 />
+                {/* Phone Number Input */}
+                  <PhoneNumberSelector
+                    value={values.phone}
+                    inputStyles={{ ...input.container, ...input.inactive, borderBottom: 0, marginBottom: 0, paddingVertical: 0 }}
+                    onChange={handleChange("phone")}
+                    onBlur={() => handleBlur("phone")}
+                    defaultCountryCode="US"
+                    error={!!(errors.phone && touched.phone)}
+                  />
+                  {errors.phone && touched.phone && (
+                    <ThemedText style={{ color: Colors.red.primary, fontSize: 12, marginTop: 4 }}>
+                      {errors.phone}
+                    </ThemedText>
+                  )}
                 {/* Password Input */}
-                <InputField
+                <PasswordInput
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
                   placeholder={t("AUTH.REGISTER.FORM.PASSWORD.PLACEHOLDER")}
-                  secureTextEntry
                   autoComplete="new-password"
                   textContentType="newPassword"
                   autoCapitalize="none"
                   error={errors.password}
                   touched={touched.password}
+                />
+
+                {/* Confirm Password Input */}
+                <PasswordInput
+                  onChangeText={handleChange("confirmPassword")}
+                  onBlur={handleBlur("confirmPassword")}
+                  value={values.confirmPassword}
+                  placeholder={t("AUTH.REGISTER.FORM.CONFIRM_PASSWORD.PLACEHOLDER")}
+                  autoComplete="new-password"
+                  textContentType="newPassword"
+                  autoCapitalize="none"
+                  error={errors.confirmPassword}
+                  touched={touched.confirmPassword}
                 />
                 {/* Newsletter Checkbox */}
                 <View style={{ paddingHorizontal: 20, flexWrap: "wrap" }}>

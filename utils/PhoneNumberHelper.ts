@@ -34,12 +34,23 @@ export function validatePhoneNumberWithErrors(
   }
 }
 
-const DEFAULT_NUMBER_FORMAT = 4;
+const DEFAULT_NUMBER_FORMAT = 0; // E164 format: +34604833094
+const DEFAULT_NUMBER_PARSE_FORMAT = 2; // NATIONAL format: 604833094
+const INTERNATIONAL_FORMAT = 1; // INTERNATIONAL format: +34 604 83 30 94
+
+export const formatPhoneNumberInternational = (phoneNumber: string) => {
+  try {
+    const parsedNumber = phoneUtil.parse(phoneNumber.toString());
+    return phoneUtil.format(parsedNumber, INTERNATIONAL_FORMAT);
+  } catch (error) {
+    return phoneNumber; // Return original if parsing fails
+  }
+};
 
 export const parsePhoneNumber = (
   phoneNumber: string,
   countryCode: string,
-  formatType = DEFAULT_NUMBER_FORMAT
+  formatType = DEFAULT_NUMBER_PARSE_FORMAT
 ) => {
   try {
     const parsedNumber = phoneUtil.parse(phoneNumber.toString(), countryCode);
@@ -52,7 +63,7 @@ export const parsePhoneNumber = (
 
 export const parseStringToPhoneNumber = (
   phoneNumber: string,
-  formatType = DEFAULT_NUMBER_FORMAT
+  formatType = DEFAULT_NUMBER_PARSE_FORMAT
 ) => {
   console.debug(phoneNumber);
   try {
@@ -107,3 +118,17 @@ export const phoneNumberValidationNotRequired = Yup.object().shape({
     }
   ),
 });
+
+export const phoneStringValidation = Yup.string().test(
+  "is-valid-phone",
+  "Invalid phone number",
+  function (value) {
+    if (!value || value.trim() === "") return true;
+    try {
+      const parsedNumber = phoneUtil.parse(value.toString());
+      return phoneUtil.isValidNumber(parsedNumber);
+    } catch (error) {
+      return false;
+    }
+  }
+);

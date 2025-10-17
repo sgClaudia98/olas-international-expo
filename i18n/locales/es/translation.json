@@ -50,10 +50,19 @@
   "LOGOUT": "Cerrar sesión",
   "PROFILE_SETTINGS": "Configuración del perfil",
   "ACTIONS.SAVE_CHANGES": "Guardar cambios",
-  "FORMLABEL.FIRST_NAME": "Nombre",
-  "FORMLABEL.LAST_NAME": "Apellidos",
-  "FORMLABEL.PHONE_NUMBER": "Teléfono",
-  "FORMLABEL.EMAIL": "Correo electrónico",
+  "FORMLABEL": {
+    "EMAIL": "Correo electrónico",
+    "FIRST_NAME": "Nombre",
+    "FULL_NAME": "Nombre completo",
+    "LAST_NAME": "Apellidos",
+    "PHONE_NUMBER": "Número de teléfono",
+    "ID_DOCUMENT": "CI/DNI",
+    "STATE": "Provincia",
+    "CITY": "Municipio",
+    "ADDRESS_LINE1": "Dirección",
+    "ADDRESS_LINE2": "Reparto",
+    "ZIP_CODE": "Código postal"
+  },
   "RECEIVER_HEADING": "Destinatario",
   "CUSTOMER_HEADING": "Comprador",
   "SUMMARY_HEADING": "Resumen",
@@ -62,6 +71,7 @@
   "QUANTITY": "Cantidad",
   "DISCOUNT": "Descuento",
   "PAYMENT_FEE": "Cargo por pago",
+  "FEE": "Fee",
   "TOTAL": "Total",
   "NUMBER": "Número",
   "DATE": "Fecha",
@@ -78,6 +88,7 @@
   "CART_NOTIFICATION_ADD_TO_CART": "Producto añadido al carrito con éxito",
   "CART_NOTIFICATION_MOD_QTY": "Cantidad del producto modificada con éxito",
   "CART_NOTIFICATION_REMOVE_FROM_CART": "Producto eliminado del carrito con éxito",
+  "SEARCH_PLACEHOLDER": "Nombre del producto",
   "MODULE": {
     "TRAVEL": "Viajes",
     "MARKET": "Mercado"
@@ -110,6 +121,16 @@
             "NORMAL": "Google Play"
           }
         }
+      },
+      "NEWSLETTER": {
+        "TITLE": "Nuevos productos cada semana",
+        "DESCRIPTION": " Recibe información de ofertas y descuentos",
+        "BUTTONS": {
+          "SUBSCRIBE": "Contáctenos"
+        },
+        "MESSAGES": {
+          "ERROR": "Ocurrió un error durante la suscripción. Por favor, inténtalo de nuevo."
+        }
       }
     },
     "SHIPPING": "Envíos",
@@ -122,6 +143,7 @@
     },
     "PAYMENT": {
       "TITLE": "Pasos de compra",
+      "SUBTITLE": "Selecciona el método de pago",
       "STEPS": {
         "Client": "Comprador",
         "Beneficiary": "Destinatario",
@@ -134,9 +156,15 @@
         "PAYMENT_ERROR": "Ocurrió un error durante el pago. Por favor, intente nuevamente."
       },
       "STATUS": {
-        "PAID": "Aceptado",
-        "PAY": "Pendiente"
+        "PAID": "Pago Aceptado",
+        "PAY": "Pago Pendiente"
       }
+    },
+    "ORDER_SECTION": {
+      "ORDER": "Orden {{current}} / {{total}}",
+      "OPEN_NOTE": "Abrir nota",
+      "CLOSE_NOTE": "Cerrar nota",
+      "PLACEHOLDER": "Deja tus comentarios aquí..."
     },
     "ORDER_STATUS": {
       "Requested": "Solicitado",
@@ -219,9 +247,17 @@
           "LABEL": "Apellido",
           "PLACEHOLDER": "Introduce tu apellido"
         },
+        "PHONE": {
+          "LABEL": "Número de Teléfono",
+          "PLACEHOLDER": "Introduce tu número de teléfono"
+        },
         "PASSWORD": {
           "LABEL": "Contraseña",
           "PLACEHOLDER": "Introduce tu contraseña"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirmar contraseña",
+          "PLACEHOLDER": "Confirma tu contraseña"
         },
         "NEWSLETTER": {
           "LABEL": "Acepto ser contactado con ofertas e información relevante."
@@ -232,7 +268,8 @@
       "TITLE": "Restablecer contraseña",
       "SUBTITLE": {
         "REQUEST_CODE": "Por favor, proporciona tu correo electrónico y solicita un código.",
-        "RESET_PASSWORD": "Introduce el código enviado a tu correo electrónico ({{email}}) y luego proporciona tu nueva contraseña."
+        "RESET_PASSWORD": "Introduce el código enviado a tu correo electrónico ({{email}}) y luego proporciona tu nueva contraseña.",
+        "MODIFY_EMAIL": "Cambiar correo electrónico"
       },
       "BUTTONS": {
         "REQUEST_CODE": "Solicitar código",
@@ -252,11 +289,52 @@
         "NEW_PASSWORD": {
           "LABEL": "Nueva contraseña",
           "PLACEHOLDER": "Introduce tu nueva contraseña"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirmar contraseña",
+          "PLACEHOLDER": "Confirma tu nueva contraseña"
         }
       },
       "ERRORS": {
-        "EMAIL_NOT_FOUND": "Error al solicitar el código, por favor verifica tu correo electrónico."
+        "EMAIL_NOT_FOUND": "Error al solicitar el código, por favor verifica tu correo electrónico.",
+        "PASSWORDS_MUST_MATCH": "Las contraseñas deben coincidir."
       }
+    },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Cambiar Contraseña",
+      "SUCCESS": "Contraseña cambiada exitosamente",
+      "ERROR": "Error al cambiar la contraseña",
+      "FORM": {
+        "CURRENT_PASSWORD": {
+          "LABEL": "Contraseña Actual",
+          "PLACEHOLDER": "Introduce tu contraseña actual"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "Nueva Contraseña",
+          "PLACEHOLDER": "Introduce tu nueva contraseña"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirmar Nueva Contraseña",
+          "PLACEHOLDER": "Confirma tu nueva contraseña"
+        }
+      },
+      "BUTTONS": {
+        "CHANGE_PASSWORD": "Cambiar Contraseña"
+      }
+    },
+    "MESSAGES": {
+      "LOGIN_SUCCESS": "Inicio de sesión exitoso",
+      "LOGIN_ERROR": "Inicio de sesión fallido",
+      "PROFILE_UPDATE_SUCCESS": "Información del perfil editada con éxito",
+      "PROFILE_UPDATE_ERROR": "Error al editar la información del perfil",
+      "VERIFICATION_SUCCESS": "¡Tu cuenta ha sido verificada exitosamente!",
+      "VERIFICATION_ERROR": "Ocurrió un error durante la verificación. Por favor, intente nuevamente.",
+      "RESEND_CODE_SUCCESS": "Se ha enviado un nuevo código de verificación a tu correo electrónico.",
+      "RESEND_CODE_ERROR": "Error al enviar el código nuevamente",
+      "RESET_PASSWORD_SUCCESS": "Contraseña restablecida exitosamente",
+      "RESET_PASSWORD_ERROR": "Error al enviar la solicitud de restablecimiento de contraseña",
+      "AUTH_CHECK_ERROR": "Error durante la verificación de autenticación",
+      "INIT_ERROR": "Error al inicializar la autenticación"
     }
   },
   "FORM": {
@@ -268,7 +346,8 @@
       "PASSWORD_UPPERCASE": "La contraseña debe contener al menos una letra mayúscula.",
       "PASSWORD_LOWERCASE": "La contraseña debe contener al menos una letra minúscula.",
       "PASSWORD_DIGIT": "La contraseña debe contener al menos un dígito.",
-      "PASSWORD_SPECIAL": "La contraseña debe contener al menos un carácter especial (#?!@$%^&*-)."
+      "PASSWORD_SPECIAL": "La contraseña debe contener al menos un carácter especial (#?!@$%^&*-).",
+      "PASSWORDS_MUST_MATCH": "Las contraseñas deben coincidir."
     }
   },
   "ERROR_CODE": {
@@ -300,21 +379,13 @@
     "VIEW_MORE": "Ver más"
   },
   "MESSAGES": {
-    "SUCCESS_PROFILE_UPDATE": "Información del perfil editada con éxito",
-    "ERROR_PROFILE_UPDATE": "Error al editar la información del perfil",
     "PAYMENT_FAILED": "Pago fallido",
     "ERROR_FETCHING_ITEMS": "Error al obtener los elementos",
     "ERROR_OPENING_URL": "No sé cómo abrir esta URL",
     "ERROR_OCCURRED": "Ocurrió un error",
     "ERROR_LOADING_FILE": "Error al cargar el archivo markdown",
-    "ERROR_SENDING_CODE": "Error al enviar el código nuevamente",
-    "LOGIN_SUCCESSFUL": "Inicio de sesión exitoso",
-    "LOGIN_FAILED": "Inicio de sesión fallido",
     "PAYMENT_SUCCESSFUL": "¡Pago exitoso!",
     "REDIRECTING_TO_LOGIN": "Redirigiendo al inicio de sesión",
-    "ERROR_AUTH_CHECK": "Error durante la verificación de autenticación",
-    "ERROR_INITIALIZING_AUTH": "Error al inicializar la autenticación",
-    "ERROR_SENDING_REQUEST": "Error al enviar la solicitud de restablecimiento de contraseña",
     "ERROR_CREATING_BOOKING": "Error al crear la reserva",
     "ERROR_IN_BOOKING": "Error en la reserva"
   }

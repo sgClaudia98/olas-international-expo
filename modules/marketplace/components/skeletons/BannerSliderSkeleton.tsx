@@ -50,18 +50,6 @@ export const BannerSliderSkeleton: React.FC<SkeletonBannerProps> = ({
           },
         ]}
       />
-
-      <View style={styles.paginationContainer}>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.paginationDot,
-              index === 3 ? styles.activePaginationDot : null,
-            ]}
-          />
-        ))}
-      </View>
     </View>
   );
 };
@@ -70,7 +58,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: "#e0e0e0",
-    borderRadius: 8,
+    borderRadius: 5,
     overflow: "hidden",
     position: "relative",
   },
@@ -79,24 +67,5 @@ const styles = StyleSheet.create({
     height: "100%",
     position: "absolute",
     backgroundColor: "rgba(255, 255, 255, 0.3)",
-  },
-  paginationContainer: {
-    position: "absolute",
-    bottom: 16,
-    left: 0,
-    right: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "rgba(150, 150, 150, 0.2)",
-    marginHorizontal: 3,
-  },
-  activePaginationDot: {
-    backgroundColor: "rgba(150, 150, 150, 0.6)",
   },
 });

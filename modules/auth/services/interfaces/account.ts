@@ -34,7 +34,7 @@ export interface IRefreshTokenRequest {
 }
 
 export interface IAccountCreateRequest
-  extends Pick<Client, "email" | "firstName" | "lastName"> {
+  extends Pick<Client, "email" | "firstName" | "lastName" | "phone"> {
   password: string;
   receiveNewsLetter: boolean;
   activationLink: string;
@@ -63,4 +63,9 @@ export interface IVerifyRequest {
 export interface ISendVerificationCodeRequest {
   email: string;
   verificationLink: string;
+}
+
+export interface IChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
 }

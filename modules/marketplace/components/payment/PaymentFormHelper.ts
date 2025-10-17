@@ -1,23 +1,17 @@
 import * as Yup from 'yup';
 import { CreateMarketBookingRequest } from "../../services/interfaces/bookingDetail";
-import { parsePhoneNumber, phoneNumberValidation } from '@/utils/PhoneNumberHelper';
+import { phoneStringValidation } from '@/utils/PhoneNumberHelper';
 
 export interface PaymentFormValues {
   client: {
       fullName: string;
-      phone: {
-        number: string;
-        code: string;
-      };
+      phone: string;
       email: string;
   };
   beneficiary: {
       firstName: string;
       lastName: string;
-      phone: {
-        number: string;
-        code: string;
-      };
+      phone: string;
       idDocument: string;
       address: {
           state: string;
@@ -38,13 +32,13 @@ export const mapValuesToPayload = (
   return {
     client: {
       fullName: client.fullName || "",
-      phone:  parsePhoneNumber(client.phone.number, client.phone.code, 0) || "",
+      phone: client.phone || "",
       email: client.email || "",
     },
     beneficiary: {
       firstName: beneficiary.firstName || "",
       lastName: beneficiary.lastName || "",
-      phone: parsePhoneNumber(beneficiary.phone.number, beneficiary.phone.code, 0) || "",
+      phone: beneficiary.phone || "",
       idDocument: beneficiary.idDocument || "",
       address: {
         line1: beneficiary.address?.line1 || "",
@@ -65,7 +59,7 @@ const validationSchemas = {
   1: Yup.object().shape({
     client: Yup.object().shape({
       fullName: Yup.string().max(50, 'Must be 50 characters or less').required('Full Name is required'),
-      phone: phoneNumberValidation,
+      phone: phoneStringValidation,
       email: Yup.string().matches(
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/,'Invalid email address').required('Email is required'),
     }),
@@ -74,7 +68,7 @@ const validationSchemas = {
     beneficiary: Yup.object().shape({
       firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
       lastName: Yup.string().max(20, 'Must be 20 characters or less').required('Required'),
-      phone: phoneNumberValidation,
+      phone: phoneStringValidation,
       idDocument: Yup.string().required('Required'),
       address: Yup.object().shape({
         state: Yup.string().required('Required'),

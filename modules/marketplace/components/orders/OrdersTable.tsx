@@ -8,6 +8,7 @@ import { Colors } from "@/styles";
 import { Link } from "expo-router";
 import { useTranslation } from "react-i18next";
 import IconSvg from "@/components/ui/IconSvg";
+import { ScrollView } from "react-native";
 
 export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) => {
   const styles = useResponsiveStyles(orderStyles);
@@ -15,8 +16,7 @@ export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) =
   const { t } = useTranslation();
 
   return (
-    <>
-      <DataTable>
+       <DataTable style={styles.table}>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title style={styles.tableColBig}>
             <ThemedText lightColor={Colors.black.second}>{t("NUMBER")}</ThemedText>
@@ -34,7 +34,6 @@ export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) =
             <ThemedText></ThemedText>
           </DataTable.Title>
         </DataTable.Header>
-      </DataTable>
       {bookings &&
         bookings?.map((booking) => (
           <DataTable.Row key={`bkid-${booking.id}`} style={styles.tableRow}>
@@ -71,6 +70,7 @@ export const OrdersTable = ({ bookings }: { bookings: AgencyClientBooking[] }) =
             </DataTable.Cell>
           </DataTable.Row>
         ))}
-    </>
+      </DataTable>
+
   );
 };

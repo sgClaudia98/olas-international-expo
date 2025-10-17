@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useFormikContext } from "formik";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/styles";
 import { PaymentFormValues } from "../PaymentFormHelper";
 import PhoneNumberSelector from "@/components/PhoneNumberSelector";
@@ -9,6 +10,7 @@ import { paymentFormStyles } from "@/styles/reused/paymentForm";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 const Step1 = () => {
+  const { t } = useTranslation();
   const { handleChange, handleBlur, values, errors } =
     useFormikContext<PaymentFormValues>();
 
@@ -16,7 +18,7 @@ const Step1 = () => {
 
   return (
     <>
-      <Text style={styles.label}>Full Name</Text>
+      <Text style={styles.label}>{t("FORMLABEL.FULL_NAME")}</Text>
       <TextInput
         style={styles.input}
         onChangeText={handleChange("client.fullName")}
@@ -32,21 +34,23 @@ const Step1 = () => {
 
       <View style={styles.twoColumnContainer}>
         <View style={styles.columnLeft}>
-          <Text style={styles.label}>Phone Number</Text>
+          <Text style={styles.label}>{t("FORMLABEL.PHONE_NUMBER")}</Text>
           <PhoneNumberSelector
-            name="client.phone"
+            value={values.client.phone}
+            onChange={handleChange("client.phone")}
+            onBlur={() => handleBlur("client.phone")}
             inputStyles={{ ...styles.input, marginBottom: 0 }}
             defaultCountryCode="US"
-            error={!!errors.client?.phone?.number}
+            error={!!errors.client?.phone}
           />
-          {errors.client?.phone?.number && (
+          {errors.client?.phone && (
             <Text style={{ ...styles.error, marginTop: 5 }}>
-              {errors.client?.phone?.number}
+              {errors.client?.phone as string}
             </Text>
           )}
         </View>
         <View style={styles.columnRight}>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>{t("FORMLABEL.EMAIL")}</Text>
           <TextInput
             style={styles.input}
             inputMode="email"

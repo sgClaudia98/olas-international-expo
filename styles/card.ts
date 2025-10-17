@@ -7,7 +7,14 @@ const baseStyle = {
     paddingHorizontal: 40,
     paddingVertical: 25
   }
-  
+
+const baseStyleMobile = {
+    backgroundColor: Colors.white.default,
+    borderRadius: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 20
+  }
+
 const desktop = StyleSheet.create({
   card: {
     gap: 10,
@@ -35,7 +42,14 @@ const desktop = StyleSheet.create({
 
 export const cardStyle = {
   mobile: StyleSheet.create({
-    ...desktop
+    ...desktop,
+    cardContent: {
+      ...desktop.cardContent,
+      ...baseStyleMobile,
+    },
+    cardHeader: {
+      ...baseStyleMobile
+    },
   }),
   tablet: StyleSheet.create({
     ...desktop

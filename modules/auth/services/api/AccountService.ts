@@ -12,6 +12,7 @@ import {
   IAccountResponse,
   IAuthRequest,
   IAuthResponse,
+  IChangePasswordRequest,
   IForgetPasswordRequest,
   IRefreshTokenRequest,
   IResetPasswordRequest,
@@ -19,7 +20,6 @@ import {
   IVerifyRequest,
 } from "../interfaces/account";
 import { BASE_URL } from "@/constants";
-import { decodeToken } from "react-jwt";
 
 export const accountService = createApi({
   reducerPath: "account",
@@ -38,12 +38,15 @@ export const accountService = createApi({
       }),
       // Removemos onQueryStarted - se manejará en el componente
     }),
-    getProfile: builder.query<IAccountResponse, void>({
-      query: () => ({
+    getProfile: builder.query<IAccountResponse, string>({
+      query: (token) => ({
         url: `/profile`,
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
-      // Removemos onQueryStarted - se manejará en el thunk
+      providesTags: ["account"],
     }),
     profile: builder.mutation<IAccountResponse, IAccountPutRequest>({
       query: (body) => ({
@@ -51,6 +54,7 @@ export const accountService = createApi({
         method: "PUT",
         body,
       }),
+      invalidatesTags: ["account"],
     }),
     refreshToken: builder.mutation<IAuthResponse, IRefreshTokenRequest>({
       query: (body) => ({
@@ -80,14 +84,15 @@ export const accountService = createApi({
         body,
       }),
     }),
-    changePassword: builder.mutation<IAuthResponse, IAuthRequest>({
+    changePassword: builder.mutation<IAuthResponse, IChangePasswordRequest>({
       query: (body) => ({
         url: `/change-password`,
         method: "POST",
         body,
       }),
+      invalidatesTags: ["account"],
     }),
-    verify: builder.mutation<void, IVerifyRequest>({
+    verify: builder.mutation<IAuthResponse, IVerifyRequest>({
       query: (body) => ({
         url: `/verify`,
         method: "POST",

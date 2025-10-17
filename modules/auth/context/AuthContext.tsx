@@ -95,6 +95,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
   const pathname = "/" + segments.join("/");
 
+  // Handle route protection and redirection
+  useEffect(() => {
+    if (!isInitialized) return;
+
+    const inAuthGroup = pathname.startsWith("/(auth)");
+
+    if (isAuthenticated && inAuthGroup) {
+      // User is authenticated but on auth screen - redirect to profile
+      router.replace("/profile");
+    } 
+  }, [isAuthenticated, pathname, isInitialized]);
+
   // Valor del contexto
   const contextValue: AuthContextType = {
     // Estado

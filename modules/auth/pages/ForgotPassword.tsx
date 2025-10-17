@@ -7,13 +7,13 @@ import OtpInput from "../components/OtpInput";
 import Btn from "@/components/Btn";
 import * as Colors from "@/styles/colors";
 import InputField from "@/components/ui/InputField";
+import PasswordInput from "@/components/ui/PasswordInput";
 import {
   useForgetPasswordMutation,
   useResetPasswordMutation,
 } from "../services/api/AccountService";
 
 import {
-  IForgetPasswordRequest,
   IResetPasswordRequest,
 } from "../services/interfaces/account";
 import { DOMAIN } from "@/constants";
@@ -36,6 +36,10 @@ interface ForgotPasswordProps {
   token?: string;
 }
 
+interface FormValues extends IResetPasswordRequest {
+  confirmPassword: string;
+}
+
 const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -55,11 +59,12 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
   console.debug("Validated Params: ", validatedParams);
   const [hasEmail, setHasEmail] = useState(!!validatedParams?.email);
 
-  const initialValues: IResetPasswordRequest = {
+  const initialValues: FormValues = {
     email: "",
     token: "",
     ...validatedParams,
     newPassword: "",
+    confirmPassword: "",
   };
 
   const validationSchema = Yup.object({
@@ -111,13 +116,23 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
           field: t("AUTH.FORGOT_PASSWORD.FORM.NEW_PASSWORD.LABEL"),
         })
       ),
+    confirmPassword: Yup.string()
+      .oneOf(
+        [Yup.ref("newPassword"), null],
+        t("FORM.ERRORS.PASSWORDS_MUST_MATCH")
+      )
+      .required(
+        t("FORM.ERRORS.REQUIRED", {
+          field: t("AUTH.FORGOT_PASSWORD.FORM.CONFIRM_PASSWORD.LABEL"),
+        })
+      ),
   });
 
-  const onSubmit = (values: IResetPasswordRequest) => {
+  const onSubmit = (values: FormValues) => {
     resetPass(values);
   };
 
-  const sendRequest = (values: IResetPasswordRequest) => {
+  const sendRequest = (values: FormValues) => {
     forgetPass({
       email: values.email,
       resetPasswordLink: `${DOMAIN}/reset-password`,
@@ -134,8 +149,9 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
 
   useEffect(() => {
     if (responseResetPass.isError) {
-      console.error("Error sending forget-password request");
+      Toast.error(t("AUTH.MESSAGES.RESET_PASSWORD_ERROR"));
     } else if (responseResetPass.isSuccess && responseResetPass.data) {
+      Toast.success(t("AUTH.MESSAGES.RESET_PASSWORD_SUCCESS"));
       goToLogin();
     }
   }, [responseResetPass.isLoading]);
@@ -227,7 +243,7 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                     )}
 
                     {/* Password Input */}
-                    <InputField
+                    <PasswordInput
                       onChangeText={handleChange("newPassword")}
                       onBlur={handleBlur("newPassword")}
                       value={values.newPassword}
@@ -238,7 +254,20 @@ const ForgotPassword: FunctionComponent<ForgotPasswordProps> = (params) => {
                       )}
                       error={errors.newPassword}
                       touched={touched.newPassword}
-                      secureTextEntry
+                    />
+
+                    {/* Confirm Password Input */}
+                    <PasswordInput
+                      onChangeText={handleChange("confirmPassword")}
+                      onBlur={handleBlur("confirmPassword")}
+                      value={values.confirmPassword}
+                      autoComplete="new-password"
+                      textContentType="newPassword"
+                      placeholder={t(
+                        "AUTH.FORGOT_PASSWORD.FORM.CONFIRM_PASSWORD.PLACEHOLDER"
+                      )}
+                      error={errors.confirmPassword}
+                      touched={touched.confirmPassword}
                     />
                   </>
                 )}

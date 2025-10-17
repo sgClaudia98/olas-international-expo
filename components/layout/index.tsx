@@ -16,7 +16,7 @@ export const screenHeaderLogoOption = ({ navigation }) => {
   return {
     header: () => (
       <View style={styles.container}>
-        <View style={{...styles.subContainer, marginTop: 10,}}>
+        <View style={{...styles.subContainer}}>
           <HeaderLeft />
           <RightHeader navigation={navigation} />
         </View>

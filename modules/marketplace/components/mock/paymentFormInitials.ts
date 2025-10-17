@@ -1,20 +1,14 @@
 export const paymentFormInitials = (v) => {
   return {
     client: {
-      fullName:  "Claudia",
-      phone:{
-            number: "12312312312",
-            code: "US",
-          },
-      email:  "claudia@example.com",
+      fullName: v.fullName ?? "",
+      phone: v.phone ?? "",
+      email: v.email ?? "",
     },
     beneficiary: {
       firstName: "asdasd",
       lastName: "asdasd",
-      phone: {
-        number: "57367777",
-        code: v.destinationCountry,
-      },
+      phone:  "+5357367777",
       idDocument: "asdasd",
       address: {
         state: v.province,

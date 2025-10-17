@@ -5,6 +5,9 @@ import { resumeStyles } from "@/styles/resume";
 
 const desktop = StyleSheet.create({
   ...resumeStyles,
+  table: {
+    minWidth: "100%",
+  },
   cardHeader: {
     ...cardStyle.desktop.cardHeader,
     flexDirection: "row",
@@ -14,6 +17,7 @@ const desktop = StyleSheet.create({
   cardContent: {
     ...cardStyle.desktop.cardContent,
     minHeight: 280,
+    minWidth: "100%",
     flexWrap: 'wrap'
   },
   tableHeader: {
@@ -61,10 +65,10 @@ const desktop = StyleSheet.create({
     borderColor: Colors.black.third,
     marginHorizontal: 30,
   },
-  
   shipmentHeader: {
     flexDirection: "row",
-    gap:14 
+    gap:14,
+    paddingTop: 20,
   },
   badge: {
     backgroundColor: Colors.black.fifth,
@@ -73,10 +77,13 @@ const desktop = StyleSheet.create({
     fontSize: 14,
     borderRadius: 3,
   },
+  tableProduct: {
+    minWidth: "100%",
+  },
   tableProductHeader: {
     borderBottomWidth: 0,
     paddingHorizontal: 15,
-    marginRight: 15
+    marginRight: 15,
   },
   tableProductRow: {
     backgroundColor: Colors.black.fifth,
@@ -119,6 +126,10 @@ export const orderStyles = {
       marginVertical: 20,
       marginLeft: 20,
     },
+    informationBoxesContainer: {
+      ...desktop.informationBoxesContainer,
+      flexDirection: "column",
+    },
   }),
   tablet: StyleSheet.create({
     ...cardStyle.tablet,
@@ -131,6 +142,9 @@ export const orderStyles = {
       ...desktop.cardRow,
       flexDirection: 'column',
       gap: 10,
+    },
+    cardContent: {
+      ...cardStyle.tablet.cardContent,
     },
     cardColumnLeft: {
       ...desktop.cardColumnLeft,

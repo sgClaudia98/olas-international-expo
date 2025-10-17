@@ -4,8 +4,8 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
+  Pressable,
   NativeSyntheticEvent,
   NativeScrollEvent,
   useWindowDimensions,
@@ -15,17 +15,51 @@ import { URL_IMAGE } from "@/constants";
 import { useBanner } from "../../hooks/useBanner";
 import { Colors } from "@/styles";
 import { BannerSliderSkeleton } from "../skeletons/BannerSliderSkeleton";
+import { useResponsiveImageDimensions, getResponsiveImageUrl } from "./ResponsiveImageHelper";
+import { useBreakpoints } from "@/hooks/useBreakpoints";
+import { useRouter } from "expo-router";
+import { useSearchContext } from "../../context/SearchContext";
+import { handleBannerAction } from "../../utils/bannerActions";
 
-const BannerSlider = ({ height = 250 }: { height?: number }) => {
+/**
+ * Responsive Banner Slider Component
+ *
+ * Features:
+ * - Automatically calculates optimal image dimensions based on screen size
+ * - Desktop: 1228x500 (~2.456:1 aspect ratio)
+ * - Mobile: 320x181 (~1.768:1 aspect ratio)
+ * - Requests appropriate image size from backend API
+ * - Maintains proper aspect ratios across all devices
+ * - Smooth transitions between breakpoints
+ *
+ * @param height - Optional fixed height, if not provided uses responsive calculation
+ */
+const BannerSlider = ({ height }: { height?: number }) => {
   const { banners, loading } = useBanner();
   const { width } = useWindowDimensions();
+  const { isMobile, isTablet } = useBreakpoints();
+  const router = useRouter();
+  const { setSelection } = useSearchContext();
+
+  // Header-style responsive padding
+  const horizontalPadding = isMobile ? 20 : isTablet ? 35 : 105;
+
+  // Get responsive image dimensions for API request with padding consideration
+  // Desktop: 1228x500 (~2.456:1), Mobile: 320x181 (~1.768:1)
+  const responsiveImageDimensions = useResponsiveImageDimensions(height, horizontalPadding);
+
+  // Display dimensions: use full screen width and proportional height
+  const displayWidth = width;
+  const displayHeight = height || responsiveImageDimensions.height;
 
   const mediaList = useMemo(
     () =>
       banners
-        .flatMap((b) => b.views)
-        .filter((view) => view.mediaId !== 0)
-        .sort((a, b) => a.position - b.position),
+        .flatMap((banner) =>
+          banner.views.map((view) => ({ view, banner }))
+        )
+        .filter((item) => item.view.mediaId !== 0)
+        .sort((a, b) => a.view.position - b.view.position),
     [banners]
   );
 
@@ -54,24 +88,39 @@ const BannerSlider = ({ height = 250 }: { height?: number }) => {
   return (
     <>
       {loading ? (
-        <BannerSliderSkeleton height={height} />
+        <BannerSliderSkeleton height={displayHeight} style={{ paddingHorizontal: horizontalPadding }} />
       ) : (
         <View style={styles.container}>
           <FlatList
             scrollEnabled={false}
             ref={flatListRef}
             data={mediaList}
-            keyExtractor={(item, index) => `media-${item.mediaId}-${index}`}
+            keyExtractor={(item, index) => `media-${item.view.mediaId}-${index}`}
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
-              <Image
-                source={{
-                  uri: `${URL_IMAGE}${item.mediaId}?width=600&height=250`,
+              <Pressable
+                onPress={() =>{
+                  console.log("Banner pressed:", item.banner); 
+                  handleBannerAction(
+                    item.banner.action,
+                    { departmentId: item.banner.departmentId },
+                    setSelection
+                  )
                 }}
-                style={{ width, height, aspectRatio: width/height, zIndex: 10 }}
-                resizeMode="cover"
-              />
+              >
+                <Image
+                  source={{
+                    uri: getResponsiveImageUrl(URL_IMAGE, item.view.mediaId, responsiveImageDimensions),
+                  }}
+                  style={{
+                    width: displayWidth, // Use full screen width for display
+                    height: displayHeight,
+                    zIndex: 10
+                  }}
+                  resizeMode="contain"
+                />
+              </Pressable>
             )}
             onMomentumScrollEnd={handleMomentumScrollEnd}
             initialNumToRender={3}

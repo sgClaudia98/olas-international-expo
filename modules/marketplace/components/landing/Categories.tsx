@@ -2,32 +2,39 @@ import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { useRouter } from "expo-router";
 import React, { useMemo } from "react";
 import { Pressable, Text, View } from "react-native";
-import { categories as staticCategories} from "../../data/landing";
 import { categoriesStyles } from "../../styles/landing";
 import { useSearchContext } from "../../context/SearchContext";
+import { CategoryIcon } from "@/components/LandingIcons";
 
 const Categories = () => {
   const route = useRouter();
   const styles = useResponsiveStyles(categoriesStyles);
-  const { departments } = useSearchContext();
-  const { setSelection } = useSearchContext();
+  const { departments, setSelection } = useSearchContext();
 
   const handleNavigation = (departmentId: number) => {
     setSelection({ departmentId: departmentId });
-    route.push("/(main)/services/market/products");
   };
 
   const categories = useMemo(() => {
-    return staticCategories.map((category) => {
-      const department = departments?.find((dep) => dep.code === category.code);
-      return ({
-      ...category,
-      url: !department ? undefined : ({
-        departmentId: department.id,
+    if (!departments || departments.length === 0) {
+      return [];
+    }
+    return departments.map((dep) => {
+      const departmentIcon = {
+        name: dep.name,
+        icon: React.createElement(CategoryIcon, { name: dep.code }),
+          code: dep.code,
+        }
+      return {
+        ...departmentIcon,
+        url: {
+          departmentId: dep.id,
         categoryId: undefined,
-      })
-    })}).filter((category) => category.url !== undefined);
-  }, []);
+        }
+      }
+    }
+    ).filter((category) => category.url !== undefined);
+  }, [departments]);
 
   return (
     <View style={styles.container}>

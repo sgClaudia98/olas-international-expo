@@ -12,7 +12,10 @@ const homeBreadcrumItem = {
 
 const allCategoriesBreadcrumbItem = {
   label: "FILTERS.ALL_CATEGORIES",
-  route: "/services/market/products",
+  route: {
+    pathname: "/(main)/services/market/products",
+    params: {},
+  },
 };
 
 const buildBreadcrumb = (
@@ -24,22 +27,33 @@ const buildBreadcrumb = (
     homeBreadcrumItem,
     allCategoriesBreadcrumbItem,
   ];
-  const ROUTE = "/services/market/products";
 
   if (department || category) items.pop();
 
   if (department) {
     items.push({
       label: capitalizeWords(department.name),
-      route: `${ROUTE}?departmentId=${department.id}`,
+      route: {
+        pathname: "/(main)/services/market/products",
+        params: { departmentId: department.id },
+      },
     });
   }
 
-  if (category)
+  if (category) {
+    const params: Record<string, number> = { categoryId: category.id };
+    if (department) {
+      params.departmentId = department.id;
+    }
+
     items.push({
       label: capitalizeWords(category.name),
-      route: `${ROUTE}?categoryId=${category.id}`,
+      route: {
+        pathname: "/(main)/services/market/products",
+        params,
+      },
     });
+  }
 
   if (product)
     items.push({

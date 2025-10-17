@@ -47,13 +47,9 @@ const LandingWrapper: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView showsHorizontalScrollIndicator={false}>
         <>
-          <View
-            style={{ marginTop: 10, marginBottom: 60, paddingHorizontal: 20 }}
-          >
-            <SearchProvider>
-              <BannerSlider height={500} />
+          <View style={{ marginTop: 10, marginBottom: 60 }}>
+              <BannerSlider />
               <Categories />
-            </SearchProvider>
           </View>
           {/* <CategoriesSlider /> */}
           {/* <PopularBrands /> */}

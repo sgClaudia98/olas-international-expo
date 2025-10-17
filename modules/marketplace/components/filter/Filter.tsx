@@ -131,10 +131,10 @@ const Filters: React.FC<FiltersProps> = ({
     setActiveCategoryTrace(item)
 
     setCategory({
-      departmentId: +item[0]?.value || undefined,
-      department: item[0]? capitalizeWords(item[0].title) : undefined,
-      categoryId: +item[1]?.value || undefined,
-      category: item[1]? capitalizeWords(item[1].title) : undefined
+      departmentId: item[0] ? +item[0].value : undefined,
+      department: item[0] ? capitalizeWords(item[0].title) : undefined,
+      categoryId: item[1] ? +item[1].value : undefined,
+      category: item[1] ? capitalizeWords(item[1].title) : undefined
     });
 
     if (lessThan.tablet && onCloseDrawer) {

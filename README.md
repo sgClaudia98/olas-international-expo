@@ -48,3 +48,15 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+# Market landing icons
+The market landing icons are used based on the svg name, and the code from the B2B, for example
+
+If you have a Department with code: `FOOD`
+
+The icon applied to it will be the one with name `Market_FOOD.svg`
+The icon need to be generated before use, the steps would be:
+1. Add icon to `/assets/icons/svg` named `Market_FOOD.svg`
+2. Run script to generate React Native Icon `npm run generate-svg-components`
+3. ALL DONE! run the app

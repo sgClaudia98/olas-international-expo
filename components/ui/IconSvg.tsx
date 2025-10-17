@@ -1,15 +1,15 @@
 import React from "react";
 import { SvgProps } from "react-native-svg";
 import * as icons from "../icons";
-import { Text, TextStyle } from "react-native";
+import { ColorValue, Text, TextStyle } from "react-native";
 import { Colors } from "@/styles";
 
 export type IconNames = Exclude<keyof typeof icons, "Mastercard" | "Paypal" | "AmericanExpress" | "Visa">;
 
 export interface IconProps extends SvgProps {
-  name: IconNames;
+  name: IconNames | string;
   size?: number;
-  color?: string;
+  color?: ColorValue;
   containerStyle?: TextStyle;
 }
 
@@ -20,7 +20,7 @@ const IconSvg: React.FC<IconProps> = ({
   ...props
 }) => {
   const Component = icons[name];
-  if (!Component) return <Text>?</Text>
+  if (!Component) return <Text></Text>
   return (
       <Component
         width={size}

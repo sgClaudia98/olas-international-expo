@@ -2,27 +2,26 @@ import React from "react";
 import { View } from "react-native";
 import { useFormikContext } from "formik";
 import { Colors } from "@/styles";
-import {
-  paymentFormStyles,
-} from "@/styles/reused/paymentForm";
+import { paymentFormStyles } from "@/styles/reused/paymentForm";
 import ContentBox from "../ContentBox";
 import OrderSection from "../OrderSection";
 import { PaymentFormValues } from "../PaymentFormHelper";
-import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import IconSvg from "@/components/ui/IconSvg";
+import { useTranslation } from "react-i18next";
+import { formatPhoneNumberInternational } from "@/utils/PhoneNumberHelper";
 
-const Step3 = ({ preview}) => {
+const Step3 = ({ preview }) => {
   const { values, handleChange } = useFormikContext<PaymentFormValues>();
-
   const styles = useResponsiveStyles(paymentFormStyles);
+  const { t } = useTranslation();
 
   return (
     <>
       <View style={styles.twoColumnContainer}>
         <View style={styles.column}>
           <ContentBox
-            title="Client"
+            title={t("CUSTOMER_HEADING")}
             data={{
               fullName: {
                 icon: (
@@ -52,21 +51,17 @@ const Step3 = ({ preview}) => {
                     size={17}
                   />
                 ),
-                value:
-                  parsePhoneNumber(
-                    values.client.phone.number,
-                    values.client.phone.code,
-                    1
-                  ) || "N/A",
+                value: values.client.phone ? formatPhoneNumberInternational(values.client.phone) : "N/A",
               },
             }}
             backgroundColor={Colors.black.fifth}
             contentBoxStyle={styles.contentBoxStyle}
           />
         </View>
+
         <View style={styles.column}>
           <ContentBox
-            title="Beneficiary"
+            title={t("RECEIVER_HEADING")}
             data={{
               name: {
                 icon: (
@@ -77,7 +72,7 @@ const Step3 = ({ preview}) => {
                   />
                 ),
                 value:
-                  `${values.beneficiary.firstName} ${values.beneficiary.lastName}` ||
+                  `${values.beneficiary.firstName} ${values.beneficiary.lastName}`.trim() ||
                   "N/A",
               },
               identification: {
@@ -94,12 +89,7 @@ const Step3 = ({ preview}) => {
                     size={17}
                   />
                 ),
-                value:
-                  parsePhoneNumber(
-                    values.beneficiary.phone.number,
-                    values.beneficiary.phone.code,
-                    1
-                  ) || "N/A",
+                value: values.beneficiary.phone ? formatPhoneNumberInternational(values.beneficiary.phone) : "N/A",
               },
               address: {
                 icon: (
@@ -125,6 +115,7 @@ const Step3 = ({ preview}) => {
           />
         </View>
       </View>
+
       {preview &&
         preview.details.map((booking) => (
           <OrderSection

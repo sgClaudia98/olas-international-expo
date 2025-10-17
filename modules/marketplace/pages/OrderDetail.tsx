@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ScrollView, View, Pressable } from "react-native";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
@@ -8,13 +8,14 @@ import { useSearchMarketBookingsMutation } from "../services/api/BookingService"
 import { ActivityIndicator, Button, DataTable } from "react-native-paper";
 import ContentBox from "../components/payment/ContentBox";
 import { Colors } from "@/styles";
-import { parsePhoneNumber } from "@/utils/PhoneNumberHelper";
+import { formatPhoneNumberInternational, parsePhoneNumber } from "@/utils/PhoneNumberHelper";
 import { orderStyles } from "../styles/orders";
 import { mapAgencyClientBookingsToUIBookings } from "../utils/bookingMapping";
 import IconSvg from "@/components/ui/IconSvg";
 import { OrdersStatus } from "../components/orders/OrdersStatus";
 import { Toast } from "toastify-react-native";
 import OrderPayOverlay from "../components/orders/OrderPayOverlay";
+import { Info } from "@/components/icons";
 
 export const OrderDetail: FC<{ id: string }> = ({ id }) => {
   const [paymentFormVisible, setPaymentFormVisible] = useState(false);
@@ -109,12 +110,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                               size={17}
                             />
                           ),
-                          value:
-                            parsePhoneNumber(
-                              beneficiary?.phone,
-                              beneficiary?.country?.code,
-                              1
-                            ) || "N/A",
+                          value: beneficiary ? formatPhoneNumberInternational(beneficiary.phone)  : "N/A"   ,
                         },
                         address: {
                           icon: (
@@ -167,12 +163,7 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                               size={17}
                             />
                           ),
-                          value:
-                            parsePhoneNumber(
-                              booking.client.phone,
-                              booking.client?.country?.code,
-                              1
-                            ) || "N/A",
+                          value: booking.client.phone ? formatPhoneNumberInternational(booking.client.phone) : "N/A",
                         },
                         email: {
                           icon: (
@@ -229,11 +220,36 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       </ThemedText>
                     </View>
                   </View>
-                  <View style={styles.resumeTotal}>
-                    <ThemedText>{t("TOTAL")}</ThemedText>
-                    <ThemedText type="defaultBold">
-                      $ {booking.totalPrice.toFixed(2)}
-                    </ThemedText>
+                  <View>
+                    <View style={styles.resumeTotal}>
+                      <ThemedText>{t("TOTAL")}</ThemedText>
+                      <ThemedText type="defaultBold">
+                        $ {booking.totalPrice.toFixed(2)}
+                      </ThemedText>
+                    </View>
+                    {booking.pendingPayment  && (
+                        <Pressable
+                          onPress={() => setPaymentFormVisible(true)}
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: 8,
+                            marginTop: 8,
+                          }}
+                        >
+                          <Info
+                            width={14}
+                            height={14}
+                            color={Colors.blue.second}
+                          />
+                          <ThemedText
+                            style={{ color: Colors.blue.second, fontSize: 14 }}
+                          >
+                            {t("MARKET.PAYMENT.STATUS.PAY")}
+                          </ThemedText>
+                        </Pressable>
+                      )}
                   </View>
                 </View>
               )}
@@ -247,30 +263,22 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
               <ActivityIndicator />
             </>
           ) : (
-            <>
-              {booking.paidStatus !== "AcceptedPaid" && (
-                <Button
-                  mode="contained"
-                  onPress={() => setPaymentFormVisible(true)}
-                >
-                  {t("MARKET.PAYMENT.STATUS.PAY").toUpperCase()}
-                </Button>
-              )}
+            <View style={{ minWidth: "100%" }}>
+              <OrdersStatus status={booking.status} />
               {booking.details.map((shipment) => (
-                <>
+                <React.Fragment key={shipment.index}>
                   <View style={styles.shipmentHeader}>
                     <ThemedText type="defaultBold">
                       {t("MARKET.SHIPPING")} {shipment.index + 1}
                     </ThemedText>
                     <ThemedText style={styles.badge}>
-                      {t("TOTAL", {
+                      {t("PRODUCTS.TOTAL", {
                         count: shipment.total,
                       }).toLowerCase()}
                     </ThemedText>
                   </View>
 
-                  <OrdersStatus status={booking.status} />
-                  <DataTable>
+                  <DataTable style={styles.tableProduct}>
                     <DataTable.Header style={styles.tableProductHeader}>
                       <DataTable.Title style={styles.tableColBig}>
                         <ThemedText style={styles.tableLabel}>
@@ -305,9 +313,9 @@ export const OrderDetail: FC<{ id: string }> = ({ id }) => {
                       </DataTable.Row>
                     ))}
                   </DataTable>
-                </>
+                </React.Fragment>
               ))}
-            </>
+            </View>
           )}
         </View>
         <OrderPayOverlay

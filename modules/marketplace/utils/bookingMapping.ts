@@ -70,7 +70,7 @@ const mapBookingDetailsToUIBookingDetails = (
     return {
       ...detail,
       index: index,
-      total: details.length,
+      total: detail.productDetails.length,
       items: items || [],
     };
   });

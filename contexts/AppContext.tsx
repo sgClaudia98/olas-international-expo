@@ -15,6 +15,7 @@ import { MainLayoutProvider } from "./mainLayoutContext";
 import ToastManager from "toastify-react-native";
 import Fonts from "@/styles/fonts";
 import { AuthProvider } from "@/modules/auth/context/AuthContext";
+import { PaymentProvider } from "@/modules/payment/providers/PaymentProvider";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -43,7 +44,9 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
                 position={"top"}
                 positionValue={2}
               />
-              <MainLayoutProvider>{children}</MainLayoutProvider>
+              <PaymentProvider>
+                <MainLayoutProvider>{children}</MainLayoutProvider>
+              </PaymentProvider>
             </LocationProvider>
           </AuthProvider>
         </Provider>

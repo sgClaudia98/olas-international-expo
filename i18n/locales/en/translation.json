@@ -50,16 +50,26 @@
   "LOGOUT": "Log out",
   "PROFILE_SETTINGS": "Profile Settings",
   "ACTIONS.SAVE_CHANGES": "Save changes",
-  "FORMLABEL.FIRST_NAME": "First Name",
-  "FORMLABEL.LAST_NAME": "Last Name",
-  "FORMLABEL.PHONE_NUMBER": "Phone Number",
-  "FORMLABEL.EMAIL": "Email",
+  "FORMLABEL": {
+    "EMAIL": "Email",
+    "FIRST_NAME": "First name",
+    "FULL_NAME": "Full name",
+    "LAST_NAME": "Last name",
+    "PHONE_NUMBER": "Phone number",
+    "ID_DOCUMENT": "CI/DNI",
+    "STATE": "State (Provincia)",
+    "CITY": "City (Municipio)",
+    "ADDRESS_LINE1": "Address",
+    "ADDRESS_LINE2": "Neighborhood (Reparto)",
+    "ZIP_CODE": "Zip Code"
+  },
   "RECEIVER_HEADING": "Beneficiary",
   "CUSTOMER_HEADING": "Client",
   "SUMMARY_HEADING": "Summary",
   "BOOKING_FEE": "Booking Fee",
   "DISCOUNT": "Discount",
   "PAYMENT_FEE": "Payment Fee",
+  "FEE": "Fee",
   "TOTAL": "Total",
   "NUMBER": "Number",
   "DATE": "Date",
@@ -78,6 +88,7 @@
   "CART_NOTIFICATION_ADD_TO_CART": "Product added to cart successfully",
   "CART_NOTIFICATION_MOD_QTY": "Product quantity modified successfully ",
   "CART_NOTIFICATION_REMOVE_FROM_CART": "Product removed from cart successfully",
+  "SEARCH_PLACEHOLDER": "Product name",
   "MODULE": {
     "TRAVEL": "Travel",
     "MARKET": "Market"
@@ -110,6 +121,16 @@
             "NORMAL": "Google Play"
           }
         }
+      },
+      "NEWSLETTER": {
+        "TITLE": "New products every week",
+        "DESCRIPTION": "Stay updated with our latest offers and discounts",
+        "BUTTONS": {
+          "SUBSCRIBE": "Contact us"
+        },
+        "MESSAGES": {
+          "ERROR": "An error occurred while subscribing. Please try again."
+        }
       }
     },
     "CART": {
@@ -123,6 +144,7 @@
     "BOOKING": "Booking",
     "PAYMENT": {
       "TITLE": "Booking Steps",
+      "SUBTITLE": "Select payment method",
       "STEPS": {
         "Client": "Client",
         "Beneficiary": "Beneficiary",
@@ -135,9 +157,15 @@
         "PAYMENT_ERROR": "An error occurred during payment. Please try again."
       },
       "STATUS": {
-        "PAID": "Accepted",
-        "PAY": "Pending"
+        "PAID": "Accepted Payment",
+        "PAY": "Pending Payment"
       }
+    },
+    "ORDER_SECTION": {
+      "ORDER": "Order {{current}} / {{total}}",
+      "OPEN_NOTE": "Open note",
+      "CLOSE_NOTE": "Close note",
+      "PLACEHOLDER": "Leave your comments here..."
     },
     "ORDER_STATUS": {
       "Requested": "Requested",
@@ -201,6 +229,14 @@
           "LABEL": "Password",
           "PLACEHOLDER": "Enter your password"
         },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirm Password",
+          "PLACEHOLDER": "Confirm your password"
+        },
+        "PHONE": {
+          "LABEL": "Phone Number",
+          "PLACEHOLDER": "Enter your phone number"
+        },
         "NEWSLETTER": {
           "LABEL": "I accept to be contacted with offers and relevant information."
         }
@@ -231,10 +267,15 @@
         "NEW_PASSWORD": {
           "LABEL": "New password",
           "PLACEHOLDER": "Enter your new password"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirm Password",
+          "PLACEHOLDER": "Confirm your new password"
         }
       },
       "ERRORS": {
-        "EMAIL_NOT_FOUND": "Error requesting code, please check your email."
+        "EMAIL_NOT_FOUND": "Error requesting code, please check your email.",
+        "PASSWORDS_MUST_MATCH": "Passwords must match."
       }
     },
     "VERIFY": {
@@ -259,6 +300,42 @@
         "SUCCESS": "Your account has been successfully verified!",
         "ERROR": "An error occurred during verification. Please try again."
       }
+    },
+    "CHANGE_PASSWORD": {
+      "TITLE": "Change Password",
+      "SUCCESS": "Password changed successfully",
+      "ERROR": "Error changing password",
+      "FORM": {
+        "CURRENT_PASSWORD": {
+          "LABEL": "Current Password",
+          "PLACEHOLDER": "Enter your current password"
+        },
+        "NEW_PASSWORD": {
+          "LABEL": "New Password",
+          "PLACEHOLDER": "Enter your new password"
+        },
+        "CONFIRM_PASSWORD": {
+          "LABEL": "Confirm New Password",
+          "PLACEHOLDER": "Confirm your new password"
+        }
+      },
+      "BUTTONS": {
+        "CHANGE_PASSWORD": "Change Password"
+      }
+    },
+    "MESSAGES": {
+      "LOGIN_SUCCESS": "Login successful",
+      "LOGIN_ERROR": "Login failed",
+      "PROFILE_UPDATE_SUCCESS": "Success editing profile info",
+      "PROFILE_UPDATE_ERROR": "Error editing profile info",
+      "VERIFICATION_SUCCESS": "Your account has been successfully verified!",
+      "VERIFICATION_ERROR": "An error occurred during verification. Please try again.",
+      "RESEND_CODE_SUCCESS": "A new verification code has been sent to your email.",
+      "RESEND_CODE_ERROR": "Error sending code again",
+      "RESET_PASSWORD_SUCCESS": "Password reset successfully",
+      "RESET_PASSWORD_ERROR": "Error sending forget-password request",
+      "AUTH_CHECK_ERROR": "Error during auth check",
+      "INIT_ERROR": "Error initializing auth"
     }
   },
   "FORM": {
@@ -270,7 +347,8 @@
       "PASSWORD_UPPERCASE": "The password must contain at least one uppercase letter.",
       "PASSWORD_LOWERCASE": "The password must contain at least one lowercase letter.",
       "PASSWORD_DIGIT": "The password must contain at least one digit.",
-      "PASSWORD_SPECIAL": "The password must contain at least one special character (#?!@$%^&*-)."
+      "PASSWORD_SPECIAL": "The password must contain at least one special character (#?!@$%^&*-).",
+      "PASSWORDS_MUST_MATCH": "Passwords must match."
     }
   },
   "ERROR_CODE": {
@@ -302,21 +380,13 @@
     "VIEW_MORE": "View more"
   },
   "MESSAGES": {
-    "SUCCESS_PROFILE_UPDATE": "Success editing profile info",
-    "ERROR_PROFILE_UPDATE": "Error editing profile info",
     "PAYMENT_FAILED": "Payment failed",
     "ERROR_FETCHING_ITEMS": "Error fetching items",
     "ERROR_OPENING_URL": "Don't know how to open this URL",
     "ERROR_OCCURRED": "An error occurred",
     "ERROR_LOADING_FILE": "Error loading markdown file",
-    "ERROR_SENDING_CODE": "Error sending code again",
-    "LOGIN_SUCCESSFUL": "Login successful",
-    "LOGIN_FAILED": "Login failed",
     "PAYMENT_SUCCESSFUL": "Payment successful!",
     "REDIRECTING_TO_LOGIN": "Redirecting to login",
-    "ERROR_AUTH_CHECK": "Error during auth check",
-    "ERROR_INITIALIZING_AUTH": "Error initializing auth",
-    "ERROR_SENDING_REQUEST": "Error sending forget-password request",
     "ERROR_CREATING_BOOKING": "Error al crear la reserva",
     "ERROR_IN_BOOKING": "Error en la reserva"
   }

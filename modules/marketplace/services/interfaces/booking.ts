@@ -169,6 +169,10 @@ export interface Banner {
   action: BannerAction;
 }
 
+export interface BannerFromDepartment extends Banner {
+  departmentId: number;
+}
+
 export interface Department {
   id: number;
   code: string;

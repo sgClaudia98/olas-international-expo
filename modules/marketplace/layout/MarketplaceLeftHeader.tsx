@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { capitalizeWords } from "@/utils/string";
 
 export default function MarketplaceLeftHeader() {
-  const { t } = useTranslation();
+  const { t , i18n } = useTranslation();
   const styles = useResponsiveStyles(responsiveStyle);
   const { departments, selection, setSelection, setProductName, productName } =
     useSearchContext();
@@ -24,17 +24,13 @@ export default function MarketplaceLeftHeader() {
   const [department, setDepartment] = useState<string>(
     selection?.departmentId?.toString() || ""
   );
-  const all_cat = {
-    label: t("FILTERS.ALL_CATEGORIES"),
-    value: "",
-  };
+  const all_cat = useMemo(() => {return {label: t("FILTERS.ALL_CATEGORIES"), value:""}}, [i18n.language]);
 
-  const menuItems = useMemo(() => {
-    const dep = departments?.map((v) => {
+  const departmentItems = useMemo(() => departments?.map((v) => {
       return { label: v.name, value: v.id.toString() };
-    });
-    return dep ? [all_cat, ...dep] : [all_cat];
-  }, [departments]);
+    }), [departments]);
+    
+  const menuItems = useMemo(() => [all_cat].concat(departmentItems || []), [all_cat, departmentItems]);
 
   const onDepartmentSelected = (value: string, label: string) => {
     setDepartment(value);
@@ -44,23 +40,10 @@ export default function MarketplaceLeftHeader() {
       categoryId: undefined,
       category: undefined,
     });
-    navigateToProducts();
   };
 
   const onProductSearch = (value: string) => {
     if (setProductName) setProductName(value);
-    if (pathname !== "/services/market/products") {
-      navigateToProducts(value);
-    }
-    // URL update is now handled by SearchContext
-  };
-
-  // Accepts an optional search string and adds it as a query param
-  const navigateToProducts = (search?: string) => {
-    route.push({
-      pathname: "/(main)/services/market/products",
-      params: search ? { search } : undefined,
-    });
   };
 
   return (

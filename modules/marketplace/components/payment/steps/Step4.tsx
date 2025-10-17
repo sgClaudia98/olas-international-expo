@@ -7,6 +7,7 @@ import { UIBooking } from "@/modules/marketplace/utils/bookingMapping";
 import { usePaymentContext } from "@/modules/payment/providers/PaymentProvider";
 import { PaymentFormValues } from "../PaymentFormHelper";
 import { useFormikContext } from "formik";
+import { useTranslation } from "react-i18next";
 
 const Step4: FC<{
   preview: UIBooking;
@@ -14,6 +15,7 @@ const Step4: FC<{
 }> = ({ preview, refetchBooking }) => {
   const { values, setFieldValue } = useFormikContext<PaymentFormValues>();
   const { methods, selectedMethod, setMethodById } = usePaymentContext();
+  const { t } = useTranslation();
 
   const styles = useResponsiveStyles(paymentFormStyles);
   const [total, setTotal] = useState(preview.totalPrice);
@@ -31,7 +33,7 @@ const Step4: FC<{
   return (
     <>
       <View>
-        <Text style={styles.label}>Select Payment Method</Text>
+        <Text style={styles.label}>{t("MARKET.PAYMENT.SUBTITLE")}</Text>
         <View style={{ marginTop: 10 }}>
           <PaymentButtons
             amount={preview.totalPrice}
@@ -42,7 +44,9 @@ const Step4: FC<{
         </View>
       </View>
       <View style={{ marginTop: 20, alignItems: 'flex-end' }}>
-        <Text style={styles.totalPrice}>Total: ${total.toFixed(2)}</Text>
+        <Text style={styles.totalPrice}>
+          {t("TOTAL")}: ${total.toFixed(2)}
+        </Text>
       </View>
     </>
   );

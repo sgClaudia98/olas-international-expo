@@ -1,5 +1,5 @@
 import {IError} from '@/services/interfaces/error';
-import {Currency, EBookingType, ESortMode, Product} from './booking';
+import {Currency, EBookingType, Product} from './booking';
 export type EBookingStatus =
   | 'Requested'
   | 'Processing'
@@ -18,7 +18,6 @@ export type EMarketBookingDetailStatus =
   | 'Cancelled'
   | 'Penalties'
   | 'Delivered';
-
 
 export interface BookingDetail {
   bookingType: EBookingType;
@@ -100,7 +99,8 @@ export interface AgencyClientBooking {
   bookingFee: number;
   paymentFee?: number | null;
   paymentMethod?: string | null;
-  paidStatus?: "AcceptedPaid" | null;
+  pendingPayment?: boolean | null;
+  paidStatus?: "AcceptedPaid" | null; 
   details?: BookingDetail[] | null; // This can be CarBookingDetail or MarketBookingDetail
 }
 
@@ -115,6 +115,12 @@ export interface AgencyClientBookingPaymentMethod {
   code: string;
   name: string;
   fee: number;
+}
+
+export interface AgencyClientBookingPaymentMethodResponse {
+  paymentMethods: AgencyClientBookingPaymentMethod[];
+  success: boolean;
+  error?: IError;
 }
 
 export interface AgencyClientBookingPreviewResponse extends AgencyClientBookingResponse {

@@ -17,7 +17,7 @@ import {
   UpdateMarketBookingCartRequest,
 } from '../interfaces/booking';
 import {DEFAULT_DESTINATION, BASE_URL} from '@/constants';
-import { AgencyClientBookingPreviewResponse, AgencyClientBookingResponse, CreateMarketBookingRequest } from '../../services/interfaces/bookingDetail';
+import { AgencyClientBookingPaymentMethodResponse, AgencyClientBookingPreviewResponse, AgencyClientBookingResponse, CreateMarketBookingRequest } from '../../services/interfaces/bookingDetail';
 
 // Define the necessary TypeScript interfaces
 export const bookingService = createApi({
@@ -150,6 +150,13 @@ export const bookingService = createApi({
       }),
     }),
     
+    getPaymentsByBookingId: builder.query<AgencyClientBookingPaymentMethodResponse, number>({
+      query: (id) => ({
+        url: `/booking/${id}/payment-methods`,
+        method: 'GET',
+      }),
+    }),
+    
     searchMarketBookings: builder.mutation<SearchAgencyClientBookingResponse, SearchAgencyClientMarketBookingRequest>({
       query: (body) => ({
         url: `/market/booking/search`, // Endpoint de la API
@@ -177,6 +184,7 @@ export const {
   useCreateMarketBookingMutation,
   usePreviewMarketBookingMutation,
   useGetBookingByIdQuery,
+  useGetPaymentsByBookingIdQuery,
   useSearchMarketBookingsMutation,
   usePayBookingMutation
 } = bookingService;

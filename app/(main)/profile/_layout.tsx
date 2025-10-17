@@ -12,9 +12,11 @@ import ProfileSideMenu, {
 import { breadcrumbContainer } from "@/styles/page";
 import { useAuth } from "@/modules/auth/context/AuthContext";
 import ProtectedRoute from "@/modules/auth/components/ProtectedRoute";
+import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 
 export default function ProfileLayout() {
   const { t } = useTranslation();
+  const styles = useResponsiveStyles(responsiveStyles);
   const items: ProfileSideMenuItem[] = [
     {
       label: "PAGE.PROFILE",
@@ -29,7 +31,6 @@ export default function ProfileLayout() {
     },
   ];
 
-  // TODO: protect this layout routes
   return (
     <ProtectedRoute>
       <Page backgroundColor={Colors.black.fifth}>
@@ -51,7 +52,7 @@ export default function ProfileLayout() {
   );
 }
 
-const styles = StyleSheet.create({
+const desktop = StyleSheet.create({
   breadcrumbContainer,
   container: {
     marginTop: 40,
@@ -67,3 +68,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+const responsiveStyles = {  
+  mobile: StyleSheet.create({
+    ...desktop,
+    container: {
+      ...desktop.container,
+      flexDirection: "column",
+    },
+    pageContent: {
+      ...desktop.pageContent,
+      marginLeft: 0,
+    },
+  }),
+  desktop: StyleSheet.create({
+    ...desktop,
+  }),
+};

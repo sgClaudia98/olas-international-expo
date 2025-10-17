@@ -30,6 +30,7 @@ export const LocationProvider: React.FC<LocationProviderProps> = ({ children }) 
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const {data: getCountryData, refetch} = useGetCountryByCodeQuery(destinationCountryCode)
   const activeDestination = useMemo(() => getLastElement(destinations), [destinations])
+  
   const addDestination = (destination: Destination) => {
     setDestinations((prevDestinations) => [...prevDestinations, destination]);
   };

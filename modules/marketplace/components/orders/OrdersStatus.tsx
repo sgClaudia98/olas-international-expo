@@ -3,6 +3,7 @@ import { EMarketBookingDetailStatus } from "../../services/interfaces/bookingDet
 import StepProgress from "../payment/StepProgress";
 import { getStatusTranslation } from "../../utils/statusTranslationMapping";
 import { useTranslation } from "react-i18next";
+import { ScrollView } from "react-native";
 
 const baseFlow: EMarketBookingDetailStatus[] = [
   "Requested",
@@ -33,8 +34,9 @@ export const OrdersStatus = ({
 }: {
   status: EMarketBookingDetailStatus;
 }) => {
-    const {i18n} = useTranslation();    
+    const {i18n} = useTranslation();
+
+    return <StepProgress styleType="minimal" step={getStatusTranslation(status, i18n.language)} steps={getFlow(status, i18n.language)}/>
     
-    return  <StepProgress styleType="minimal" step={getStatusTranslation(status, i18n.language)} steps={getFlow(status, i18n.language)}/>
 
 };

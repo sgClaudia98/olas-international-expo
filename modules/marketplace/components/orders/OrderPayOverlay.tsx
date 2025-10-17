@@ -20,7 +20,7 @@ const OrderPayOverlay = ({
   preview,
 }: PaymentOverlayProps) => {
   const styles = useResponsiveStyles(paymentFormStyles);
-
+  
   return (
     <Modal
       visible={visible}

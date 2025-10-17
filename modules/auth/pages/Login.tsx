@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FunctionComponent } from "react";
 import { View } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "@/components/ui/InputField";
+import PasswordInput from "@/components/ui/PasswordInput";
 import Btn from "@/components/Btn";
 import { Colors } from "@/styles";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
@@ -12,6 +13,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { useTranslation } from "react-i18next";
 import { Link, useRouter } from "expo-router";
 import { useAuth } from "../context/AuthContext";
+import { Toast } from "toastify-react-native";
 
 interface FormValues {
   email: string;
@@ -62,14 +64,10 @@ const Login: FunctionComponent<LoginProps> = () => {
     setIsLoading(true);
     try {
       await login(values);
-      // ✅ Login exitoso
-      console.log("Login successful");
-      // Redirigir o mostrar mensaje de éxito
+      Toast.success(t("AUTH.MESSAGES.LOGIN_SUCCESS"));
       router.replace("/(main)");
     } catch (error) {
-      // ❌ Login falló
-      console.error("Login failed:", error);
-      //TODO: Mostrar mensaje de error al usuario
+      Toast.error(t("AUTH.MESSAGES.LOGIN_ERROR"));
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +89,6 @@ const Login: FunctionComponent<LoginProps> = () => {
             handleChange,
             handleBlur,
             handleSubmit,
-            setFieldValue,
             values,
             errors,
             touched,
@@ -121,14 +118,13 @@ const Login: FunctionComponent<LoginProps> = () => {
                 />
 
                 {/* Password Input */}
-                <InputField
+                <PasswordInput
                   onChangeText={handleChange("password")}
                   onBlur={handleBlur("password")}
                   value={values.password}
                   placeholder={t("AUTH.LOGIN.FORM.PASSWORD.PLACEHOLDER")}
                   error={errors.password}
                   touched={touched.password}
-                  secureTextEntry
                 />
 
                 {/* Remember me and forgot password */}

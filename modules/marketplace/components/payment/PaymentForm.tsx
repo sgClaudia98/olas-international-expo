@@ -54,21 +54,13 @@ const getInitials = (v: PaymentFormInitials) => {
   return process.env.NODE_ENV === "development" ? paymentFormInitials(v) : {
     client: {
       fullName: v.fullName ?? "",
-      phone: v.phone
-        ? parseStringToPhoneNumber(v.phone)
-        : {
-            number: "",
-            code: "",
-          },
+      phone: v.phone,
       email: v.email ?? "",
     },
     beneficiary: {
       firstName: "",
       lastName: "",
-      phone: {
-        number: "",
-        code: v.destinationCountry,
-      },
+      phone: "",
       idDocument: "",
       address: {
         state: v.province,

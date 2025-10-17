@@ -16,14 +16,13 @@ import { BreadcrumbItem } from "@/components/Breadcrumb";
 import { buildBreadcrumb } from "../utils/breadcrumbBuild";
 import { useSearchContext } from "../context/SearchContext";
 import { SortOption, useSort } from "../hooks/useSort";
-
+import { ViewWithoutPadding } from "@/components/ViewWithoutPadding";
 
 const ProductsWrapper: React.FC = () => {
   const styles = useResponsiveStyles(responsiveStyle);
   const { lessThan } = useBreakpoints();
 
-  const { data, items, stats, loading, fetchPage } =
-    useSearchMarketOptions();
+  const { data, items, stats, loading, fetchPage } = useSearchMarketOptions();
   const { selection } = useSearchContext();
   const [showDesktopFilters, setShowDesktopFilters] = React.useState(true);
   const [showMobileDrawer, setShowMobileDrawer] = React.useState(false);
@@ -50,24 +49,32 @@ const ProductsWrapper: React.FC = () => {
     if (data) {
       setTotalProducts(data.totals);
       let items = buildBreadcrumb();
-      const ROUTE = "/services/market/products";
-            
+
       if (selection.departmentId) {
-        items.pop()
-        console.debug("1Sel", selection)
+        items.pop();
         items.push({
-          label: selection.department || '',
-          route: `${ROUTE}?departmentId=${selection.departmentId}`,
+          label: selection.department || "",
+          route: {
+            pathname: "/(main)/services/market/products",
+            params: { departmentId: selection.departmentId },
+          },
         });
-        if (selection.category)
+        if (selection.categoryId && selection.category) {
           items.push({
             label: selection.category,
-            route: `${ROUTE}?departmentId=${selection.departmentId}&categoryId=${selection.categoryId}`,
+            route: {
+              pathname: "/(main)/services/market/products",
+              params: {
+                departmentId: selection.departmentId,
+                categoryId: selection.categoryId,
+              },
+            },
           });
+        }
       }
       setBreadcrumb(items);
     }
-  }, [data, selection.department, selection.category]);
+  }, [data, selection.departmentId, selection.categoryId, selection.department, selection.category]);
 
   const toggleDesktopFilters = () => {
     setShowDesktopFilters(!showDesktopFilters);
@@ -83,7 +90,9 @@ const ProductsWrapper: React.FC = () => {
 
   return (
     <>
-      <BannerSlider />
+      <ViewWithoutPadding>
+        <BannerSlider />
+      </ViewWithoutPadding>
       <ProductsWrapperHeader
         toggleFilters={toggleDesktopFilters}
         openMobileDrawer={openMobileDrawer}
@@ -95,10 +104,7 @@ const ProductsWrapper: React.FC = () => {
       />
       <View style={styles.wrapper}>
         {!lessThan.tablet && showDesktopFilters && (
-          <Filters
-            stats={stats}
-            onCloseDrawer={() => {}}
-          />
+          <Filters stats={stats} onCloseDrawer={() => {}} />
         )}
 
         {lessThan.tablet && (

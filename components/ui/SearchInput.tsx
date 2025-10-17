@@ -8,9 +8,10 @@ import { View } from "react-native";
 import { Colors } from "@/styles";
 import IconSvg from "./IconSvg";
 import { use } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface SearchInputProps {
-  value?: string;
+  value: string;
   onChangeText?: (text: string) => void;
   loading?: boolean;
   debounceDelay?: number; // Optional debounce delay, default 500ms
@@ -22,7 +23,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   loading = false,
   debounceDelay = 1000, // Default debounce delay is 500ms
 }) => {
-  const [inputValue, setInputValue] = useState(value || ""); // Local state for input value
+  const {t} = useTranslation()
+  const [inputValue, setInputValue] = useState(value); // Local state for input value
   const searchSubject = useRef(new Subject<string>()); // Ref for managing the RxJS Subject
 
   // Effect hook to manage the debounce using RxJS
@@ -48,9 +50,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   useEffect(() => {
-    if (value !== undefined) {
-      setInputValue(value); // Update local state when the prop changes
-    }
+    setInputValue(value); // Update local state when the prop changes
   }, [value]);
 
   return (
@@ -59,7 +59,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       theme={{ colors: { background: Colors.black.fifth } }} // Example theme color
       outlineColor="transparent" // Example outline color
       activeOutlineColor="transparent" // Example active outline color
-      placeholder="Nombre del producto"
+      placeholder={t("SEARCH_PLACEHOLDER")}
       placeholderTextColor={Colors.black.second}
       textColor={Colors.black.primary}
       style={{ height: inputHeight.height }}

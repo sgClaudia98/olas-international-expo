@@ -9,12 +9,15 @@ const desktop = StyleSheet.create({
     gap: 18,
   },
   formRow: {
-    gap: 25,
+    gap: 30,
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   formColumn: {
-    width: "40%",
+    flex: 1,
+    minWidth: 280,
+    maxWidth: 400,
   },
   formLabel: {
     fontSize: 14,
@@ -47,6 +50,8 @@ export const profileStyles = {
       ...desktop.formColumn,
       width: "100%",
       gap: 18,
+      minWidth: 'auto',
+      maxWidth: 'auto',
     }
   }),
   tablet: StyleSheet.create({
@@ -66,7 +71,9 @@ export const profileStyles = {
     },
     formColumn: {
       ...desktop.formColumn,
-      width: "100%",      
+      width: "100%",
+      minWidth: 'auto',
+      maxWidth: 'auto',
     },
   }),
   desktop: StyleSheet.create({

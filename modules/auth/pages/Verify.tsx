@@ -1,4 +1,5 @@
-import { RouteProp, StackActions, useNavigation } from "@react-navigation/core";
+import { RouteProp } from "@react-navigation/core";
+import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import { View } from "react-native";
@@ -21,6 +22,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { authPagesStyles } from "../styles/authPages";
 import { useTranslation } from "react-i18next";
 import Countdown from "../components/Countdown";
+import { Toast } from "toastify-react-native";
 
 const validationSchema = Yup.object({
   token: Yup.string()
@@ -34,13 +36,14 @@ interface VerifyProps {
 }
 
 const Verify: FunctionComponent<VerifyProps> = (params) => {
-  const navigation = useNavigation();
+  const router = useRouter();
   const style = useResponsiveStyles(authPagesStyles);
   const { token, email } = params;
   const [verify, { isLoading, isError, isSuccess, error, data }] =
     useVerifyMutation(); // Destructure to get mutation states
   const [sendVerification, _] = useSendVerificationCodeMutation();
   const [countdown, setCountdown] = useState(0);
+  
   const initialValues: IVerifyRequest = {
     token: token ?? "",
     email,
@@ -54,10 +57,10 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
 
   useEffect(() => {
     if (isError) {
-      //TODO:  Manejar error de token expired
-      console.error("Error");
+      Toast.error(t("AUTH.MESSAGES.VERIFICATION_ERROR"));
     } else if (isSuccess && (data as any)) {
-      navigation.dispatch(StackActions.replace("Auth", { screen: "Login" }));
+      Toast.success(t("AUTH.MESSAGES.VERIFICATION_SUCCESS"));
+      router.replace("/login");
     }
   }, [isLoading]);
 
@@ -68,9 +71,10 @@ const Verify: FunctionComponent<VerifyProps> = (params) => {
     })
       .unwrap()
       .then(() => {
+        Toast.success(t("AUTH.MESSAGES.RESEND_CODE_SUCCESS"));
         setCountdown(60);
       })
-      .catch(() => console.error("Error sendind code again"));
+      .catch(() => Toast.error(t("AUTH.MESSAGES.RESEND_CODE_ERROR")));
   };
 
   useEffect(() => {

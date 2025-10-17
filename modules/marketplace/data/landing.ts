@@ -1,17 +1,13 @@
 import { RelativePathString } from "expo-router";
 import {
-  ElectricalAppliances,
   FastDeliveryIcon,
-  Ferreteria,
-  FoodAndCombo,
-  PersonalCare,
   SafePaymentIcon,
   Support247Icon,
 } from "@/components/LandingIcons";
 import React from "react";
 import { ImageSourcePropType } from "react-native";
 
-interface CategoryElement {
+export interface CategoryElement {
   name: string;
   icon?: React.ReactElement;
   code: string;
@@ -20,29 +16,6 @@ interface CategoryElement {
     categoryId?: number;
   };
 }
-
-export const categories: CategoryElement[] = [
-  {
-    name: "Alimentos y Combos",
-    icon: React.createElement(FoodAndCombo),
-    code: "FOOD",
-  },
-  {
-    name: "Cuidado personal y Hogar",
-    icon: React.createElement(PersonalCare),
-    code: "PERSONALCARE",
-  },
-  {
-    name: "Ferretería",
-    icon: React.createElement(Ferreteria),
-    code: "HARDWAREANDTOOLS",
-  },
-  {
-    name: "Electrodomésticos y Celulares",
-    icon: React.createElement(ElectricalAppliances),
-    code: "HOMEAPPLIANCES",
-  },
-];
 
 interface PopularBrand {
   name?: string;

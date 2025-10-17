@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-paper";
 import { Formik} from "formik";
@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { Toast } from "toastify-react-native";
 import { usePaymentContext } from "@/modules/payment/providers/PaymentProvider";
 import { usePayment } from "@/modules/payment/hooks/usePayment";
+import { useGetPaymentsByBookingIdQuery } from "../../services/api/BookingService";
 
 type ValidationSchemas = {
   [key: number]: Yup.ObjectSchema<any>;
@@ -34,6 +35,12 @@ const OrderPayForm = ({
 
   const styles = useResponsiveStyles(paymentFormStyles);
 
+  const { setAvailableMethods } = usePaymentContext();
+  const { processPayment } = usePayment();
+
+  // Fetch payment methods for the booking
+  const { data: paymentMethodsData } = useGetPaymentsByBookingIdQuery(preview.id);
+
   const initialValues = {
     paymentMethod: preview.paymentMethod || "PayPal",
   };
@@ -43,8 +50,17 @@ const OrderPayForm = ({
     [step]
   );
 
-  const { setAvailableMethods } = usePaymentContext();
-  const { processPayment } = usePayment();
+  useEffect(() => {
+    if (paymentMethodsData?.success && paymentMethodsData.paymentMethods) {
+      setAvailableMethods(
+        paymentMethodsData.paymentMethods.map((m) => ({
+          id: m.code,
+          name: m.name,
+          fee: m.fee,
+        }))
+      );
+    }
+  }, [paymentMethodsData, setAvailableMethods]);
 
   const handleSubmit = async (values: { paymentMethod: string }) => {
     console.log("values", values, !!processPayment);

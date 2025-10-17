@@ -1,7 +1,7 @@
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import * as Colors from "./colors";
 
-export const inputStyles = StyleSheet.create({
+const desktop = StyleSheet.create({
   // Base container style for the input
   container: {
     borderWidth: 1,
@@ -74,3 +74,18 @@ export const inputStyle = {
   lineHeight: 1,
 };
 
+
+
+export const inputStyles = {
+  mobile: StyleSheet.create({
+    ...desktop,
+    container: {
+      ...desktop.container,
+      minWidth: "auto",
+    }
+  }),
+  tablet: StyleSheet.create({
+    ...desktop
+  }),
+  desktop,
+};

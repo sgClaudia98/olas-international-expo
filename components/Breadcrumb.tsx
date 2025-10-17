@@ -7,7 +7,10 @@ import { useTranslation } from "react-i18next";
 
 export interface BreadcrumbItem {
   label: string;
-  route?: string;
+  route?: string | {
+    pathname: string;
+    params?: Record<string, string | number>;
+  };
 }
 
 interface BreadcrumbProps {
@@ -18,9 +21,13 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items = [] }) => {
   const {t} = useTranslation();
   const router = useRouter();
 
-  const handleRouting = (route?: string) => {
+  const handleRouting = (route?: string | { pathname: string; params?: Record<string, string | number> }) => {
     if (route) {
-      router.push(route as any);
+      if (typeof route === 'string') {
+        router.push(route as any);
+      } else {
+        router.push(route as any);
+      }
     }
   };
 

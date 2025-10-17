@@ -1,17 +1,13 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 import { Formik } from "formik";
 import { IAccountResponse } from "../services/interfaces/account";
-import {
-  parsePhoneNumber,
-  parseStringToPhoneNumber,
-} from "@/utils/PhoneNumberHelper";
 import { ThemedText } from "@/components/ThemedText";
 import { TextInput } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import PhoneNumberSelector from "@/components/PhoneNumberSelector";
 import { Toast } from "toastify-react-native";
 import { Colors } from "@/styles";
-import { TransWithoutContext, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { profileStyles } from "../styles/profile";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
 import { validationSchema } from "./UpdateProfileFormHelper";
@@ -27,10 +23,7 @@ interface UpdateProfileFormProps {
 interface FormikValues {
   firstName: string;
   lastName: string;
-  phone: {
-    code: any;
-    number: any;
-  };
+  phone: string;
   email: string;
 }
 
@@ -38,12 +31,7 @@ function mapClient(client?: Client) {
   return {
     firstName: client?.firstName ?? "",
     lastName: client?.lastName ?? "",
-    phone: client?.phone
-      ? parseStringToPhoneNumber(client.phone)
-      : {
-          number: undefined,
-          code: undefined,
-        },
+    phone: client?.phone ?? "",
     email: client?.email ?? "",
   };
 }
@@ -56,23 +44,24 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
   const [updateProfile] = useProfileMutation();
 
   const initialValues: FormikValues = mapClient(profile?.client);
-  console.debug("init", initialValues);
+
   const onSave = (values: FormikValues, { resetForm }) => {
-    console.debug(values, "Vals");
-    updateProfile({
+    const payload = {
       lastName: values.lastName,
       firstName: values.firstName,
-      phone: parsePhoneNumber(values.phone.number, values.phone.code, 0) || "",
+      phone: values.phone,
       preferredLanguage: i18n.language,
       receiveNewsLetter: false,
-    })
+    };
+
+    updateProfile(payload)
       .unwrap()
       .then((resp) => {
         if (resp.success) {
-          Toast.success(t("MESSAGES.SUCCESS_PROFILE_UPDATE"));
+          Toast.success(t("AUTH.MESSAGES.PROFILE_UPDATE_SUCCESS"));
           resetForm({ values });
         } else {
-          Toast.error(t("MESSAGES.ERROR_PROFILE_UPDATE"));
+          Toast.error(t("AUTH.MESSAGES.PROFILE_UPDATE_ERROR"));
         }
       });
   };
@@ -88,9 +77,6 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
         handleBlur,
         errors,
         values,
-        isSubmitting,
-        touched,
-        validateForm,
         submitForm,
       }) => (
         <>
@@ -152,13 +138,15 @@ export const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({
                   </ThemedText>
                   <PhoneNumberSelector
                     inputStyles={{ ...styles.formInput, marginBottom: 0 }}
-                    name="phone"
+                    value={values.phone}
+                    onChange={handleChange("phone")}
+                    onBlur={() => handleBlur("phone")}
                     defaultCountryCode="US"
-                    error={!!errors.phone?.number}
+                    error={!!errors.phone}
                   />
-                  {errors.phone?.number && (
+                  {errors.phone && (
                     <ThemedText lightColor={Colors.red.primary}>
-                      {errors.phone?.number as string}
+                      {errors.phone as string}
                     </ThemedText>
                   )}
                 </View>

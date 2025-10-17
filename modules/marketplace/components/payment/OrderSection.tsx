@@ -5,6 +5,7 @@ import { paymentFormStyles } from "../../../../styles/reused/paymentForm";
 import { DataTable, Button } from "react-native-paper";
 import { UIBookingDetail } from "../../utils/bookingMapping";
 import { useResponsiveStyles } from "@/hooks/useResponsiveStyles";
+import { useTranslation } from "react-i18next";
 
 interface OrderSectionProps {
   booking: UIBookingDetail;
@@ -19,25 +20,30 @@ const OrderSection: React.FC<OrderSectionProps> = ({
 }) => {
   const [notesEnabled, setNotesEnabled] = useState(false);
   const styles = useResponsiveStyles(paymentFormStyles);
+  const { t } = useTranslation();
 
   const { index, total } = booking;
 
   return (
     <View style={styles.productTableContainer}>
-      <Text style={styles.orderText}>Order {index+1} / {total}</Text>
+      <Text style={styles.orderText}>
+        {t("MARKET.ORDER_SECTION.ORDER", { current: index + 1, total })}
+      </Text>
+
       <DataTable>
         <DataTable.Header style={styles.tableHeader}>
           <DataTable.Title>
-            <Text style={styles.label}>Product</Text>
+            <Text style={styles.label}>{t("PRODUCT")}</Text>
           </DataTable.Title>
           <DataTable.Title numeric>
-            <Text style={styles.label}>Quantity</Text>
+            <Text style={styles.label}>{t("QUANTITY")}</Text>
           </DataTable.Title>
           <DataTable.Title numeric>
-            <Text style={styles.label}>Price</Text>
+            <Text style={styles.label}>{t("PRICE")}</Text>
           </DataTable.Title>
         </DataTable.Header>
       </DataTable>
+
       {booking.items.map((item) => (
         <DataTable.Row
           key={`${booking.id}-${item.id}`}
@@ -54,28 +60,31 @@ const OrderSection: React.FC<OrderSectionProps> = ({
           </DataTable.Cell>
         </DataTable.Row>
       ))}
+
       <View style={styles.separator} />
+
       <View style={styles.commentsContainer}>
         <Button
           style={styles.commentsButton}
           onPress={() => setNotesEnabled(!notesEnabled)}
         >
-          {notesEnabled ? "Close note" : "Open note"}
+          {notesEnabled ? t("MARKET.ORDER_SECTION.CLOSE_NOTE") : t("MARKET.ORDER_SECTION.OPEN_NOTE")}
         </Button>
+
         {notesEnabled && (
           <TextInput
             style={[styles.commentsTextArea, { minHeight: 60 }]}
             multiline
             numberOfLines={3}
-            placeholder="Leave your comments here..."
+            placeholder={t("MARKET.ORDER_SECTION.PLACEHOLDER")}
             placeholderTextColor={Colors.black.third}
             onChangeText={onChangeNote}
             value={note}
           />
         )}
+
         <Text style={styles.totalPrice}>
-          Total $
-          {booking.items.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
+          {t("TOTAL")} ${booking.items.reduce((acc, item) => acc + item.price, 0).toFixed(2)}
         </Text>
       </View>
     </View>
